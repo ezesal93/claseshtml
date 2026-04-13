@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Física - Ondas Mecánicas - Escuela Alemana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;700&display=swap');
+
+        :root {
+            --latex-font: 'Libre+Baskerville', serif;
+            --sans-font: 'Noto Sans', sans-serif;
+        }
+
+        body { background-color: #4a5568; font-family: var(--latex-font); padding: 15px; }
+
+        .paper {
+            background-color: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 10mm 15mm;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            color: #1a1a1a;
+            line-height: 1.25;
+            font-size: 11px;
+        }
+
+        .inst-header { display: flex; align-items: flex-start; margin-bottom: 5px; }
+        .logo-container { width: 65px; margin-right: 12px; flex-shrink: 0; }
+        .school-info { font-family: Arial, sans-serif; font-size: 9px; flex-grow: 1; line-height: 1.1; padding-top: 5px; }
+        .score-box { width: 80px; height: 90px; border: 2px solid #a3cf62; border-radius: 12px; margin-left: 10px; }
+        
+        .main-title { text-align: center; margin-top: -35px; margin-bottom: 8px; }
+        .main-title h1 { font-family: var(--sans-font); font-size: 18px; font-weight: bold; margin-bottom: 0; text-transform: uppercase; }
+
+        .student-data { font-family: Arial, sans-serif; font-size: 12px; margin: 8px 0; border-bottom: 1px double #ccc; padding-bottom: 5px; }
+        .line-space { border-bottom: 1px solid #000; display: inline-block; min-height: 1.1em; }
+
+        .formula-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 10px 0; }
+        .formula-box { background: #f8fafc; border: 1px solid #cbd5e0; padding: 12px; border-radius: 8px; text-align: center; }
+        .formula-box h3 { font-family: var(--sans-font); font-size: 11px; font-weight: bold; margin-bottom: 8px; color: #2d3748; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; }
+
+        .concepts-box { background: #fffcf0; border: 1px dashed #d69e2e; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 10px; }
+        .concepts-box strong { color: #744210; }
+
+        .mission-title { border-left: 4px solid #000; padding-left: 8px; margin-top: 15px; margin-bottom: 5px; font-size: 14px; background: #f7fafc; font-weight: bold; font-family: var(--sans-font); }
+        
+        .exercise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+        .exercise-item { border-bottom: 1px dashed #edf2f7; padding-bottom: 6px; text-align: justify; }
+
+        @media print {
+            body { background: white !important; padding: 0 !important; }
+            .paper { box-shadow: none !important; width: 100% !important; margin: 0 !important; padding: 8mm !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print fixed top-4 right-4">
+        <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 font-bold transition">
+            🖨️ Imprimir Guía
+        </button>
+    </div>
+
+    <div class="paper">
+        <!-- ENCABEZADO INSTITUCIONAL -->
+        <div class="inst-header">
+            <div class="logo-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana" class="w-full h-auto">
+            </div>
+            <div class="school-info">
+                <p class="font-bold">Escuela Particular 95 Alemana</p>
+                <p>Camilo Henríquez 125 - Paillaco</p>
+                <p>Fono: 63-421765 – Región De Los Ríos</p>
+            </div>
+            <div class="score-box"></div>
+        </div>
+
+        <div class="main-title">
+            <h1>Guía de Ejercicios: Ondas Mecánicas</h1>
+            <p class="text-[10px] font-bold italic">Unidad 1: El Sonido y las Ondas - 1° Medio Física</p>
+        </div>
+
+        <div class="student-data">
+            <div class="flex justify-between mb-1">
+                <span class="flex-grow">Nombre: <span class="line-space w-4/5"></span></span>
+                <span>Fecha: <span class="line-space w-24"></span></span>
+            </div>
+            <div class="flex gap-6 text-[10px]">
+                <span>Puntaje Ideal: <strong>30 pts</strong></span>
+                <span>Puntaje Obtenido: <span class="line-space w-8"></span></span>
+            </div>
+        </div>
+
+        <div class="text-[10px] mb-2">
+            <strong>Objetivo de clase:</strong> Resolver problemas numéricos de ondas aplicando las relaciones matemáticas entre frecuencia, período, longitud y velocidad.
+        </div>
+
+        <h2 class="mission-title">I. Formulario de Trabajo</h2>
+        <div class="formula-container">
+            <!-- Bloque Frecuencia y Periodo -->
+            <div class="formula-box">
+                <h3>Frecuencia ( $f$ ) y Período ( $T$ )</h3>
+                <div class="grid grid-cols-2 gap-2 items-center">
+                    <div>$$f = \frac{1}{T}$$</div>
+                    <div>$$T = \frac{1}{f}$$</div>
+                </div>
+            </div>
+            <!-- Bloque Velocidad -->
+            <div class="formula-box">
+                <h3>Velocidad de Propagación ( $v$ )</h3>
+                <div class="grid grid-cols-2 gap-2 items-center">
+                    <div>$$v = \lambda \cdot f$$</div>
+                    <div>$$v = \frac{\lambda}{T}$$</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- APARTADO DE CONCEPTOS AGREGADO -->
+        <div class="concepts-box">
+            <strong>¿Qué significa cada concepto?</strong>
+            <ul class="grid grid-cols-2 gap-x-4 mt-1">
+                <li>• <strong>Frecuencia ($f$):</strong> Cantidad de vueltas o ciclos que da la onda en 1 segundo. Se mide en Hertz (Hz).</li>
+                <li>• <strong>Período ($T$):</strong> Tiempo que demora la onda en completar 1 solo ciclo. Se mide en segundos (s).</li>
+                <li>• <strong>Longitud ($\lambda$):</strong> Distancia física entre dos puntos iguales de la onda (ej: de cresta a cresta).</li>
+                <li>• <strong>Velocidad ($v$):</strong> Rapidez con la que la energía de la onda se desplaza por el medio.</li>
+            </ul>
+        </div>
+
+        <h2 class="mission-title">II. Batería de Ejercicios</h2>
+        <div class="exercise-grid">
+            <!-- Ejercicios (30 problemas) -->
+            <div class="exercise-item">1. Una onda realiza 40 ciclos en 10 segundos. ¿Cuál es su frecuencia ($f$) y su período ($T$)?</div>
+            <div class="exercise-item">2. El período de una onda es de $0,5$ s. ¿Cuál es su frecuencia en Hz?</div>
+            <div class="exercise-item">3. Un motor vibra con una frecuencia de $60$ Hz. ¿Cuánto tiempo tarda en completar un ciclo?</div>
+            <div class="exercise-item">4. Si una onda tiene una frecuencia de $20$ Hz, ¿cuántos ciclos realiza en un minuto (60 s)?</div>
+            <div class="exercise-item">5. Una cuerda vibra $150$ veces en $5$ segundos. Calcula $f$ y $T$.</div>
+            <div class="exercise-item">6. El latido de un corazón tiene un período de $0,8$ s. ¿Cuál es su frecuencia cardíaca?</div>
+            <div class="exercise-item">7. Una onda tarda $0,02$ s en completar un ciclo. ¿Cuál es su frecuencia?</div>
+            <div class="exercise-item">8. ¿Cuántas vibraciones realiza un ala de colibrí en $3$ s si su frecuencia es de $50$ Hz?</div>
+            <div class="exercise-item">9. Una onda tiene una $\lambda$ de $2$ m y una $f$ de $10$ Hz. ¿A qué velocidad viaja?</div>
+            <div class="exercise-item">10. El sonido viaja a $340$ m/s con una frecuencia de $170$ Hz. ¿Cuál es su longitud de onda ($\lambda$)?</div>
+            <div class="exercise-item">11. Una onda en el agua tiene una $\lambda$ de $0,5$ m y un $T$ de $2$ s. Calcula su velocidad ($v$).</div>
+            <div class="exercise-item">12. Si una onda viaja a $1500$ m/s y tiene una $\lambda$ de $3$ m, ¿cuál es su frecuencia?</div>
+            <div class="exercise-item">13. Una onda de radio viaja a $3x10^8$ m/s. Si su $f$ es $100$ MHz ($10^8$ Hz), ¿cuál es su $\lambda$?</div>
+            <div class="exercise-item">14. Una onda de $500$ Hz viaja a $250$ m/s. ¿Cuál es el período ($T$) de esta onda?</div>
+            <div class="exercise-item">15. Calcula la velocidad de una onda que tiene $\lambda = 12$ m y un período $T = 4$ s.</div>
+            <div class="exercise-item">16. Una onda recorre $60$ metros en $2$ segundos. Si su $\lambda$ es $3$ m, ¿cuál es su frecuencia?</div>
+            <div class="exercise-item">17. Un diapasón vibra a $440$ Hz. Si el sonido viaja a $340$ m/s, ¿cuánto mide la onda ($\lambda$)?</div>
+            <div class="exercise-item">18. En una cuerda, una onda viaja a $12$ m/s. Si realiza $6$ ciclos en $3$ s, ¿cuánto vale su $\lambda$?</div>
+            <div class="exercise-item">19. Una onda tiene un período de $0,1$ s y una $\lambda$ de $5$ m. ¿Qué distancia recorre en $10$ s?</div>
+            <div class="exercise-item">20. ¿Cuál es la frecuencia de una onda sonora de $\lambda = 0,2$ m si $v = 340$ m/s?</div>
+            <div class="exercise-item">21. Si el período de una onda se duplica, ¿qué ocurre con su frecuencia? Justifique.</div>
+            <div class="exercise-item">22. Una onda atraviesa $20$ metros en $5$ s. Si su frecuencia es $2$ Hz, ¿cuánto vale su $\lambda$?</div>
+            <div class="exercise-item">23. Un niño produce ondas en una piscina. Si hace $2$ oscilaciones por segundo y la $\lambda$ es de $10$ cm, calcula $v$.</div>
+            <div class="exercise-item">24. Calcula el período de una onda que viaja a $20$ m/s y tiene una $\lambda$ de $40$ m.</div>
+            <div class="exercise-item">25. Si una onda realiza $100$ ciclos en $4$ s y su $\lambda$ es $0,5$ m, ¿cuál es su velocidad?</div>
+            <div class="exercise-item">26. Una onda sísmica viaja a $5.000$ m/s. Si su frecuencia es de $10$ Hz, ¿cuánto mide su $\lambda$?</div>
+            <div class="exercise-item">27. El período de una onda es $0,005$ s. ¿A qué frecuencia corresponde en Hertz?</div>
+            <div class="exercise-item">28. Una cuerda de guitarra vibra a $330$ Hz. Si la onda mide $1,2$ m, ¿a qué velocidad se propaga?</div>
+            <div class="exercise-item">29. Una onda recorre $100$ m en $4$ s. Si su período es de $0,5$ s, ¿cuál es su $\lambda$?</div>
+            <div class="exercise-item">30. Si una onda tiene $v = 15$ m/s y $f = 5$ Hz, ¿cuántos ciclos hay en una distancia de $30$ m?</div>
+        </div>
+
+        <div class="mt-4 text-[7px] text-center text-gray-400 border-t pt-2 uppercase">
+            Escuela Particular 95 Alemana - Paillaco | Departamento de Ciencias - Física
+        </div>
+    </div>
+</body>
+</html>

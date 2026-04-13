@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Laboratorio Virtual - Física - Escuela Alemana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;700&display=swap');
+
+        :root {
+            --latex-font: 'Libre+Baskerville', serif;
+            --sans-font: 'Noto Sans', sans-serif;
+        }
+
+        body { background-color: #4a5568; font-family: var(--latex-font); padding: 15px; }
+
+        .paper {
+            background-color: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 12mm 18mm;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            color: #1a1a1a;
+            line-height: 1.4;
+            font-size: 12px;
+        }
+
+        .inst-header { display: flex; align-items: flex-start; margin-bottom: 20px; }
+        .logo-container { width: 75px; margin-right: 15px; flex-shrink: 0; }
+        .school-info { font-family: Arial, sans-serif; font-size: 10px; flex-grow: 1; line-height: 1.2; padding-top: 5px; }
+        
+        .score-box { 
+            width: 90px; 
+            height: 90px; 
+            border: 2px solid #a3cf62; 
+            border-radius: 12px; 
+            margin-left: 15px; 
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .score-header { background: #a3cf62; color: white; font-size: 10px; font-weight: bold; text-align: center; padding: 4px 0; text-transform: uppercase; font-family: sans-serif; }
+        .score-body { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; }
+        
+        .main-title { text-align: center; margin-top: 0px; margin-bottom: 15px; }
+        .main-title h1 { font-family: var(--sans-font); font-size: 19px; font-weight: bold; margin-bottom: 2px; text-transform: uppercase; color: #1a202c; }
+
+        .student-data { font-family: Arial, sans-serif; font-size: 12px; margin: 10px 0; padding-bottom: 10px; border-bottom: 1px double #ddd; }
+        .data-row { display: flex; align-items: flex-end; margin-bottom: 10px; }
+        .line-space { border-bottom: 1px solid #000; display: inline-block; min-height: 1.2em; vertical-align: bottom; }
+
+        .mission-title { border-left: 5px solid #000; padding-left: 10px; margin-top: 20px; margin-bottom: 10px; font-size: 14px; background: #f7fafc; font-weight: bold; font-family: var(--sans-font); display: flex; justify-content: space-between; align-items: center; padding-right: 10px; }
+        .pts-label { font-size: 10px; color: #4a5568; font-weight: normal; }
+        
+        .step-badge { background: #2d3748; color: white; padding: 2px 7px; border-radius: 4px; font-size: 10px; margin-right: 8px; vertical-align: middle; font-weight: bold; }
+        
+        .instruction-box { background: #f0f7ff; border: 1px solid #bee3f8; padding: 12px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #3182ce; font-size: 11px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-family: Arial, sans-serif; font-size: 11px; }
+        th, td { border: 1px solid #cbd5e0; padding: 6px; text-align: center; }
+        th { background-color: #f8fafc; font-weight: bold; }
+
+        @media print {
+            body { background: white !important; padding: 0 !important; }
+            .paper { box-shadow: none !important; width: 100% !important; margin: 0 !important; padding: 10mm !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print fixed top-4 right-4">
+        <button onclick="window.print()" class="bg-blue-600 text-white px-5 py-2.5 rounded-lg shadow-lg hover:bg-blue-700 font-bold transition">
+            🖨️ Imprimir Guía
+        </button>
+    </div>
+
+    <div class="paper">
+        <!-- ENCABEZADO -->
+        <div class="inst-header">
+            <div class="logo-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana" class="w-full h-auto">
+            </div>
+            <div class="school-info">
+                <p class="font-bold text-[11px]">Escuela Particular 95 Alemana</p>
+                <p>Camilo Henríquez 125 - Paillaco</p>
+                <p>Fono: 63-421765 – Región De Los Ríos</p>
+            </div>
+            <div class="score-box">
+                <div class="score-header">Nota</div>
+                <div class="score-body"></div>
+            </div>
+        </div>
+
+        <div class="main-title">
+            <h1>Guía Evaluación: Laboratorio Virtual de Ondas</h1>
+            <p class="text-[11px] font-bold italic text-gray-500 text-center">Física 1° Medio - Unidad: Ondas y Sonido</p>
+        </div>
+
+        <!-- DATOS DEL ESTUDIANTE ACTUALIZADOS CON IMAGEN -->
+        <div class="student-data">
+            <div class="data-row">
+                <span class="flex-grow">Nombre del Estudiante: <span class="line-space w-[400px]"></span></span>
+                <span>N° de Lista: <span class="line-space w-12"></span></span>
+            </div>
+            <div class="data-row">
+                <span class="mr-8">Curso: <span class="line-space w-24"></span></span>
+                <span class="flex-grow">Fecha: <span class="line-space w-28"></span></span>
+            </div>
+            <div class="flex gap-10 mt-4 border-t pt-3">
+                <span><strong>Puntaje Ideal:</strong> 42 Puntos</span>
+                <span><strong>Puntaje de Aprobación:</strong> 25 Puntos</span>
+                <span><strong>Puntaje Obtenido:</strong> <span class="line-space w-16"></span> Puntos</span>
+            </div>
+        </div>
+
+        <div class="instruction-box">
+            <div class="flex justify-between items-center">
+                <div>
+                    <strong>Instrucciones iniciales:</strong> Accede al simulador <i>"PhET: Onda en una cuerda"</i>. 
+                    Configura en modo <strong>Oscilar</strong> y <strong>Sin Extremo</strong>. Activa Reglas y Cronómetro.
+                </div>
+                <div class="text-right ml-4 border-l pl-3 border-blue-200">
+                    <span class="pts-label font-bold">4 pts</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIVIDAD 1 -->
+        <h2 class="mission-title">
+            <span>Actividad 1: Amplitud y Frecuencia</span>
+            <span class="pts-label">8 pts</span>
+        </h2>
+        <div class="ml-2 space-y-4">
+            <p><span class="step-badge">1.1</span> Observa la onda. Al aumentar la <b>Amplitud</b>, ¿qué cambio notas en la elongación máxima de la cuerda? <br>
+            <span class="line-space w-full mt-2"></span></p>
+
+            <p><span class="step-badge">1.2</span> Si subes la <b>Frecuencia</b> al máximo ($3,00$ Hz), ¿qué sucede con la rapidez con la que vibran las partículas? <br>
+            <span class="line-space w-full mt-2"></span></p>
+        </div>
+
+        <!-- ACTIVIDAD 2 -->
+        <h2 class="mission-title">
+            <span>Actividad 2: Medición de Período y Frecuencia</span>
+            <span class="pts-label">15 pts</span>
+        </h2>
+        <div class="ml-2">
+            <p class="mb-2">Configura: <strong>Amplitud $1,00$ cm</strong> y <strong>Frecuencia $1,00$ Hz</strong>. Activa <strong>"Cámara Lenta"</strong>.</p>
+            <div class="bg-gray-50 p-3 border rounded-lg shadow-sm">
+                <p class="text-[11px] mb-2 font-bold italic">Mide el tiempo [ Período (T) ]  que tarda una esfera celeste en completar una oscilación. Realiza la medición por tirplicado:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Medición 1 (s)</th>
+                            <th>Medición 2 (s)</th>
+                            <th>Medición 3 (s)</th>
+                            <th class="bg-blue-50">Promedio [ Periodo (T) ]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="h-10">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="bg-blue-50"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4"><span class="step-badge">2.2</span> Calcula la frecuencia experimental: $f = 1 / T$. <br>
+            <strong>Cálculo:</strong> $f = 1 / $ <span class="line-space w-16 text-center"></span> [s] $=$ <span class="line-space w-16"></span> [Hz]. <br>
+            ¿Es similar al valor configurado en el simulador? <span class="line-space w-1/4"></span></p>
+        </div>
+
+        <!-- ACTIVIDAD 3 -->
+        <h2 class="mission-title">
+            <span>Actividad 3: Longitud de Onda ($\lambda$)</span>
+            <span class="pts-label">10 pts</span>
+        </h2>
+        <div class="ml-2">
+            <p><span class="step-badge">3.1</span> <b>Pausa</b> la simulación. Mide con la regla la distancia horizontal entre dos crestas consecutivas. <br>
+            Longitud de onda ($\lambda$): <span class="line-space w-24 text-center"></span> [cm].</p>
+            
+            <p class="mt-4"><span class="step-badge">3.2</span> Si aumentas la frecuencia a $2,00$ Hz, ¿qué ocurre con $\lambda$? <br>
+            <span class="mr-6">☐ Aumenta</span> <span class="mr-6">☐ Disminuye</span> <span>☐ Se mantiene</span></p>
+            
+            <p class="mt-4"><span class="step-badge">3.3</span> Conclusión: A mayor frecuencia, la longitud de onda debe <span class="line-space w-32"></span> porque hay una relación inversa entre ambas variables.</p>
+        </div>
+
+        <!-- REFLEXIÓN -->
+        <h2 class="mission-title">
+            <span>IV. Reflexión Final</span>
+            <span class="pts-label">5 pts</span>
+        </h2>
+        <div class="ml-2">
+            <p>¿Qué importancia tiene la frecuencia en la transmisión de energía de una onda sonora? Responde según lo observado. <br>
+            <span class="line-space w-full mt-2"></span></p>
+        </div>
+
+        <div class="mt-8 text-[8px] text-center text-gray-400 border-t pt-2 uppercase tracking-widest">
+            Escuela Particular 95 Alemana - Paillaco | Departamento de Ciencias
+        </div>
+    </div>
+</body>
+</html>

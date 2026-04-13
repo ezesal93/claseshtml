@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio Avanzado de Ondas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+        body { font-family: 'Outfit', sans-serif; overflow-x: hidden; }
+        .canvas-container { position: relative; background: #020617; border-radius: 1.5rem; cursor: grab; }
+        .canvas-container:active { cursor: grabbing; }
+        input[type="range"] { cursor: pointer; height: 6px; -webkit-appearance: none; border-radius: 10px; }
+        .math-font { font-family: 'Times New Roman', Times, serif; font-style: italic; }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .tab-btn.active { background: white; color: #0f172a; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800">
+
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-4xl font-black text-slate-900 tracking-tight">Ondas <span class="text-blue-600">Pro</span></h1>
+                <p class="text-slate-500 font-medium">Laboratorio Experimental - 1° Medio</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-2 rounded-2xl shadow-sm border border-slate-200">
+                <button id="btnSlowMo" class="px-4 py-2 rounded-xl text-sm font-bold transition-all bg-slate-100 text-slate-600 hover:bg-blue-50">🐢 Cámara Lenta</button>
+                <div class="h-6 w-[1px] bg-slate-200"></div>
+                <button id="btnPlayPause" class="px-6 py-2 rounded-xl text-sm font-bold bg-blue-600 text-white shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all">Pausar</button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- PANEL DE CONTROL -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                        <span class="bg-blue-100 text-blue-600 p-1.5 rounded-lg text-sm">01</span>
+                        Concepto Actual
+                    </h3>
+                    
+                    <div id="info-box">
+                        <div class="flex justify-between items-start mb-2">
+                            <h2 id="infoTitle" class="text-2xl font-bold text-slate-800">Frecuencia</h2>
+                            <span id="infoUnit" class="text-xs font-black text-blue-500 bg-blue-50 px-2 py-1 rounded-md">Hz</span>
+                        </div>
+                        <p id="infoDesc" class="text-slate-600 text-sm leading-relaxed mb-4">Número de ciclos por segundo. Determina qué tan rápido vibra la fuente de la onda.</p>
+                        
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 text-center mb-4">
+                            <span class="block text-[10px] uppercase font-bold text-slate-400 mb-1 tracking-widest">Fórmula Matemática</span>
+                            <span id="infoFormula" class="text-2xl math-font text-slate-800">f = 1 / T</span>
+                        </div>
+
+                        <div class="p-4 bg-blue-600 rounded-2xl text-white shadow-md shadow-blue-100">
+                            <p class="text-xs font-bold uppercase opacity-80 mb-1 text-blue-100">Misión Experimental:</p>
+                            <p id="infoMission" class="text-sm font-medium">¡Truco! Puedes pinchar la onda y arrastrarla para cambiar su tamaño.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sliders -->
+                <div class="bg-slate-900 rounded-3xl p-6 shadow-xl text-white">
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Frecuencia (f)</label>
+                                <span id="val-frecuencia" class="text-blue-400 font-mono text-lg font-bold">2.0 Hz</span>
+                            </div>
+                            <input type="range" id="input-frecuencia" min="0.5" max="5" step="0.1" value="2" class="w-full bg-slate-800 accent-blue-500">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Longitud (λ)</label>
+                                <span id="val-longitud" class="text-emerald-400 font-mono text-lg font-bold">120 m</span>
+                            </div>
+                            <input type="range" id="input-longitud" min="60" max="250" step="5" value="120" class="w-full bg-slate-800 accent-emerald-500">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Amplitud (A)</label>
+                                <span id="val-amplitud" class="text-orange-400 font-mono text-lg font-bold">40</span>
+                            </div>
+                            <input type="range" id="input-amplitud" min="10" max="100" step="5" value="40" class="w-full bg-slate-800 accent-orange-400">
+                        </div>
+                    </div>
+                    <button id="btnReset" class="w-full mt-6 py-2 rounded-xl text-xs font-bold border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 transition-all">Reiniciar Laboratorio</button>
+                </div>
+
+                <div id="analysis-box" class="bg-emerald-50 border border-emerald-100 p-5 rounded-3xl">
+                    <h4 class="text-emerald-800 font-bold text-sm mb-2 flex items-center gap-2">🔍 Análisis en Tiempo Real:</h4>
+                    <p id="analysis-text" class="text-emerald-700 text-xs leading-tight">Calculando parámetros...</p>
+                </div>
+            </div>
+
+            <!-- VISUALIZACIÓN -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+                <div class="canvas-container shadow-2xl border-[10px] border-white" id="container">
+                    <div class="absolute top-6 left-6 grid grid-cols-2 gap-3 z-20">
+                        <div class="glass p-3 rounded-2xl">
+                            <span class="block text-[9px] uppercase text-blue-300 font-black">Periodo (T)</span>
+                            <span id="calc-periodo" class="text-xl font-mono text-white font-bold">0.50s</span>
+                        </div>
+                        <div class="glass p-3 rounded-2xl">
+                            <span class="block text-[9px] uppercase text-emerald-300 font-black">Velocidad (v)</span>
+                            <span id="calc-velocidad" class="text-xl font-mono text-white font-bold">240m/s</span>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20 bg-black/40 p-1.5 rounded-2xl backdrop-blur-md">
+                        <button onclick="setActiveTab('frecuencia')" id="tab-frecuencia" class="tab-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all text-white">Frecuencia</button>
+                        <button onclick="setActiveTab('longitud')" id="tab-longitud" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-white">Longitud</button>
+                        <button onclick="setActiveTab('particula')" id="tab-particula" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all text-white">Partículas</button>
+                    </div>
+
+                    <canvas id="waveCanvas"></canvas>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col gap-1">
+                        <span class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs mb-2">f</span>
+                        <h4 class="font-bold text-sm">Frecuencia</h4>
+                        <p class="text-[11px] text-slate-500 italic">"¿Cuántas veces?"</p>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xs mb-2">λ</span>
+                        <h4 class="font-bold text-sm">Longitud</h4>
+                        <p class="text-[11px] text-slate-500 italic">"¿Qué tan larga?"</p>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs mb-2">A</span>
+                        <h4 class="font-bold text-sm">Amplitud</h4>
+                        <p class="text-[11px] text-slate-500 italic">"¿Qué tan alta?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- ESTADO ---
+        let activeTab = 'frecuencia';
+        let isPlaying = true;
+        let isSlowMo = false;
+        let frequency = 2.0;
+        let wavelength = 120;
+        let amplitude = 40;
+        let offset = 0;
+        let isDragging = false;
+
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        const inputs = {
+            f: document.getElementById('input-frecuencia'),
+            l: document.getElementById('input-longitud'),
+            a: document.getElementById('input-amplitud')
+        };
+
+        const contentMap = {
+            frecuencia: {
+                title: "Frecuencia (f)", formula: "f = 1 / T", unit: "Hz",
+                desc: "Representa la rapidez de la fuente vibratoria. A mayor frecuencia, las ondas nacen más seguido.",
+                mission: "Prueba a mover el deslizador de Frecuencia. ¿Ves cómo el Periodo (T) cambia de forma inversa?"
+            },
+            longitud: {
+                title: "Longitud (λ)", formula: "λ = v / f", unit: "m",
+                desc: "Es la distancia física entre dos crestas. No depende solo de la fuente, sino también del medio.",
+                mission: "Arrastra la onda horizontalmente o usa el control verde para cambiar su extensión."
+            },
+            particula: {
+                title: "Modo Partícula", formula: "v = λ · f", unit: "m/s",
+                desc: "Aquí puedes ver que las partículas del medio solo oscilan, no se desplazan con la onda.",
+                mission: "Observa el punto rojo. Sube y baja, pero nunca se mueve hacia la derecha."
+            }
+        };
+
+        // --- INTERACCIÓN CON MOUSE (DRAG) ---
+        canvas.addEventListener('mousedown', startDrag);
+        window.addEventListener('mousemove', drag);
+        window.addEventListener('mouseup', endDrag);
+
+        function startDrag(e) {
+            isDragging = true;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            const rect = canvas.getBoundingClientRect();
+            const mouseY = e.clientY - rect.top;
+            const midY = canvas.height / 2;
+            
+            // Cambiar amplitud con el eje Y
+            let newAmp = Math.abs(midY - mouseY);
+            amplitude = Math.min(Math.max(newAmp, 10), 100);
+            inputs.a.value = amplitude;
+            document.getElementById('val-amplitud').innerText = Math.round(amplitude);
+            updateAll();
+        }
+
+        function endDrag() {
+            isDragging = false;
+        }
+
+        // --- LÓGICA DE INTERFAZ ---
+        function setActiveTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab-${tab}`).classList.add('active');
+            
+            const info = contentMap[tab];
+            document.getElementById('infoTitle').innerText = info.title;
+            document.getElementById('infoFormula').innerText = info.formula;
+            document.getElementById('infoUnit').innerText = info.unit;
+            document.getElementById('infoDesc').innerText = info.desc;
+            document.getElementById('infoMission').innerText = info.mission;
+        }
+
+        inputs.f.oninput = (e) => {
+            frequency = parseFloat(e.target.value);
+            document.getElementById('val-frecuencia').innerText = frequency.toFixed(1) + ' Hz';
+            updateAll();
+        };
+        inputs.l.oninput = (e) => {
+            wavelength = parseInt(e.target.value);
+            document.getElementById('val-longitud').innerText = wavelength + ' m';
+            updateAll();
+        };
+        inputs.a.oninput = (e) => {
+            amplitude = parseInt(e.target.value);
+            document.getElementById('val-amplitud').innerText = amplitude;
+            updateAll();
+        };
+
+        document.getElementById('btnPlayPause').onclick = () => {
+            isPlaying = !isPlaying;
+            document.getElementById('btnPlayPause').innerText = isPlaying ? "Pausar" : "Iniciar";
+            document.getElementById('btnPlayPause').classList.toggle('bg-blue-600');
+            document.getElementById('btnPlayPause').classList.toggle('bg-emerald-600');
+        };
+
+        document.getElementById('btnSlowMo').onclick = () => {
+            isSlowMo = !isSlowMo;
+            document.getElementById('btnSlowMo').classList.toggle('bg-blue-600');
+            document.getElementById('btnSlowMo').classList.toggle('text-white');
+        };
+
+        document.getElementById('btnReset').onclick = () => {
+            frequency = 2.0; wavelength = 120; amplitude = 40;
+            inputs.f.value = 2; inputs.l.value = 120; inputs.a.value = 40;
+            document.getElementById('val-frecuencia').innerText = '2.0 Hz';
+            document.getElementById('val-longitud').innerText = '120 m';
+            document.getElementById('val-amplitud').innerText = '40';
+            updateAll();
+        };
+
+        function updateAll() {
+            const period = (1 / frequency).toFixed(2);
+            const speed = (frequency * wavelength).toFixed(0);
+            document.getElementById('calc-periodo').innerText = period + 's';
+            document.getElementById('calc-velocidad').innerText = speed + 'm/s';
+            
+            let analysis = `Velocidad actual: ${speed} m/s. `;
+            if (frequency > 3.5) analysis += "Frecuencia alta: mucha energía por segundo. ";
+            if (amplitude > 70) analysis += "Amplitud alta: onda muy intensa.";
+            document.getElementById('analysis-text').innerText = analysis;
+        }
+
+        // --- RENDERIZADO ---
+        function draw() {
+            if (canvas.width !== canvas.clientWidth) {
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientHeight;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const w = canvas.width;
+            const h = canvas.height;
+            const midY = h / 2;
+
+            // Dibujar Partículas (Modo Medio)
+            if (activeTab === 'particula') {
+                for (let px = 50; px < w; px += 80) {
+                    const py = midY + amplitude * Math.sin((2 * Math.PI / wavelength) * (px - offset));
+                    ctx.fillStyle = px === 210 ? '#ef4444' : '#1e293b';
+                    ctx.beginPath();
+                    ctx.arc(px, py, px === 210 ? 8 : 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    if (px === 210) {
+                        ctx.fillStyle = '#ef4444';
+                        ctx.font = "bold 10px sans-serif";
+                        ctx.fillText("PARTÍCULA", px - 25, py - 15);
+                        // Línea de trayectoria
+                        ctx.setLineDash([2, 4]);
+                        ctx.strokeStyle = 'rgba(239, 68, 68, 0.3)';
+                        ctx.beginPath(); ctx.moveTo(px, midY - amplitude); ctx.lineTo(px, midY + amplitude); ctx.stroke();
+                        ctx.setLineDash([]);
+                    }
+                }
+            }
+
+            // Dibujar Onda con degradado
+            const grad = ctx.createLinearGradient(0, 0, w, 0);
+            grad.addColorStop(0, '#3b82f6');
+            grad.addColorStop(1, '#10b981');
+            
+            ctx.beginPath();
+            ctx.lineWidth = 6;
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = grad;
+            
+            for (let x = 0; x < w; x += 2) {
+                const y = midY + amplitude * Math.sin((2 * Math.PI / wavelength) * (x - offset));
+                if (x === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+
+            // Relleno suave bajo la onda
+            ctx.lineTo(w, h); ctx.lineTo(0, h);
+            ctx.fillStyle = 'rgba(59, 130, 246, 0.05)';
+            ctx.fill();
+
+            // Indicadores dinámicos
+            if (activeTab === 'longitud') {
+                const lX1 = (offset % wavelength);
+                const lX2 = lX1 + wavelength;
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(lX1, midY - amplitude - 30); ctx.lineTo(lX2, midY - amplitude - 30);
+                ctx.moveTo(lX1, midY - amplitude - 25); ctx.lineTo(lX1, midY - amplitude - 35);
+                ctx.moveTo(lX2, midY - amplitude - 25); ctx.lineTo(lX2, midY - amplitude - 35);
+                ctx.stroke();
+                ctx.fillStyle = '#10b981';
+                ctx.font = "bold 12px sans-serif";
+                ctx.fillText(`λ = ${wavelength}m`, lX1 + wavelength/2 - 20, midY - amplitude - 45);
+            }
+
+            if (isPlaying) {
+                const speedMult = isSlowMo ? 0.3 : 1.8;
+                offset += (frequency * speedMult);
+            }
+            requestAnimationFrame(draw);
+        }
+
+        setActiveTab('frecuencia');
+        updateAll();
+        draw();
+    </script>
+</body>
+</html>

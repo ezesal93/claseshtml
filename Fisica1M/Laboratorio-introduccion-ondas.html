@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Física - Teléfono Acústico - Escuela Alemana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@400;700&display=swap');
+
+        :root {
+            --latex-font: 'Libre+Baskerville', serif;
+            --sans-font: 'Noto Sans', sans-serif;
+        }
+
+        body { background-color: #4a5568; font-family: var(--latex-font); padding: 20px; }
+
+        .paper {
+            background-color: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 10mm 15mm;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            color: #1a1a1a;
+            line-height: 1.3;
+        }
+
+        h1, h2, h3 { font-family: var(--sans-font); }
+
+        .inst-header { display: flex; align-items: flex-start; margin-bottom: 5px; }
+        .logo-container { width: 75px; margin-right: 15px; flex-shrink: 0; }
+        .school-info { font-family: Arial, sans-serif; font-size: 11px; flex-grow: 1; line-height: 1.2; padding-top: 5px; }
+        .score-box { width: 85px; height: 95px; border: 2px solid #a3cf62; border-radius: 15px; margin-left: 10px; }
+        
+        .main-title { text-align: center; margin-top: -25px; margin-bottom: 10px; }
+        .main-title h1 { font-size: 24px; font-weight: normal; margin-bottom: 0; }
+
+        .student-data { font-family: Arial, sans-serif; font-size: 14px; margin: 15px 0; }
+        .line-space { border-bottom: 1px solid #000; display: inline-block; min-height: 1.2em; }
+
+        .box-rounded {
+            border: 1px solid #000;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .step-badge { background: #000; color: #fff; padding: 1px 6px; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; font-weight: bold; }
+        .mission-title { border-left: 5px solid #000; padding-left: 10px; margin-top: 15px; margin-bottom: 8px; font-size: 1.1rem; background: #f7fafc; font-weight: bold; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 8px 0; font-family: var(--sans-font); font-size: 0.85rem; }
+        th, td { border: 1px solid black; padding: 6px; text-align: center; }
+
+        .info-box { border: 1px dashed #4a5568; padding: 8px; margin: 10px 0; font-size: 0.8rem; background-color: #f0f4f8; }
+        .pts { float: right; font-family: Arial; font-weight: bold; font-size: 11px; color: #444; }
+
+        @media print {
+            body { background: white !important; padding: 0 !important; }
+            .paper { box-shadow: none !important; width: 100% !important; margin: 0 !important; padding: 10mm !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print fixed top-4 right-4">
+        <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 font-bold transition">
+            🖨️ Descargar Guía (PDF)
+        </button>
+    </div>
+
+    <div class="paper">
+        <!-- ENCABEZADO INSTITUCIONAL -->
+        <div class="inst-header">
+            <div class="logo-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" 
+                     alt="Escudo Escuela Alemana" 
+                     class="w-full h-auto">
+            </div>
+            <div class="school-info">
+                <p class="font-bold">Escuela Particular 95 Alemana</p>
+                <p>Camilo Henríquez 125 - Paillaco</p>
+                <p>Fono: 63-421765 – Región De Los Ríos</p>
+            </div>
+            <div class="score-box"></div>
+        </div>
+
+        <div class="main-title">
+            <h1>Laboratorio de Física: El Teléfono Acústico</h1>
+            <p>(Ondas y Sonido - 1° Medio)</p>
+            <p class="font-bold underline italic text-sm">Prof. Ezequiel Saldivia</p>
+        </div>
+
+        <div class="student-data">
+            <div class="flex flex-wrap justify-between mb-2">
+                <span class="flex-grow">Integrantes: <span class="line-space w-3/4"></span></span>
+                <span class="ml-4">Fecha: <span class="line-space w-24"></span></span>
+            </div>
+            <div class="flex gap-8">
+                <span>Pje. ideal: <span class="line-space w-12 text-center font-bold">48</span></span>
+                <span>Pje. Obtenido: <span class="line-space w-12"></span></span>
+                <span>Nivel de exigencia: <span class="line-space w-12 text-center font-bold">60%</span></span>
+            </div>
+        </div>
+
+        <div class="box-rounded">
+            <p><strong>Objetivo:</strong> Comprender cómo se origina, se propaga y se amplifica el sonido utilizando distintos medios materiales.</p>
+            <p><strong>Introducción:</strong> ¿Cómo viaja el sonido? ¿Puede el sonido atravesar objetos sólidos mejor que el aire? Para responder a estas preguntas vamos a construir un "Teléfono Acústico" para observar cómo la energía se transforma de ondas sonoras a vibraciones mecánicas.</p>
+        </div>
+
+        <div class="info-box italic">
+            <strong>Materiales:</strong> 2 vasos de plástico, 2 vasos de plumavit, 5m de hilo de coser, 5m de lienza de pescar y 4 clips.
+        </div>
+
+        <!-- SECCIÓN 1: PROCEDIMIENTO (8 PTS) -->
+        <h2 class="mission-title">1. Procedimiento Experimental <span class="pts">Puntaje Sección: 8 pts</span></h2>
+        <div class="ml-4 space-y-2 text-sm">
+            <p><span class="step-badge">1.1</span> Perforen el fondo de cada vaso en el centro con la ayuda de un alfiler.</p>
+            <p><span class="step-badge">1.2</span> Pasen el hilo/lienza por el agujero y amárrenlo a un clip en el fondo interior para que no se suelte.</p>
+            <p><span class="step-badge">1.3</span> <strong>Condición de prueba:</strong> Para hablar, el hilo debe estar siempre **tenso**. Un compañero habla y el otro escucha colocando el vaso en su oreja.</p>
+            <p>¿Qué ocurre con la comunicación si el hilo queda suelto (laxo)? <span class="pts">[___ / 4 pts]</span><br> <span class="line-space w-full mt-2"></span></p>
+            <p>¿Qué sucede si un compañero toca el hilo con la mano mientras el otro habla? <span class="pts">[___ / 4 pts]</span><br> <span class="line-space w-full mt-2"></span></p>
+        </div>
+
+        <!-- SECCIÓN 2: REGISTRO DE DATOS (12 PTS) -->
+        <h2 class="mission-title">2. Resultados de los Mensajes <span class="pts">Puntaje Sección: 12 pts</span></h2>
+        <p class="text-sm ml-4 mb-2">Evalúen la claridad del sonido del 1 al 5 (1: casi no se escucha, 5: se escucha muy claro).</p>
+        <table>
+            <thead>
+                <tr class="bg-gray-100 uppercase text-[10px]">
+                    <th>Prueba</th>
+                    <th>Vaso</th>
+                    <th>Conector</th>
+                    <th>¿Se entendió el mensaje?</th>
+                    <th>Calidad (1 a 5)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="h-8"><td>A</td><td>Plumavit</td><td>Hilo de coser</td><td></td><td></td></tr>
+                <tr class="h-8"><td>B</td><td>Plumavit</td><td>Lienza de pescar</td><td></td><td></td></tr>
+                <tr class="h-8"><td>C</td><td>Plástico</td><td>Hilo de coser</td><td></td><td></td></tr>
+                <tr class="h-8"><td>D</td><td>Plástico</td><td>Lienza de pescar</td><td></td><td></td></tr>
+            </tbody>
+        </table>
+        <p class="text-[10px] italic text-right">*Puntaje: 3 pts por completar correctamente cada combinación de prueba.</p>
+
+        <!-- SECCIÓN 3: ANÁLISIS COMPARATIVO (18 PTS) -->
+        <h2 class="mission-title">3. Análisis de Materiales <span class="pts">Puntaje Sección: 18 pts</span></h2>
+        <div class="ml-4 space-y-4 text-sm">
+            <p><span class="step-badge">3.1</span> <strong>El Conector:</strong> ¿Cuál material transmitió mejor el sonido, el hilo de coser o la lienza? ¿A qué propiedad del material crees que se debe? <span class="pts">[___ / 6 pts]</span><br> <span class="line-space w-full mt-2"></span></p>
+
+            <p><span class="step-badge">3.2</span> <strong>El Receptor/Emisor:</strong> ¿Hubo diferencia entre el vaso de plumavit y el de plástico? ¿Cuál permitió que el mensaje se escuchara más fuerte? <span class="pts">[___ / 6 pts]</span><br> <span class="line-space w-full mt-2"></span></p>
+
+            <p><span class="step-badge">3.3</span> <strong>Propagación:</strong> Cuando hablas al vaso, ¿el sonido viaja por el aire dentro del hilo o a través de las vibraciones del hilo sólido? Explica. <span class="pts">[___ / 6 pts]</span><br> <span class="line-space w-full mt-2"></span><br><span class="line-space w-full mt-2"></span></p>
+        </div>
+
+        <!-- SECCIÓN 4: CONCLUSIÓN CIENTÍFICA (10 PTS) -->
+        <h2 class="mission-title">4. Conclusión Final <span class="pts">Puntaje Sección: 10 pts</span></h2>
+        <div class="ml-4 space-y-3 text-sm">
+            <p>Considerando que el sonido es una onda mecánica que necesita un medio para viajar:</p>
+            <p>¿Por qué crees que el sonido viaja con tanta claridad a través del material que para ustedes trasmitio "mejor el mensaje" en comparación a simplemente hablar a la misma distancia por el aire? <span class="pts">[___ / 5 pts]</span><br> <span class="line-space w-full mt-2"></span></p>
+            
+            <p>Dibuja el camino que sigue la vibración desde que sale de la boca del compañero hasta llegar al oído del receptor: <span class="pts">[___ / 5 pts]</span></p>
+            <div class="border-2 border-black h-32 w-full mt-2 flex items-center justify-center text-gray-300 italic text-[10px]">
+                Espacio para esquema de propagación
+            </div>
+        </div>
+
+        <div class="mt-8 text-[9px] text-center text-gray-400 border-t pt-2 uppercase">
+            Laboratorio Experimental - Escuela Particular 95 Alemana - Paillaco
+        </div>
+    </div>
+</body>
+</html>

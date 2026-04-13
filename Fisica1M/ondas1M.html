@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio de Ondas - 1° Medio Física</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cargando MathJax para renderizar símbolos matemáticos -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .canvas-container {
+            background: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 300px;
+        }
+        .formula-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-5xl mx-auto">
+        <!-- Encabezado -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-800 mb-2">Simulador Interactivo de Ondas</h1>
+            <p class="text-gray-600">Unidad: El Sonido y la Luz - 1° Año de Educación Media (Chile)</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Panel de Controles y Simulación -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="canvas-container p-4">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-700">Visualización de la Onda</h2>
+                    <canvas id="waveCanvas"></canvas>
+                    <div class="mt-4 flex flex-wrap gap-4 justify-around text-sm font-medium">
+                        <span class="text-blue-600">Amplitud ($A$): <span id="ampVal">50</span> px</span>
+                        <span class="text-green-600">Frecuencia ($f$): <span id="freqVal">0.02</span> Hz</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Controles Experimentales</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Amplitud (Intensidad)</label>
+                            <input type="range" id="amplitude" min="10" max="100" value="50" class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer">
+                            <p class="text-xs text-gray-500 mt-1">Representa el desplazamiento máximo desde el punto de equilibrio.</p>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Frecuencia (Tono)</label>
+                            <input type="range" id="frequency" min="0.005" max="0.1" step="0.001" value="0.02" class="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer">
+                            <p class="text-xs text-gray-500 mt-1">Número de ciclos que pasan por un punto en un segundo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Teoría y Ecuaciones -->
+            <div class="space-y-6">
+                <div class="bg-blue-900 text-white p-6 rounded-xl shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Conceptos Clave</h2>
+                    <ul class="space-y-4 text-sm">
+                        <li>
+                            <strong>Amplitud ($A$):</strong> Relacionada con la energía. En el sonido, determina el <em>volumen</em>.
+                        </li>
+                        <li>
+                            <strong>Frecuencia ($f$):</strong> Se mide en Hertz ($Hz$). Determina el <em>tono</em>.
+                        </li>
+                        <li>
+                            <strong>Periodo ($T$):</strong> El tiempo que demora un ciclo completo ($T = 1/f$).
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <div class="formula-card">
+                            $f = \frac{1}{T}$
+                        </div>
+                        <div class="formula-card">
+                            $v = \lambda \cdot f$
+                        </div>
+                        <p class="text-[10px] text-blue-200 text-center">$\lambda$ = Longitud de onda | $v$ = Velocidad</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500">
+                    <h2 class="text-xl font-bold mb-2">💡 Dato Curioso</h2>
+                    <p class="text-gray-700 text-sm italic">
+                        El oído humano joven puede percibir frecuencias entre los $20\text{ Hz}$ y los $20.000\text{ Hz}$. ¡Con la edad, perdemos la capacidad de oír las más altas!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Ejercicios -->
+        <section class="mt-12 bg-white p-8 rounded-xl shadow-md">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Guía de Ejercicios</h2>
+            
+            <div class="space-y-8">
+                <div class="p-4 border-l-4 border-blue-500 bg-blue-50">
+                    <p class="font-semibold text-gray-800">Ejercicio 1: El péndulo</p>
+                    <p class="text-gray-600">Un péndulo completa $20$ oscilaciones en $10$ segundos. ¿Cuál es su frecuencia ($f$) y su periodo ($T$)?</p>
+                    <button onclick="toggleAnswer('ans1')" class="mt-2 text-blue-600 text-sm font-bold hover:underline">Ver Solución</button>
+                    <div id="ans1" class="hidden mt-2 p-3 bg-white rounded border border-blue-200 text-sm">
+                        <strong>Solución:</strong><br>
+                        $f = \frac{\text{ciclos}}{\text{tiempo}} = \frac{20}{10} = 2\text{ Hz}$.<br>
+                        $T = \frac{1}{f} = \frac{1}{2} = 0,5\text{ s}$.
+                    </div>
+                </div>
+
+                <div class="p-4 border-l-4 border-green-500 bg-green-50">
+                    <p class="font-semibold text-gray-800">Ejercicio 2: Velocidad del sonido</p>
+                    <p class="text-gray-600">Si una onda sonora tiene una frecuencia de $170\text{ Hz}$ y la velocidad del sonido es $340\text{ m/s}$, ¿cuál es su longitud de onda ($\lambda$)?</p>
+                    <button onclick="toggleAnswer('ans2')" class="mt-2 text-green-600 text-sm font-bold hover:underline">Ver Solución</button>
+                    <div id="ans2" class="hidden mt-2 p-3 bg-white rounded border border-green-200 text-sm">
+                        <strong>Solución:</strong><br>
+                        Usamos: $v = \lambda \cdot f \implies \lambda = \frac{v}{f}$<br>
+                        $\lambda = \frac{340}{170} = 2\text{ metros}$.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-12 text-center text-gray-500 text-xs">
+            <p>Diseñado para el fortalecimiento de la educación científica en Chile.</p>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        const ampInput = document.getElementById('amplitude');
+        const freqInput = document.getElementById('frequency');
+        const ampValDisp = document.getElementById('ampVal');
+        const freqValDisp = document.getElementById('freqVal');
+
+        let offset = 0;
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = 300;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function drawWave() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const amplitude = parseFloat(ampInput.value);
+            const frequency = parseFloat(freqInput.value);
+            
+            ampValDisp.innerText = amplitude;
+            freqValDisp.innerText = frequency.toFixed(3);
+
+            // Dibujar eje de equilibrio
+            ctx.beginPath();
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.setLineDash([5, 5]);
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset dash
+
+            // Dibujar la onda
+            ctx.beginPath();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = '#3b82f6';
+
+            for (let x = 0; x < canvas.width; x++) {
+                const y = canvas.height / 2 + Math.sin(x * frequency + offset) * amplitude;
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+
+            ctx.stroke();
+
+            // Animación
+            offset -= 0.1;
+            requestAnimationFrame(drawWave);
+        }
+
+        function toggleAnswer(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+
+        window.onload = drawWave;
+    </script>
+</body>
+</html>

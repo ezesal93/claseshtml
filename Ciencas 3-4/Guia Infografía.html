@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía: Infografía de Auditoría Ambiental — Paillaco</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #2E7D52; --green-l: #EAF3DE; --green-m: #97C459; --green-d: #27500A;
+    --blue: #185FA5; --blue-l: #E6F1FB; --blue-d: #0C447C;
+    --amber: #854F0B; --amber-l: #FAEEDA; --amber-d: #633806;
+    --red: #A32D2D; --red-l: #FCEBEB; --red-d: #791F1F;
+    --teal: #0F6E56; --teal-l: #E1F5EE; --teal-d: #085041;
+    --gray: #4A4A4A; --gray-l: #F4F4F2; --gray-m: #CCCCCC;
+    --text: #1C1C1C; --text-s: #555555; --text-t: #888888;
+    --bg: #FFFFFF; --bg-s: #F7F7F5; --border: rgba(0,0,0,0.1);
+    --radius: 8px; --radius-lg: 12px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg-s);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    background: var(--green);
+    color: #fff;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 3px solid var(--teal);
+  }
+  .page-header h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; opacity: 0.85; }
+  .oa-pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .stepper { display: flex; gap: 0; }
+  .dots-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 18px;
+    flex-shrink: 0;
+  }
+  .dot {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all .2s;
+    border: 1.5px solid transparent;
+  }
+  .dot.active  { background: #E6F1FB; color: #0C447C; border-color: #185FA5; }
+  .dot.done    { background: #EAF3DE; color: #27500A; border-color: #2E7D52; }
+  .dot.pending { background: #F4F4F2; color: #888888; border-color: #CCCCCC; }
+  .dot-line { width: 1.5px; flex: 1; min-height: 16px; background: var(--border); }
+
+  .panels-col { flex: 1; min-width: 0; }
+  .step-panel { display: none; flex-direction: column; gap: 14px; padding-bottom: 28px; }
+  .step-panel.active { display: flex; }
+
+  .step-head { padding-top: 4px; }
+  .step-num { font-size: 11px; font-weight: 500; color: var(--text-t); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+  .step-title { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .step-sub { font-size: 13px; color: var(--text-s); }
+
+  .card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+  }
+  .card h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+  .card p, .card li { font-size: 13px; color: var(--text-s); line-height: 1.65; }
+  .card ul { padding-left: 16px; }
+  .card li { margin-bottom: 4px; }
+
+  .section-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--text-t); margin-bottom: 6px;
+  }
+
+  .tag {
+    display: inline-block; padding: 3px 9px; border-radius: 5px;
+    font-size: 11px; font-weight: 500; margin: 2px 2px 0 0;
+  }
+  .tag-green { background: #EAF3DE; color: #27500A; }
+  .tag-blue  { background: #E6F1FB; color: #0C447C; }
+  .tag-amber { background: #FAEEDA; color: #633806; }
+  .tag-red   { background: #FCEBEB; color: #791F1F; }
+
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(0,1fr)); gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+
+  .tip {
+    background: #FAEEDA; border: 0.5px solid #EF9F27;
+    border-radius: var(--radius);
+    padding: 10px 14px; font-size: 13px; color: #633806;
+  }
+  .tip strong { color: #412402; }
+
+  .note {
+    background: #E6F1FB; border: 0.5px solid #85B7EB;
+    border-radius: var(--radius);
+    padding: 10px 14px; font-size: 13px; color: #0C447C;
+  }
+
+  .success-box {
+    background: #EAF3DE; border: 0.5px solid #97C459;
+    border-radius: var(--radius);
+    padding: 10px 14px; font-size: 13px; color: #27500A;
+  }
+
+  .example {
+    border-left: 3px solid #85B7EB;
+    background: #F7F9FE;
+    padding: 8px 12px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 13px; color: var(--text-s);
+    font-style: italic;
+  }
+
+  .checklist { list-style: none; padding: 0; margin: 6px 0 0; }
+  .checklist li {
+    font-size: 13px; color: var(--text-s);
+    padding: 4px 0;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .checklist li::before {
+    content: "○"; color: var(--text-t); font-size: 12px;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  .nav-row {
+    display: flex; gap: 8px; margin-top: 6px; align-items: center;
+  }
+  .btn {
+    background: transparent;
+    border: 0.5px solid rgba(0,0,0,0.25);
+    border-radius: var(--radius);
+    padding: 7px 16px; font-size: 13px;
+    cursor: pointer; color: var(--text);
+    transition: background .15s, transform .1s;
+    font-family: var(--font);
+  }
+  .btn:hover { background: #F0F0EE; }
+  .btn:active { transform: scale(.97); }
+  .btn-primary {
+    background: #E6F1FB; color: #0C447C;
+    border-color: #85B7EB;
+  }
+  .btn-primary:hover { background: #B5D4F4; }
+  .step-counter { font-size: 12px; color: var(--text-t); margin-left: auto; }
+
+  .layout-grid {
+    display: grid;
+    gap: 4px;
+    background: #F0F0EE;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 10px;
+  }
+  .layout-block {
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 12px; font-weight: 500;
+    text-align: center;
+  }
+  .lb-green  { background: #EAF3DE; color: #27500A; }
+  .lb-blue   { background: #E6F1FB; color: #0C447C; }
+  .lb-amber  { background: #FAEEDA; color: #633806; }
+  .lb-red    { background: #FCEBEB; color: #791F1F; }
+  .lb-gray   { background: #EEEEEC; color: #4A4A4A; }
+  .lb-teal   { background: #E1F5EE; color: #085041; }
+
+  .cat-badge {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px; border-radius: var(--radius);
+    margin-bottom: 6px;
+  }
+  .cat-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 4px;
+  }
+  .cat-text p { font-size: 13px; color: var(--text-s); margin-top: 2px; }
+  .cat-text strong { font-size: 13px; font-weight: 500; }
+
+  .score-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .score-bar-label { font-size: 12px; color: var(--text-s); width: 80px; flex-shrink: 0; }
+  .score-bar-track {
+    flex: 1; height: 8px; background: #EEEEEC;
+    border-radius: 4px; overflow: hidden;
+  }
+  .score-bar-fill { height: 100%; border-radius: 4px; }
+  .score-bar-val { font-size: 12px; font-weight: 500; width: 28px; text-align: right; flex-shrink: 0; }
+
+  .rubric-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .rubric-table th {
+    text-align: left; padding: 7px 8px;
+    background: #2A2A2A; color: #fff;
+    font-weight: 500; font-size: 11px;
+  }
+  .rubric-table th:first-child { border-radius: 6px 0 0 0; }
+  .rubric-table th:last-child  { border-radius: 0 6px 0 0; text-align: center; }
+  .rubric-table td {
+    padding: 7px 8px; vertical-align: top;
+    border-bottom: 0.5px solid #EEEEEC;
+    line-height: 1.5;
+  }
+  .rubric-table tr:nth-child(even) td { background: #FAFAF8; }
+  .rubric-table td:last-child { text-align: center; font-weight: 500; }
+  .rubric-table tfoot td {
+    background: #2A2A2A; color: #fff;
+    font-weight: 500; padding: 8px;
+    border-bottom: none;
+  }
+  .rubric-table tfoot td:first-child { border-radius: 0 0 0 6px; }
+  .rubric-table tfoot td:last-child  { border-radius: 0 0 6px 0; text-align: center; }
+
+  .lvl-good   { color: #27500A; }
+  .lvl-ok     { color: #633806; }
+  .lvl-low    { color: #791F1F; }
+  .pts-badge {
+    display: inline-block;
+    padding: 3px 8px; border-radius: 5px;
+    font-size: 12px; font-weight: 500;
+  }
+
+  .conv-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+  .conv-table th { background: var(--bg-s); padding: 5px 8px; text-align: center; font-weight: 500; color: var(--text-s); border: 0.5px solid var(--border); }
+  .conv-table td { padding: 5px 8px; text-align: center; border: 0.5px solid var(--border); }
+  .conv-good { background: #EAF3DE; color: #27500A; font-weight: 500; }
+  .conv-ok   { background: #FAEEDA; color: #633806; font-weight: 500; }
+  .conv-low  { background: #FCEBEB; color: #791F1F; font-weight: 500; }
+
+  @media (max-width: 540px) {
+    .dots-col { margin-right: 12px; }
+    .dot { width: 26px; height: 26px; font-size: 11px; }
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+    .rubric-table { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Guía: Infografía de Auditoría Ambiental Urbana</h1>
+  <p>Ciencias para la Ciudadanía · 4° Medio · Módulo Ambiente y Sostenibilidad · Paillaco</p>
+  <div class="oa-pill">
+    <strong>OA 3:</strong> Modelar los efectos del cambio climático en diversos ecosistemas y sus componentes biológicos, físicos y químicos, y evaluar posibles soluciones para la mitigación y adaptación.
+  </div>
+</div>
+
+<div class="container">
+  <div class="stepper">
+    <div class="dots-col" id="dotsCol"></div>
+    <div class="panels-col" id="panelsCol"></div>
+  </div>
+</div>
+
+<script>
+const steps = [
+  {
+    title: "Organiza tus datos",
+    sub: "Vacía toda la información recolectada antes de diseñar",
+    html: `
+      <div class="card">
+        <h3>¿Qué datos tienes?</h3>
+        <p>Aplicaste la auditoría <strong>4 veces</strong>, una por cada calle del recorrido en cuadrado. Cada auditoría tiene 4 categorías con ítems marcables y una nota de 1 a 7. Tu primer paso es consolidar esos datos en una tabla.</p>
+      </div>
+
+      <div class="section-label">Tabla de vaciado de notas</div>
+      <div class="card" style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:400px">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:6px 8px;background:#F0F0EE;border:0.5px solid #E0E0DE;border-radius:4px 0 0 0">Categoría</th>
+              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 1</th>
+              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 2</th>
+              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 3</th>
+              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 4</th>
+              <th style="padding:6px 8px;background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;text-align:center;font-weight:500">Promedio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2E7D52;margin-right:6px"></span>Biodiversidad</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#27500A;background:#EAF3DE">___</td>
+            </tr>
+            <tr style="background:#FAFAFA">
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#A32D2D;margin-right:6px"></span>Limpieza</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#0C447C;background:#E6F1FB">___</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#185FA5;margin-right:6px"></span>Agua y suelo</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#0C447C;background:#E6F1FB">___</td>
+            </tr>
+            <tr style="background:#FAFAFA">
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#854F0B;margin-right:6px"></span>Bienestar urbano</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#0C447C;background:#E6F1FB">___</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip">
+        <strong>Tip:</strong> Calcula el promedio sumando las 4 notas de cada fila y dividiendo por 4. Anota también cuántos ítems marcaste (✓) en cada categoría — eso lo usarás en el gráfico de radar.
+      </div>
+    `
+  },
+  {
+    title: "Define el mensaje central",
+    sub: "Toda buena infografía tiene una idea principal antes de empezar a diseñar",
+    html: `
+      <div class="card">
+        <h3>La pregunta clave</h3>
+        <p>Antes de abrir Canva o tomar lápices, responde esta pregunta en <strong>una sola oración</strong>. Esa oración será el título o subtítulo de tu infografía.</p>
+      </div>
+
+      <div class="section-label">Plantilla de mensaje central</div>
+      <div class="example">
+        "El entorno de [nombre del lugar] en Paillaco muestra fortalezas en [categoría con mejor promedio], pero presenta déficit crítico en [categoría con peor promedio], lo que refleja el impacto del cambio climático sobre [componente afectado: biodiversidad / suelo / agua]."
+      </div>
+
+      <div class="section-label" style="margin-top:14px">Conexión con el OA 3</div>
+      <div class="card">
+        <h3>¿Cómo se vincula cada hallazgo con el cambio climático?</h3>
+        <div class="cat-badge" style="background:#EAF3DE">
+          <div class="cat-dot" style="background:#2E7D52"></div>
+          <div class="cat-text">
+            <strong>Biodiversidad baja →</strong>
+            <p>Fragmentación de hábitat urbano, pérdida de polinizadores, reducción de captura de CO₂</p>
+          </div>
+        </div>
+        <div class="cat-badge" style="background:#E6F1FB">
+          <div class="cat-dot" style="background:#185FA5"></div>
+          <div class="cat-text">
+            <strong>Suelo impermeabilizado →</strong>
+            <p>Mayor escorrentía, inundaciones urbanas, formación de islas de calor</p>
+          </div>
+        </div>
+        <div class="cat-badge" style="background:#FCEBEB">
+          <div class="cat-dot" style="background:#A32D2D"></div>
+          <div class="cat-text">
+            <strong>Microbasurales →</strong>
+            <p>Contaminación de napas, emisión de gases de descomposición, degradación del suelo</p>
+          </div>
+        </div>
+        <div class="cat-badge" style="background:#FAEEDA">
+          <div class="cat-dot" style="background:#854F0B"></div>
+          <div class="cat-text">
+            <strong>Falta de sombra y árboles →</strong>
+            <p>Aumento de temperatura local, menor confort térmico en eventos de calor extremo</p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: "Estructura de la infografía",
+    sub: "Cómo organizar los bloques en formato vertical (A4 o afiche)",
+    html: `
+      <div class="card">
+        <h3>La infografía tiene 6 bloques en orden vertical</h3>
+        <p>Usa este esquema como guía para distribuir el espacio en tu hoja o plantilla digital.</p>
+      </div>
+
+      <div class="section-label">Distribución visual del espacio</div>
+      <div class="layout-grid">
+        <div class="layout-block lb-green" style="padding:10px 12px">
+          <div style="font-size:13px;font-weight:500">① Encabezado</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">Título · lugar · fecha · integrantes del grupo</div>
+        </div>
+        <div class="grid2" style="gap:4px">
+          <div class="layout-block lb-blue" style="padding:10px 8px">
+            <div style="font-size:12px;font-weight:500">② Mapa del recorrido</div>
+            <div style="font-size:11px;margin-top:2px;opacity:0.8">Las 4 calles en cuadrado, coloreadas por calle</div>
+          </div>
+          <div class="layout-block lb-teal" style="padding:10px 8px">
+            <div style="font-size:12px;font-weight:500">③ Gráfico de radar</div>
+            <div style="font-size:11px;margin-top:2px;opacity:0.8">Las 4 categorías con sus promedios</div>
+          </div>
+        </div>
+        <div class="grid2" style="gap:4px">
+          <div class="layout-block lb-amber" style="padding:8px">
+            <div style="font-size:12px;font-weight:500">④ Foto 1 + leyenda</div>
+          </div>
+          <div class="layout-block lb-amber" style="padding:8px">
+            <div style="font-size:12px;font-weight:500">④ Foto 2 + leyenda</div>
+          </div>
+        </div>
+        <div class="layout-block lb-red" style="padding:10px 12px">
+          <div style="font-size:13px;font-weight:500">⑤ Análisis: conexión con cambio climático</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">¿Qué encontraste y cómo se relaciona con el OA 3?</div>
+        </div>
+        <div class="layout-block" style="background:#E1F5EE;color:#085041;padding:10px 12px">
+          <div style="font-size:13px;font-weight:500">⑥ Propuesta de mejora</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">Medidas de mitigación y/o adaptación</div>
+        </div>
+        <div class="layout-block lb-gray" style="padding:7px;font-size:11px;color:#666">
+          Fuente de datos · Nombre del grupo · Asignatura
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Proporción recomendada:</strong> El mapa y el radar ocupan cada uno ~20% del espacio total. Las fotos ~25%. Análisis + propuesta ~30%. Encabezado y pie ~5% cada uno.
+      </div>
+    `
+  },
+  {
+    title: "Cómo hacer el mapa del recorrido",
+    sub: "Bloque ② — representa las 4 calles como un cuadrado",
+    html: `
+      <div class="card">
+        <h3>¿Qué debe mostrar el mapa?</h3>
+        <ul>
+          <li>El punto elegido al centro (puede ser una estrella o punto de color oscuro)</li>
+          <li>Las 4 calles que forman el cuadrado alrededor, cada una con un color distinto</li>
+          <li>Una etiqueta para cada calle: "Calle 1", "Calle 2", etc.</li>
+          <li>Una rosa de los vientos o indicador de norte (opcional pero recomendado)</li>
+          <li>El nombre del lugar o referencia (plaza, colegio, esquina, etc.)</li>
+        </ul>
+      </div>
+
+      <div class="section-label">Esquema del mapa</div>
+      <div class="card">
+        <svg viewBox="0 0 260 200" width="100%" style="max-width:320px;display:block;margin:0 auto">
+          <rect x="10" y="10" width="240" height="180" rx="8" fill="#F0F7F3" stroke="#CCDDCC" stroke-width="0.5"/>
+          <!-- grid faint -->
+          <line x1="70" y1="10" x2="70" y2="190" stroke="#E0EEEA" stroke-width="0.4"/>
+          <line x1="130" y1="10" x2="130" y2="190" stroke="#E0EEEA" stroke-width="0.4"/>
+          <line x1="190" y1="10" x2="190" y2="190" stroke="#E0EEEA" stroke-width="0.4"/>
+          <line x1="10" y1="70" x2="250" y2="70" stroke="#E0EEEA" stroke-width="0.4"/>
+          <line x1="10" y1="130" x2="250" y2="130" stroke="#E0EEEA" stroke-width="0.4"/>
+          <!-- manzanas -->
+          <rect x="78" y="78" width="40" height="40" rx="3" fill="#C0E0CC"/>
+          <rect x="132" y="78" width="40" height="40" rx="3" fill="#C0E0CC"/>
+          <rect x="78" y="132" width="40" height="40" rx="3" fill="#C0E0CC"/>
+          <rect x="132" y="132" width="40" height="40" rx="3" fill="#C0E0CC"/>
+          <!-- calles coloreadas -->
+          <!-- top: calle 1 verde -->
+          <line x1="75" y1="75" x2="175" y2="75" stroke="#2E7D52" stroke-width="4" stroke-linecap="round"/>
+          <!-- right: calle 2 rojo -->
+          <line x1="175" y1="75" x2="175" y2="175" stroke="#A32D2D" stroke-width="4" stroke-linecap="round"/>
+          <!-- bottom: calle 3 azul -->
+          <line x1="175" y1="175" x2="75" y2="175" stroke="#185FA5" stroke-width="4" stroke-linecap="round"/>
+          <!-- left: calle 4 ambar -->
+          <line x1="75" y1="175" x2="75" y2="75" stroke="#854F0B" stroke-width="4" stroke-linecap="round"/>
+          <!-- centro -->
+          <circle cx="125" cy="125" r="6" fill="#1C1C1C"/>
+          <circle cx="125" cy="125" r="3" fill="white"/>
+          <!-- labels -->
+          <text x="125" y="68" text-anchor="middle" font-size="9" fill="#27500A" font-weight="500">Calle 1</text>
+          <text x="188" y="128" text-anchor="start" font-size="9" fill="#791F1F" font-weight="500">Calle 2</text>
+          <text x="125" y="188" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="500">Calle 3</text>
+          <text x="18" y="128" text-anchor="start" font-size="9" fill="#633806" font-weight="500">Calle 4</text>
+          <text x="125" y="132" text-anchor="middle" font-size="8" fill="#555">Punto</text>
+          <!-- norte -->
+          <circle cx="230" cy="35" r="12" fill="white" stroke="#CCC" stroke-width="0.5"/>
+          <text x="230" y="31" text-anchor="middle" font-size="9" fill="#A32D2D" font-weight="bold">N</text>
+          <polygon points="230,33 227,41 233,41" fill="#A32D2D"/>
+        </svg>
+        <p style="font-size:12px;color:#888;text-align:center;margin-top:8px">Esquema de referencia — recrea esto con tus datos reales</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Herramientas para hacerlo</h3>
+          <ul>
+            <li>A mano alzada sobre papel cuadriculado</li>
+            <li>Captura de Google Maps + dibujar encima en Canva</li>
+            <li>Google Slides con formas y líneas de colores</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Colores sugeridos por calle</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#2E7D52"></span>Calle 1 — verde</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#A32D2D"></span>Calle 2 — rojo</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#185FA5"></span>Calle 3 — azul</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#854F0B"></span>Calle 4 — amarillo</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: "Cómo hacer el gráfico de radar",
+    sub: "Bloque ③ — visualiza el perfil ambiental con las 4 categorías",
+    html: `
+      <div class="card">
+        <h3>¿Qué es un gráfico de radar?</h3>
+        <p>Es un gráfico con forma de telaraña que permite comparar varias categorías al mismo tiempo. Cada "brazo" del radar representa una categoría, y el punto en ese brazo corresponde al promedio obtenido (escala 1–7).</p>
+      </div>
+
+      <div class="section-label">Ejemplo de radar con notas ilustrativas</div>
+      <div class="card" style="display:flex;justify-content:center;align-items:center;padding:1.5rem">
+        <svg viewBox="-10 -10 220 220" width="100%" style="max-width:260px">
+          <defs>
+            <polygon id="grid7" points="100,7 179,57 179,143 100,193 21,143 21,57"/>
+            <polygon id="grid5" points="100,36 165,79 165,121 100,164 35,121 35,79"/>
+            <polygon id="grid3" points="100,64 151,93 151,107 100,136 49,107 49,93"/>
+            <polygon id="grid1" points="100,93 115,100 115,100 100,107 85,100 85,100"/>
+          </defs>
+          <!-- rings -->
+          <polygon points="100,7 179,57 179,143 100,193 21,143 21,57" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
+          <polygon points="100,36 165,79 165,121 100,164 35,121 35,79" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
+          <polygon points="100,64 151,93 151,107 100,136 49,107 49,93" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
+          <polygon points="100,93 115,100 115,100 100,107 85,100 85,100" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
+          <!-- spokes -->
+          <line x1="100" y1="100" x2="100" y2="7" stroke="#E0E0E0" stroke-width="0.5"/>
+          <line x1="100" y1="100" x2="179" y2="57" stroke="#E0E0E0" stroke-width="0.5"/>
+          <line x1="100" y1="100" x2="179" y2="143" stroke="#E0E0E0" stroke-width="0.5"/>
+          <line x1="100" y1="100" x2="100" y2="193" stroke="#E0E0E0" stroke-width="0.5"/>
+          <line x1="100" y1="100" x2="21" y2="143" stroke="#E0E0E0" stroke-width="0.5"/>
+          <line x1="100" y1="100" x2="21" y2="57" stroke="#E0E0E0" stroke-width="0.5"/>
+          <!-- data: values ~5,3,4,6 scaled on 7 (93 center, range 86) -->
+          <!-- top=Biodiversidad=5: 100, 100-(5/7)*93=100-66=34 -->
+          <!-- br=Limpieza=3: 179-(3/7)*79=179-34=145, 143-(3/7)*43=143-18=125 -->
+          <!-- bl_bottom = Agua/Suelo=4 approx -->
+          <polygon
+            points="100,34 155,125 132,175 68,175 45,125 100,34"
+            fill="rgba(24,95,165,0.18)" stroke="#185FA5" stroke-width="1.5"/>
+          <!-- dots -->
+          <circle cx="100" cy="34" r="4" fill="#2E7D52"/>
+          <circle cx="155" cy="125" r="4" fill="#A32D2D"/>
+          <circle cx="132" cy="175" r="4" fill="#185FA5"/>
+          <circle cx="68" cy="175" r="4" fill="#185FA5"/>
+          <circle cx="45" cy="125" r="4" fill="#854F0B"/>
+          <!-- labels -->
+          <text x="100" y="-2" text-anchor="middle" font-size="9" fill="#27500A" font-weight="500">Biodiversidad</text>
+          <text x="185" y="57" text-anchor="start" font-size="9" fill="#791F1F" font-weight="500">Limpieza</text>
+          <text x="155" y="205" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="500">Agua/Suelo</text>
+          <text x="45" y="205" text-anchor="middle" font-size="9" fill="#633806" font-weight="500">Bienestar</text>
+          <!-- scale labels -->
+          <text x="103" y="5" font-size="7" fill="#AAA">7</text>
+          <text x="103" y="34" font-size="7" fill="#AAA">5</text>
+          <text x="103" y="63" font-size="7" fill="#AAA">3</text>
+          <text x="103" y="93" font-size="7" fill="#AAA">1</text>
+        </svg>
+      </div>
+      <p style="font-size:12px;color:#888;text-align:center;margin-top:-4px">Ejemplo con valores ilustrativos. Reemplaza con tus promedios reales.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Cómo construirlo paso a paso</h3>
+          <ul>
+            <li>Dibuja una circunferencia o polígono con 4 ejes (uno por categoría)</li>
+            <li>Marca la escala del 1 al 7 en cada eje</li>
+            <li>Ubica el promedio de cada categoría en su eje</li>
+            <li>Une los 4 puntos formando un polígono</li>
+            <li>Rellena el área con un color semitransparente</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cómo hacerlo en herramientas digitales</h3>
+          <ul>
+            <li><strong>Canva:</strong> insertar gráfico → radar → editar datos</li>
+            <li><strong>Google Sheets:</strong> seleccionar datos → insertar gráfico → tipo "radar"</li>
+            <li><strong>A mano:</strong> dibujar polígono de 4 lados con regla y transportador</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-label">Escala de colores del radar</div>
+      <div class="card">
+        <div class="score-bar-row">
+          <span class="score-bar-label" style="font-weight:500;color:#27500A">6 — 7 Óptimo</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:100%;background:#2E7D52"></div></div>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label" style="font-weight:500;color:#633806">4 — 5 Regular</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:70%;background:#EF9F27"></div></div>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label" style="font-weight:500;color:#791F1F">1 — 3 Crítico</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:43%;background:#E24B4A"></div></div>
+        </div>
+        <p style="font-size:12px;color:#888;margin-top:6px">Usa esta escala de colores de forma consistente en toda la infografía.</p>
+      </div>
+    `
+  },
+  {
+    title: "Cómo incorporar las fotografías",
+    sub: "Bloque ④ — las fotos son evidencia y recurso narrativo",
+    html: `
+      <div class="card">
+        <h3>Criterios para elegir las mejores fotos</h3>
+        <ul>
+          <li>Selecciona entre 2 y 4 fotografías que muestren los hallazgos más relevantes</li>
+          <li>Prioriza fotos que representan lo mejor y lo peor de la auditoría</li>
+          <li>Asegúrate de que la imagen sea nítida y muestre claramente el elemento evaluado</li>
+          <li>Incluye al menos una foto de problema y una foto de algo positivo encontrado</li>
+        </ul>
+      </div>
+
+      <div class="section-label">Cómo redactar la leyenda de cada foto</div>
+      <div class="card">
+        <h3>Estructura de la leyenda (4 elementos)</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;margin-top:8px">
+          <div style="background:#F0F0EE;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#333">Ubicación</div>
+            <div style="color:#666;margin-top:2px">Calle N</div>
+          </div>
+          <div style="background:#EAF3DE;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#27500A">Categoría</div>
+            <div style="color:#555;margin-top:2px">Biodiversidad</div>
+          </div>
+          <div style="background:#E6F1FB;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#0C447C">Hallazgo</div>
+            <div style="color:#555;margin-top:2px">Qué observaron</div>
+          </div>
+          <div style="background:#FCEBEB;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#791F1F">Conexión CC</div>
+            <div style="color:#555;margin-top:2px">Cambio climático</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Ejemplo de leyenda bien redactada</div>
+      <div class="example">
+        "Calle 2 — Categoría Biodiversidad: árbol sin taza libre de cemento y sin señales de vida silvestre. Nota: 2/7. El suelo cementado impide la infiltración del agua de lluvia, agravando el riesgo de inundaciones urbanas ante eventos climáticos extremos."
+      </div>
+
+      <div class="tip" style="margin-top:12px">
+        <strong>Tip:</strong> La leyenda no es solo una descripción — debe conectar lo que ves con un proceso ambiental. Eso es lo que evalúa el OA 3.
+      </div>
+    `
+  },
+  {
+    title: "Redacta el análisis y la propuesta",
+    sub: "Bloques ⑤ y ⑥ — aquí se demuestra el aprendizaje del OA 3",
+    html: `
+      <div class="note">
+        <strong>Recuerda:</strong> El OA 3 tiene dos verbos: <em>modelar</em> efectos del cambio climático (eso es el análisis) y <em>evaluar</em> soluciones (eso es la propuesta). Ambos deben aparecer en la infografía.
+      </div>
+
+      <div class="section-label" style="margin-top:14px">Bloque ⑤ — Análisis (3 a 5 oraciones)</div>
+      <div class="card">
+        <h3>Preguntas guía para el análisis</h3>
+        <ul class="checklist">
+          <li>¿Cuál fue la categoría con mejor y peor promedio?</li>
+          <li>¿Hubo diferencias notables entre las 4 calles?</li>
+          <li>¿Qué componente está más afectado: biológico, físico o químico?</li>
+          <li>¿Qué efectos del cambio climático se relacionan directamente con lo observado?</li>
+        </ul>
+      </div>
+
+      <div class="section-label">Bloque ⑥ — Propuesta de mejora</div>
+      <div class="grid2">
+        <div class="card">
+          <h3 style="color:#0F6E56">Mitigación</h3>
+          <p style="font-size:12px;color:#555;margin-bottom:6px">Reduce las causas del problema:</p>
+          <ul style="font-size:12px;color:#555;padding-left:14px">
+            <li>Plantar árboles nativos con taza de tierra</li>
+            <li>Instalar contenedores de reciclaje diferenciado</li>
+            <li>Reducir superficies impermeables con adoquines permeables</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="color:#185FA5">Adaptación</h3>
+          <p style="font-size:12px;color:#555;margin-bottom:6px">Ajusta el entorno al nuevo clima:</p>
+          <ul style="font-size:12px;color:#555;padding-left:14px">
+            <li>Jardines de lluvia o biofiltros en veredas</li>
+            <li>Corredores verdes urbanos entre plazas</li>
+            <li>Techos y pavimentos permeables</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="example">
+        <strong>Ejemplo de propuesta bien redactada:</strong><br>
+        "Para mitigar la escasa biodiversidad detectada en las 4 calles, proponemos instalar tazas de tierra en los árboles existentes y plantar 2 nuevas especies nativas por cuadra. Como medida de adaptación ante lluvias extremas, se sugiere construir un jardín de lluvia en la esquina de mayor acumulación de agua identificada en la Calle 3."
+      </div>
+    `
+  },
+  {
+    title: "Diseña y finaliza",
+    sub: "Herramientas, lista de verificación y rúbrica de evaluación",
+    html: `
+      <div class="grid2">
+        <div class="card">
+          <h3>Herramientas gratuitas</h3>
+          <ul>
+            <li><strong>Canva</strong> — plantillas de infografía vertical, fácil de usar</li>
+            <li><strong>Google Slides</strong> — colaborativo, sin instalación</li>
+            <li><strong>Piktochart</strong> — especializado en infografías</li>
+            <li><strong>A mano</strong> en cartulina o afiche — válido y valorado</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Lista de verificación final</h3>
+          <ul class="checklist">
+            <li>¿Tiene título con nombre del lugar?</li>
+            <li>¿Hay un mapa del recorrido en cuadrado?</li>
+            <li>¿El radar muestra las 4 categorías?</li>
+            <li>¿Hay al menos 2 fotos con leyenda completa?</li>
+            <li>¿Se menciona el cambio climático en el análisis?</li>
+            <li>¿Hay una propuesta de mitigación o adaptación?</li>
+            <li>¿Los colores son consistentes (escala semáforo)?</li>
+            <li>¿Aparece el nombre del grupo?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:4px">Rúbrica de evaluación — puntaje máximo: 48 puntos</div>
+      <div style="overflow-x:auto">
+        <table class="rubric-table">
+          <thead>
+            <tr>
+              <th style="width:18%">Criterio</th>
+              <th style="width:22%">Excelente (4 pts)</th>
+              <th style="width:22%">Logrado (3 pts)</th>
+              <th style="width:22%">En proceso (2 pts)</th>
+              <th style="width:10%">Inicial (1 pt)</th>
+              <th style="width:6%">Máx.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Datos y resultados</strong></td>
+              <td class="lvl-good">Datos completos de las 4 calles, promedios correctos y presentación clara y ordenada.</td>
+              <td style="color:#0C447C">Datos de las 4 calles con notas por categoría y promedios calculados.</td>
+              <td class="lvl-ok">Datos de 3 calles o falta algún promedio.</td>
+              <td class="lvl-low">Datos incompletos o sin organización.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>2. Mapa del recorrido</strong><br></td>
+              <td class="lvl-good">Mapa detallado con las 4 calles coloreadas, punto central, norte y referencia del lugar.</td>
+              <td style="color:#0C447C">Mapa claro del recorrido en cuadrado con las 4 calles identificadas.</td>
+              <td class="lvl-ok">Mapa presente pero con elementos incompletos o poco claros.</td>
+              <td class="lvl-low">Sin mapa o irreconocible como recorrido.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>3. Gráfico de radar</strong><br></td>
+              <td class="lvl-good">Radar con las 4 categorías, datos correctos, escala visible, colores coherentes y área rellena.</td>
+              <td style="color:#0C447C">Radar con las 4 categorías y datos correctos, escala visible.</td>
+              <td class="lvl-ok">Radar con 3 categorías o escala poco clara.</td>
+              <td class="lvl-low">Sin radar o tipo de gráfico incorrecto.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>4. Fotografías con leyenda</strong><br></td>
+              <td class="lvl-good">3 o más fotos claras con leyenda completa: calle, categoría, hallazgo y conexión con cambio climático.</td>
+              <td style="color:#0C447C">Al menos 3 fotos con leyenda que identifica calle, categoría y hallazgo.</td>
+              <td class="lvl-ok">2 fotos con leyenda parcial, sin conexión con cambio climático.</td>
+              <td class="lvl-low">Fotos sin leyenda o sin relación con la auditoría.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>5. Análisis y cambio climático</strong><br></td>
+              <td class="lvl-good">Conecta 3 o más hallazgos con efectos del CC, distingue componentes bio./fís./quím. y cita evidencia de los datos.</td>
+              <td style="color:#0C447C">Conecta 2 hallazgos con efectos del CC en componentes biológicos, físicos o químicos.</td>
+              <td class="lvl-ok">Menciona el cambio climático pero la conexión con los datos es vaga o incompleta.</td>
+              <td class="lvl-low">No relaciona los hallazgos con el cambio climático.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>6. Propuesta de solución</strong><br></td>
+              <td class="lvl-good">Propone medidas de mitigación Y adaptación, con actor responsable y factibilidad argumentada.</td>
+              <td style="color:#0C447C">Propone 2 o más medidas específicas de mitigación o adaptación vinculadas al diagnóstico.</td>
+              <td class="lvl-ok">Propone una medida general, poco vinculada a los datos obtenidos.</td>
+              <td class="lvl-low">Sin propuesta o no pertinente al contexto observado.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5"><strong>Puntaje total</strong></td>
+              <td><strong>24</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      
+    `
+  }
+];
+
+let current = 0;
+
+function render() {
+  const dotsCol = document.getElementById('dotsCol');
+  const panelsCol = document.getElementById('panelsCol');
+  dotsCol.innerHTML = '';
+  panelsCol.innerHTML = '';
+
+  steps.forEach((s, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot ' + (i < current ? 'done' : i === current ? 'active' : 'pending');
+    dot.textContent = i < current ? '✓' : (i + 1);
+    dot.onclick = () => { current = i; render(); window.scrollTo({top: 0, behavior:'smooth'}); };
+    dotsCol.appendChild(dot);
+    if (i < steps.length - 1) {
+      const line = document.createElement('div');
+      line.className = 'dot-line';
+      dotsCol.appendChild(line);
+    }
+
+    const panel = document.createElement('div');
+    panel.className = 'step-panel' + (i === current ? ' active' : '');
+    panel.innerHTML = `
+      <div class="step-head">
+        <div class="step-num">Paso ${i + 1} de ${steps.length}</div>
+        <div class="step-title">${s.title}</div>
+        <div class="step-sub">${s.sub}</div>
+      </div>
+      ${s.html}
+      <div class="nav-row">
+        ${current > 0 ? `<button class="btn" onclick="move(-1)">← Anterior</button>` : ''}
+        ${current < steps.length - 1
+          ? `<button class="btn btn-primary" onclick="move(1)">Siguiente →</button>`
+          : `<button class="btn btn-primary" style="background:#EAF3DE;color:#27500A;border-color:#97C459" disabled>✓ Guía completa</button>`}
+        <span class="step-counter">${i + 1} / ${steps.length}</span>
+      </div>
+    `;
+    panelsCol.appendChild(panel);
+  });
+}
+
+function move(dir) {
+  current = Math.max(0, Math.min(steps.length - 1, current + dir));
+  render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+render();
+</script>
+</body>
+</html>
