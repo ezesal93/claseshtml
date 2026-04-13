@@ -1,0 +1,61 @@
+[
+  {
+    "materia": "Biología 1M",
+    "icono": "🧬",
+    "color": "#2e7d32",
+    "carpeta": "Biologia 1M",
+    "archivos": [
+      { "nombre": "La historia de los patrones", "archivo": "La historia de los patrones.html" }
+    ]
+  },
+  {
+    "materia": "Ciencias 3-4",
+    "icono": "🔬",
+    "color": "#1565c0",
+    "carpeta": "Ciencias 3-4",
+    "archivos": [
+      { "nombre": "Guía Infografía 3M", "archivo": "Guia Infografia-3M.html" },
+      { "nombre": "Guía Infografía 4M", "archivo": "Guia Infografia-4M.html" }
+    ]
+  },
+  {
+    "materia": "Ciencias Salud 3M",
+    "icono": "🧠",
+    "color": "#6a1b9a",
+    "carpeta": "Ciencias Salud 3M",
+    "archivos": [
+      { "nombre": "Cerebro adolescente 3M", "archivo": "cerebro-adolescente-3M.html" }
+    ]
+  },
+  {
+    "materia": "Ecología 4M",
+    "icono": "🌿",
+    "color": "#558b2f",
+    "carpeta": "Ecologia 4M",
+    "archivos": [
+      { "nombre": "4M - La historia de los patrones", "archivo": "4M-La historia de los patrones.html" }
+    ]
+  },
+  {
+    "materia": "Física 1M",
+    "icono": "⚡",
+    "color": "#d84315",
+    "carpeta": "Fisica1M",
+    "archivos": [
+      { "nombre": "Ecuaciones - Ondas - Simulación", "archivo": "Ecuaciones-Ondas-Simulacion.html" },
+      { "nombre": "Guía Ondas", "archivo": "Guia Ondas.html" },
+      { "nombre": "Laboratorio introducción a ondas", "archivo": "Laboratorio-introduccion-ondas.html" },
+      { "nombre": "Laboratorio ondas - variables", "archivo": "Laboratorio-ondas-variables.html" },
+      { "nombre": "Ondas 1M", "archivo": "ondas1M.html" }
+    ]
+  },
+  {
+    "materia": "Química 1M",
+    "icono": "⚗️",
+    "color": "#0277bd",
+    "carpeta": "Quimica1M",
+    "archivos": [
+      { "nombre": "Laboratorio introducción al átomo", "archivo": "Laboratorio-introducion-atomo.html" }
+    ]
+  }
+]

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía: Infografía de Auditoría Ambiental Comparativa — Paillaco</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #2E7D52; --green-l: #EAF3DE; --green-m: #97C459; --green-d: #27500A;
+    --blue: #185FA5; --blue-l: #E6F1FB; --blue-d: #0C447C;
+    --amber: #854F0B; --amber-l: #FAEEDA; --amber-d: #633806;
+    --red: #A32D2D; --red-l: #FCEBEB; --red-d: #791F1F;
+    --teal: #0F6E56; --teal-l: #E1F5EE; --teal-d: #085041;
+    --purple: #534AB7; --purple-l: #EEEDFE; --purple-d: #3C3489;
+    --gray: #4A4A4A; --gray-l: #F4F4F2; --gray-m: #CCCCCC;
+    --text: #1C1C1C; --text-s: #555555; --text-t: #888888;
+    --bg: #FFFFFF; --bg-s: #F7F7F5; --border: rgba(0,0,0,0.1);
+    --radius: 8px; --radius-lg: 12px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* colores por lugar */
+    --lugar-a: #185FA5; --lugar-a-l: #E6F1FB; --lugar-a-d: #0C447C;
+    --lugar-b: #0F6E56; --lugar-b-l: #E1F5EE; --lugar-b-d: #085041;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg-s);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
+    color: #fff;
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 3px solid var(--teal);
+  }
+  .page-header h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+  .page-header p { font-size: 13px; opacity: 0.85; }
+  .oa-pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+  .compare-badge {
+    display: inline-flex; gap: 8px; align-items: center;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .compare-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .stepper { display: flex; gap: 0; }
+  .dots-col {
+    display: flex; flex-direction: column;
+    align-items: center; margin-right: 18px; flex-shrink: 0;
+  }
+  .dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; flex-shrink: 0;
+    cursor: pointer; transition: all .2s;
+    border: 1.5px solid transparent;
+  }
+  .dot.active  { background: #E6F1FB; color: #0C447C; border-color: #185FA5; }
+  .dot.done    { background: #EAF3DE; color: #27500A; border-color: #2E7D52; }
+  .dot.pending { background: #F4F4F2; color: #888888; border-color: #CCCCCC; }
+  .dot-line { width: 1.5px; flex: 1; min-height: 16px; background: var(--border); }
+
+  .panels-col { flex: 1; min-width: 0; }
+  .step-panel { display: none; flex-direction: column; gap: 14px; padding-bottom: 28px; }
+  .step-panel.active { display: flex; }
+
+  .step-head { padding-top: 4px; }
+  .step-num { font-size: 11px; font-weight: 500; color: var(--text-t); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 2px; }
+  .step-title { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+  .step-sub { font-size: 13px; color: var(--text-s); }
+
+  .card {
+    background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+  }
+  .card h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+  .card p, .card li { font-size: 13px; color: var(--text-s); line-height: 1.65; }
+  .card ul { padding-left: 16px; }
+  .card li { margin-bottom: 4px; }
+
+  /* tarjetas de lugar A / B */
+  .lugar-card-a {
+    background: var(--bg); border: 1.5px solid #85B7EB;
+    border-top: 4px solid var(--lugar-a);
+    border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+  }
+  .lugar-card-b {
+    background: var(--bg); border: 1.5px solid #5DCAA5;
+    border-top: 4px solid var(--lugar-b);
+    border-radius: var(--radius-lg); padding: 1rem 1.25rem;
+  }
+  .lugar-card-a h3, .lugar-card-b h3 { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+  .lugar-card-a h3 { color: var(--lugar-a-d); }
+  .lugar-card-b h3 { color: var(--lugar-b-d); }
+  .lugar-card-a p, .lugar-card-a li,
+  .lugar-card-b p, .lugar-card-b li { font-size: 13px; color: var(--text-s); line-height: 1.65; }
+  .lugar-card-a ul, .lugar-card-b ul { padding-left: 16px; }
+  .lugar-card-a li, .lugar-card-b li { margin-bottom: 4px; }
+
+  .lugar-label-a {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--lugar-a-l); color: var(--lugar-a-d);
+    border: 0.5px solid #85B7EB;
+    border-radius: 5px; padding: 3px 10px; font-size: 11px; font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .lugar-label-b {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--lugar-b-l); color: var(--lugar-b-d);
+    border: 0.5px solid #5DCAA5;
+    border-radius: 5px; padding: 3px 10px; font-size: 11px; font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .lugar-dot-a { width: 8px; height: 8px; border-radius: 50%; background: var(--lugar-a); flex-shrink: 0; }
+  .lugar-dot-b { width: 8px; height: 8px; border-radius: 50%; background: var(--lugar-b); flex-shrink: 0; }
+
+  .section-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--text-t); margin-bottom: 6px;
+  }
+
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(0,1fr)); gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+
+  .tip {
+    background: #FAEEDA; border: 0.5px solid #EF9F27;
+    border-radius: var(--radius); padding: 10px 14px;
+    font-size: 13px; color: #633806;
+  }
+  .tip strong { color: #412402; }
+
+  .note {
+    background: #E6F1FB; border: 0.5px solid #85B7EB;
+    border-radius: var(--radius); padding: 10px 14px;
+    font-size: 13px; color: #0C447C;
+  }
+
+  .success-box {
+    background: #EAF3DE; border: 0.5px solid #97C459;
+    border-radius: var(--radius); padding: 10px 14px;
+    font-size: 13px; color: #27500A;
+  }
+
+  .example {
+    border-left: 3px solid #85B7EB; background: #F7F9FE;
+    padding: 8px 12px; border-radius: 0 var(--radius) var(--radius) 0;
+    font-size: 13px; color: var(--text-s); font-style: italic;
+  }
+
+  .checklist { list-style: none; padding: 0; margin: 6px 0 0; }
+  .checklist li {
+    font-size: 13px; color: var(--text-s); padding: 4px 0;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  .checklist li::before {
+    content: "○"; color: var(--text-t); font-size: 12px;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  .nav-row { display: flex; gap: 8px; margin-top: 6px; align-items: center; }
+  .btn {
+    background: transparent; border: 0.5px solid rgba(0,0,0,0.25);
+    border-radius: var(--radius); padding: 7px 16px; font-size: 13px;
+    cursor: pointer; color: var(--text);
+    transition: background .15s, transform .1s; font-family: var(--font);
+  }
+  .btn:hover { background: #F0F0EE; }
+  .btn:active { transform: scale(.97); }
+  .btn-primary { background: #E6F1FB; color: #0C447C; border-color: #85B7EB; }
+  .btn-primary:hover { background: #B5D4F4; }
+  .step-counter { font-size: 12px; color: var(--text-t); margin-left: auto; }
+
+  .layout-grid {
+    display: grid; gap: 4px;
+    background: #F0F0EE; border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 10px;
+  }
+  .layout-block {
+    border-radius: 6px; padding: 8px 10px;
+    font-size: 12px; font-weight: 500; text-align: center;
+  }
+  .lb-green  { background: #EAF3DE; color: #27500A; }
+  .lb-blue   { background: #E6F1FB; color: #0C447C; }
+  .lb-amber  { background: #FAEEDA; color: #633806; }
+  .lb-red    { background: #FCEBEB; color: #791F1F; }
+  .lb-gray   { background: #EEEEEC; color: #4A4A4A; }
+  .lb-teal   { background: #E1F5EE; color: #085041; }
+  .lb-purple { background: #EEEDFE; color: #3C3489; }
+
+  .cat-badge {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px; border-radius: var(--radius); margin-bottom: 6px;
+  }
+  .cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .cat-text p { font-size: 13px; color: var(--text-s); margin-top: 2px; }
+  .cat-text strong { font-size: 13px; font-weight: 500; }
+
+  .score-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .score-bar-label { font-size: 12px; color: var(--text-s); width: 80px; flex-shrink: 0; }
+  .score-bar-track { flex: 1; height: 8px; background: #EEEEEC; border-radius: 4px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 4px; }
+
+  .rubric-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .rubric-table th {
+    text-align: left; padding: 7px 8px;
+    background: #2A2A2A; color: #fff; font-weight: 500; font-size: 11px;
+  }
+  .rubric-table th:first-child { border-radius: 6px 0 0 0; }
+  .rubric-table th:last-child  { border-radius: 0 6px 0 0; text-align: center; }
+  .rubric-table td {
+    padding: 7px 8px; vertical-align: top;
+    border-bottom: 0.5px solid #EEEEEC; line-height: 1.5;
+  }
+  .rubric-table tr:nth-child(even) td { background: #FAFAF8; }
+  .rubric-table td:last-child { text-align: center; font-weight: 500; }
+  .rubric-table tfoot td {
+    background: #2A2A2A; color: #fff; font-weight: 500;
+    padding: 8px; border-bottom: none;
+  }
+  .rubric-table tfoot td:first-child { border-radius: 0 0 0 6px; }
+  .rubric-table tfoot td:last-child  { border-radius: 0 0 6px 0; text-align: center; }
+
+  .lvl-good { color: #27500A; }
+  .lvl-ok   { color: #633806; }
+  .lvl-low  { color: #791F1F; }
+  .pts-badge {
+    display: inline-block; padding: 3px 8px; border-radius: 5px;
+    font-size: 12px; font-weight: 500;
+  }
+
+  /* tabla comparativa */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .comp-table th { padding: 6px 8px; font-weight: 500; font-size: 11px; border: 0.5px solid #E0E0DE; }
+  .comp-table td { padding: 6px 8px; border: 0.5px solid #E8E8E6; text-align: center; }
+  .comp-table td:first-child { text-align: left; }
+  .th-cat   { background: #F0F0EE; color: #4A4A4A; }
+  .th-a     { background: var(--lugar-a-l); color: var(--lugar-a-d); }
+  .th-b     { background: var(--lugar-b-l); color: var(--lugar-b-d); }
+  .th-diff  { background: #F4F4F2; color: #4A4A4A; }
+  .td-a     { background: #F3F8FD; font-weight: 500; color: var(--lugar-a-d); }
+  .td-b     { background: #F0FAF5; font-weight: 500; color: var(--lugar-b-d); }
+  .td-empty { color: #BBBBBB; }
+
+  @media (max-width: 540px) {
+    .dots-col { margin-right: 12px; }
+    .dot { width: 26px; height: 26px; font-size: 11px; }
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+    .rubric-table { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Guía: Infografía de Auditoría Ambiental Comparativa</h1>
+  <p>Ciencias para la Ciudadanía · 3° Medio · Módulo Ambiente y Sostenibilidad · Paillaco</p>
+  <div class="oa-pill">
+    <strong>OA 2:</strong> Analizar los efectos de las actividades humanas sobre los ecosistemas locales, comparando espacios con distintos grados de intervención y evaluando su relación con el bienestar de las comunidades.
+  </div>
+  <div class="compare-badge">
+    <span class="compare-dot" style="background:#E6F1FB"></span> Lugar A
+    <span style="opacity:0.5">vs</span>
+    <span class="compare-dot" style="background:#9FE1CB"></span> Lugar B
+    — dos lugares, cuatro calles cada uno
+  </div>
+</div>
+
+<div class="container">
+  <div class="stepper">
+    <div class="dots-col" id="dotsCol"></div>
+    <div class="panels-col" id="panelsCol"></div>
+  </div>
+</div>
+
+<script>
+const steps = [
+  {
+    title: "Organiza tus datos",
+    sub: "Consolida los resultados de ambos lugares antes de diseñar",
+    html: `
+      <div class="card">
+        <h3>¿Qué datos tienen?</h3>
+        <p>Aplicaron la auditoría <strong>dos veces</strong>: una vez en cada lugar, recorriendo las 4 calles del cuadrado en cada uno. Cada auditoría tiene 4 categorías con ítems marcables y una nota de 1 a 7. Tu primer paso es organizar ambos conjuntos de datos en paralelo para facilitar la comparación.</p>
+      </div>
+
+      <div class="section-label">Tabla de vaciado — Lugar A</div>
+      <div class="lugar-card-a">
+        <div class="lugar-label-a"><span class="lugar-dot-a"></span>Lugar A — nombre: _______________</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:400px">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:6px 8px;background:#F0F0EE;border:0.5px solid #E0E0DE">Categoría</th>
+                <th style="padding:6px 8px;background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;text-align:center">Calle 1</th>
+                <th style="padding:6px 8px;background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;text-align:center">Calle 2</th>
+                <th style="padding:6px 8px;background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;text-align:center">Calle 3</th>
+                <th style="padding:6px 8px;background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;text-align:center">Calle 4</th>
+                <th style="padding:6px 8px;background:#0C447C;color:#fff;border:0.5px solid #85B7EB;text-align:center;font-weight:500">Promedio</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${['Biodiversidad','Limpieza','Agua y suelo','Bienestar urbano'].map((cat,i) => `
+              <tr style="${i%2===1?'background:#FAFAFA':''}">
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${['#2E7D52','#A32D2D','#185FA5','#854F0B'][i]};margin-right:6px"></span>${cat}</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #85B7EB;text-align:center;font-weight:500;color:#0C447C;background:#E6F1FB">___</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-label">Tabla de vaciado — Lugar B</div>
+      <div class="lugar-card-b">
+        <div class="lugar-label-b"><span class="lugar-dot-b"></span>Lugar B — nombre: _______________</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:400px">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:6px 8px;background:#F0F0EE;border:0.5px solid #E0E0DE">Categoría</th>
+                <th style="padding:6px 8px;background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5;text-align:center">Calle 1</th>
+                <th style="padding:6px 8px;background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5;text-align:center">Calle 2</th>
+                <th style="padding:6px 8px;background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5;text-align:center">Calle 3</th>
+                <th style="padding:6px 8px;background:#E1F5EE;color:#085041;border:0.5px solid #5DCAA5;text-align:center">Calle 4</th>
+                <th style="padding:6px 8px;background:#085041;color:#fff;border:0.5px solid #5DCAA5;text-align:center;font-weight:500">Promedio</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${['Biodiversidad','Limpieza','Agua y suelo','Bienestar urbano'].map((cat,i) => `
+              <tr style="${i%2===1?'background:#FAFAFA':''}">
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${['#2E7D52','#A32D2D','#185FA5','#854F0B'][i]};margin-right:6px"></span>${cat}</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#AAA">___</td>
+                <td style="padding:6px 8px;border:0.5px solid #5DCAA5;text-align:center;font-weight:500;color:#085041;background:#E1F5EE">___</td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Tip:</strong> Calcula el promedio de cada categoría sumando las 4 notas (una por calle) y dividiendo por 4. Esos promedios son los que usarás en el gráfico de radar comparativo.
+      </div>
+    `
+  },
+  {
+    title: "Define el mensaje central",
+    sub: "La comparación debe tener una hipótesis o pregunta que guíe toda la infografía",
+    html: `
+      <div class="card">
+        <h3>La pregunta clave de la comparación</h3>
+        <p>Antes de diseñar, respondan esta pregunta en <strong>una sola oración</strong>. Esa oración será el subtítulo de la infografía y guiará todo el análisis.</p>
+      </div>
+
+      <div class="section-label">Plantilla de mensaje central comparativo</div>
+      <div class="example">
+        "Al comparar [Lugar A] y [Lugar B] en Paillaco, se observa que [Lugar A/B] presenta mejores condiciones ambientales en [categoría], mientras que ambos espacios muestran déficit crítico en [categoría], lo que refleja la influencia de las actividades humanas sobre [componente afectado]."
+      </div>
+
+      <div class="section-label" style="margin-top:14px">Tipos de comparación que puede mostrar la infografía</div>
+      <div class="grid2">
+        <div class="card">
+          <h3>Contraste marcado</h3>
+          <p>Un lugar tiene condiciones significativamente mejores que el otro. La infografía muestra qué factores explican esa diferencia.</p>
+          <div style="margin-top:8px;font-size:12px;color:#888">Ejemplo: plaza con árboles vs calle comercial cementada</div>
+        </div>
+        <div class="card">
+          <h3>Patrón compartido</h3>
+          <p>Ambos lugares presentan los mismos problemas o las mismas fortalezas. La infografía muestra un diagnóstico común del barrio.</p>
+          <div style="margin-top:8px;font-size:12px;color:#888">Ejemplo: dos sectores residenciales con baja biodiversidad</div>
+        </div>
+      </div>
+
+      <div class="section-label">Preguntas para afinar la comparación</div>
+      <div class="card">
+        <ul>
+          <li>¿Qué diferencia al Lugar A del Lugar B en términos de uso (residencial, comercial, parque)?</li>
+          <li>¿En cuál categoría la diferencia entre lugares fue mayor?</li>
+          <li>¿En cuál las notas fueron similares pese al contexto distinto?</li>
+          <li>¿Qué actividad humana explica mejor la diferencia observada?</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    title: "Estructura de la infografía",
+    sub: "Cómo organizar los bloques en formato vertical (A4 o afiche)",
+    html: `
+      <div class="card">
+        <h3>La infografía tiene 7 bloques en orden vertical</h3>
+        <p>La estructura es similar a una auditoría simple, pero incorpora un bloque exclusivo para la comparación directa entre los dos lugares.</p>
+      </div>
+
+      <div class="section-label">Distribución visual del espacio</div>
+      <div class="layout-grid">
+        <div class="layout-block lb-green" style="padding:10px 12px">
+          <div style="font-size:13px;font-weight:500">① Encabezado</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">Título · nombre de ambos lugares · fecha · integrantes</div>
+        </div>
+        <div class="grid2" style="gap:4px">
+          <div class="layout-block lb-blue" style="padding:10px 8px;border-top:3px solid #185FA5">
+            <div style="font-size:11px;font-weight:500;opacity:0.7;margin-bottom:2px">LUGAR A</div>
+            <div style="font-size:12px;font-weight:500">② Mapa del recorrido A</div>
+            <div style="font-size:11px;margin-top:2px;opacity:0.8">4 calles coloreadas, punto central</div>
+          </div>
+          <div class="layout-block lb-teal" style="padding:10px 8px;border-top:3px solid #0F6E56">
+            <div style="font-size:11px;font-weight:500;opacity:0.7;margin-bottom:2px">LUGAR B</div>
+            <div style="font-size:12px;font-weight:500">② Mapa del recorrido B</div>
+            <div style="font-size:11px;margin-top:2px;opacity:0.8">4 calles coloreadas, punto central</div>
+          </div>
+        </div>
+        <div class="layout-block lb-purple" style="padding:10px 12px">
+          <div style="font-size:13px;font-weight:500">③ Gráfico de radar comparativo</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">Ambos lugares superpuestos en el mismo radar — un color por lugar</div>
+        </div>
+        <div class="grid2" style="gap:4px">
+          <div class="layout-block lb-amber" style="padding:8px">
+            <div style="font-size:12px;font-weight:500">④ Foto Lugar A + leyenda</div>
+          </div>
+          <div class="layout-block lb-amber" style="padding:8px">
+            <div style="font-size:12px;font-weight:500">④ Foto Lugar B + leyenda</div>
+          </div>
+        </div>
+        <div class="layout-block lb-red" style="padding:10px 12px">
+          <div style="font-size:13px;font-weight:500">⑤ Análisis comparativo</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">¿Qué diferencia a los dos lugares? ¿Qué los une? ¿Qué actividad humana lo explica?</div>
+        </div>
+        <div class="layout-block" style="background:#E1F5EE;color:#085041;padding:10px 12px">
+          <div style="font-size:13px;font-weight:500">⑥ Propuesta de mejora</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">Medidas específicas para cada lugar o para ambos</div>
+        </div>
+        <div class="layout-block lb-gray" style="padding:7px;font-size:11px;color:#666">
+          Fuente de datos · Nombre del grupo · Asignatura
+        </div>
+      </div>
+
+      <div class="tip">
+        <strong>Clave del diseño comparativo:</strong> usa el mismo color para el Lugar A en todos los bloques (azul) y el mismo para el Lugar B (verde). Esa consistencia visual hace que la comparación sea inmediatamente legible.
+      </div>
+    `
+  },
+  {
+    title: "Cómo hacer los dos mapas",
+    sub: "Bloque ② — un mapa por lugar, misma escala y convención de colores",
+    html: `
+      <div class="card">
+        <h3>¿Por qué dos mapas separados?</h3>
+        <p>Cada lugar tiene su propio recorrido en cuadrado. Al mostrarlos por separado, el lector puede ubicar geográficamente cada espacio antes de leer la comparación. Los mapas se presentan uno al lado del otro.</p>
+      </div>
+
+      <div class="section-label">¿Qué debe mostrar cada mapa?</div>
+      <div class="grid2">
+        <div class="lugar-card-a">
+          <div class="lugar-label-a"><span class="lugar-dot-a"></span>Lugar A</div>
+          <ul>
+            <li>Punto de partida al centro</li>
+            <li>4 calles en cuadrado, coloreadas por calle (verde, rojo, azul, amarillo)</li>
+            <li>Etiquetas de cada calle</li>
+            <li>Nombre del lugar (colegio, plaza, etc.)</li>
+            <li>Norte opcional</li>
+          </ul>
+        </div>
+        <div class="lugar-card-b">
+          <div class="lugar-label-b"><span class="lugar-dot-b"></span>Lugar B</div>
+          <ul>
+            <li>Punto de partida al centro</li>
+            <li>4 calles en cuadrado, coloreadas por calle (misma convención que Lugar A)</li>
+            <li>Etiquetas de cada calle</li>
+            <li>Nombre del lugar</li>
+            <li>Norte opcional</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-label">Esquema de referencia (ambos mapas en paralelo)</div>
+      <div class="card" style="overflow:hidden">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <div class="lugar-label-a" style="margin-bottom:6px"><span class="lugar-dot-a"></span>Lugar A</div>
+            <svg viewBox="0 0 140 140" width="100%">
+              <rect x="2" y="2" width="136" height="136" rx="6" fill="#F0F7FF" stroke="#B5D4F4" stroke-width="0.5"/>
+              <rect x="40" y="40" width="28" height="28" rx="2" fill="#B5D4F4" opacity="0.5"/>
+              <rect x="72" y="40" width="28" height="28" rx="2" fill="#B5D4F4" opacity="0.5"/>
+              <rect x="40" y="72" width="28" height="28" rx="2" fill="#B5D4F4" opacity="0.5"/>
+              <rect x="72" y="72" width="28" height="28" rx="2" fill="#B5D4F4" opacity="0.5"/>
+              <line x1="38" y1="38" x2="102" y2="38" stroke="#2E7D52" stroke-width="3" stroke-linecap="round"/>
+              <line x1="102" y1="38" x2="102" y2="102" stroke="#A32D2D" stroke-width="3" stroke-linecap="round"/>
+              <line x1="102" y1="102" x2="38" y2="102" stroke="#185FA5" stroke-width="3" stroke-linecap="round"/>
+              <line x1="38" y1="102" x2="38" y2="38" stroke="#854F0B" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="70" cy="70" r="5" fill="#185FA5"/>
+              <circle cx="70" cy="70" r="2.5" fill="white"/>
+              <text x="70" y="32" text-anchor="middle" font-size="7" fill="#27500A" font-weight="500">Calle 1</text>
+              <text x="112" y="72" text-anchor="start" font-size="7" fill="#791F1F" font-weight="500">C.2</text>
+              <text x="70" y="114" text-anchor="middle" font-size="7" fill="#0C447C" font-weight="500">Calle 3</text>
+              <text x="4" y="72" text-anchor="start" font-size="7" fill="#633806" font-weight="500">C.4</text>
+            </svg>
+          </div>
+          <div>
+            <div class="lugar-label-b" style="margin-bottom:6px"><span class="lugar-dot-b"></span>Lugar B</div>
+            <svg viewBox="0 0 140 140" width="100%">
+              <rect x="2" y="2" width="136" height="136" rx="6" fill="#F0FAF5" stroke="#9FE1CB" stroke-width="0.5"/>
+              <rect x="40" y="40" width="28" height="28" rx="2" fill="#9FE1CB" opacity="0.4"/>
+              <rect x="72" y="40" width="28" height="28" rx="2" fill="#9FE1CB" opacity="0.4"/>
+              <rect x="40" y="72" width="28" height="28" rx="2" fill="#9FE1CB" opacity="0.4"/>
+              <rect x="72" y="72" width="28" height="28" rx="2" fill="#9FE1CB" opacity="0.4"/>
+              <line x1="38" y1="38" x2="102" y2="38" stroke="#2E7D52" stroke-width="3" stroke-linecap="round"/>
+              <line x1="102" y1="38" x2="102" y2="102" stroke="#A32D2D" stroke-width="3" stroke-linecap="round"/>
+              <line x1="102" y1="102" x2="38" y2="102" stroke="#185FA5" stroke-width="3" stroke-linecap="round"/>
+              <line x1="38" y1="102" x2="38" y2="38" stroke="#854F0B" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="70" cy="70" r="5" fill="#0F6E56"/>
+              <circle cx="70" cy="70" r="2.5" fill="white"/>
+              <text x="70" y="32" text-anchor="middle" font-size="7" fill="#27500A" font-weight="500">Calle 1</text>
+              <text x="112" y="72" text-anchor="start" font-size="7" fill="#791F1F" font-weight="500">C.2</text>
+              <text x="70" y="114" text-anchor="middle" font-size="7" fill="#0C447C" font-weight="500">Calle 3</text>
+              <text x="4" y="72" text-anchor="start" font-size="7" fill="#633806" font-weight="500">C.4</text>
+            </svg>
+          </div>
+        </div>
+        <p style="font-size:12px;color:#888;text-align:center;margin-top:10px">Misma convención de colores por calle en ambos mapas — azul para A, verde para B como fondo</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Herramientas para hacer los mapas</h3>
+          <ul>
+            <li>A mano sobre papel cuadriculado</li>
+            <li>Captura de Google Maps + Canva</li>
+            <li>Google Slides con formas de colores</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Colores de calle (iguales en ambos mapas)</h3>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#2E7D52"></span>Calle 1 — verde</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#A32D2D"></span>Calle 2 — rojo</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#185FA5"></span>Calle 3 — azul</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#854F0B"></span>Calle 4 — amarillo</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: "Cómo hacer el radar comparativo",
+    sub: "Bloque ③ — ambos lugares en el mismo gráfico, un color por lugar",
+    html: `
+      <div class="card">
+        <h3>¿Por qué un solo radar con dos polígonos?</h3>
+        <p>Superponer los dos lugares en el mismo radar permite ver de un vistazo en qué categorías hay diferencias y en cuáles los resultados convergen. Es el corazón visual de la comparación.</p>
+      </div>
+
+      <div class="section-label">Ejemplo de radar comparativo</div>
+      <div class="card" style="display:flex;justify-content:center;padding:1.5rem">
+        <svg viewBox="0 0 360 330" width="100%" style="max-width:320px">
+          <!--
+            Centro: cx=180, cy=175. Radio máx=90.
+            Eje arriba  (Biodiversidad): 180,  85
+            Eje derecha (Limpieza):      270, 175
+            Eje abajo   (Agua/Suelo):    180, 265
+            Eje izq     (Bienestar):      90, 175
+            r = val/7 * 90
+            Lugar A: Bio=5→64, Limp=4→51, Agua=5→64, Bienest=4→51
+              arriba=180,111  der=231,175  abajo=180,239  izq=129,175
+            Lugar B: Bio=3→39, Limp=5→64, Agua=2→26, Bienest=6→77
+              arriba=180,136  der=244,175  abajo=180,201  izq=103,175
+          -->
+          <!-- leyenda centrada arriba -->
+          <rect x="74"  y="10" width="72" height="16" rx="4" fill="rgba(24,95,165,0.13)" stroke="#185FA5" stroke-width="1"/>
+          <text x="110" y="22" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="500">— Lugar A</text>
+          <rect x="156" y="10" width="72" height="16" rx="4" fill="rgba(15,110,86,0.10)" stroke="#0F6E56" stroke-width="1" stroke-dasharray="4,2"/>
+          <text x="192" y="22" text-anchor="middle" font-size="9" fill="#085041" font-weight="500">- - Lugar B</text>
+
+          <!-- anillos r=90(7), 64(5), 39(3), 13(1) -->
+          <polygon points="180,85  270,175 180,265  90,175" fill="none" stroke="#EBEBEB" stroke-width="0.8"/>
+          <polygon points="180,111 231,175 180,239 129,175" fill="none" stroke="#EBEBEB" stroke-width="0.6"/>
+          <polygon points="180,136 219,175 180,214 141,175" fill="none" stroke="#EBEBEB" stroke-width="0.6"/>
+          <polygon points="180,162 193,175 180,188 167,175" fill="none" stroke="#EBEBEB" stroke-width="0.5"/>
+
+          <!-- ejes -->
+          <line x1="180" y1="175" x2="180" y2="85"  stroke="#DDDDDD" stroke-width="0.8"/>
+          <line x1="180" y1="175" x2="270" y2="175" stroke="#DDDDDD" stroke-width="0.8"/>
+          <line x1="180" y1="175" x2="180" y2="265" stroke="#DDDDDD" stroke-width="0.8"/>
+          <line x1="180" y1="175" x2="90"  y2="175" stroke="#DDDDDD" stroke-width="0.8"/>
+
+          <!-- marcas de escala -->
+          <text x="184" y="91"  font-size="7" fill="#CCCCCC">7</text>
+          <text x="184" y="116" font-size="7" fill="#CCCCCC">5</text>
+          <text x="184" y="141" font-size="7" fill="#CCCCCC">3</text>
+          <text x="184" y="166" font-size="7" fill="#CCCCCC">1</text>
+
+          <!-- Lugar A (azul sólido) -->
+          <polygon points="180,111 231,175 180,239 129,175"
+            fill="rgba(24,95,165,0.14)" stroke="#185FA5" stroke-width="2.5"/>
+          <circle cx="180" cy="111" r="4" fill="#185FA5"/>
+          <circle cx="231" cy="175" r="4" fill="#185FA5"/>
+          <circle cx="180" cy="239" r="4" fill="#185FA5"/>
+          <circle cx="129" cy="175" r="4" fill="#185FA5"/>
+
+          <!-- Lugar B (verde punteado) -->
+          <polygon points="180,136 244,175 180,201 103,175"
+            fill="rgba(15,110,86,0.10)" stroke="#0F6E56" stroke-width="2.5" stroke-dasharray="6,3"/>
+          <circle cx="180" cy="136" r="4" fill="#0F6E56"/>
+          <circle cx="244" cy="175" r="4" fill="#0F6E56"/>
+          <circle cx="180" cy="201" r="4" fill="#0F6E56"/>
+          <circle cx="103" cy="175" r="4" fill="#0F6E56"/>
+
+          <!-- etiquetas con amplio margen dentro del viewBox 360×330 -->
+          <!-- Arriba: centrada en x=180, bien por encima del eje -->
+          <text x="180" y="74" text-anchor="middle" font-size="11" fill="#27500A" font-weight="500">Biodiversidad</text>
+          <!-- Derecha: empieza en x=278, caben ~80px hasta x=358 -->
+          <text x="278" y="171" text-anchor="start" font-size="11" fill="#791F1F" font-weight="500">Limpieza</text>
+          <!-- Abajo: centrada -->
+          <text x="180" y="284" text-anchor="middle" font-size="11" fill="#0C447C" font-weight="500">Agua / Suelo</text>
+          <!-- Izquierda: termina en x=82, dos líneas, bien a la izquierda -->
+          <text x="82" y="169" text-anchor="end" font-size="11" fill="#633806" font-weight="500">Bienestar</text>
+          <text x="82" y="183" text-anchor="end" font-size="11" fill="#633806" font-weight="500">urbano</text>
+        </svg>
+      </div>
+      <p style="font-size:12px;color:#888;text-align:center;margin-top:-4px">Lugar A (línea sólida azul) vs Lugar B (línea punteada verde). Valores ilustrativos.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Cómo construirlo a mano</h3>
+          <ul>
+            <li>Dibuja un polígono de 4 ejes sobre la misma base</li>
+            <li>Marca los promedios del Lugar A en azul → une los puntos con línea sólida</li>
+            <li>Marca los promedios del Lugar B en verde → une los puntos con línea punteada</li>
+            <li>Rellena cada área con color semitransparente</li>
+            <li>Agrega una leyenda pequeña con los colores de cada lugar</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Cómo hacerlo en digital</h3>
+          <ul>
+            <li><strong>Google Sheets:</strong> tabla con 3 columnas (categoría, Lugar A, Lugar B) → insertar gráfico → tipo "radar"</li>
+            <li><strong>Canva:</strong> gráfico radar → agrega dos series de datos</li>
+            <li>Asegúrate de que la leyenda sea visible y con los colores correctos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-label">Escala de colores (igual para ambos lugares)</div>
+      <div class="card">
+        <div class="score-bar-row">
+          <span class="score-bar-label" style="font-weight:500;color:#27500A">6 — 7 Óptimo</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:100%;background:#2E7D52"></div></div>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label" style="font-weight:500;color:#633806">4 — 5 Regular</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:70%;background:#EF9F27"></div></div>
+        </div>
+        <div class="score-bar-row">
+          <span class="score-bar-label" style="font-weight:500;color:#791F1F">1 — 3 Crítico</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:43%;background:#E24B4A"></div></div>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: "Cómo incorporar las fotografías",
+    sub: "Bloque ④ — al menos una foto de cada lugar, con leyenda completa",
+    html: `
+      <div class="card">
+        <h3>Criterios para elegir las fotos</h3>
+        <ul>
+          <li>Incluye al menos <strong>1 foto del Lugar A</strong> y <strong>1 foto del Lugar B</strong></li>
+          <li>Elige fotos que muestren el hallazgo más importante o el contraste más llamativo entre ambos lugares</li>
+          <li>Si pueden, elige fotos del mismo tipo de elemento en ambos lugares (ej: árbol en Lugar A vs. ausencia de árbol en Lugar B) — eso refuerza la comparación visualmente</li>
+        </ul>
+      </div>
+
+      <div class="section-label">Estructura de la leyenda (5 elementos)</div>
+      <div class="card">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;margin-top:4px">
+          <div style="background:#F0F0EE;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#333">Lugar</div>
+            <div style="color:#666;margin-top:2px">A o B</div>
+          </div>
+          <div style="background:#EAF3DE;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#27500A">Calle</div>
+            <div style="color:#555;margin-top:2px">Calle 1, 2…</div>
+          </div>
+          <div style="background:#E6F1FB;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#0C447C">Categoría</div>
+            <div style="color:#555;margin-top:2px">Biodiversidad…</div>
+          </div>
+          <div style="background:#FAEEDA;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#633806">Hallazgo</div>
+            <div style="color:#555;margin-top:2px">Qué observaron</div>
+          </div>
+          <div style="background:#FCEBEB;border-radius:6px;padding:8px;font-size:12px;text-align:center">
+            <div style="font-weight:500;color:#791F1F">Actividad humana</div>
+            <div style="color:#555;margin-top:2px">Qué lo causa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Ejemplo de par de leyendas comparativas</div>
+      <div class="grid2">
+        <div class="example" style="border-left-color:#185FA5">
+          <strong style="color:#0C447C">Lugar A — Calle 2 — Biodiversidad:</strong> árbol con taza de tierra libre y presencia de insectos. Nota: 6/7. El espacio permeable permite que el árbol reciba agua y albergue fauna local.
+        </div>
+        <div class="example" style="border-left-color:#0F6E56">
+          <strong style="color:#085041">Lugar B — Calle 2 — Biodiversidad:</strong> árbol completamente rodeado de cemento, sin señales de vida silvestre. Nota: 2/7. La impermeabilización del suelo por actividades comerciales impide el desarrollo de biodiversidad urbana.
+        </div>
+      </div>
+
+      <div class="tip" style="margin-top:4px">
+        <strong>Tip comparativo:</strong> Si tienes fotos del mismo tipo de elemento en ambos lugares (un árbol, una vereda, un canal), ponlas una al lado de la otra. El contraste visual habla por sí solo.
+      </div>
+    `
+  },
+  {
+    title: "Redacta el análisis y la propuesta",
+    sub: "Bloques ⑤ y ⑥ — aquí se demuestra el aprendizaje sobre actividad humana y ecosistemas",
+    html: `
+      <div class="note">
+        <strong>Recuerda:</strong> En 3° medio el foco es analizar cómo las <em>actividades humanas</em> generan diferencias en los ecosistemas. El análisis debe explicar qué actividades (comercio, tráfico, construcción, etc.) están detrás de lo que observaron, y la propuesta debe ser concreta para cada lugar.
+      </div>
+
+      <div class="section-label" style="margin-top:14px">Bloque ⑤ — Análisis comparativo (4 a 6 oraciones)</div>
+      <div class="card">
+        <h3>Preguntas guía para el análisis</h3>
+        <ul style="list-style:none;padding:0">
+          <li style="display:flex;gap:8px;padding:5px 0;font-size:13px;color:#555;border-bottom:0.5px solid #EEEEEC"><span style="color:#185FA5;font-weight:500;flex-shrink:0">A vs B</span>¿En cuál categoría la diferencia entre lugares fue más marcada?</li>
+          <li style="display:flex;gap:8px;padding:5px 0;font-size:13px;color:#555;border-bottom:0.5px solid #EEEEEC"><span style="color:#185FA5;font-weight:500;flex-shrink:0">A vs B</span>¿Qué actividad humana explica mejor esa diferencia?</li>
+          <li style="display:flex;gap:8px;padding:5px 0;font-size:13px;color:#555;border-bottom:0.5px solid #EEEEEC"><span style="color:#0F6E56;font-weight:500;flex-shrink:0">Común</span>¿Hubo alguna categoría con notas bajas en ambos lugares?</li>
+          <li style="display:flex;gap:8px;padding:5px 0;font-size:13px;color:#555;border-bottom:0.5px solid #EEEEEC"><span style="color:#0F6E56;font-weight:500;flex-shrink:0">Común</span>¿Qué dice eso sobre el estado general del barrio?</li>
+          <li style="display:flex;gap:8px;padding:5px 0;font-size:13px;color:#555"><span style="color:#854F0B;font-weight:500;flex-shrink:0">Conclusión</span>¿Qué lugar está en mejor condición ambiental y por qué?</li>
+        </ul>
+      </div>
+
+      <div class="section-label">Bloque ⑥ — Propuesta de mejora</div>
+      <div class="card">
+        <h3>La propuesta puede ser específica por lugar o compartida</h3>
+        <div class="grid2" style="margin-top:8px">
+          <div style="background:#EDF5FF;border-radius:8px;padding:10px">
+            <div class="lugar-label-a" style="margin-bottom:6px"><span class="lugar-dot-a"></span>Para el Lugar A</div>
+            <p style="font-size:12px;color:#555">Medida enfocada en su problema principal (el que tuvo menor nota)</p>
+          </div>
+          <div style="background:#EDF8F3;border-radius:8px;padding:10px">
+            <div class="lugar-label-b" style="margin-bottom:6px"><span class="lugar-dot-b"></span>Para el Lugar B</div>
+            <p style="font-size:12px;color:#555">Medida enfocada en su problema principal (que puede ser distinto al de A)</p>
+          </div>
+        </div>
+        <div style="background:#F4F4F2;border-radius:8px;padding:10px;margin-top:8px">
+          <div style="font-size:12px;font-weight:500;color:#4A4A4A;margin-bottom:4px">Para ambos lugares</div>
+          <p style="font-size:12px;color:#555">Si ambos comparten un problema, propón una medida común aplicable a los dos sectores</p>
+        </div>
+      </div>
+
+      <div class="example" style="margin-top:4px">
+        <strong>Ejemplo de análisis + propuesta bien redactados:</strong><br>
+        "El Lugar A (plaza) obtuvo un promedio de biodiversidad de 5,5 frente al 2,0 del Lugar B (sector comercial). Esta diferencia se explica principalmente por la alta densidad de superficies impermeables en el Lugar B, resultado de la expansión comercial de la última década. Sin embargo, ambos lugares comparten notas críticas en bienestar urbano (2,5 y 2,0), lo que refleja la escasa inversión municipal en infraestructura peatonal.<br><br>
+        Para el Lugar B, proponemos recuperar al menos un árbol por cuadra mediante la ruptura de la vereda cementada. Para ambos lugares, se sugiere instalar puntos de reciclaje diferenciado en coordinación con la municipalidad de Paillaco."
+      </div>
+    `
+  },
+  {
+    title: "Diseña y finaliza",
+    sub: "Herramientas, lista de verificación y rúbrica de evaluación",
+    html: `
+      <div class="grid2">
+        <div class="card">
+          <h3>Herramientas gratuitas</h3>
+          <ul>
+            <li><strong>Canva</strong> — plantillas de infografía vertical, fácil de usar</li>
+            <li><strong>Google Slides</strong> — colaborativo, sin instalación</li>
+            <li><strong>Piktochart</strong> — especializado en infografías</li>
+            <li><strong>A mano</strong> en cartulina o afiche — válido y valorado</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Lista de verificación final</h3>
+          <ul class="checklist">
+            <li>¿El título menciona ambos lugares?</li>
+            <li>¿Hay un mapa para el Lugar A y otro para el Lugar B?</li>
+            <li>¿El radar muestra ambos lugares en el mismo gráfico?</li>
+            <li>¿Hay al menos 1 foto de cada lugar con leyenda?</li>
+            <li>¿El análisis explica qué actividad humana genera las diferencias?</li>
+            <li>¿Hay propuesta específica para cada lugar o compartida?</li>
+            <li>¿Los colores son consistentes (azul = A, verde = B)?</li>
+            <li>¿Aparece el nombre del grupo?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-label" style="margin-top:4px">Rúbrica de evaluación — puntaje máximo: 28 puntos</div>
+      <div style="overflow-x:auto">
+        <table class="rubric-table">
+          <thead>
+            <tr>
+              <th style="width:18%">Criterio</th>
+              <th style="width:22%">Excelente (4 pts)</th>
+              <th style="width:22%">Logrado (3 pts)</th>
+              <th style="width:22%">En proceso (2 pts)</th>
+              <th style="width:10%">Inicial (1 pt)</th>
+              <th style="width:6%">Máx.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Datos de ambos lugares</strong></td>
+              <td class="lvl-good">Datos completos de los 2 lugares: 4 calles por lugar, promedios correctos y presentación clara y diferenciada.</td>
+              <td style="color:#0C447C">Datos de las 4 calles por lugar con notas y promedios calculados en ambos.</td>
+              <td class="lvl-ok">Datos de un solo lugar completos o faltan promedios.</td>
+              <td class="lvl-low">Datos incompletos o sin organización.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>2. Mapas de los recorridos</strong></td>
+              <td class="lvl-good">Dos mapas detallados con 4 calles coloreadas, punto central, norte y nombre del lugar en cada uno.</td>
+              <td style="color:#0C447C">Dos mapas claros del recorrido en cuadrado con las 4 calles identificadas.</td>
+              <td class="lvl-ok">Solo un mapa o ambos con elementos incompletos.</td>
+              <td class="lvl-low">Sin mapas o irreconocibles como recorridos.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>3. Radar comparativo</strong></td>
+              <td class="lvl-good">Radar con ambos lugares superpuestos, 4 categorías, datos correctos, colores diferenciados, leyenda y escala visible.</td>
+              <td style="color:#0C447C">Radar con ambos lugares, 4 categorías y datos correctos con leyenda.</td>
+              <td class="lvl-ok">Radar de un solo lugar o sin leyenda que diferencie A y B.</td>
+              <td class="lvl-low">Sin radar o tipo de gráfico incorrecto.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>4. Fotografías con leyenda</strong></td>
+              <td class="lvl-good">Al menos 1 foto por lugar, leyenda completa (lugar, calle, categoría, hallazgo, actividad humana) y uso comparativo de las imágenes.</td>
+              <td style="color:#0C447C">Al menos 1 foto por lugar con leyenda que identifica lugar, calle, categoría y hallazgo.</td>
+              <td class="lvl-ok">Fotos de un solo lugar o leyendas parciales sin identificar el lugar.</td>
+              <td class="lvl-low">Fotos sin leyenda o sin relación con la auditoría.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>5. Análisis comparativo</strong></td>
+              <td class="lvl-good">Compara los dos lugares, identifica 2 o más actividades humanas que explican las diferencias y distingue patrones comunes y diferenciados.</td>
+              <td style="color:#0C447C">Compara los dos lugares e identifica al menos 1 actividad humana que explica la diferencia observada.</td>
+              <td class="lvl-ok">Describe los resultados de cada lugar por separado sin establecer comparación explícita.</td>
+              <td class="lvl-low">No compara los lugares ni menciona actividades humanas.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>6. Propuesta de mejora</strong></td>
+              <td class="lvl-good">Propone medidas específicas para cada lugar Y una medida compartida, con actor responsable y argumento de factibilidad.</td>
+              <td style="color:#0C447C">Propone 2 o más medidas concretas vinculadas a los diagnósticos de ambos lugares.</td>
+              <td class="lvl-ok">Propone una medida general, no diferenciada por lugar.</td>
+              <td class="lvl-low">Sin propuesta o no pertinente a los lugares observados.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+            <tr>
+              <td><strong>7. Claridad visual y coherencia</strong></td>
+              <td class="lvl-good">Colores consistentes por lugar en todos los bloques, leyendas claras, jerarquía visual legible y diseño que facilita la comparación.</td>
+              <td style="color:#0C447C">Colores diferenciados por lugar en la mayoría de los bloques, diseño ordenado.</td>
+              <td class="lvl-ok">Colores inconsistentes o diseño que dificulta identificar qué pertenece a cada lugar.</td>
+              <td class="lvl-low">Diseño sin diferenciación visual entre los dos lugares.</td>
+              <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="5"><strong>Puntaje total</strong></td>
+              <td><strong>28</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    `
+  }
+];
+
+let current = 0;
+
+function render() {
+  const dotsCol = document.getElementById('dotsCol');
+  const panelsCol = document.getElementById('panelsCol');
+  dotsCol.innerHTML = '';
+  panelsCol.innerHTML = '';
+
+  steps.forEach((s, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot ' + (i < current ? 'done' : i === current ? 'active' : 'pending');
+    dot.textContent = i < current ? '✓' : (i + 1);
+    dot.onclick = () => { current = i; render(); window.scrollTo({top: 0, behavior:'smooth'}); };
+    dotsCol.appendChild(dot);
+    if (i < steps.length - 1) {
+      const line = document.createElement('div');
+      line.className = 'dot-line';
+      dotsCol.appendChild(line);
+    }
+
+    const panel = document.createElement('div');
+    panel.className = 'step-panel' + (i === current ? ' active' : '');
+    panel.innerHTML = `
+      <div class="step-head">
+        <div class="step-num">Paso ${i + 1} de ${steps.length}</div>
+        <div class="step-title">${s.title}</div>
+        <div class="step-sub">${s.sub}</div>
+      </div>
+      ${s.html}
+      <div class="nav-row">
+        ${current > 0 ? `<button class="btn" onclick="move(-1)">← Anterior</button>` : ''}
+        ${current < steps.length - 1
+          ? `<button class="btn btn-primary" onclick="move(1)">Siguiente →</button>`
+          : `<button class="btn btn-primary" style="background:#EAF3DE;color:#27500A;border-color:#97C459" disabled>✓ Guía completa</button>`}
+        <span class="step-counter">${i + 1} / ${steps.length}</span>
+      </div>
+    `;
+    panelsCol.appendChild(panel);
+  });
+}
+
+function move(dir) {
+  current = Math.max(0, Math.min(steps.length - 1, current + dir));
+  render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+render();
+</script>
+</body>
+</html>

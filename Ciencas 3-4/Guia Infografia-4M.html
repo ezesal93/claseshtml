@@ -244,13 +244,6 @@
     font-size: 12px; font-weight: 500;
   }
 
-  .conv-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
-  .conv-table th { background: var(--bg-s); padding: 5px 8px; text-align: center; font-weight: 500; color: var(--text-s); border: 0.5px solid var(--border); }
-  .conv-table td { padding: 5px 8px; text-align: center; border: 0.5px solid var(--border); }
-  .conv-good { background: #EAF3DE; color: #27500A; font-weight: 500; }
-  .conv-ok   { background: #FAEEDA; color: #633806; font-weight: 500; }
-  .conv-low  { background: #FCEBEB; color: #791F1F; font-weight: 500; }
-
   @media (max-width: 540px) {
     .dots-col { margin-right: 12px; }
     .dot { width: 26px; height: 26px; font-size: 11px; }
@@ -280,57 +273,42 @@
 const steps = [
   {
     title: "Organiza tus datos",
-    sub: "Vacía toda la información recolectada antes de diseñar",
+    sub: "Revisa el formulario que completaron antes de empezar a diseñar",
     html: `
       <div class="card">
         <h3>¿Qué datos tienes?</h3>
-        <p>Aplicaste la auditoría <strong>4 veces</strong>, una por cada calle del recorrido en cuadrado. Cada auditoría tiene 4 categorías con ítems marcables y una nota de 1 a 7. Tu primer paso es consolidar esos datos en una tabla.</p>
+        <p>Aplicaron la auditoría <strong>una sola vez</strong> para todo el recorrido: las 2 cuadras a la redonda desde el punto elegido. El formulario tiene 4 categorías con ítems marcables y una nota de 1 a 7 por cada categoría. Tu primer paso es revisar y ordenar esos resultados.</p>
       </div>
 
-      <div class="section-label">Tabla de vaciado de notas</div>
+      <div class="section-label">Tabla de resultados del recorrido completo</div>
       <div class="card" style="overflow-x:auto">
-        <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:400px">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:320px">
           <thead>
             <tr>
-              <th style="text-align:left;padding:6px 8px;background:#F0F0EE;border:0.5px solid #E0E0DE;border-radius:4px 0 0 0">Categoría</th>
-              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 1</th>
-              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 2</th>
-              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 3</th>
-              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Calle 4</th>
-              <th style="padding:6px 8px;background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;text-align:center;font-weight:500">Promedio</th>
+              <th style="text-align:left;padding:6px 8px;background:#F0F0EE;border:0.5px solid #E0E0DE">Categoría</th>
+              <th style="padding:6px 8px;background:#EAF3DE;color:#27500A;border:0.5px solid #C0DD97;text-align:center">Ítems marcados (✓)</th>
+              <th style="padding:6px 8px;background:#E6F1FB;color:#0C447C;border:0.5px solid #85B7EB;text-align:center;font-weight:500">Nota (1–7)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#2E7D52;margin-right:6px"></span>Biodiversidad</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___  / total</td>
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#27500A;background:#EAF3DE">___</td>
             </tr>
             <tr style="background:#FAFAFA">
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#A32D2D;margin-right:6px"></span>Limpieza</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___  / total</td>
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#0C447C;background:#E6F1FB">___</td>
             </tr>
             <tr>
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#185FA5;margin-right:6px"></span>Agua y suelo</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___  / total</td>
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#0C447C;background:#E6F1FB">___</td>
             </tr>
             <tr style="background:#FAFAFA">
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#854F0B;margin-right:6px"></span>Bienestar urbano</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
-              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___</td>
+              <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;color:#999">___  / total</td>
               <td style="padding:6px 8px;border:0.5px solid #E8E8E6;text-align:center;font-weight:500;color:#0C447C;background:#E6F1FB">___</td>
             </tr>
           </tbody>
@@ -338,7 +316,7 @@ const steps = [
       </div>
 
       <div class="tip">
-        <strong>Tip:</strong> Calcula el promedio sumando las 4 notas de cada fila y dividiendo por 4. Anota también cuántos ítems marcaste (✓) en cada categoría — eso lo usarás en el gráfico de radar.
+        <strong>Tip:</strong> Anota también los hallazgos más llamativos que observaron en el recorrido: cuántos árboles había, si vieron microbasurales, si las veredas estaban cementadas, etc. Esos detalles enriquecerán el análisis y las leyendas de las fotos.
       </div>
     `
   },
@@ -353,7 +331,7 @@ const steps = [
 
       <div class="section-label">Plantilla de mensaje central</div>
       <div class="example">
-        "El entorno de [nombre del lugar] en Paillaco muestra fortalezas en [categoría con mejor promedio], pero presenta déficit crítico en [categoría con peor promedio], lo que refleja el impacto del cambio climático sobre [componente afectado: biodiversidad / suelo / agua]."
+        "El entorno de [nombre del lugar] en Paillaco muestra fortalezas en [categoría con mejor nota], pero presenta déficit crítico en [categoría con peor nota], lo que refleja el impacto del cambio climático sobre [componente afectado: biodiversidad / suelo / agua]."
       </div>
 
       <div class="section-label" style="margin-top:14px">Conexión con el OA 3</div>
@@ -408,11 +386,11 @@ const steps = [
         <div class="grid2" style="gap:4px">
           <div class="layout-block lb-blue" style="padding:10px 8px">
             <div style="font-size:12px;font-weight:500">② Mapa del recorrido</div>
-            <div style="font-size:11px;margin-top:2px;opacity:0.8">Las 4 calles en cuadrado, coloreadas por calle</div>
+            <div style="font-size:11px;margin-top:2px;opacity:0.8">Las 2 cuadras a la redonda desde el punto central</div>
           </div>
           <div class="layout-block lb-teal" style="padding:10px 8px">
             <div style="font-size:12px;font-weight:500">③ Gráfico de radar</div>
-            <div style="font-size:11px;margin-top:2px;opacity:0.8">Las 4 categorías con sus promedios</div>
+            <div style="font-size:11px;margin-top:2px;opacity:0.8">Las 4 categorías con sus notas</div>
           </div>
         </div>
         <div class="grid2" style="gap:4px">
@@ -425,7 +403,7 @@ const steps = [
         </div>
         <div class="layout-block lb-red" style="padding:10px 12px">
           <div style="font-size:13px;font-weight:500">⑤ Análisis: conexión con cambio climático</div>
-          <div style="font-size:11px;margin-top:2px;opacity:0.8">¿Qué encontraste y cómo se relaciona con el OA 3?</div>
+          <div style="font-size:11px;margin-top:2px;opacity:0.8">¿Qué encontraron y cómo se relaciona con el OA 3?</div>
         </div>
         <div class="layout-block" style="background:#E1F5EE;color:#085041;padding:10px 12px">
           <div style="font-size:13px;font-weight:500">⑥ Propuesta de mejora</div>
@@ -443,14 +421,14 @@ const steps = [
   },
   {
     title: "Cómo hacer el mapa del recorrido",
-    sub: "Bloque ② — representa las 4 calles como un cuadrado",
+    sub: "Bloque ② — representa el área auditada como un cuadrado de 2 cuadras",
     html: `
       <div class="card">
         <h3>¿Qué debe mostrar el mapa?</h3>
         <ul>
           <li>El punto elegido al centro (puede ser una estrella o punto de color oscuro)</li>
-          <li>Las 4 calles que forman el cuadrado alrededor, cada una con un color distinto</li>
-          <li>Una etiqueta para cada calle: "Calle 1", "Calle 2", etc.</li>
+          <li>El recorrido completo en cuadrado, como una sola área coloreada</li>
+          <li>Las calles del perímetro identificadas con sus nombres reales si los recuerdan</li>
           <li>Una rosa de los vientos o indicador de norte (opcional pero recomendado)</li>
           <li>El nombre del lugar o referencia (plaza, colegio, esquina, etc.)</li>
         </ul>
@@ -460,41 +438,46 @@ const steps = [
       <div class="card">
         <svg viewBox="0 0 260 200" width="100%" style="max-width:320px;display:block;margin:0 auto">
           <rect x="10" y="10" width="240" height="180" rx="8" fill="#F0F7F3" stroke="#CCDDCC" stroke-width="0.5"/>
-          <!-- grid faint -->
           <line x1="70" y1="10" x2="70" y2="190" stroke="#E0EEEA" stroke-width="0.4"/>
           <line x1="130" y1="10" x2="130" y2="190" stroke="#E0EEEA" stroke-width="0.4"/>
           <line x1="190" y1="10" x2="190" y2="190" stroke="#E0EEEA" stroke-width="0.4"/>
           <line x1="10" y1="70" x2="250" y2="70" stroke="#E0EEEA" stroke-width="0.4"/>
           <line x1="10" y1="130" x2="250" y2="130" stroke="#E0EEEA" stroke-width="0.4"/>
-          <!-- manzanas -->
+          <!-- manzanas internas -->
           <rect x="78" y="78" width="40" height="40" rx="3" fill="#C0E0CC"/>
           <rect x="132" y="78" width="40" height="40" rx="3" fill="#C0E0CC"/>
           <rect x="78" y="132" width="40" height="40" rx="3" fill="#C0E0CC"/>
           <rect x="132" y="132" width="40" height="40" rx="3" fill="#C0E0CC"/>
-          <!-- calles coloreadas -->
-          <!-- top: calle 1 verde -->
-          <line x1="75" y1="75" x2="175" y2="75" stroke="#2E7D52" stroke-width="4" stroke-linecap="round"/>
-          <!-- right: calle 2 rojo -->
-          <line x1="175" y1="75" x2="175" y2="175" stroke="#A32D2D" stroke-width="4" stroke-linecap="round"/>
-          <!-- bottom: calle 3 azul -->
-          <line x1="175" y1="175" x2="75" y2="175" stroke="#185FA5" stroke-width="4" stroke-linecap="round"/>
-          <!-- left: calle 4 ambar -->
-          <line x1="75" y1="175" x2="75" y2="75" stroke="#854F0B" stroke-width="4" stroke-linecap="round"/>
-          <!-- centro -->
+          <!-- área del recorrido sombreada -->
+          <rect x="70" y="70" width="110" height="110" rx="4" fill="rgba(24,95,165,0.10)" stroke="#185FA5" stroke-width="2" stroke-dasharray="5,3"/>
+          <!-- calles del perímetro -->
+          <line x1="70" y1="70" x2="180" y2="70" stroke="#185FA5" stroke-width="3" stroke-linecap="round"/>
+          <line x1="180" y1="70" x2="180" y2="180" stroke="#185FA5" stroke-width="3" stroke-linecap="round"/>
+          <line x1="180" y1="180" x2="70" y2="180" stroke="#185FA5" stroke-width="3" stroke-linecap="round"/>
+          <line x1="70" y1="180" x2="70" y2="70" stroke="#185FA5" stroke-width="3" stroke-linecap="round"/>
+          <!-- punto central -->
           <circle cx="125" cy="125" r="6" fill="#1C1C1C"/>
           <circle cx="125" cy="125" r="3" fill="white"/>
-          <!-- labels -->
-          <text x="125" y="68" text-anchor="middle" font-size="9" fill="#27500A" font-weight="500">Calle 1</text>
-          <text x="188" y="128" text-anchor="start" font-size="9" fill="#791F1F" font-weight="500">Calle 2</text>
-          <text x="125" y="188" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="500">Calle 3</text>
-          <text x="18" y="128" text-anchor="start" font-size="9" fill="#633806" font-weight="500">Calle 4</text>
+          <!-- flechas de sentido del recorrido -->
+          <polygon points="110,68 120,63 120,73" fill="#185FA5"/>
+          <polygon points="182,110 187,120 177,120" fill="#185FA5"/>
+          <polygon points="140,182 130,187 130,177" fill="#185FA5"/>
+          <polygon points="68,140 63,130 73,130" fill="#185FA5"/>
+          <!-- etiquetas -->
+          <text x="125" y="62" text-anchor="middle" font-size="8" fill="#0C447C" font-weight="500">Calle norte</text>
+          <text x="194" y="128" text-anchor="start" font-size="8" fill="#0C447C" font-weight="500">Calle este</text>
+          <text x="125" y="194" text-anchor="middle" font-size="8" fill="#0C447C" font-weight="500">Calle sur</text>
+          <text x="18" y="128" text-anchor="start" font-size="8" fill="#0C447C" font-weight="500">Calle oeste</text>
           <text x="125" y="132" text-anchor="middle" font-size="8" fill="#555">Punto</text>
+          <!-- etiqueta de área -->
+          <rect x="78" y="78" width="45" height="14" rx="3" fill="rgba(24,95,165,0.15)"/>
+          <text x="101" y="88" text-anchor="middle" font-size="7" fill="#0C447C" font-weight="500">Área auditada</text>
           <!-- norte -->
           <circle cx="230" cy="35" r="12" fill="white" stroke="#CCC" stroke-width="0.5"/>
           <text x="230" y="31" text-anchor="middle" font-size="9" fill="#A32D2D" font-weight="bold">N</text>
           <polygon points="230,33 227,41 233,41" fill="#A32D2D"/>
         </svg>
-        <p style="font-size:12px;color:#888;text-align:center;margin-top:8px">Esquema de referencia — recrea esto con tus datos reales</p>
+        <p style="font-size:12px;color:#888;text-align:center;margin-top:8px">El recorrido completo se muestra como una sola área. Las flechas indican el sentido del recorrido.</p>
       </div>
 
       <div class="grid2">
@@ -507,81 +490,85 @@ const steps = [
           </ul>
         </div>
         <div class="card">
-          <h3>Colores sugeridos por calle</h3>
-          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
-            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#2E7D52"></span>Calle 1 — verde</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#A32D2D"></span>Calle 2 — rojo</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#185FA5"></span>Calle 3 — azul</div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="display:inline-block;width:24px;height:8px;border-radius:4px;background:#854F0B"></span>Calle 4 — amarillo</div>
-          </div>
+          <h3>Qué destacar en el mapa</h3>
+          <ul>
+            <li>El perímetro del recorrido en azul</li>
+            <li>El punto de partida/referencia al centro</li>
+            <li>Puedes marcar con íconos los hallazgos más importantes (un árbol, un microbasural, etc.)</li>
+          </ul>
         </div>
+      </div>
+
+      <div class="tip">
+        <strong>Tip:</strong> Si recuerdas el nombre de las calles del recorrido, úsalos en el mapa. Si no, puedes describirlos por orientación (norte, sur, este, oeste) o simplemente como "perímetro auditado".
       </div>
     `
   },
   {
     title: "Cómo hacer el gráfico de radar",
-    sub: "Bloque ③ — visualiza el perfil ambiental con las 4 categorías",
+    sub: "Bloque ③ — visualiza el perfil ambiental del recorrido con las 4 categorías",
     html: `
       <div class="card">
         <h3>¿Qué es un gráfico de radar?</h3>
-        <p>Es un gráfico con forma de telaraña que permite comparar varias categorías al mismo tiempo. Cada "brazo" del radar representa una categoría, y el punto en ese brazo corresponde al promedio obtenido (escala 1–7).</p>
+        <p>Es un gráfico con forma de telaraña que permite comparar varias categorías al mismo tiempo. Cada "brazo" del radar representa una categoría, y el punto en ese brazo corresponde a la nota obtenida (escala 1–7).</p>
       </div>
 
       <div class="section-label">Ejemplo de radar con notas ilustrativas</div>
       <div class="card" style="display:flex;justify-content:center;align-items:center;padding:1.5rem">
-        <svg viewBox="-10 -10 220 220" width="100%" style="max-width:260px">
-          <defs>
-            <polygon id="grid7" points="100,7 179,57 179,143 100,193 21,143 21,57"/>
-            <polygon id="grid5" points="100,36 165,79 165,121 100,164 35,121 35,79"/>
-            <polygon id="grid3" points="100,64 151,93 151,107 100,136 49,107 49,93"/>
-            <polygon id="grid1" points="100,93 115,100 115,100 100,107 85,100 85,100"/>
-          </defs>
-          <!-- rings -->
-          <polygon points="100,7 179,57 179,143 100,193 21,143 21,57" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
-          <polygon points="100,36 165,79 165,121 100,164 35,121 35,79" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
-          <polygon points="100,64 151,93 151,107 100,136 49,107 49,93" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
-          <polygon points="100,93 115,100 115,100 100,107 85,100 85,100" fill="none" stroke="#E0E0E0" stroke-width="0.5"/>
-          <!-- spokes -->
-          <line x1="100" y1="100" x2="100" y2="7" stroke="#E0E0E0" stroke-width="0.5"/>
-          <line x1="100" y1="100" x2="179" y2="57" stroke="#E0E0E0" stroke-width="0.5"/>
-          <line x1="100" y1="100" x2="179" y2="143" stroke="#E0E0E0" stroke-width="0.5"/>
-          <line x1="100" y1="100" x2="100" y2="193" stroke="#E0E0E0" stroke-width="0.5"/>
-          <line x1="100" y1="100" x2="21" y2="143" stroke="#E0E0E0" stroke-width="0.5"/>
-          <line x1="100" y1="100" x2="21" y2="57" stroke="#E0E0E0" stroke-width="0.5"/>
-          <!-- data: values ~5,3,4,6 scaled on 7 (93 center, range 86) -->
-          <!-- top=Biodiversidad=5: 100, 100-(5/7)*93=100-66=34 -->
-          <!-- br=Limpieza=3: 179-(3/7)*79=179-34=145, 143-(3/7)*43=143-18=125 -->
-          <!-- bl_bottom = Agua/Suelo=4 approx -->
-          <polygon
-            points="100,34 155,125 132,175 68,175 45,125 100,34"
-            fill="rgba(24,95,165,0.18)" stroke="#185FA5" stroke-width="1.5"/>
-          <!-- dots -->
-          <circle cx="100" cy="34" r="4" fill="#2E7D52"/>
-          <circle cx="155" cy="125" r="4" fill="#A32D2D"/>
-          <circle cx="132" cy="175" r="4" fill="#185FA5"/>
-          <circle cx="68" cy="175" r="4" fill="#185FA5"/>
-          <circle cx="45" cy="125" r="4" fill="#854F0B"/>
-          <!-- labels -->
-          <text x="100" y="-2" text-anchor="middle" font-size="9" fill="#27500A" font-weight="500">Biodiversidad</text>
-          <text x="185" y="57" text-anchor="start" font-size="9" fill="#791F1F" font-weight="500">Limpieza</text>
-          <text x="155" y="205" text-anchor="middle" font-size="9" fill="#0C447C" font-weight="500">Agua/Suelo</text>
-          <text x="45" y="205" text-anchor="middle" font-size="9" fill="#633806" font-weight="500">Bienestar</text>
-          <!-- scale labels -->
-          <text x="103" y="5" font-size="7" fill="#AAA">7</text>
-          <text x="103" y="34" font-size="7" fill="#AAA">5</text>
-          <text x="103" y="63" font-size="7" fill="#AAA">3</text>
-          <text x="103" y="93" font-size="7" fill="#AAA">1</text>
+        <svg viewBox="0 0 320 300" width="100%" style="max-width:300px">
+          <!--
+            Radar 4 ejes en cruz. Centro: cx=160, cy=160. Radio máx=90 (nota 7).
+            Eje arriba  (Biodiversidad): 160, 70
+            Eje derecha (Limpieza):      250, 160
+            Eje abajo   (Agua/Suelo):    160, 250
+            Eje izq     (Bienestar):      70, 160
+            r = val/7 * 90
+            Datos ilustrativos: Bio=5→64, Limp=3→39, Agua=4→51, Bienest=4→51
+              arriba=160,96  der=199,160  abajo=160,211  izq=109,160
+          -->
+          <!-- anillos cuadrados r=90(7), 64(5), 39(3), 13(1) -->
+          <polygon points="160,70 250,160 160,250 70,160" fill="none" stroke="#EBEBEB" stroke-width="0.8"/>
+          <polygon points="160,96 224,160 160,224 96,160"  fill="none" stroke="#EBEBEB" stroke-width="0.6"/>
+          <polygon points="160,121 199,160 160,199 121,160" fill="none" stroke="#EBEBEB" stroke-width="0.6"/>
+          <polygon points="160,147 173,160 160,173 147,160" fill="none" stroke="#EBEBEB" stroke-width="0.5"/>
+
+          <!-- ejes -->
+          <line x1="160" y1="160" x2="160" y2="70"  stroke="#DDDDDD" stroke-width="0.8"/>
+          <line x1="160" y1="160" x2="250" y2="160" stroke="#DDDDDD" stroke-width="0.8"/>
+          <line x1="160" y1="160" x2="160" y2="250" stroke="#DDDDDD" stroke-width="0.8"/>
+          <line x1="160" y1="160" x2="70"  y2="160" stroke="#DDDDDD" stroke-width="0.8"/>
+
+          <!-- marcas de escala en eje arriba -->
+          <text x="164" y="76"  font-size="7" fill="#CCCCCC">7</text>
+          <text x="164" y="101" font-size="7" fill="#CCCCCC">5</text>
+          <text x="164" y="126" font-size="7" fill="#CCCCCC">3</text>
+          <text x="164" y="151" font-size="7" fill="#CCCCCC">1</text>
+
+          <!-- datos: Bio=5, Limp=3, Agua=4, Bienest=4 -->
+          <polygon points="160,96 199,160 160,211 109,160"
+            fill="rgba(24,95,165,0.18)" stroke="#185FA5" stroke-width="2"/>
+          <circle cx="160" cy="96"  r="4.5" fill="#2E7D52"/>
+          <circle cx="199" cy="160" r="4.5" fill="#A32D2D"/>
+          <circle cx="160" cy="211" r="4.5" fill="#185FA5"/>
+          <circle cx="109" cy="160" r="4.5" fill="#854F0B"/>
+
+          <!-- etiquetas — amplio margen dentro del viewBox 320×300 -->
+          <text x="160" y="58"  text-anchor="middle" font-size="11" fill="#27500A" font-weight="500">Biodiversidad</text>
+          <text x="258" y="156" text-anchor="start"  font-size="11" fill="#791F1F" font-weight="500">Limpieza</text>
+          <text x="160" y="268" text-anchor="middle" font-size="11" fill="#0C447C" font-weight="500">Agua / Suelo</text>
+          <text x="62"  y="154" text-anchor="end"    font-size="11" fill="#633806" font-weight="500">Bienestar</text>
+          <text x="62"  y="167" text-anchor="end"    font-size="11" fill="#633806" font-weight="500">urbano</text>
         </svg>
       </div>
-      <p style="font-size:12px;color:#888;text-align:center;margin-top:-4px">Ejemplo con valores ilustrativos. Reemplaza con tus promedios reales.</p>
+      <p style="font-size:12px;color:#888;text-align:center;margin-top:-4px">Ejemplo con valores ilustrativos. Reemplaza con tus notas reales.</p>
 
       <div class="grid2">
         <div class="card">
           <h3>Cómo construirlo paso a paso</h3>
           <ul>
-            <li>Dibuja una circunferencia o polígono con 4 ejes (uno por categoría)</li>
+            <li>Dibuja una figura con 4 ejes (uno por categoría)</li>
             <li>Marca la escala del 1 al 7 en cada eje</li>
-            <li>Ubica el promedio de cada categoría en su eje</li>
+            <li>Ubica la nota de cada categoría en su eje</li>
             <li>Une los 4 puntos formando un polígono</li>
             <li>Rellena el área con un color semitransparente</li>
           </ul>
@@ -621,7 +608,7 @@ const steps = [
       <div class="card">
         <h3>Criterios para elegir las mejores fotos</h3>
         <ul>
-          <li>Selecciona entre 2 y 4 fotografías que muestren los hallazgos más relevantes</li>
+          <li>Selecciona entre 2 y 4 fotografías que muestren los hallazgos más relevantes del recorrido</li>
           <li>Prioriza fotos que representan lo mejor y lo peor de la auditoría</li>
           <li>Asegúrate de que la imagen sea nítida y muestre claramente el elemento evaluado</li>
           <li>Incluye al menos una foto de problema y una foto de algo positivo encontrado</li>
@@ -633,8 +620,8 @@ const steps = [
         <h3>Estructura de la leyenda (4 elementos)</h3>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px;margin-top:8px">
           <div style="background:#F0F0EE;border-radius:6px;padding:8px;font-size:12px;text-align:center">
-            <div style="font-weight:500;color:#333">Ubicación</div>
-            <div style="color:#666;margin-top:2px">Calle N</div>
+            <div style="font-weight:500;color:#333">Lugar</div>
+            <div style="color:#666;margin-top:2px">Sector del recorrido</div>
           </div>
           <div style="background:#EAF3DE;border-radius:6px;padding:8px;font-size:12px;text-align:center">
             <div style="font-weight:500;color:#27500A">Categoría</div>
@@ -653,7 +640,7 @@ const steps = [
 
       <div class="section-label">Ejemplo de leyenda bien redactada</div>
       <div class="example">
-        "Calle 2 — Categoría Biodiversidad: árbol sin taza libre de cemento y sin señales de vida silvestre. Nota: 2/7. El suelo cementado impide la infiltración del agua de lluvia, agravando el riesgo de inundaciones urbanas ante eventos climáticos extremos."
+        "Recorrido — Categoría Biodiversidad: árbol sin taza libre de cemento y sin señales de vida silvestre. Nota: 2/7. El suelo cementado impide la infiltración del agua de lluvia, agravando el riesgo de inundaciones urbanas ante eventos climáticos extremos."
       </div>
 
       <div class="tip" style="margin-top:12px">
@@ -673,8 +660,8 @@ const steps = [
       <div class="card">
         <h3>Preguntas guía para el análisis</h3>
         <ul class="checklist">
-          <li>¿Cuál fue la categoría con mejor y peor promedio?</li>
-          <li>¿Hubo diferencias notables entre las 4 calles?</li>
+          <li>¿Cuál fue la categoría con mejor y peor nota?</li>
+          <li>¿Hubo algún hallazgo que les sorprendió durante el recorrido?</li>
           <li>¿Qué componente está más afectado: biológico, físico o químico?</li>
           <li>¿Qué efectos del cambio climático se relacionan directamente con lo observado?</li>
         </ul>
@@ -704,7 +691,7 @@ const steps = [
 
       <div class="example">
         <strong>Ejemplo de propuesta bien redactada:</strong><br>
-        "Para mitigar la escasa biodiversidad detectada en las 4 calles, proponemos instalar tazas de tierra en los árboles existentes y plantar 2 nuevas especies nativas por cuadra. Como medida de adaptación ante lluvias extremas, se sugiere construir un jardín de lluvia en la esquina de mayor acumulación de agua identificada en la Calle 3."
+        "Para mitigar la escasa biodiversidad detectada en el recorrido, proponemos instalar tazas de tierra en los árboles existentes y plantar 2 nuevas especies nativas por cuadra. Como medida de adaptación ante lluvias extremas, se sugiere construir un jardín de lluvia en la esquina de mayor acumulación de agua identificada durante la auditoría."
       </div>
     `
   },
@@ -726,8 +713,8 @@ const steps = [
           <h3>Lista de verificación final</h3>
           <ul class="checklist">
             <li>¿Tiene título con nombre del lugar?</li>
-            <li>¿Hay un mapa del recorrido en cuadrado?</li>
-            <li>¿El radar muestra las 4 categorías?</li>
+            <li>¿Hay un mapa del recorrido (2 cuadras a la redonda)?</li>
+            <li>¿El radar muestra las 4 categorías con sus notas?</li>
             <li>¿Hay al menos 2 fotos con leyenda completa?</li>
             <li>¿Se menciona el cambio climático en el análisis?</li>
             <li>¿Hay una propuesta de mitigación o adaptación?</li>
@@ -737,7 +724,7 @@ const steps = [
         </div>
       </div>
 
-      <div class="section-label" style="margin-top:4px">Rúbrica de evaluación — puntaje máximo: 48 puntos</div>
+      <div class="section-label" style="margin-top:4px">Rúbrica de evaluación — puntaje máximo: 24 puntos</div>
       <div style="overflow-x:auto">
         <table class="rubric-table">
           <thead>
@@ -753,22 +740,22 @@ const steps = [
           <tbody>
             <tr>
               <td><strong>1. Datos y resultados</strong></td>
-              <td class="lvl-good">Datos completos de las 4 calles, promedios correctos y presentación clara y ordenada.</td>
-              <td style="color:#0C447C">Datos de las 4 calles con notas por categoría y promedios calculados.</td>
-              <td class="lvl-ok">Datos de 3 calles o falta algún promedio.</td>
+              <td class="lvl-good">Datos completos del recorrido: nota por categoría, ítems marcados y presentación clara y ordenada.</td>
+              <td style="color:#0C447C">Las 4 categorías con notas y cantidad de ítems marcados.</td>
+              <td class="lvl-ok">Faltan notas o ítems en algunas categorías.</td>
               <td class="lvl-low">Datos incompletos o sin organización.</td>
               <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
             </tr>
             <tr>
-              <td><strong>2. Mapa del recorrido</strong><br></td>
-              <td class="lvl-good">Mapa detallado con las 4 calles coloreadas, punto central, norte y referencia del lugar.</td>
-              <td style="color:#0C447C">Mapa claro del recorrido en cuadrado con las 4 calles identificadas.</td>
+              <td><strong>2. Mapa del recorrido</strong></td>
+              <td class="lvl-good">Mapa detallado del área auditada con punto central, norte, nombres de calles y referencia del lugar.</td>
+              <td style="color:#0C447C">Mapa claro del recorrido en cuadrado con el área auditada identificada.</td>
               <td class="lvl-ok">Mapa presente pero con elementos incompletos o poco claros.</td>
               <td class="lvl-low">Sin mapa o irreconocible como recorrido.</td>
               <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
             </tr>
             <tr>
-              <td><strong>3. Gráfico de radar</strong><br></td>
+              <td><strong>3. Gráfico de radar</strong></td>
               <td class="lvl-good">Radar con las 4 categorías, datos correctos, escala visible, colores coherentes y área rellena.</td>
               <td style="color:#0C447C">Radar con las 4 categorías y datos correctos, escala visible.</td>
               <td class="lvl-ok">Radar con 3 categorías o escala poco clara.</td>
@@ -776,15 +763,15 @@ const steps = [
               <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
             </tr>
             <tr>
-              <td><strong>4. Fotografías con leyenda</strong><br></td>
-              <td class="lvl-good">3 o más fotos claras con leyenda completa: calle, categoría, hallazgo y conexión con cambio climático.</td>
-              <td style="color:#0C447C">Al menos 3 fotos con leyenda que identifica calle, categoría y hallazgo.</td>
+              <td><strong>4. Fotografías con leyenda</strong></td>
+              <td class="lvl-good">3 o más fotos claras con leyenda completa: lugar, categoría, hallazgo y conexión con cambio climático.</td>
+              <td style="color:#0C447C">Al menos 3 fotos con leyenda que identifica lugar, categoría y hallazgo.</td>
               <td class="lvl-ok">2 fotos con leyenda parcial, sin conexión con cambio climático.</td>
               <td class="lvl-low">Fotos sin leyenda o sin relación con la auditoría.</td>
               <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
             </tr>
             <tr>
-              <td><strong>5. Análisis y cambio climático</strong><br></td>
+              <td><strong>5. Análisis y cambio climático</strong></td>
               <td class="lvl-good">Conecta 3 o más hallazgos con efectos del CC, distingue componentes bio./fís./quím. y cita evidencia de los datos.</td>
               <td style="color:#0C447C">Conecta 2 hallazgos con efectos del CC en componentes biológicos, físicos o químicos.</td>
               <td class="lvl-ok">Menciona el cambio climático pero la conexión con los datos es vaga o incompleta.</td>
@@ -792,7 +779,7 @@ const steps = [
               <td><span class="pts-badge" style="background:#EAF3DE;color:#27500A">4</span></td>
             </tr>
             <tr>
-              <td><strong>6. Propuesta de solución</strong><br></td>
+              <td><strong>6. Propuesta de solución</strong></td>
               <td class="lvl-good">Propone medidas de mitigación Y adaptación, con actor responsable y factibilidad argumentada.</td>
               <td style="color:#0C447C">Propone 2 o más medidas específicas de mitigación o adaptación vinculadas al diagnóstico.</td>
               <td class="lvl-ok">Propone una medida general, poco vinculada a los datos obtenidos.</td>
@@ -808,8 +795,6 @@ const steps = [
           </tfoot>
         </table>
       </div>
-
-      
     `
   }
 ];
