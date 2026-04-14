@@ -57,5 +57,23 @@
     "archivos": [
       { "nombre": "Laboratorio introducción al átomo", "archivo": "Laboratorio-introducion-atomo.html" }
     ]
+  },
+  {
+    "materia": "Orientacion",
+    "icono": "⚗️",
+    "color": "#0277bd",
+    "carpeta": "Quimica1M",
+    "archivos": [
+      { "nombre": "Clase Vapers", "archivo": "Clase-vapers.html" }
+    ]
+  },
+  {
+    "materia": "Clases-Quimica-Marcos",
+    "icono": "⚗️",
+    "color": "#0277bd",
+    "carpeta": "Quimica1M",
+    "archivos": [
+      { "nombre": "Diagnóstico", "archivo": "diagnostico.html" }
+    ]
   }
 ]
