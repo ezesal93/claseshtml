@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Sabemos lo que aspiramos? — Clase de Orientación 1° Medio</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f4f0; color: #1a1a18; min-height: 100vh; padding: 1.5rem 1rem; }
+  .wrap { max-width: 820px; margin: 0 auto; }
+  .nav-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding: 0.75rem 1rem; background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; }
+  .nav-steps { display: flex; gap: 6px; }
+  .nav-dot { width: 28px; height: 6px; border-radius: 3px; background: #ddd; cursor: pointer; transition: background 0.2s; border: none; }
+  .nav-dot.active { background: #534AB7; }
+  .nav-dot.done { background: #5DCAA5; }
+  .nav-label { font-size: 13px; color: #888; }
+  .timer-bar { height: 4px; background: #e5e4e0; border-radius: 2px; margin-bottom: 1.5rem; overflow: hidden; }
+  .timer-fill { height: 100%; border-radius: 2px; background: #534AB7; transition: width 0.4s ease; }
+  .slide { display: none; }
+  .slide.active { display: block; }
+  .phase-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 8px; margin-bottom: 10px; letter-spacing: 0.03em; }
+  .slide-title { font-size: 24px; font-weight: 500; color: #1a1a18; line-height: 1.3; margin-bottom: 6px; }
+  .slide-sub { font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 1.25rem; }
+  .objetivo-box { background: #EEEDFE; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; }
+  .objetivo-label { font-size: 11px; font-weight: 600; color: #534AB7; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .objetivo-text { font-size: 15px; color: #26215C; line-height: 1.7; }
+  .card { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 1rem; }
+  .info-card { border-radius: 12px; padding: 1rem; background: #f5f4f0; }
+  .info-card-label { font-size: 11px; font-weight: 600; color: #888; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .info-card-text { font-size: 14px; color: #1a1a18; line-height: 1.6; }
+  .law-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 0.5px solid rgba(0,0,0,0.08); align-items: flex-start; }
+  .law-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .law-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; }
+  .law-title { font-size: 14px; font-weight: 500; color: #1a1a18; margin-bottom: 3px; }
+  .law-desc { font-size: 13px; color: #666; line-height: 1.55; }
+  .component-list { list-style: none; }
+  .component-list li { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 0.5px solid rgba(0,0,0,0.08); font-size: 14px; color: #444; line-height: 1.5; }
+  .component-list li:last-child { border-bottom: none; }
+  .comp-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .myth-card { border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 10px; cursor: pointer; border: 0.5px solid rgba(0,0,0,0.12); background: #fff; transition: border-color 0.2s, box-shadow 0.2s; }
+  .myth-card:hover { border-color: #AFA9EC; box-shadow: 0 0 0 2px rgba(83,74,183,0.08); }
+  .myth-question { font-size: 15px; font-weight: 500; color: #1a1a18; margin-bottom: 3px; }
+  .myth-hint { font-size: 12px; color: #aaa; }
+  .myth-answer { display: none; margin-top: 12px; padding-top: 12px; border-top: 0.5px solid rgba(0,0,0,0.08); font-size: 14px; color: #444; line-height: 1.65; }
+  .myth-answer.shown { display: block; }
+  .myth-verdict { display: inline-block; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 8px; margin-bottom: 7px; }
+  .verdict-mito { background: #FCEBEB; color: #A32D2D; }
+  .verdict-real { background: #FAEEDA; color: #854F0B; }
+  .btn-row { display: flex; gap: 10px; margin-top: 1.25rem; flex-wrap: wrap; }
+  button { cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 500; border-radius: 8px; padding: 9px 20px; transition: all 0.15s; }
+  .btn-primary { background: #534AB7; color: #fff; border: none; }
+  .btn-primary:hover { background: #3C3489; }
+  .btn-secondary { background: transparent; color: #555; border: 0.5px solid rgba(0,0,0,0.2); }
+  .btn-secondary:hover { background: #f5f4f0; }
+  .help-box { background: #f5f4f0; border-radius: 10px; padding: 1rem 1.25rem; margin-top: 1rem; font-size: 14px; color: #444; line-height: 1.7; }
+  .help-box strong { font-weight: 500; color: #1a1a18; }
+  @media (max-width: 500px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .slide-title { font-size: 20px; }
+    .nav-dot { width: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="nav-bar">
+    <div class="nav-steps" id="navDots"></div>
+    <span class="nav-label" id="slideCounter">1 / 6</span>
+  </div>
+
+  <div class="timer-bar"><div class="timer-fill" id="timerFill" style="width:16%;"></div></div>
+
+  <!-- SLIDE 1: Portada / Objetivo -->
+  <div class="slide active" data-index="0">
+    <span class="phase-tag" style="background:#EEEDFE;color:#3C3489;">Bienvenida · 0–3 min</span>
+    <div class="slide-title">¿Sabemos lo que aspiramos?</div>
+    <div class="slide-sub">Clase de orientación · 1° Medio · 40 minutos</div>
+    <div class="objetivo-box">
+      <div class="objetivo-label">Objetivo de la clase</div>
+      <div class="objetivo-text">Identificar qué son los vapers y cigarrillos electrónicos, reconocer sus efectos en la salud y conocer la normativa chilena que los regula, para tomar decisiones informadas y autónomas.</div>
+    </div>
+    <div class="card">
+      <div class="info-card-label" style="margin-bottom:12px;">¿Qué vamos a hacer hoy?</div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#EEEDFE;color:#534AB7;">1</div>
+        <div><div class="law-title">¿Qué hay dentro de un vaper?</div><div class="law-desc">Conocer sus componentes reales</div></div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#E1F5EE;color:#0F6E56;">2</div>
+        <div><div class="law-title">Mitos vs. realidad</div><div class="law-desc">Tarjetas interactivas para debatir</div></div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FAEEDA;color:#633806;">3</div>
+        <div><div class="law-title">¿Qué dice la ley en Chile?</div><div class="law-desc">La regulación que debes conocer</div></div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FAECE7;color:#712B13;">4</div>
+        <div><div class="law-title">Reflexión final</div><div class="law-desc">¿Qué harías tú?</div></div>
+      </div>
+    </div>
+    <div class="btn-row"><button class="btn-primary" onclick="goTo(1)">Comenzar →</button></div>
+  </div>
+
+  <!-- SLIDE 2: Componentes -->
+  <div class="slide" data-index="1">
+    <span class="phase-tag" style="background:#EEEDFE;color:#3C3489;">¿Qué es? · 3–12 min</span>
+    <div class="slide-title">¿Qué hay dentro de un vaper?</div>
+    <div class="slide-sub">Muchos creen que es solo "vapor de agua". Veamos qué dice la evidencia.</div>
+    <div class="card">
+      <div class="info-card-label" style="margin-bottom:10px;">Componentes reales de un cigarrillo electrónico</div>
+      <ul class="component-list">
+        <li><span class="comp-dot" style="background:#E24B4A;"></span><span><strong style="font-weight:500;">Nicotina</strong> — altamente adictiva, afecta el desarrollo cerebral en adolescentes</span></li>
+        <li><span class="comp-dot" style="background:#E24B4A;"></span><span><strong style="font-weight:500;">Metales pesados</strong> — plomo, níquel y cromo provenientes de la bobina calefactora</span></li>
+        <li><span class="comp-dot" style="background:#E24B4A;"></span><span><strong style="font-weight:500;">Partículas ultrafinas</strong> — penetran profundo en los pulmones y el torrente sanguíneo</span></li>
+        <li><span class="comp-dot" style="background:#EF9F27;"></span><span><strong style="font-weight:500;">Propilenglicol y glicerina vegetal</strong> — al calentarse generan compuestos irritantes</span></li>
+        <li><span class="comp-dot" style="background:#EF9F27;"></span><span><strong style="font-weight:500;">Saborizantes artificiales</strong> — algunos contienen diacetil, vinculado a enfermedad pulmonar grave</span></li>
+        <li><span class="comp-dot" style="background:#888;"></span><span><strong style="font-weight:500;">Formaldehído</strong> — compuesto cancerígeno que se produce al calentar el líquido</span></li>
+      </ul>
+    </div>
+    <div class="card-grid">
+      <div class="info-card" style="background:#EEEDFE;">
+        <div class="info-card-label" style="color:#534AB7;">Temperatura del vapor</div>
+        <div class="info-card-text" style="color:#26215C;">Hasta <strong style="font-weight:500;">200°C</strong> — suficiente para generar compuestos tóxicos nuevos</div>
+      </div>
+      <div class="info-card" style="background:#FAEEDA;">
+        <div class="info-card-label" style="color:#854F0B;">Nicotina vs cigarro</div>
+        <div class="info-card-text" style="color:#412402;">Un pod puede tener <strong style="font-weight:500;">equivalencia a 1–2 cajetillas</strong> de cigarrillos</div>
+      </div>
+      <div class="info-card" style="background:#FAECE7;">
+        <div class="info-card-label" style="color:#712B13;">Daño silencioso</div>
+        <div class="info-card-text" style="color:#4A1B0C;">Los síntomas pulmonares pueden tardar <strong style="font-weight:500;">meses o años</strong> en aparecer</div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(0)">← Volver</button>
+      <button class="btn-primary" onclick="goTo(2)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Mitos -->
+  <div class="slide" data-index="2">
+    <span class="phase-tag" style="background:#E1F5EE;color:#0F6E56;">Mitos · 12–25 min</span>
+    <div class="slide-title">Mito o realidad</div>
+    <div class="slide-sub">Haz clic en cada tarjeta para revelar la respuesta.</div>
+
+    <div class="myth-card" onclick="toggleMyth(this)">
+      <div class="myth-question">"El vaper es solo vapor de agua, no hace daño."</div>
+      <div class="myth-hint">Toca para revelar →</div>
+      <div class="myth-answer">
+        <span class="myth-verdict verdict-mito">Mito</span>
+        <div>Contiene partículas tóxicas, metales pesados y compuestos químicos. El término "vapor" es marketing — técnicamente es un aerosol con sustancias dañinas.</div>
+      </div>
+    </div>
+
+    <div class="myth-card" onclick="toggleMyth(this)">
+      <div class="myth-question">"Si es de sabor frutal, es más natural y seguro."</div>
+      <div class="myth-hint">Toca para revelar →</div>
+      <div class="myth-answer">
+        <span class="myth-verdict verdict-mito">Mito</span>
+        <div>Los sabores son 100% artificiales. Algunos saborizantes como el diacetil (mantequilla, caramelo) están vinculados a una enfermedad llamada "pulmón de palomitas de maíz", irreversible.</div>
+      </div>
+    </div>
+
+    <div class="myth-card" onclick="toggleMyth(this)">
+      <div class="myth-question">"El vaper no es adictivo, puedo dejarlo cuando quiera."</div>
+      <div class="myth-hint">Toca para revelar →</div>
+      <div class="myth-answer">
+        <span class="myth-verdict verdict-mito">Mito</span>
+        <div>La nicotina es una de las sustancias más adictivas que existen. En adolescentes el cerebro es más vulnerable: la adicción se puede generar en semanas. Muchos usuarios adultos no han podido dejarlo.</div>
+      </div>
+    </div>
+
+    <div class="myth-card" onclick="toggleMyth(this)">
+      <div class="myth-question">"Si no siento nada raro, no me está haciendo daño."</div>
+      <div class="myth-hint">Toca para revelar →</div>
+      <div class="myth-answer">
+        <span class="myth-verdict verdict-mito">Mito</span>
+        <div>El daño pulmonar acumulado no duele. Enfermedades como la EVALI (lesión pulmonar por vapeo) pueden requerir hospitalización sin síntomas previos claros.</div>
+      </div>
+    </div>
+
+    <div class="myth-card" onclick="toggleMyth(this)">
+      <div class="myth-question">"El vaper fue inventado para ayudar a dejar de fumar."</div>
+      <div class="myth-hint">Toca para revelar →</div>
+      <div class="myth-answer">
+        <span class="myth-verdict" style="background:#FAEEDA;color:#854F0B;">Parcialmente real — pero...</span>
+        <div>Surgió como herramienta de cesación, pero la OMS advierte que no es un método aprobado para dejar de fumar. Además, la industria tabacalera lo reorientó masivamente hacia jóvenes que nunca habían fumado.</div>
+      </div>
+    </div>
+
+    <div class="myth-card" onclick="toggleMyth(this)">
+      <div class="myth-question">"Los vapers desechables no tienen nicotina, son inofensivos."</div>
+      <div class="myth-hint">Toca para revelar →</div>
+      <div class="myth-answer">
+        <span class="myth-verdict verdict-mito">Mito</span>
+        <div>Muchos vapers "sin nicotina" la contienen de todas formas según análisis de laboratorio. Además, los otros componentes del aerosol siguen siendo dañinos independiente de la nicotina.</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(1)">← Volver</button>
+      <button class="btn-primary" onclick="goTo(3)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Ley -->
+  <div class="slide" data-index="3">
+    <span class="phase-tag" style="background:#FAEEDA;color:#633806;">Ley · 25–33 min</span>
+    <div class="slide-title">¿Qué dice la ley en Chile?</div>
+    <div class="slide-sub">Los cigarrillos electrónicos y vapers están regulados por la Ley 21.545 (2023) que modificó la Ley del Tabaco.</div>
+    <div class="card">
+      <div class="law-item">
+        <div class="law-icon" style="background:#FCEBEB;color:#A32D2D;font-size:15px;">+18</div>
+        <div>
+          <div class="law-title">Prohibición de venta a menores de 18 años</div>
+          <div class="law-desc">Es ilegal que cualquier comercio venda vapers, pods o líquidos a personas menores de edad. El vendedor puede ser multado.</div>
+        </div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FCEBEB;color:#A32D2D;font-size:11px;">PROH.</div>
+        <div>
+          <div class="law-title">Prohibido en espacios públicos cerrados</div>
+          <div class="law-desc">No se puede vapear en colegios, hospitales, transporte público, centros comerciales, restaurantes ni ningún espacio cerrado de uso público o colectivo.</div>
+        </div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FAEEDA;color:#633806;font-size:11px;">ETQ.</div>
+        <div>
+          <div class="law-title">Obligación de etiquetado y advertencias sanitarias</div>
+          <div class="law-desc">Todos los productos deben llevar advertencias visibles. No pueden usar imágenes de personas jóvenes ni términos como "light" o "natural".</div>
+        </div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FAEEDA;color:#633806;font-size:11px;">PUB.</div>
+        <div>
+          <div class="law-title">Publicidad restringida</div>
+          <div class="law-desc">Está prohibida la publicidad en TV, radio y redes sociales dirigida a menores, y en medios masivos en general. No se pueden regalar muestras gratuitas.</div>
+        </div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#E1F5EE;color:#0F6E56;font-size:11px;">ISP</div>
+        <div>
+          <div class="law-title">Fiscalización del ISP</div>
+          <div class="law-desc">El Instituto de Salud Pública (ISP) regula y fiscaliza los productos. Puede prohibir la venta de marcas que no cumplan los requisitos o que tengan componentes no declarados.</div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(2)">← Volver</button>
+      <button class="btn-primary" onclick="goTo(4)">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Reflexión -->
+  <div class="slide" data-index="4">
+    <span class="phase-tag" style="background:#FAECE7;color:#712B13;">Reflexión · 33–40 min</span>
+    <div class="slide-title">¿Por qué está tan normalizado?</div>
+    <div class="slide-sub">Preguntas para conversar en curso — no hay respuestas correctas, hay reflexiones honestas.</div>
+    <div class="card">
+      <div class="law-item">
+        <div class="law-icon" style="background:#FBEAF0;color:#993556;font-size:20px;">?</div>
+        <div><div class="law-title">¿Por qué creen que los vapers se venden con sabores dulces y colores llamativos?</div><div class="law-desc">Pensar en a quién va dirigido ese diseño y ese marketing.</div></div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FBEAF0;color:#993556;font-size:20px;">?</div>
+        <div><div class="law-title">¿Qué harían si un amigo o amiga les ofrece vapear?</div><div class="law-desc">Pensar sin presión: ¿qué dirían? ¿Cómo lo manejarían?</div></div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FBEAF0;color:#993556;font-size:20px;">?</div>
+        <div><div class="law-title">¿Por qué muchos jóvenes creen que el vaper es inofensivo?</div><div class="law-desc">Pensar en el rol de redes sociales, influencers y publicidad encubierta.</div></div>
+      </div>
+      <div class="law-item">
+        <div class="law-icon" style="background:#FBEAF0;color:#993556;font-size:20px;">?</div>
+        <div><div class="law-title">¿La ley es suficiente para protegerlos? ¿Qué más haría falta?</div><div class="law-desc">Reflexionar sobre el rol del Estado, la familia, el colegio y cada uno/a.</div></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(3)">← Volver</button>
+      <button class="btn-primary" onclick="goTo(5)">Cierre →</button>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Cierre -->
+  <div class="slide" data-index="5">
+    <span class="phase-tag" style="background:#E1F5EE;color:#085041;">Cierre · 40 min</span>
+    <div class="slide-title">Para llevarse puesto</div>
+    <div class="slide-sub">Tres ideas clave de esta clase.</div>
+    <div class="card-grid">
+      <div class="info-card" style="background:#EEEDFE;">
+        <div class="info-card-label" style="color:#534AB7;">Lo que entra</div>
+        <div class="info-card-text" style="color:#26215C;">El vaper no es vapor de agua. Es un aerosol con nicotina, metales y químicos tóxicos que dañan los pulmones aunque no lo sientas.</div>
+      </div>
+      <div class="info-card" style="background:#FAEEDA;">
+        <div class="info-card-label" style="color:#854F0B;">Lo que dice la ley</div>
+        <div class="info-card-text" style="color:#412402;">En Chile es ilegal venderlo a menores de 18 años y usarlo en espacios públicos cerrados. El ISP regula y puede prohibir marcas.</div>
+      </div>
+      <div class="info-card" style="background:#E1F5EE;">
+        <div class="info-card-label" style="color:#0F6E56;">Lo que puedes hacer</div>
+        <div class="info-card-text" style="color:#04342C;">Conocer la información real te da poder para decidir. Si alguien cercano consume, puedes orientarlo a pedir ayuda sin juzgar.</div>
+      </div>
+    </div>
+    <div class="help-box">
+      <strong>Si necesitas hablar o pedir ayuda:</strong><br>
+      Programa de cesación del tabaco: <strong>MINSAL / consultorios de atención primaria</strong><br>
+      Fono Salud Responde: <strong>600 360 7777</strong> (gratuito, confidencial)<br>
+      Habla con un adulto de confianza en tu colegio o familia.
+    </div>
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo(4)">← Volver</button>
+      <button class="btn-primary" onclick="goTo(0)">Reiniciar clase</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const totalSlides = 6;
+  const timerPcts = [16, 33, 50, 67, 83, 100];
+  let current = 0;
+
+  function buildDots() {
+    const dotsEl = document.getElementById('navDots');
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+      const d = document.createElement('button');
+      d.className = 'nav-dot' + (i === current ? ' active' : i < current ? ' done' : '');
+      d.setAttribute('aria-label', 'Ir a sección ' + (i + 1));
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function goTo(idx) {
+    document.querySelectorAll('.slide')[current].classList.remove('active');
+    current = idx;
+    document.querySelectorAll('.slide')[current].classList.add('active');
+    document.getElementById('timerFill').style.width = timerPcts[current] + '%';
+    document.getElementById('slideCounter').textContent = (current + 1) + ' / ' + totalSlides;
+    buildDots();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleMyth(card) {
+    const answer = card.querySelector('.myth-answer');
+    const hint = card.querySelector('.myth-hint');
+    const isShown = answer.classList.contains('shown');
+    answer.classList.toggle('shown', !isShown);
+    hint.style.display = isShown ? '' : 'none';
+    card.style.borderColor = isShown ? 'rgba(0,0,0,0.12)' : '#AFA9EC';
+  }
+
+  buildDots();
+</script>
+</body>
+</html>

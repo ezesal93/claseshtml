@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Completa — Mapas Conceptuales</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:    #F7F3EC;
+    --ink:      #1A1714;
+    --ink-muted:#5C5650;
+    --ink-faint:#A09890;
+    --teal:     #0E6B5E;
+    --teal-lt:  #D6EFEB;
+    --amber:    #C4620A;
+    --amber-lt: #FDECD9;
+    --blue:     #1B4F8A;
+    --blue-lt:  #DBE9F9;
+    --rose:     #9B2335;
+    --rose-lt:  #F8DDE0;
+    --violet:   #4A2D8A;
+    --violet-lt:#EAE4F7;
+    --border:   #DDD8CF;
+    --card-bg:  #FFFFFF;
+    --body-bg:  #F7F3EC;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+    --r: 10px;
+    --r-sm: 6px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--body-bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  .hero {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 20% 50%, rgba(14,107,94,.35) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 80% 40%, rgba(27,79,138,.25) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--teal-lt);
+    border: 1px solid rgba(14,107,94,.5);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -.02em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #8ECEC6;
+  }
+  .hero p {
+    font-size: 17px;
+    color: rgba(247,243,236,.7);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .hero-pill {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    color: var(--cream);
+  }
+
+  /* ── NAV / TOC ───────────────────────────── */
+  .toc-bar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toc-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-decoration: none;
+    padding: 14px 16px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color .2s, border-color .2s;
+  }
+  .toc-link:hover { color: var(--ink); border-color: var(--teal); }
+
+  /* ── LAYOUT ──────────────────────────────── */
+  .page { max-width: 960px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+  .section { padding: 3.5rem 0 0; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--border);
+    line-height: 1;
+    user-select: none;
+    min-width: 48px;
+  }
+  .section-title-wrap h2 {
+    font-family: var(--serif);
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .section-title-wrap p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-top: 2px;
+  }
+
+  /* ── CARDS ───────────────────────────────── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.5rem;
+  }
+  .card + .card { margin-top: 1rem; }
+
+  /* ── STEP CARDS ──────────────────────────── */
+  .steps-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .step {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 1.25rem;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .step:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); transform: translateY(-1px); }
+  .step-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .step-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: .35rem;
+  }
+  .step-content p {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+  }
+  .tip-box {
+    margin-top: .9rem;
+    padding: .75rem 1rem;
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    line-height: 1.55;
+    border-left: 3px solid;
+  }
+  .tip-box strong { font-weight: 600; }
+  .tip-teal  { background: var(--teal-lt);   border-color: var(--teal);   color: #0A4C43; }
+  .tip-amber { background: var(--amber-lt);  border-color: var(--amber);  color: #7D3C04; }
+  .tip-blue  { background: var(--blue-lt);   border-color: var(--blue);   color: #133A68; }
+  .tip-rose  { background: var(--rose-lt);   border-color: var(--rose);   color: #6B1724; }
+  .tip-violet{ background: var(--violet-lt); border-color: var(--violet); color: #321E63; }
+  .tip-ink   { background: #F0EDEA;          border-color: #B0A898;       color: var(--ink-muted); }
+
+  .s1 { background: var(--teal-lt);   color: var(--teal); }
+  .s2 { background: var(--amber-lt);  color: var(--amber); }
+  .s3 { background: var(--blue-lt);   color: var(--blue); }
+  .s4 { background: var(--rose-lt);   color: var(--rose); }
+  .s5 { background: var(--violet-lt); color: var(--violet); }
+  .s6 { background: #E8F5E9;          color: #2E7D32; }
+
+  /* ── QUÉ ES ─────────────────────────────── */
+  .what-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .what-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.25rem;
+  }
+  .what-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: .75rem;
+  }
+  .what-card h4 { font-size: 15px; font-weight: 600; margin-bottom: .3rem; }
+  .what-card p { font-size: 13px; color: var(--ink-muted); line-height: 1.55; }
+
+  .proposicion-demo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 1.5rem;
+    background: var(--ink);
+    border-radius: var(--r);
+    margin-bottom: 1rem;
+  }
+  .prop-node {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--sans);
+  }
+  .prop-link {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: #8ECEC6;
+    padding: 3px 10px;
+    border: 1px dashed rgba(142,206,198,.4);
+    border-radius: 20px;
+  }
+  .prop-arrow { color: rgba(255,255,255,.3); font-size: 18px; }
+  .prop-label { font-size: 11px; color: rgba(255,255,255,.4); text-align: center; margin-top: 2px; font-family: var(--mono); }
+
+  /* ── PLANTILLA SVG ───────────────────────── */
+  .template-wrap {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 2rem;
+    margin-bottom: 1rem;
+  }
+  .template-wrap svg { width: 100%; display: block; }
+
+  /* ── TABS ────────────────────────────────── */
+  .tabs-nav {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .tab-btn {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 18px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--card-bg);
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .tab-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .tab-btn.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ── PALABRAS DE ENLACE ──────────────────── */
+  .palabras-section { margin-bottom: 1.5rem; }
+  .palabras-section h4 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--ink-muted);
+    margin-bottom: .75rem;
+  }
+  .palabras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: .5rem;
+  }
+  .palabra-chip {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .6rem .9rem;
+    font-size: 13px;
+    color: var(--ink);
+  }
+  .palabra-chip span {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+    font-family: var(--mono);
+  }
+
+  /* ── ERRORES ─────────────────────────────── */
+  .errores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .error-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .error-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .error-card.bad::before  { background: var(--rose); }
+  .error-card.good::before { background: var(--teal); }
+  .error-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: .6rem;
+    font-family: var(--mono);
+  }
+  .badge-bad  { background: var(--rose-lt);  color: var(--rose); }
+  .badge-good { background: var(--teal-lt);  color: var(--teal); }
+  .error-card h4 { font-size: 14px; font-weight: 600; margin-bottom: .35rem; }
+  .error-card p  { font-size: 13px; color: var(--ink-muted); line-height: 1.55; }
+  .error-example {
+    margin-top: .75rem;
+    padding: .6rem .9rem;
+    border-radius: var(--r-sm);
+    font-size: 12.5px;
+    font-family: var(--mono);
+  }
+  .ex-bad  { background: var(--rose-lt);  color: #6B1724; }
+  .ex-good { background: var(--teal-lt);  color: #0A4C43; }
+
+  /* ── CHECKLIST ───────────────────────────── */
+  .checklist { display: flex; flex-direction: column; gap: 0; }
+  .check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: .9rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background .15s;
+    border-radius: 0;
+  }
+  .check-row:first-child { border-radius: var(--r) var(--r) 0 0; }
+  .check-row:last-child  { border-bottom: none; border-radius: 0 0 var(--r) var(--r); }
+  .check-row:hover { background: #FAFAF8; }
+  .check-row.done { background: var(--teal-lt); }
+  .check-row.done .check-label { color: var(--ink-muted); text-decoration: line-through; }
+  .check-box-ui {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+    background: #fff;
+  }
+  .check-row.done .check-box-ui {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  .check-box-ui svg { display: none; }
+  .check-row.done .check-box-ui svg { display: block; }
+  .check-label { font-size: 14px; line-height: 1.55; padding-top: 1px; }
+  .check-cat {
+    font-size: 11px;
+    font-family: var(--mono);
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-top: 2px;
+  }
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 20px;
+    height: 6px;
+    margin-bottom: .5rem;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 20px;
+    transition: width .3s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+    font-family: var(--mono);
+  }
+  .progress-label span { color: var(--teal); font-weight: 600; }
+
+  /* ── DIFERENCIAS ─────────────────────────── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .compare-table th {
+    text-align: left;
+    padding: .7rem 1rem;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--ink-muted);
+    background: #F7F3EC;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table td {
+    padding: .8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 600; width: 30%; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; font-family: var(--mono); }
+  .tag-mc  { background: var(--teal-lt);   color: var(--teal); }
+  .tag-mm  { background: var(--amber-lt);  color: var(--amber); }
+  .tag-mw  { background: var(--blue-lt);   color: var(--blue); }
+
+  /* ── RÚBRICA ─────────────────────────────── */
+  .rubrica-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .rubrica-table th {
+    padding: .6rem .9rem;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .rubrica-table th:first-child { text-align: left; }
+  .rubrica-table td {
+    padding: .7rem .9rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    border-right: 1px solid var(--border);
+    line-height: 1.45;
+  }
+  .rubrica-table td:first-child { font-weight: 500; }
+  .rubrica-table tr:last-child td { border-bottom: none; }
+  .score { text-align: center; font-weight: 600; }
+  .s-ex  { color: var(--teal); }
+  .s-bn  { color: var(--blue); }
+  .s-sf  { color: var(--amber); }
+  .s-in  { color: var(--rose); }
+  .rubrica-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+  }
+
+  /* ── GLOSARIO ────────────────────────────── */
+  .glosario-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .glosario-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 1.1rem 1.25rem;
+  }
+  .glosario-term {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: .35rem;
+  }
+  .glosario-def {
+    font-size: 13.5px;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  .footer {
+    background: var(--ink);
+    color: rgba(247,243,236,.55);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    font-size: 13px;
+    margin-top: 4rem;
+  }
+  .footer strong { color: var(--cream); }
+
+  /* ── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 600px) {
+    .step { grid-template-columns: 1fr; }
+    .step-icon { width: 40px; height: 40px; }
+    .what-grid { grid-template-columns: 1fr 1fr; }
+    .palabras-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  }
+
+  /* ── PRINT ───────────────────────────────── */
+  @media print {
+    .toc-bar { display: none; }
+    .hero { padding: 2rem; }
+    .section { page-break-inside: avoid; }
+    .step:hover { box-shadow: none; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Guía didáctica completa</div>
+    <h1>Mapas <em>conceptuales</em><br>paso a paso</h1>
+    <p>Todo lo que necesitas saber para crear, evaluar y enseñar mapas conceptuales de manera efectiva.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">6 pasos detallados</span>
+      <span class="hero-pill">Plantilla visual</span>
+      <span class="hero-pill">3 ejemplos resueltos</span>
+      <span class="hero-pill">Palabras de enlace</span>
+      <span class="hero-pill">Errores frecuentes</span>
+      <span class="hero-pill">Rúbrica de evaluación</span>
+      <span class="hero-pill">Lista de verificación</span>
+      <span class="hero-pill">Glosario</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════ NAV -->
+<nav class="toc-bar">
+  <div class="toc-inner">
+    <a class="toc-link" href="#sec-que-es">¿Qué es?</a>
+    <a class="toc-link" href="#sec-pasos">Los 6 pasos</a>
+    <a class="toc-link" href="#sec-plantilla">Plantilla</a>
+    <a class="toc-link" href="#sec-palabras">Palabras de enlace</a>
+    <a class="toc-link" href="#sec-ejemplos">Ejemplos</a>
+    <a class="toc-link" href="#sec-diferencias">Diferencias</a>
+    <a class="toc-link" href="#sec-errores">Errores frecuentes</a>
+    <a class="toc-link" href="#sec-rubrica">Rúbrica</a>
+    <a class="toc-link" href="#sec-checklist">Lista de verificación</a>
+    <a class="toc-link" href="#sec-glosario">Glosario</a>
+  </div>
+</nav>
+
+<main class="page">
+
+<!-- ═══════════════════════════════════════════ QUÉ ES -->
+<section class="section" id="sec-que-es">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title-wrap">
+      <h2>¿Qué es un mapa conceptual?</h2>
+      <p>Definición, componentes y estructura fundamental</p>
+    </div>
+  </div>
+
+  <div class="what-grid">
+    <div class="what-card">
+      <div class="what-icon" style="background:var(--teal-lt);">⬡</div>
+      <h4>Concepto</h4>
+      <p>Una palabra o frase encerrada en un óvalo o rectángulo que representa un objeto, evento, idea o categoría.</p>
+    </div>
+    <div class="what-card">
+      <div class="what-icon" style="background:var(--amber-lt);">→</div>
+      <h4>Palabra de enlace</h4>
+      <p>Una o pocas palabras escritas sobre la línea que conecta dos conceptos. Indica el tipo de relación entre ellos.</p>
+    </div>
+    <div class="what-card">
+      <div class="what-icon" style="background:var(--blue-lt);">◎</div>
+      <h4>Proposición</h4>
+      <p>La unidad de significado: Concepto A + palabra de enlace + Concepto B. Debe poder leerse como una oración con sentido.</p>
+    </div>
+    <div class="what-card">
+      <div class="what-icon" style="background:var(--rose-lt);">⤻</div>
+      <h4>Enlace cruzado</h4>
+      <p>Línea que conecta conceptos de diferentes ramas del mapa. Muestra relaciones complejas entre dominios distintos.</p>
+    </div>
+  </div>
+
+  <div style="margin-bottom:1rem;">
+    <p style="font-size:13px;color:var(--ink-muted);margin-bottom:.75rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:.07em;">Ejemplo de proposición</p>
+    <div class="proposicion-demo">
+      <div>
+        <div class="prop-node" style="background:rgba(14,107,94,.25);color:#8ECEC6;">La planta</div>
+        <div class="prop-label">concepto A</div>
+      </div>
+      <span class="prop-arrow">→</span>
+      <div>
+        <div class="prop-link">realiza</div>
+        <div class="prop-label" style="color:rgba(142,206,198,.5);">enlace</div>
+      </div>
+      <span class="prop-arrow">→</span>
+      <div>
+        <div class="prop-node" style="background:rgba(27,79,138,.3);color:#93C2EF;">fotosíntesis</div>
+        <div class="prop-label">concepto B</div>
+      </div>
+      <span class="prop-arrow">→</span>
+      <div>
+        <div class="prop-link">usando</div>
+        <div class="prop-label" style="color:rgba(142,206,198,.5);">enlace</div>
+      </div>
+      <span class="prop-arrow">→</span>
+      <div>
+        <div class="prop-node" style="background:rgba(74,45,138,.3);color:#C3AFF0;">luz solar</div>
+        <div class="prop-label">concepto C</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p style="font-size:14px;color:var(--ink-muted);line-height:1.65;">
+      <strong style="color:var(--ink);">¿Para qué sirve?</strong> — Un mapa conceptual ayuda a organizar y representar el conocimiento de forma visual, a identificar relaciones entre ideas, a estudiar un tema de manera profunda y a comunicar estructuras complejas de manera clara. Fue desarrollado por Joseph Novak en los años 70 basándose en la teoría del aprendizaje significativo de Ausubel.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PASOS -->
+<section class="section" id="sec-pasos">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title-wrap">
+      <h2>Los 6 pasos para crear tu mapa</h2>
+      <p>Sigue este orden para obtener mejores resultados</p>
+    </div>
+  </div>
+
+  <div class="steps-grid">
+
+    <div class="step">
+      <div class="step-icon s1">1</div>
+      <div class="step-content">
+        <h3>Define una pregunta de enfoque</h3>
+        <p>Antes de escribir cualquier concepto, formula una pregunta que delimite el tema. Esta pregunta será el norte de todo tu mapa y te ayudará a decidir qué conceptos incluir y cuáles no.</p>
+        <div class="tip-box tip-teal">
+          <strong>Ejemplo:</strong> "¿Cómo funciona el ciclo del agua en la naturaleza?" — Esta pregunta es lo suficientemente concreta como para delimitar el tema y lo suficientemente amplia para incluir varios subtemas relevantes.
+        </div>
+        <div class="tip-box tip-ink" style="margin-top:.6rem;">
+          <strong>Evita preguntas demasiado amplias</strong> como "¿Qué es la naturaleza?" (muy vago) o demasiado cerradas como "¿Cuánto tarda el ciclo del agua?" (respuesta de una sola palabra, no genera estructura).
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-icon s2">2</div>
+      <div class="step-content">
+        <h3>Haz una lluvia de conceptos clave</h3>
+        <p>Sin preocuparte por el orden, escribe en papeles, post-its o en una lista todos los conceptos que se te ocurran relacionados con la pregunta de enfoque. Incluye sustantivos, procesos y categorías importantes.</p>
+        <div class="tip-box tip-amber">
+          <strong>Cantidad sugerida:</strong> Entre 15 y 25 conceptos. Si tienes menos de 10, el mapa quedará incompleto. Si tienes más de 35, probablemente estés mezclando niveles de especificidad o temas distintos.
+        </div>
+        <div class="tip-box tip-ink" style="margin-top:.6rem;">
+          <strong>Truco:</strong> Una vez que tengas tu lista, agrupa los conceptos parecidos con colores o círculos. Esos grupos se convertirán en las ramas principales de tu mapa.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-icon s3">3</div>
+      <div class="step-content">
+        <h3>Jerarquiza de lo general a lo específico</h3>
+        <p>Identifica el concepto más amplio e inclusivo: ese va en la cima (o al centro, si prefieres un mapa radial). Luego organiza el resto por niveles: los conceptos que explican o subdividen a otros van más abajo.</p>
+        <div class="tip-box tip-blue">
+          <strong>Pregunta clave para jerarquizar:</strong> "¿Este concepto incluye, contiene o explica a los demás?" — Si la respuesta es sí, va arriba. Si es un ejemplo, característica o detalle de otro, va abajo.
+        </div>
+        <div class="tip-box tip-ink" style="margin-top:.6rem;">
+          <strong>Regla práctica:</strong> Los conceptos del nivel 1 suelen ser categorías grandes (máximo 4-5). Los del nivel 2, subcategorías. Los del nivel 3, ejemplos, características o datos concretos.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-icon s4">4</div>
+      <div class="step-content">
+        <h3>Dibuja las líneas y escribe las palabras de enlace</h3>
+        <p>Conecta los conceptos relacionados con líneas dirigidas. Sobre cada línea (o al lado, si hay espacio), escribe una palabra o frase corta que explique la relación. Esta es la parte más importante del mapa.</p>
+        <div class="tip-box tip-rose">
+          <strong>Regla de oro:</strong> Nunca dejes una línea sin palabra de enlace. Una flecha vacía no tiene significado. La frase "Concepto A → Concepto B" sin enlace no es una proposición, es solo una asociación vaga.
+        </div>
+        <div class="tip-box tip-ink" style="margin-top:.6rem;">
+          <strong>Palabras de enlace útiles:</strong> es un tipo de / produce / requiere / forma parte de / se divide en / depende de / genera / permite / utiliza / causa / se relaciona con / es necesario para
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-icon s5">5</div>
+      <div class="step-content">
+        <h3>Lee cada proposición en voz alta</h3>
+        <p>Recorre cada conexión de tu mapa y lee: Concepto A + palabra de enlace + Concepto B. Debe sonar como una oración con sentido completo y verdadero. Si no suena bien, revisa la palabra de enlace o la dirección de la flecha.</p>
+        <div class="tip-box tip-violet">
+          <strong>Proposición válida:</strong> "El agua <em>se evapora por</em> calor solar" ✓<br>
+          <strong>Proposición inválida:</strong> "El agua <em>→</em> calor solar" ✗ (falta el enlace)<br>
+          <strong>Proposición confusa:</strong> "El agua <em>tiene relación con</em> calor solar" — demasiado vaga, ¿qué tipo de relación?
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-icon s6">6</div>
+      <div class="step-content">
+        <h3>Agrega ejemplos y enlaces cruzados</h3>
+        <p>Una vez que tienes la estructura principal, enriquece el mapa con: (a) ejemplos concretos en los nodos terminales, y (b) enlaces cruzados que conecten conceptos de distintas ramas mostrando relaciones más complejas.</p>
+        <div class="tip-box" style="background:#E8F5E9;border-color:#2E7D32;color:#1B5E20;">
+          <strong>Los enlaces cruzados</strong> son la señal de un mapa conceptual de alta calidad. Muestran que el estudiante ve conexiones entre dominios, no solo memoriza listas. Usa líneas discontinuas o de un color distinto para diferenciarlos de las conexiones jerárquicas normales.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PLANTILLA -->
+<section class="section" id="sec-plantilla">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title-wrap">
+      <h2>Plantilla visual — hoja de ruta</h2>
+      <p>Estructura base que puedes copiar y rellenar con tu propio tema</p>
+    </div>
+  </div>
+
+  <div class="template-wrap">
+    <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#A09890"/>
+        </marker>
+        <marker id="arr-cross" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+          <polygon points="0 0,8 3,0 6" fill="#9B2335"/>
+        </marker>
+      </defs>
+
+      <!-- PREGUNTA DE ENFOQUE -->
+      <rect x="200" y="8" width="400" height="28" rx="14" fill="#1A1714" opacity=".07"/>
+      <text x="400" y="26" text-anchor="middle" font-size="12" font-family="'DM Mono',monospace" fill="#5C5650">PREGUNTA DE ENFOQUE: ¿…?</text>
+
+      <!-- CONCEPTO CENTRAL -->
+      <rect x="270" y="52" width="260" height="50" rx="10" fill="#0E6B5E" opacity=".12" stroke="#0E6B5E" stroke-width="2"/>
+      <text x="400" y="73" text-anchor="middle" font-size="14" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">CONCEPTO CENTRAL</text>
+      <text x="400" y="91" text-anchor="middle" font-size="11" font-family="'DM Mono',monospace" fill="#0E6B5E">el más general del tema</text>
+
+      <!-- Líneas nivel 1 → 2 -->
+      <line x1="320" y1="102" x2="140" y2="178" stroke="#A09890" stroke-width="1.2" marker-end="url(#arr)"/>
+      <line x1="400" y1="102" x2="400" y2="178" stroke="#A09890" stroke-width="1.2" marker-end="url(#arr)"/>
+      <line x1="480" y1="102" x2="660" y2="178" stroke="#A09890" stroke-width="1.2" marker-end="url(#arr)"/>
+
+      <!-- PALABRAS DE ENLACE N1→N2 -->
+      <rect x="165" y="126" width="90" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".8"/>
+      <text x="210" y="138" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#7D3C04">palabra enlace</text>
+      <rect x="352" y="126" width="90" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".8"/>
+      <text x="397" y="138" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#7D3C04">palabra enlace</text>
+      <rect x="538" y="126" width="90" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".8"/>
+      <text x="583" y="138" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#7D3C04">palabra enlace</text>
+
+      <!-- CONCEPTOS SECUNDARIOS -->
+      <rect x="50" y="178" width="188" height="44" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+      <text x="144" y="196" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Concepto secundario A</text>
+      <text x="144" y="213" text-anchor="middle" font-size="10.5" font-family="'DM Mono',monospace" fill="#0E6B5E">subtema o categoría</text>
+
+      <rect x="306" y="178" width="188" height="44" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+      <text x="400" y="196" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Concepto secundario B</text>
+      <text x="400" y="213" text-anchor="middle" font-size="10.5" font-family="'DM Mono',monospace" fill="#0E6B5E">subtema o categoría</text>
+
+      <rect x="562" y="178" width="188" height="44" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+      <text x="656" y="196" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Concepto secundario C</text>
+      <text x="656" y="213" text-anchor="middle" font-size="10.5" font-family="'DM Mono',monospace" fill="#0E6B5E">subtema o categoría</text>
+
+      <!-- Líneas nivel 2 → 3 -->
+      <line x1="104" y1="222" x2="74" y2="296" stroke="#A09890" stroke-width="1" marker-end="url(#arr)"/>
+      <line x1="184" y1="222" x2="214" y2="296" stroke="#A09890" stroke-width="1" marker-end="url(#arr)"/>
+      <line x1="356" y1="222" x2="316" y2="296" stroke="#A09890" stroke-width="1" marker-end="url(#arr)"/>
+      <line x1="444" y1="222" x2="484" y2="296" stroke="#A09890" stroke-width="1" marker-end="url(#arr)"/>
+      <line x1="612" y1="222" x2="592" y2="296" stroke="#A09890" stroke-width="1" marker-end="url(#arr)"/>
+      <line x1="700" y1="222" x2="720" y2="296" stroke="#A09890" stroke-width="1" marker-end="url(#arr)"/>
+
+      <!-- PALABRAS DE ENLACE N2→N3 (mini) -->
+      <rect x="50" y="250" width="58" height="16" rx="8" fill="#FDECD9"/>
+      <text x="79" y="261" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">enlace</text>
+      <rect x="172" y="250" width="58" height="16" rx="8" fill="#FDECD9"/>
+      <text x="201" y="261" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">enlace</text>
+      <rect x="292" y="250" width="58" height="16" rx="8" fill="#FDECD9"/>
+      <text x="321" y="261" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">enlace</text>
+      <rect x="450" y="250" width="58" height="16" rx="8" fill="#FDECD9"/>
+      <text x="479" y="261" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">enlace</text>
+      <rect x="566" y="250" width="58" height="16" rx="8" fill="#FDECD9"/>
+      <text x="595" y="261" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">enlace</text>
+      <rect x="690" y="250" width="58" height="16" rx="8" fill="#FDECD9"/>
+      <text x="719" y="261" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">enlace</text>
+
+      <!-- CONCEPTOS ESPECÍFICOS -->
+      <rect x="30" y="296" width="110" height="32" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+      <text x="85" y="316" text-anchor="middle" font-size="12" font-family="'DM Sans',sans-serif" fill="#321E63">Específico A1</text>
+
+      <rect x="158" y="296" width="110" height="32" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+      <text x="213" y="316" text-anchor="middle" font-size="12" font-family="'DM Sans',sans-serif" fill="#321E63">Específico A2</text>
+
+      <rect x="274" y="296" width="110" height="32" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+      <text x="329" y="316" text-anchor="middle" font-size="12" font-family="'DM Sans',sans-serif" fill="#321E63">Específico B1</text>
+
+      <rect x="450" y="296" width="110" height="32" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+      <text x="505" y="316" text-anchor="middle" font-size="12" font-family="'DM Sans',sans-serif" fill="#321E63">Específico B2</text>
+
+      <rect x="550" y="296" width="110" height="32" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+      <text x="605" y="316" text-anchor="middle" font-size="12" font-family="'DM Sans',sans-serif" fill="#321E63">Específico C1</text>
+
+      <rect x="678" y="296" width="110" height="32" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+      <text x="733" y="316" text-anchor="middle" font-size="12" font-family="'DM Sans',sans-serif" fill="#321E63">Específico C2</text>
+
+      <!-- ENLACE CRUZADO -->
+      <path d="M 384 312 Q 400 360 450 312" stroke="#9B2335" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-cross)"/>
+      <rect x="388" y="340" width="90" height="18" rx="9" fill="#F8DDE0" stroke="#9B2335" stroke-width=".8"/>
+      <text x="433" y="352" text-anchor="middle" font-size="9.5" font-family="'DM Mono',monospace" fill="#6B1724">enlace cruzado</text>
+
+      <!-- LEYENDA -->
+      <rect x="0" y="370" width="800" height="128" rx="0" fill="#F7F3EC"/>
+      <line x1="0" y1="370" x2="800" y2="370" stroke="#DDD8CF" stroke-width="1"/>
+      <text x="20" y="392" font-size="12" font-weight="600" font-family="'DM Sans',sans-serif" fill="#5C5650">LEYENDA</text>
+
+      <!-- leyenda items -->
+      <rect x="20" y="402" width="80" height="22" rx="6" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.5"/>
+      <text x="60" y="416" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#0A4C43">Central</text>
+      <text x="112" y="417" font-size="11" font-family="'DM Sans',sans-serif" fill="#5C5650">Tema principal, el más general. Solo uno.</text>
+
+      <rect x="20" y="432" width="80" height="22" rx="6" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1"/>
+      <text x="60" y="446" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#0A4C43">Secundario</text>
+      <text x="112" y="447" font-size="11" font-family="'DM Sans',sans-serif" fill="#5C5650">Subtemas principales. Máximo 4–5 por mapa.</text>
+
+      <rect x="20" y="462" width="80" height="22" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+      <text x="60" y="476" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Específico</text>
+      <text x="112" y="477" font-size="11" font-family="'DM Sans',sans-serif" fill="#5C5650">Detalles, ejemplos y características concretas.</text>
+
+      <rect x="420" y="402" width="80" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".8"/>
+      <text x="460" y="414" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#7D3C04">enlace</text>
+      <text x="512" y="415" font-size="11" font-family="'DM Sans',sans-serif" fill="#5C5650">Palabras de enlace — sobre cada línea.</text>
+
+      <line x1="420" y1="440" x2="498" y2="440" stroke="#9B2335" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <polygon points="494,436 502,440 494,444" fill="#9B2335"/>
+      <text x="512" y="444" font-size="11" font-family="'DM Sans',sans-serif" fill="#5C5650">Enlace cruzado — conecta ramas distintas.</text>
+
+      <line x1="420" y1="466" x2="498" y2="466" stroke="#A09890" stroke-width="1.2"/>
+      <polygon points="494,462 502,466 494,470" fill="#A09890"/>
+      <text x="512" y="470" font-size="11" font-family="'DM Sans',sans-serif" fill="#5C5650">Relación jerárquica normal.</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <p style="font-size:14px;color:var(--ink-muted);line-height:1.65;"><strong style="color:var(--ink);">Cómo usar esta plantilla:</strong> Imprime o copia esta estructura. Escribe tu pregunta de enfoque en la parte superior. Pon tu concepto central en el cuadro verde oscuro. Rellena los conceptos secundarios (verde claro) con los 3-4 grandes subtemas de tu tema. Luego añade los específicos (violeta) con detalles, ejemplos o características. Finalmente, busca conexiones entre ramas y dibuja enlaces cruzados (línea roja discontinua).</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ PALABRAS DE ENLACE -->
+<section class="section" id="sec-palabras">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title-wrap">
+      <h2>Banco de palabras de enlace</h2>
+      <p>Úsalas según el tipo de relación que quieras expresar</p>
+    </div>
+  </div>
+
+  <div class="palabras-section">
+    <h4>Relaciones de tipo / clasificación</h4>
+    <div class="palabras-grid">
+      <div class="palabra-chip">es un tipo de<span>clasificación</span></div>
+      <div class="palabra-chip">se clasifica en<span>taxonomía</span></div>
+      <div class="palabra-chip">es un ejemplo de<span>instancia</span></div>
+      <div class="palabra-chip">pertenece a<span>membresía</span></div>
+      <div class="palabra-chip">se divide en<span>subdivisión</span></div>
+      <div class="palabra-chip">es una categoría de<span>jerarquía</span></div>
+    </div>
+  </div>
+
+  <div class="palabras-section">
+    <h4>Relaciones de composición / parte-todo</h4>
+    <div class="palabras-grid">
+      <div class="palabra-chip">forma parte de<span>composición</span></div>
+      <div class="palabra-chip">está compuesto por<span>estructura</span></div>
+      <div class="palabra-chip">contiene<span>inclusión</span></div>
+      <div class="palabra-chip">incluye<span>contenido</span></div>
+      <div class="palabra-chip">está formado por<span>constitución</span></div>
+      <div class="palabra-chip">integra<span>componente</span></div>
+    </div>
+  </div>
+
+  <div class="palabras-section">
+    <h4>Relaciones de causa / efecto / proceso</h4>
+    <div class="palabras-grid">
+      <div class="palabra-chip">causa<span>causalidad</span></div>
+      <div class="palabra-chip">produce<span>resultado</span></div>
+      <div class="palabra-chip">genera<span>origen</span></div>
+      <div class="palabra-chip">permite<span>habilitación</span></div>
+      <div class="palabra-chip">lleva a<span>consecuencia</span></div>
+      <div class="palabra-chip">provoca<span>efecto</span></div>
+      <div class="palabra-chip">resulta en<span>producto</span></div>
+      <div class="palabra-chip">determina<span>influencia</span></div>
+    </div>
+  </div>
+
+  <div class="palabras-section">
+    <h4>Relaciones de necesidad / dependencia</h4>
+    <div class="palabras-grid">
+      <div class="palabra-chip">requiere<span>necesidad</span></div>
+      <div class="palabra-chip">necesita<span>dependencia</span></div>
+      <div class="palabra-chip">depende de<span>subordinación</span></div>
+      <div class="palabra-chip">utiliza<span>uso</span></div>
+      <div class="palabra-chip">se basa en<span>fundamento</span></div>
+      <div class="palabra-chip">emplea<span>herramienta</span></div>
+    </div>
+  </div>
+
+  <div class="palabras-section">
+    <h4>Relaciones de propiedad / característica</h4>
+    <div class="palabras-grid">
+      <div class="palabra-chip">tiene<span>posesión</span></div>
+      <div class="palabra-chip">presenta<span>característica</span></div>
+      <div class="palabra-chip">se caracteriza por<span>atributo</span></div>
+      <div class="palabra-chip">posee<span>propiedad</span></div>
+      <div class="palabra-chip">se define por<span>definición</span></div>
+    </div>
+  </div>
+
+  <div class="palabras-section" style="margin-bottom:0;">
+    <h4>Relaciones de contraste / comparación</h4>
+    <div class="palabras-grid">
+      <div class="palabra-chip">se diferencia de<span>contraste</span></div>
+      <div class="palabra-chip">a diferencia de<span>distinción</span></div>
+      <div class="palabra-chip">es opuesto a<span>oposición</span></div>
+      <div class="palabra-chip">se complementa con<span>complemento</span></div>
+      <div class="palabra-chip">es similar a<span>analogía</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ EJEMPLOS -->
+<section class="section" id="sec-ejemplos">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title-wrap">
+      <h2>Ejemplos resueltos</h2>
+      <p>Tres temas distintos con la estructura completa</p>
+    </div>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="showTab('foto', this)">Fotosíntesis</button>
+    <button class="tab-btn" onclick="showTab('agua', this)">El ciclo del agua</button>
+    <button class="tab-btn" onclick="showTab('demo', this)">La democracia</button>
+  </div>
+
+  <!-- FOTOSÍNTESIS -->
+  <div id="tab-foto" class="tab-pane active">
+    <div class="template-wrap">
+      <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="af" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#A09890"/></marker>
+          <marker id="afc" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#9B2335"/></marker>
+        </defs>
+
+        <text x="380" y="18" text-anchor="middle" font-size="11" font-family="'DM Mono',monospace" fill="#5C5650">¿Qué es la fotosíntesis y cómo se produce en las plantas?</text>
+
+        <rect x="240" y="30" width="240" height="46" rx="9" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="2"/>
+        <text x="360" y="50" text-anchor="middle" font-size="14" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Fotosíntesis</text>
+        <text x="360" y="67" text-anchor="middle" font-size="10.5" font-family="'DM Mono',monospace" fill="#0E6B5E">proceso biológico de las plantas</text>
+
+        <line x1="300" y1="76" x2="130" y2="148" stroke="#A09890" stroke-width="1.2" marker-end="url(#af)"/>
+        <line x1="360" y1="76" x2="360" y2="148" stroke="#A09890" stroke-width="1.2" marker-end="url(#af)"/>
+        <line x1="420" y1="76" x2="590" y2="148" stroke="#A09890" stroke-width="1.2" marker-end="url(#af)"/>
+
+        <rect x="68" y="105" width="72" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="104" y="117" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">requiere</text>
+        <rect x="316" y="105" width="72" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="352" y="117" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">produce</text>
+        <rect x="526" y="105" width="72" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="562" y="117" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">ocurre en</text>
+
+        <rect x="30" y="148" width="196" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="128" y="164" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Materias primas</text>
+        <text x="128" y="180" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">luz solar · agua · CO₂</text>
+
+        <rect x="266" y="148" width="196" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="364" y="164" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Productos</text>
+        <text x="364" y="180" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">glucosa + oxígeno (O₂)</text>
+
+        <rect x="502" y="148" width="196" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="600" y="164" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Lugar</text>
+        <text x="600" y="180" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">cloroplastos (hojas)</text>
+
+        <line x1="88" y1="190" x2="64" y2="254" stroke="#A09890" stroke-width="1" marker-end="url(#af)"/>
+        <line x1="168" y1="190" x2="190" y2="254" stroke="#A09890" stroke-width="1" marker-end="url(#af)"/>
+        <line x1="316" y1="190" x2="282" y2="254" stroke="#A09890" stroke-width="1" marker-end="url(#af)"/>
+        <line x1="412" y1="190" x2="448" y2="254" stroke="#A09890" stroke-width="1" marker-end="url(#af)"/>
+        <line x1="600" y1="190" x2="600" y2="254" stroke="#A09890" stroke-width="1" marker-end="url(#af)"/>
+
+        <rect x="46" y="219" width="50" height="14" rx="7" fill="#FDECD9"/>
+        <text x="71" y="229" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#7D3C04">es</text>
+        <rect x="152" y="219" width="58" height="14" rx="7" fill="#FDECD9"/>
+        <text x="181" y="229" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#7D3C04">también es</text>
+        <rect x="262" y="219" width="54" height="14" rx="7" fill="#FDECD9"/>
+        <text x="289" y="229" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#7D3C04">es la</text>
+        <rect x="408" y="219" width="78" height="14" rx="7" fill="#FDECD9"/>
+        <text x="447" y="229" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#7D3C04">sirve de alimento</text>
+        <rect x="562" y="219" width="74" height="14" rx="7" fill="#FDECD9"/>
+        <text x="599" y="229" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#7D3C04">contiene clorofila</text>
+
+        <rect x="24" y="254" width="100" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="74" y="272" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Luz solar</text>
+
+        <rect x="148" y="254" width="100" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="198" y="272" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">CO₂ y H₂O</text>
+
+        <rect x="248" y="254" width="100" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="298" y="272" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Glucosa</text>
+
+        <rect x="408" y="254" width="100" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="458" y="272" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Seres vivos</text>
+
+        <rect x="562" y="254" width="100" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="612" y="272" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Clorofila</text>
+
+        <!-- Enlace cruzado -->
+        <path d="M 198 268 Q 280 310 298 268" stroke="#9B2335" fill="none" stroke-width="1.3" stroke-dasharray="5,3" marker-end="url(#afc)"/>
+        <rect x="208" y="302" width="90" height="15" rx="7" fill="#F8DDE0"/>
+        <text x="253" y="313" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#6B1724">ambos son reactivos</text>
+
+        <text x="380" y="345" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#A09890">Enlace cruzado: CO₂ y H₂O también se liberan en la respiración celular (otra rama posible)</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- CICLO DEL AGUA -->
+  <div id="tab-agua" class="tab-pane">
+    <div class="template-wrap">
+      <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="aa" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#A09890"/></marker>
+          <marker id="aac" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#9B2335"/></marker>
+        </defs>
+
+        <text x="380" y="18" text-anchor="middle" font-size="11" font-family="'DM Mono',monospace" fill="#5C5650">¿Cómo funciona el ciclo del agua en la naturaleza?</text>
+
+        <rect x="240" y="28" width="280" height="46" rx="9" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="2"/>
+        <text x="380" y="48" text-anchor="middle" font-size="14" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Ciclo del agua</text>
+        <text x="380" y="65" text-anchor="middle" font-size="10.5" font-family="'DM Mono',monospace" fill="#0E6B5E">circulación continua del agua en la Tierra</text>
+
+        <line x1="310" y1="74" x2="130" y2="144" stroke="#A09890" stroke-width="1.2" marker-end="url(#aa)"/>
+        <line x1="380" y1="74" x2="380" y2="144" stroke="#A09890" stroke-width="1.2" marker-end="url(#aa)"/>
+        <line x1="450" y1="74" x2="630" y2="144" stroke="#A09890" stroke-width="1.2" marker-end="url(#aa)"/>
+
+        <rect x="50" y="100" width="70" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="85" y="112" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">incluye</text>
+        <rect x="342" y="100" width="70" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="377" y="112" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">incluye</text>
+        <rect x="540" y="100" width="90" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="585" y="112" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">es impulsado por</text>
+
+        <rect x="24" y="144" width="200" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="124" y="160" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Etapas del ciclo</text>
+        <text x="124" y="177" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">evaporación · condensación · precipitación</text>
+
+        <rect x="278" y="144" width="200" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="378" y="160" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Almacenamiento</text>
+        <text x="378" y="177" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">océanos · glaciares · aguas subterráneas</text>
+
+        <rect x="532" y="144" width="200" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="632" y="160" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Energía solar</text>
+        <text x="632" y="177" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">fuente de energía del ciclo</text>
+
+        <line x1="74" y1="186" x2="54" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#aa)"/>
+        <line x1="174" y1="186" x2="194" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#aa)"/>
+        <line x1="328" y1="186" x2="294" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#aa)"/>
+        <line x1="428" y1="186" x2="464" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#aa)"/>
+        <line x1="632" y1="186" x2="632" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#aa)"/>
+
+        <rect x="16" y="246" width="112" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="72" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Evaporación</text>
+
+        <rect x="148" y="246" width="112" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="204" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Precipitación</text>
+
+        <rect x="258" y="246" width="112" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="314" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Océanos</text>
+
+        <rect x="414" y="246" width="112" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="470" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Glaciares</text>
+
+        <rect x="576" y="246" width="112" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="632" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Calor solar</text>
+
+        <path d="M 148 260 Q 180 300 258 260" stroke="#9B2335" fill="none" stroke-width="1.3" stroke-dasharray="5,3" marker-end="url(#aac)"/>
+        <rect x="166" y="293" width="110" height="14" rx="7" fill="#F8DDE0"/>
+        <text x="221" y="304" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#6B1724">lluvia recarga océanos</text>
+
+        <text x="380" y="328" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#A09890">Enlace cruzado: la precipitación recarga el almacenamiento (océanos y glaciares)</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- DEMOCRACIA -->
+  <div id="tab-demo" class="tab-pane">
+    <div class="template-wrap">
+      <svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ad" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#A09890"/></marker>
+          <marker id="adc" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#9B2335"/></marker>
+        </defs>
+
+        <text x="380" y="18" text-anchor="middle" font-size="11" font-family="'DM Mono',monospace" fill="#5C5650">¿En qué se basa la democracia y cuáles son sus elementos fundamentales?</text>
+
+        <rect x="220" y="28" width="320" height="46" rx="9" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="2"/>
+        <text x="380" y="48" text-anchor="middle" font-size="14" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">La democracia</text>
+        <text x="380" y="65" text-anchor="middle" font-size="10.5" font-family="'DM Mono',monospace" fill="#0E6B5E">sistema de gobierno basado en la soberanía popular</text>
+
+        <line x1="300" y1="74" x2="120" y2="144" stroke="#A09890" stroke-width="1.2" marker-end="url(#ad)"/>
+        <line x1="380" y1="74" x2="380" y2="144" stroke="#A09890" stroke-width="1.2" marker-end="url(#ad)"/>
+        <line x1="460" y1="74" x2="640" y2="144" stroke="#A09890" stroke-width="1.2" marker-end="url(#ad)"/>
+
+        <rect x="50" y="101" width="68" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="84" y="113" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">se basa en</text>
+        <rect x="340" y="101" width="68" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="374" y="113" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">garantiza</text>
+        <rect x="558" y="101" width="68" height="18" rx="9" fill="#FDECD9" stroke="#C4620A" stroke-width=".7"/>
+        <text x="592" y="113" text-anchor="middle" font-size="9" font-family="'DM Mono',monospace" fill="#7D3C04">requiere</text>
+
+        <rect x="14" y="144" width="210" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="119" y="160" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Principios</text>
+        <text x="119" y="177" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">igualdad · libertad · soberanía popular</text>
+
+        <rect x="276" y="144" width="210" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="381" y="160" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Derechos ciudadanos</text>
+        <text x="381" y="177" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">voto · expresión · reunión · due process</text>
+
+        <rect x="538" y="144" width="210" height="42" rx="8" fill="#D6EFEB" stroke="#0E6B5E" stroke-width="1.2"/>
+        <text x="643" y="160" text-anchor="middle" font-size="13" font-weight="600" font-family="'DM Sans',sans-serif" fill="#0A4C43">Instituciones</text>
+        <text x="643" y="177" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#0E6B5E">parlamento · poder judicial · ejecutivo</text>
+
+        <line x1="74" y1="186" x2="54" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#ad)"/>
+        <line x1="164" y1="186" x2="190" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#ad)"/>
+        <line x1="326" y1="186" x2="296" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#ad)"/>
+        <line x1="436" y1="186" x2="464" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#ad)"/>
+        <line x1="643" y1="186" x2="643" y2="246" stroke="#A09890" stroke-width="1" marker-end="url(#ad)"/>
+
+        <rect x="10" y="246" width="120" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="70" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Separación de poderes</text>
+
+        <rect x="154" y="246" width="120" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="214" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Sufragio universal</text>
+
+        <rect x="260" y="246" width="120" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="320" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Libertad de expresión</text>
+
+        <rect x="410" y="246" width="120" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="470" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Constitución</text>
+
+        <rect x="583" y="246" width="120" height="28" rx="6" fill="#EAE4F7" stroke="#4A2D8A" stroke-width="1"/>
+        <text x="643" y="264" text-anchor="middle" font-size="11" font-family="'DM Sans',sans-serif" fill="#321E63">Elecciones libres</text>
+
+        <path d="M 214 260 Q 270 305 320 260" stroke="#9B2335" fill="none" stroke-width="1.3" stroke-dasharray="5,3" marker-end="url(#adc)"/>
+        <rect x="218" y="297" width="130" height="14" rx="7" fill="#F8DDE0"/>
+        <text x="283" y="308" text-anchor="middle" font-size="8.5" font-family="'DM Mono',monospace" fill="#6B1724">el voto ejerce la libertad</text>
+
+        <text x="380" y="330" text-anchor="middle" font-size="10" font-family="'DM Mono',monospace" fill="#A09890">Enlace cruzado: el sufragio universal es el ejercicio práctico de la libertad de expresión política</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ DIFERENCIAS -->
+<section class="section" id="sec-diferencias">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title-wrap">
+      <h2>Mapa conceptual vs. otras herramientas</h2>
+      <p>¿Cuándo usar cada una?</p>
+    </div>
+  </div>
+
+  <div style="border:1px solid var(--border);border-radius:var(--r);overflow:hidden;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Característica</th>
+          <th><span class="tag tag-mc">Mapa conceptual</span></th>
+          <th><span class="tag tag-mm">Mapa mental</span></th>
+          <th><span class="tag tag-mw">Diagrama de flujo</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Propósito principal</td>
+          <td>Organizar y mostrar relaciones entre conceptos</td>
+          <td>Lluvia de ideas y asociación libre</td>
+          <td>Mostrar un proceso paso a paso</td>
+        </tr>
+        <tr>
+          <td>Estructura</td>
+          <td>Jerárquica con enlaces cruzados</td>
+          <td>Radial, desde el centro hacia afuera</td>
+          <td>Lineal o ramificada, con decisiones</td>
+        </tr>
+        <tr>
+          <td>Palabras de enlace</td>
+          <td>Obligatorias en cada conexión</td>
+          <td>No se usan habitualmente</td>
+          <td>Se usan en nodos de decisión</td>
+        </tr>
+        <tr>
+          <td>Proposiciones</td>
+          <td>Elemento central del mapa</td>
+          <td>No se generan explícitamente</td>
+          <td>Implícitas en los pasos del proceso</td>
+        </tr>
+        <tr>
+          <td>Base teórica</td>
+          <td>Aprendizaje significativo (Ausubel/Novak)</td>
+          <td>Pensamiento irradiante (Tony Buzan)</td>
+          <td>Ingeniería de procesos / lógica</td>
+        </tr>
+        <tr>
+          <td>Mejor para</td>
+          <td>Estudiar conceptos complejos, evaluación profunda</td>
+          <td>Generar ideas rápidamente, creatividad</td>
+          <td>Documentar procedimientos, algoritmos</td>
+        </tr>
+        <tr>
+          <td>Imágenes / colores</td>
+          <td>Opcionales, no son centrales</td>
+          <td>Muy recomendadas, parte del método</td>
+          <td>Estandarizadas (rombos = decisión, etc.)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ ERRORES -->
+<section class="section" id="sec-errores">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-title-wrap">
+      <h2>Errores frecuentes y cómo corregirlos</h2>
+      <p>Los problemas más comunes que cometen los estudiantes</p>
+    </div>
+  </div>
+
+  <div class="errores-grid">
+    <div class="error-card bad">
+      <div class="error-badge badge-bad">Error #1</div>
+      <h4>Líneas sin palabras de enlace</h4>
+      <p>El error más común y el más grave. Una flecha vacía entre dos conceptos no tiene significado lógico.</p>
+      <div class="error-example ex-bad">Planta ——→ Fotosíntesis</div>
+      <div class="error-example ex-good">Planta —realiza→ Fotosíntesis</div>
+    </div>
+    <div class="error-card bad">
+      <div class="error-badge badge-bad">Error #2</div>
+      <h4>Mapa en cadena (lista vertical)</h4>
+      <p>A→B→C→D en una sola línea. No hay jerarquía ni ramas. Es una lista disfrazada de mapa.</p>
+      <div class="error-example ex-bad">Agua → Evaporación → Nube → Lluvia → Río</div>
+      <div class="error-example ex-good">Estructurar en niveles: ciclo → etapas → cada etapa por separado</div>
+    </div>
+    <div class="error-card bad">
+      <div class="error-badge badge-bad">Error #3</div>
+      <h4>Todos los conceptos al mismo nivel</h4>
+      <p>Sin jerarquía. Los estudiantes colocan todos los conceptos como si fueran iguales de generales.</p>
+      <div class="error-example ex-bad">Animal / Perro / Mamífero / Cuatro patas / Vertebrado (todos al mismo nivel)</div>
+      <div class="error-example ex-good">Animal → Vertebrado → Mamífero → Perro (jerarquía correcta)</div>
+    </div>
+    <div class="error-card bad">
+      <div class="error-badge badge-bad">Error #4</div>
+      <h4>Palabras de enlace vagas</h4>
+      <p>Usar "tiene relación con", "se relaciona con" o "es parte de todo" no dice nada específico.</p>
+      <div class="error-example ex-bad">Calor "tiene relación con" evaporación</div>
+      <div class="error-example ex-good">Calor "provoca la" evaporación</div>
+    </div>
+    <div class="error-card bad">
+      <div class="error-badge badge-bad">Error #5</div>
+      <h4>Oraciones completas en los nodos</h4>
+      <p>Un concepto debe ser una palabra o frase muy corta, no una oración. Las oraciones van en la proposición (nodo + enlace + nodo).</p>
+      <div class="error-example ex-bad">["La fotosíntesis es el proceso por el cual las plantas producen su alimento"]</div>
+      <div class="error-example ex-good">["Fotosíntesis"] —es— ["proceso de producción de alimento"]</div>
+    </div>
+    <div class="error-card good">
+      <div class="error-badge badge-good">Buena práctica</div>
+      <h4>Leer el mapa en voz alta</h4>
+      <p>Antes de entregar, recorre cada conexión leyendo: Concepto A + enlace + Concepto B. Si suena como una oración verdadera, está bien. Si suena raro, hay que ajustar.</p>
+      <div class="error-example ex-good">"La planta realiza fotosíntesis usando luz solar" ✓</div>
+    </div>
+    <div class="error-card good">
+      <div class="error-badge badge-good">Buena práctica</div>
+      <h4>Buscar activamente enlaces cruzados</h4>
+      <p>Al terminar el mapa, revisar deliberadamente si algún concepto de una rama se conecta con otra. Esos cruces son señal de comprensión profunda.</p>
+      <div class="error-example ex-good">Preguntarse: ¿algún concepto de la rama A afecta a alguno de la rama B?</div>
+    </div>
+    <div class="error-card good">
+      <div class="error-badge badge-good">Buena práctica</div>
+      <h4>Usar post-its al hacer el borrador</h4>
+      <p>Hacer el primer borrador con post-its permite mover conceptos libremente, reorganizar la jerarquía y descubrir la mejor estructura antes de dibujar el mapa final.</p>
+      <div class="error-example ex-good">Borrador en papel → versión final limpia o digital</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ RÚBRICA -->
+<section class="section" id="sec-rubrica">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div class="section-title-wrap">
+      <h2>Rúbrica de evaluación</h2>
+      <p>Criterios para calificar un mapa conceptual</p>
+    </div>
+  </div>
+
+  <div class="rubrica-wrap">
+    <table class="rubrica-table">
+      <thead>
+        <tr>
+          <th style="width:22%;">Criterio</th>
+          <th>Excelente (4)</th>
+          <th>Bueno (3)</th>
+          <th>Suficiente (2)</th>
+          <th>Insuficiente (1)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jerarquía y estructura</td>
+          <td>Jerarquía clara y correcta. Concepto central bien definido. Al menos 3 niveles bien diferenciados.</td>
+          <td>Jerarquía generalmente correcta con algún concepto fuera de lugar.</td>
+          <td>Jerarquía parcial o poco clara. Difícil distinguir niveles.</td>
+          <td>Sin jerarquía. Estructura de lista o cadena.</td>
+        </tr>
+        <tr>
+          <td>Palabras de enlace</td>
+          <td>Todas las conexiones tienen palabras de enlace específicas y precisas que generan proposiciones válidas.</td>
+          <td>La mayoría tiene enlace. Alguna vaga ("tiene relación con").</td>
+          <td>Menos de la mitad tiene enlace o son todas vagas.</td>
+          <td>Sin palabras de enlace. Solo flechas vacías.</td>
+        </tr>
+        <tr>
+          <td>Proposiciones</td>
+          <td>Todas las proposiciones son correctas, verdaderas y con sentido al leerlas.</td>
+          <td>La mayoría correctas. Alguna imprecisa o confusa.</td>
+          <td>Varias proposiciones incorrectas o sin sentido.</td>
+          <td>No se forman proposiciones coherentes.</td>
+        </tr>
+        <tr>
+          <td>Cobertura del tema</td>
+          <td>Incluye todos los conceptos clave del tema con ejemplos concretos.</td>
+          <td>Incluye los conceptos principales, faltan algunos detalles.</td>
+          <td>Incluye conceptos superficiales. Falta profundidad.</td>
+          <td>Muy incompleto. Faltan conceptos centrales.</td>
+        </tr>
+        <tr>
+          <td>Enlaces cruzados</td>
+          <td>Al menos 2 enlaces cruzados válidos que muestran relaciones complejas.</td>
+          <td>Un enlace cruzado válido.</td>
+          <td>Intento de enlace cruzado pero incorrecto o forzado.</td>
+          <td>Sin enlaces cruzados.</td>
+        </tr>
+        <tr>
+          <td>Pregunta de enfoque</td>
+          <td>Pregunta clara, delimitada. El mapa la responde completamente.</td>
+          <td>Pregunta presente. El mapa la responde parcialmente.</td>
+          <td>Pregunta vaga o el mapa no la responde bien.</td>
+          <td>Sin pregunta de enfoque.</td>
+        </tr>
+        <tr>
+          <td>Presentación</td>
+          <td>Legible, organizado, nodos claramente diferenciados, flechas con dirección.</td>
+          <td>Generalmente legible, alguna zona confusa.</td>
+          <td>Difícil de leer. Flechas sin dirección clara.</td>
+          <td>Ilegible o desordenado.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:1rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;">
+    <div>
+      <p style="font-size:13px;font-family:var(--mono);color:var(--ink-faint);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.25rem;">Puntuación máxima</p>
+      <p style="font-size:2rem;font-family:var(--serif);font-weight:700;color:var(--teal);">28 puntos</p>
+    </div>
+    <div style="flex:1;min-width:200px;">
+      <p style="font-size:13px;color:var(--ink-muted);line-height:1.6;">Suma los puntos de los 7 criterios. <strong style="color:var(--ink);">24–28: Excelente.</strong> <strong style="color:var(--ink);">18–23: Bueno.</strong> <strong style="color:var(--ink);">12–17: Suficiente.</strong> <strong style="color:var(--ink);">Menos de 12: Insuficiente.</strong> Comparte esta rúbrica con tus estudiantes antes de que empiecen para que sepan exactamente qué se espera de ellos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ CHECKLIST -->
+<section class="section" id="sec-checklist">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <div class="section-title-wrap">
+      <h2>Lista de verificación</h2>
+      <p>Revisa tu mapa antes de entregarlo — haz clic para marcar</p>
+    </div>
+  </div>
+
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill"></div></div>
+  <p class="progress-label"><span id="progress-text">0</span> de 12 criterios cumplidos</p>
+
+  <div class="checklist card" id="checklist-wrap">
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Escribí una pregunta de enfoque que delimita el tema del mapa</div><div class="check-cat">estructura</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">El concepto más general está en la parte superior o al centro del mapa</div><div class="check-cat">jerarquía</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Se pueden distinguir claramente al menos 3 niveles (general → secundario → específico)</div><div class="check-cat">jerarquía</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">El mapa tiene al menos 15 conceptos relevantes al tema</div><div class="check-cat">cobertura</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Todos los conceptos están encerrados en un óvalo o rectángulo</div><div class="check-cat">forma</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Todas las líneas tienen palabras de enlace escritas encima o al lado</div><div class="check-cat">proposiciones</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Leí en voz alta cada proposición (A + enlace + B) y todas tienen sentido completo</div><div class="check-cat">proposiciones</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Las palabras de enlace son específicas (no solo "tiene relación con" o "es parte de")</div><div class="check-cat">proposiciones</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Hay al menos un enlace cruzado válido entre ramas distintas del mapa</div><div class="check-cat">complejidad</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Los nodos terminales (últimos de cada rama) incluyen ejemplos concretos</div><div class="check-cat">cobertura</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">Las flechas tienen una dirección de lectura clara (de arriba hacia abajo o indicada con punta)</div><div class="check-cat">presentación</div></div>
+    </div>
+
+    <div class="check-row" onclick="toggleCheck(this)">
+      <div class="check-box-ui"><svg width="12" height="10" viewBox="0 0 12 10"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div><div class="check-label">El mapa responde la pregunta de enfoque que escribí al principio</div><div class="check-cat">coherencia</div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ GLOSARIO -->
+<section class="section" id="sec-glosario">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title-wrap">
+      <h2>Glosario de términos</h2>
+      <p>Vocabulario clave para hablar de mapas conceptuales con precisión</p>
+    </div>
+  </div>
+
+  <div class="glosario-grid">
+    <div class="glosario-item">
+      <div class="glosario-term">concepto</div>
+      <div class="glosario-def">Regularidad percibida en eventos u objetos designada por una etiqueta (palabra). Va siempre encerrado en un óvalo o rectángulo en el mapa.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">palabra de enlace</div>
+      <div class="glosario-def">Palabra o frase corta que va sobre la línea de conexión entre dos conceptos. Especifica el tipo de relación y permite construir proposiciones.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">proposición</div>
+      <div class="glosario-def">Unidad semántica formada por dos conceptos unidos por una palabra de enlace. Es la unidad mínima de significado de un mapa conceptual.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">jerarquía</div>
+      <div class="glosario-def">Organización de los conceptos desde los más generales e inclusivos (arriba) hasta los más específicos y concretos (abajo).</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">enlace cruzado</div>
+      <div class="glosario-def">Línea que conecta conceptos pertenecientes a distintas ramas jerárquicas del mapa. Indica relaciones complejas y pensamiento integrador.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">nodo</div>
+      <div class="glosario-def">Cada uno de los conceptos del mapa representado por una figura geométrica (óvalo, rectángulo, etc.).</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">pregunta de enfoque</div>
+      <div class="glosario-def">Pregunta que delimita el problema o tema que el mapa conceptual debe responder. Orienta la selección y organización de conceptos.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">aprendizaje significativo</div>
+      <div class="glosario-def">Teoría de Ausubel según la cual el conocimiento nuevo se aprende relacionándolo con conocimiento ya existente. Los mapas conceptuales fueron creados para facilitar este tipo de aprendizaje.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">concepto supraordinado</div>
+      <div class="glosario-def">Concepto de mayor nivel de generalidad que incluye o engloba a otros. Ocupa los niveles superiores de la jerarquía.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">concepto subordinado</div>
+      <div class="glosario-def">Concepto más específico que se encuentra bajo otro más general en la jerarquía. Son los ejemplos, características o instancias de un concepto más amplio.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">diferenciación progresiva</div>
+      <div class="glosario-def">Principio según el cual los conceptos más generales se presentan primero y luego se especifican progresivamente. Refleja la estructura jerárquica del mapa.</div>
+    </div>
+    <div class="glosario-item">
+      <div class="glosario-term">reconciliación integradora</div>
+      <div class="glosario-def">Proceso de reconocer y expresar relaciones entre conceptos previamente aprendidos como distintos. Los enlaces cruzados son la expresión visual de este proceso.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════ FOOTER -->
+<footer class="footer">
+  <p><strong>Guía de Mapas Conceptuales</strong> — Material didáctico para estudiantes</p>
+  <p style="margin-top:.4rem;">Basado en la metodología de Joseph D. Novak y la teoría del aprendizaje significativo de David Ausubel</p>
+</footer>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleCheck(row) {
+    row.classList.toggle('done');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const total = document.querySelectorAll('.check-row').length;
+    const done  = document.querySelectorAll('.check-row.done').length;
+    const pct   = Math.round((done / total) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = done;
+  }
+</script>
+
+</body>
+</html>

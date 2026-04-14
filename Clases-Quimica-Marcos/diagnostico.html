@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico — Química · Estudiante de Altas Competencias</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --ink: #1A1814;
+    --ink2: #5A5650;
+    --ink3: #9A968F;
+    --accent: #2B5CE6;
+    --accent-light: #EAF0FD;
+    --accent-mid: #B8CCFA;
+    --teal: #0D7A5E;
+    --teal-light: #E0F3EE;
+    --amber: #B35A00;
+    --amber-light: #FEF0E0;
+    --coral: #C4391A;
+    --coral-light: #FDEAE5;
+    --purple: #5B35C2;
+    --purple-light: #EEEAFC;
+    --border: rgba(26,24,20,0.1);
+    --border-strong: rgba(26,24,20,0.2);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  /* HEADER */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .header-meta {
+    font-size: 12px;
+    color: var(--ink3);
+    font-weight: 400;
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 57px;
+    z-index: 99;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .progress-label {
+    font-size: 11px;
+    color: var(--ink3);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* INTRO */
+  .intro-hero {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+  }
+
+  .intro-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent-mid);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+  }
+
+  .intro-badge svg { width: 13px; height: 13px; }
+
+  .intro-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .intro-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .intro-desc {
+    font-size: 15px;
+    color: var(--ink2);
+    max-width: 520px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .intro-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 500px) {
+    .intro-cards { grid-template-columns: 1fr; }
+  }
+
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .intro-card-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .intro-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .intro-card-sub {
+    font-size: 11px;
+    color: var(--ink3);
+  }
+
+  .docente-note {
+    background: var(--accent-light);
+    border: 1px solid var(--accent-mid);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--ink2);
+    line-height: 1.6;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+
+  .docente-note strong { color: var(--accent); font-weight: 600; }
+
+  /* SECTION */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* QUESTION */
+  .q-block {
+    margin-bottom: 2rem;
+  }
+
+  .q-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+
+  .q-hint {
+    font-size: 12px;
+    color: var(--ink3);
+    margin-bottom: 12px;
+  }
+
+  /* PILLS */
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pill {
+    border: 1px solid var(--border-strong);
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--ink2);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 400;
+  }
+
+  .pill:hover {
+    background: var(--surface2);
+    color: var(--ink);
+    border-color: var(--border-strong);
+  }
+
+  .pill.sel {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* CARDS */
+  .card-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 12px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card.sel {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-mid);
+  }
+
+  .card-icon { font-size: 22px; margin-bottom: 6px; }
+
+  .card-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+
+  .card-sub { font-size: 11px; color: var(--ink3); }
+  .card.sel .card-label { color: var(--accent); }
+
+  /* SCALE */
+  .scale-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .scale-row { display: flex; gap: 8px; }
+
+  .scale-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--ink2);
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .scale-btn:hover { background: var(--surface2); color: var(--ink); }
+
+  .scale-btn.sel {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    font-weight: 600;
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--ink3);
+    width: calc(5 * 44px + 4 * 8px);
+    max-width: 100%;
+  }
+
+  /* TEXTAREA */
+  .q-text {
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    background: var(--surface);
+    resize: vertical;
+    min-height: 90px;
+    outline: none;
+    transition: border-color 0.15s;
+    line-height: 1.6;
+  }
+
+  .q-text:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+  .q-text::placeholder { color: var(--ink3); }
+
+  /* NAVIGATION */
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .btn {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    padding: 10px 22px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--surface);
+    color: var(--ink2);
+  }
+
+  .btn:hover { background: var(--surface2); color: var(--ink); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .btn-primary:hover { background: #1E48CC; border-color: #1E48CC; }
+
+  .btn-ghost { visibility: hidden; }
+
+  .step-ind { font-size: 12px; color: var(--ink3); font-weight: 500; }
+
+  /* ——— RESULTS ——— */
+  .result-hero {
+    padding: 2.5rem 0 2rem;
+    text-align: center;
+  }
+
+  .result-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(24px, 4vw, 34px);
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
+  }
+
+  .result-date { font-size: 13px; color: var(--ink3); }
+
+  .profile-card {
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 1.25rem;
+    border: 1px solid;
+  }
+
+  .profile-card.investigador { background: var(--accent-light); border-color: var(--accent-mid); }
+  .profile-card.creativo { background: var(--purple-light); border-color: #CEC7F5; }
+  .profile-card.sistemico { background: var(--teal-light); border-color: #9EE1CC; }
+  .profile-card.curioso { background: var(--amber-light); border-color: #F9C96F; }
+
+  .profile-emoji { font-size: 32px; margin-bottom: 10px; }
+
+  .profile-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .investigador .profile-name { color: var(--accent); }
+  .creativo .profile-name { color: var(--purple); }
+  .sistemico .profile-name { color: var(--teal); }
+  .curioso .profile-name { color: var(--amber); }
+
+  .profile-desc { font-size: 13px; color: var(--ink2); line-height: 1.7; }
+
+  .result-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow);
+  }
+
+  .rs-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dim-bar { margin-bottom: 12px; }
+
+  .dim-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--ink2);
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .bar-track {
+    height: 7px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 7px;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 3px 3px 3px 0;
+  }
+
+  .tag-blue { background: var(--accent-light); color: var(--accent); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+  .tag-amber { background: var(--amber-light); color: var(--amber); }
+  .tag-coral { background: var(--coral-light); color: var(--coral); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+
+  .reco-list { list-style: none; padding: 0; }
+  .reco-list li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    font-size: 13px;
+    color: var(--ink2);
+    border-bottom: 1px solid var(--border);
+    line-height: 1.6;
+  }
+
+  .reco-list li:last-child { border-bottom: none; }
+
+  .reco-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .open-q {
+    padding: 10px 14px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .open-q-label { font-size: 11px; font-weight: 600; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .open-q-val { font-size: 13px; color: var(--ink); line-height: 1.6; }
+
+  .disclaimer {
+    background: var(--surface2);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 12px;
+    color: var(--ink3);
+    line-height: 1.6;
+    margin-top: 1rem;
+  }
+
+  .disclaimer strong { color: var(--ink2); font-weight: 500; }
+
+  .result-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 10px 22px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-outline:hover { background: var(--accent-light); }
+
+  @media print {
+    .site-header, .progress-wrap, .result-actions, .nav-bar, #screen-intro, #screen-diag { display: none !important; }
+    body { background: white; }
+    .result-section { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    .profile-card { break-inside: avoid; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .anim { animation: fadeUp 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">quím<span>·</span>ica</div>
+  <div class="header-meta">Instrumento diagnóstico · Química</div>
+</header>
+
+<div class="progress-wrap" id="progress-wrap" style="display:none">
+  <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <span class="progress-label" id="progress-label">Paso 1 de 5</span>
+</div>
+
+<div class="page">
+
+  <!-- ===== INTRO ===== -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-hero anim">
+      <div class="intro-badge">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a.5.5 0 0 1 .5.5v.793l2.146 2.147a.5.5 0 0 1-.708.708L8.5 3.707v.086c1.347.47 2.5 1.8 2.5 3.457 0 1.93-1.343 3.5-3 3.5S5 9.18 5 7.25c0-1.657 1.153-2.987 2.5-3.457v-.086L6.062 5.148a.5.5 0 1 1-.708-.708L7.5 2.293V1.5A.5.5 0 0 1 8 1z"/></svg>
+        Chile · 4° Básico
+      </div>
+      <h1 class="intro-title">Diagnóstico de intereses<br>en <em>química</em></h1>
+      <p class="intro-desc">Este instrumento permite identificar el perfil del estudiante para planificar un trabajo semestral personalizado, ajustado a sus capacidades, intereses y estilo cognitivo.</p>
+      <div class="intro-cards">
+        <div class="intro-card">
+          <div class="intro-card-icon">🔍</div>
+          <div class="intro-card-title">Intereses temáticos</div>
+          <div class="intro-card-sub">¿Qué áreas le llaman más?</div>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-icon">🧠</div>
+          <div class="intro-card-title">Estilo cognitivo</div>
+          <div class="intro-card-sub">¿Cómo aprende y procesa?</div>
+        </div>
+        <div class="intro-card">
+          <div class="intro-card-icon">⚡</div>
+          <div class="intro-card-title">Nivel de desafío</div>
+          <div class="intro-card-sub">¿Qué profundidad alcanzar?</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="startDiag()">Comenzar diagnóstico →</button>
+    </div>
+  </div>
+
+  <!-- ===== DIAGNOSTIC ===== -->
+  <div class="screen" id="screen-diag">
+    <div style="padding-top:1.5rem" id="step-content"></div>
+    <div class="nav-bar">
+      <button class="btn" id="btn-back" onclick="goBack()">← Anterior</button>
+      <span class="step-ind" id="step-ind"></span>
+      <button class="btn btn-primary" id="btn-next" onclick="goNext()">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- ===== RESULTS ===== -->
+  <div class="screen" id="screen-result">
+    <div class="result-hero anim">
+      <h1 class="result-title">Perfil del estudiante</h1>
+      <p class="result-date" id="res-fecha"></p>
+    </div>
+    <div id="result-content"></div>
+    <div class="result-actions">
+      <button class="btn-outline" onclick="window.print()">Imprimir / Guardar PDF</button>
+      <button class="btn btn-primary" onclick="reiniciar()">Realizar nuevo diagnóstico</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const steps = [
+  {
+    section: "Sección 1 de 5 — Contexto y motivación",
+    questions: [
+      {
+        id: "origen",
+        type: "pills",
+        multi: true,
+        label: "¿Cómo surgió el interés del estudiante por la química?",
+        hint: "Puede seleccionar más de una si aplica",
+        options: ["Un experimento que vio o hizo","Un libro, documental o video","Por curiosidad propia","Por un familiar o conocido","Un juego o videojuego","Otro motivo"]
+      },
+      {
+        id: "tiempo",
+        type: "pills",
+        multi: false,
+        label: "¿Hace cuánto tiempo muestra interés en temas de ciencias o química?",
+        options: ["Menos de 6 meses","Entre 6 meses y 1 año","Entre 1 y 2 años","Más de 2 años","Siempre ha sido curioso/a"]
+      },
+      {
+        id: "motivacion_abierta",
+        type: "text",
+        label: "¿Qué es lo que más le gusta o le da curiosidad de la química o las ciencias?",
+        hint: "Si el estudiante puede escribirlo él mismo, mejor. Espacio libre sin guía."
+      }
+    ]
+  },
+  {
+    section: "Sección 2 de 5 — Áreas de interés temático",
+    questions: [
+      {
+        id: "temas",
+        type: "cards",
+        multi: true,
+        label: "¿Cuáles de estos temas le parecen más interesantes? (puede elegir varios)",
+        options: [
+          {icon:"🔥",label:"Reacciones y explosiones",sub:"Cómo cambian las cosas"},
+          {icon:"🧬",label:"Átomos y moléculas",sub:"Los bloques del universo"},
+          {icon:"🧪",label:"Mezclas y experimentos",sub:"Laboratorio"},
+          {icon:"💊",label:"Medicamentos y venenos",sub:"Química de la vida"},
+          {icon:"🌊",label:"Agua y el medioambiente",sub:"Química ecológica"},
+          {icon:"🍕",label:"Cocina y alimentos",sub:"Química cotidiana"},
+          {icon:"💎",label:"Materiales y cristales",sub:"Minerales y metales"},
+          {icon:"🚀",label:"Cohetes y combustibles",sub:"Propulsión y energía"},
+          {icon:"⚡",label:"Electricidad y baterías",sub:"Electroquímica"},
+          {icon:"🌡️",label:"Estados de la materia",sub:"Sólido, líquido, gas"}
+        ]
+      },
+      {
+        id: "pregunta_favorita",
+        type: "text",
+        label: "¿Cuál es la pregunta de ciencias que más le gustaría responder en su vida?",
+        hint: "No hay respuesta incorrecta. Esta pregunta revela el tipo de pensador/a que es el estudiante."
+      }
+    ]
+  },
+  {
+    section: "Sección 3 de 5 — Estilo de aprendizaje",
+    questions: [
+      {
+        id: "aprende_mejor",
+        type: "cards",
+        multi: false,
+        label: "¿Cómo aprende mejor el estudiante?",
+        options: [
+          {icon:"🤲",label:"Haciendo experimentos",sub:"Aprender con las manos"},
+          {icon:"📚",label:"Leyendo y estudiando",sub:"Libros y artículos"},
+          {icon:"👀",label:"Viendo videos y demos",sub:"Visual y audiovisual"},
+          {icon:"💬",label:"Hablando y preguntando",sub:"Diálogo y discusión"},
+          {icon:"🧩",label:"Resolviendo problemas",sub:"Desafíos y retos"}
+        ]
+      },
+      {
+        id: "persistencia",
+        type: "scale",
+        min: 1, max: 5,
+        label: "Cuando algo no le sale o no entiende algo difícil, ¿qué suele hacer?",
+        hint: "1 = se frustra fácilmente · 5 = insiste hasta entender",
+        labelMin: "Se frustra rápido",
+        labelMax: "Insiste hasta lograrlo"
+      },
+      {
+        id: "profundidad_amplitud",
+        type: "scale",
+        min: 1, max: 5,
+        label: "¿El estudiante prefiere saber un poco de muchas cosas o mucho de pocas?",
+        hint: "1 = explorar variado y amplio · 5 = profundizar un solo tema",
+        labelMin: "Explorar mucho y variado",
+        labelMax: "Profundizar un solo tema"
+      },
+      {
+        id: "abstract",
+        type: "pills",
+        multi: false,
+        label: "Ante una explicación difícil o abstracta, el estudiante...",
+        options: [
+          "Se aburre si no hay algo concreto que ver o tocar",
+          "Le interesa entender aunque sea difícil",
+          "Prefiere primero lo práctico y luego la teoría",
+          "Propone sus propias hipótesis o explicaciones"
+        ]
+      }
+    ]
+  },
+  {
+    section: "Sección 4 de 5 — Indicadores de altas competencias",
+    questions: [
+      {
+        id: "pensamiento_complejo",
+        type: "text",
+        label: "¿Ha hecho alguna vez una pregunta que te haya sorprendido por su profundidad?",
+        hint: "Escribe un ejemplo concreto si recuerdas alguno. Este es uno de los indicadores más valiosos del instrumento."
+      },
+      {
+        id: "conexiones",
+        type: "pills",
+        multi: false,
+        label: "¿El estudiante relaciona ideas de distintas áreas? (ej. química con historia, cocina, películas)",
+        options: ["Sí, constantemente","A veces","Raramente","No lo he observado"]
+      },
+      {
+        id: "vocabulario",
+        type: "pills",
+        multi: false,
+        label: "¿Cómo describirías su vocabulario científico?",
+        options: [
+          "Usa términos técnicos correctamente de forma espontánea",
+          "Entiende términos técnicos cuando los escucha",
+          "Usa vocabulario básico apropiado para su edad",
+          "Todavía está desarrollando su vocabulario científico"
+        ]
+      },
+      {
+        id: "metacognicion",
+        type: "pills",
+        multi: false,
+        label: "¿Muestra consciencia de cómo aprende? (ej. \"no entiendo esto, necesito verlo de otra forma\")",
+        options: ["Sí, con frecuencia","A veces","Raramente","No lo he observado"]
+      },
+      {
+        id: "nivel_desafio",
+        type: "scale",
+        min: 1, max: 5,
+        label: "¿Qué nivel de desafío académico crees que es adecuado para él/ella vs. sus pares de 4° básico?",
+        hint: "1 = nivel estándar de su curso · 5 = muy por encima del curso",
+        labelMin: "Nivel estándar 4° básico",
+        labelMax: "Muy por encima"
+      }
+    ]
+  },
+  {
+    section: "Sección 5 de 5 — Expectativas y contexto",
+    questions: [
+      {
+        id: "objetivo_familia",
+        type: "pills",
+        multi: true,
+        label: "¿Cuál es el principal objetivo de la familia con estas clases?",
+        options: [
+          "Cultivar el interés y la pasión",
+          "Prepararlo/a para cuando vea química en el colegio",
+          "Estimular su potencial académico",
+          "Que aprenda con rigor y profundidad real",
+          "Que tenga una experiencia divertida y motivadora"
+        ]
+      },
+      {
+        id: "disponibilidad",
+        type: "pills",
+        multi: false,
+        label: "¿Cuántas horas a la semana se podrían dedicar a estas clases?",
+        options: ["1 hora semanal","2 horas semanales","3 horas semanales","Más de 3 horas","Variable según semana"]
+      },
+      {
+        id: "recursos",
+        type: "pills",
+        multi: true,
+        label: "¿Con qué recursos se cuenta para los experimentos?",
+        options: [
+          "Materiales caseros básicos",
+          "Presupuesto para comprar insumos",
+          "Kit o laboratorio básico en casa",
+          "Acceso a biblioteca o libros especializados",
+          "Solo recursos digitales / online"
+        ]
+      },
+      {
+        id: "notas_finales",
+        type: "text",
+        label: "¿Hay algo más relevante sobre el estudiante para planificar el semestre?",
+        hint: "Contexto familiar, habilidades en otras áreas, experiencias previas, características personales..."
+      }
+    ]
+  }
+];
+
+let currentStep = 0;
+let answers = {};
+
+function startDiag() {
+  document.getElementById('screen-intro').classList.remove('active');
+  document.getElementById('screen-diag').classList.add('active');
+  document.getElementById('progress-wrap').style.display = 'flex';
+  renderStep();
+}
+
+function renderStep() {
+  const s = steps[currentStep];
+  const total = steps.length;
+  const pct = ((currentStep) / total * 100).toFixed(0);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = 'Paso ' + (currentStep+1) + ' de ' + total;
+  document.getElementById('step-ind').textContent = (currentStep+1) + ' / ' + total;
+  const back = document.getElementById('btn-back');
+  back.className = currentStep === 0 ? 'btn btn-ghost' : 'btn';
+  document.getElementById('btn-next').textContent = currentStep === total-1 ? 'Ver perfil del estudiante →' : 'Siguiente →';
+
+  let html = '<div class="section-label anim">' + s.section + '</div>';
+  s.questions.forEach(q => {
+    html += '<div class="q-block anim">';
+    html += '<div class="q-label">' + q.label + '</div>';
+    if (q.hint) html += '<div class="q-hint">' + q.hint + '</div>';
+    const saved = answers[q.id];
+    if (q.type === 'pills') {
+      html += '<div class="pill-row">';
+      q.options.forEach(opt => {
+        const sel = saved ? (Array.isArray(saved) ? saved.includes(opt) : saved === opt) : false;
+        html += '<button class="pill' + (sel?' sel':'') + '" onclick="togglePill(this,\''+q.id+'\','+!!q.multi+')">' + opt + '</button>';
+      });
+      html += '</div>';
+    } else if (q.type === 'cards') {
+      html += '<div class="card-row">';
+      q.options.forEach(opt => {
+        const lbl = opt.label;
+        const sel = saved ? (Array.isArray(saved) ? saved.includes(lbl) : saved === lbl) : false;
+        html += '<button class="card'+(sel?' sel':'')+'" onclick="toggleCard(this,\''+q.id+'\','+!!q.multi+')">'
+          + '<div class="card-icon">'+opt.icon+'</div>'
+          + '<div class="card-label">'+opt.label+'</div>'
+          + '<div class="card-sub">'+opt.sub+'</div>'
+          + '</button>';
+      });
+      html += '</div>';
+    } else if (q.type === 'scale') {
+      html += '<div class="scale-wrap"><div class="scale-row">';
+      for (let i = q.min; i <= q.max; i++) {
+        const sel = saved == i;
+        html += '<button class="scale-btn'+(sel?' sel':'')+'" onclick="selectScale(this,\''+q.id+'\','+i+')">'+i+'</button>';
+      }
+      html += '</div><div class="scale-labels"><span>'+q.labelMin+'</span><span>'+q.labelMax+'</span></div></div>';
+    } else if (q.type === 'text') {
+      const val = (saved||'').replace(/"/g,'&quot;');
+      html += '<textarea class="q-text" placeholder="Escribe aquí..." oninput="saveText(this,\''+q.id+'\')">' + (saved||'') + '</textarea>';
+    }
+    html += '</div>';
+  });
+
+  document.getElementById('step-content').innerHTML = html;
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function togglePill(el, qid, multi) {
+  if (multi) {
+    el.classList.toggle('sel');
+    answers[qid] = Array.from(el.parentElement.querySelectorAll('.pill.sel')).map(b => b.textContent.trim());
+  } else {
+    el.parentElement.querySelectorAll('.pill').forEach(b => b.classList.remove('sel'));
+    el.classList.add('sel');
+    answers[qid] = el.textContent.trim();
+  }
+}
+
+function toggleCard(el, qid, multi) {
+  if (multi) {
+    el.classList.toggle('sel');
+    answers[qid] = Array.from(el.parentElement.querySelectorAll('.card.sel')).map(b => b.querySelector('.card-label').textContent.trim());
+  } else {
+    el.parentElement.querySelectorAll('.card').forEach(b => b.classList.remove('sel'));
+    el.classList.add('sel');
+    answers[qid] = el.querySelector('.card-label').textContent.trim();
+  }
+}
+
+function selectScale(el, qid, val) {
+  el.parentElement.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  answers[qid] = val;
+}
+
+function saveText(el, qid) { answers[qid] = el.value; }
+
+function goNext() {
+  if (currentStep < steps.length - 1) { currentStep++; renderStep(); }
+  else showResults();
+}
+
+function goBack() {
+  if (currentStep > 0) { currentStep--; renderStep(); }
+}
+
+function reiniciar() {
+  answers = {}; currentStep = 0;
+  document.getElementById('screen-result').classList.remove('active');
+  document.getElementById('screen-intro').classList.add('active');
+  document.getElementById('progress-wrap').style.display = 'none';
+  document.getElementById('progress-fill').style.width = '0%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function computeProfile() {
+  let inv=0, cre=0, sis=0, cur=0;
+  const t = answers['temas']||[];
+  if (t.includes('Átomos y moléculas')||t.includes('Mezclas y experimentos')) inv+=2;
+  if (t.includes('Reacciones y explosiones')||t.includes('Cohetes y combustibles')) cre+=2;
+  if (t.includes('Materiales y cristales')||t.includes('Electricidad y baterías')) sis+=2;
+  if (t.includes('Cocina y alimentos')||t.includes('Medicamentos y venenos')) cur+=2;
+  const e = answers['aprende_mejor']||'';
+  if (e==='Leyendo y estudiando'||e==='Resolviendo problemas') inv++;
+  if (e==='Haciendo experimentos') cre++;
+  if (e==='Viendo videos y demos'||e==='Hablando y preguntando') cur++;
+  if ((answers['conexiones']||'')==='Sí, constantemente') { inv++; cur++; }
+  const v = answers['vocabulario']||'';
+  if (v.includes('espontánea')) inv+=2;
+  if ((answers['metacognicion']||'')==='Sí, con frecuencia') inv++;
+  const p = answers['persistencia']||3;
+  if (p>=4) { inv++; sis++; }
+  const d = answers['profundidad_amplitud']||3;
+  if (d>=4) sis+=2;
+  if (d<=2) cur+=2;
+  const m = Math.max(inv,cre,sis,cur);
+  if (m===inv) return 'investigador';
+  if (m===cre) return 'creativo';
+  if (m===sis) return 'sistemico';
+  return 'curioso';
+}
+
+function computeDims() {
+  const nd = answers['nivel_desafio']||3;
+  const pe = answers['persistencia']||3;
+  const v = answers['vocabulario']||'';
+  const me = answers['metacognicion']||'';
+  const co = answers['conexiones']||'';
+  let vs=1; if(v.includes('espontánea'))vs=5; else if(v.includes('Entiende'))vs=3; else if(v.includes('básico'))vs=2;
+  let ms=1; if(me==='Sí, con frecuencia')ms=5; else if(me==='A veces')ms=3;
+  let cs=1; if(co==='Sí, constantemente')cs=5; else if(co==='A veces')cs=3;
+  return {
+    'Nivel de desafío percibido': Math.round(nd*20),
+    'Persistencia ante dificultad': Math.round(pe*20),
+    'Vocabulario científico': Math.round(vs*20),
+    'Pensamiento conexionista': Math.round(cs*20),
+    'Metacognición': Math.round(ms*20)
+  };
+}
+
+const profiles = {
+  investigador: {
+    emoji:'🔬', nombre:'Perfil Investigador/a',
+    desc:'Este estudiante muestra una orientación hacia la comprensión profunda y el rigor. Disfruta entender el "por qué" detrás de los fenómenos, tiende a persistir ante la dificultad y posiblemente usa vocabulario técnico de forma espontánea. Responde muy bien a desafíos que requieran razonamiento y análisis.',
+    reco:['Incluir lectura de divulgación científica real (Feynman adaptado, National Geographic, etc.)','Introducir notación y lenguaje científico formal de forma gradual y progresiva','Plantear preguntas abiertas de investigación: "¿qué pasaría si...?"','Diseñar experimentos con hipótesis, variables y registro de datos','Explorar la química desde sus fundamentos: ¿qué es realmente un átomo?']
+  },
+  creativo: {
+    emoji:'🎨', nombre:'Perfil Explorador/a Creativo/a',
+    desc:'Este estudiante aprende mejor cuando puede hacer, crear y experimentar. La química le resulta fascinante en su dimensión visual y transformadora. Es probable que invente sus propias hipótesis y disfrute de los resultados inesperados. Necesita variedad y estímulo constante para mantenerse comprometido.',
+    reco:['Comenzar con experimentos espectaculares y seguros que generen asombro visual','Conectar la química con arte, cocina o tecnología cotidiana','Permitirle diseñar sus propios experimentos (con guía y estructura)','Usar el error como herramienta positiva de aprendizaje y descubrimiento','Diseñar proyectos de mediana duración con resultado tangible y visible']
+  },
+  sistemico: {
+    emoji:'⚙️', nombre:'Perfil Sistémico/Analítico',
+    desc:'Este estudiante tiende a profundizar en un tema antes de pasar al siguiente. Aprecia las estructuras, los patrones y la lógica interna de los fenómenos. Probablemente es muy ordenado en su forma de procesar información y disfruta entender cómo encajan las piezas de un sistema.',
+    reco:['Presentar la química con estructura progresiva y muy clara desde el inicio','Usar mapas conceptuales, tablas y diagramas como herramientas de organización','Introducir la tabla periódica como sistema lógicamente organizado','Plantear ejercicios de clasificación, categorización y comparación','Conectar la química con matemáticas y física básica']
+  },
+  curioso: {
+    emoji:'🌍', nombre:'Perfil Gran Curioso/a',
+    desc:'Este estudiante tiene una curiosidad amplia y voraz: quiere explorar muchos temas y conectar la química con todo lo que le rodea. Su principal motor es el asombro y la pregunta espontánea. Responde muy bien a la química cotidiana y a las conexiones inesperadas con otras disciplinas.',
+    reco:['Partir siempre desde preguntas del mundo real ("¿por qué el cielo es azul?")','Usar la cocina, el cuerpo humano y la naturaleza como laboratorio principal','Apoyarse en documentales, podcasts y divulgación científica accesible','Respetar sus tangentes: si pregunta algo fuera del plan, explorarlo','Dar espacio para que él/ella proponga temas del semestre']
+  }
+};
+
+const dimColors = {
+  'Nivel de desafío percibido':'#2B5CE6',
+  'Persistencia ante dificultad':'#0D7A5E',
+  'Vocabulario científico':'#5B35C2',
+  'Pensamiento conexionista':'#C4391A',
+  'Metacognición':'#B35A00'
+};
+
+function showResults() {
+  document.getElementById('screen-diag').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('res-fecha').textContent = 'Diagnóstico realizado el ' + new Date().toLocaleDateString('es-CL',{year:'numeric',month:'long',day:'numeric'});
+
+  const prof = computeProfile();
+  const pd = profiles[prof];
+  const dims = computeDims();
+  const temas = answers['temas']||[];
+  const origen = answers['origen']||[];
+  const obj = answers['objetivo_familia']||[];
+  const hrs = answers['disponibilidad']||'No especificado';
+  const rec = answers['recursos']||[];
+
+  let html = '';
+
+  // Profile card
+  html += '<div class="profile-card '+prof+' anim"><div class="profile-emoji">'+pd.emoji+'</div>'
+    + '<div class="profile-name">'+pd.nombre+'</div>'
+    + '<div class="profile-desc">'+pd.desc+'</div></div>';
+
+  // Dimensions
+  html += '<div class="result-section anim"><div class="rs-title">Dimensiones del perfil</div>';
+  Object.entries(dims).forEach(([k,v]) => {
+    html += '<div class="dim-bar"><div class="dim-label"><span>'+k+'</span><span>'+v+'%</span></div>'
+      + '<div class="bar-track"><div class="bar-fill" style="width:'+v+'%;background:'+dimColors[k]+'"></div></div></div>';
+  });
+  html += '</div>';
+
+  // Temas
+  if (temas.length) {
+    html += '<div class="result-section anim"><div class="rs-title">Áreas de interés identificadas</div><div>';
+    temas.forEach(t => { html += '<span class="tag tag-blue">'+t+'</span>'; });
+    html += '</div></div>';
+  }
+
+  // Recomendaciones
+  html += '<div class="result-section anim"><div class="rs-title">Recomendaciones pedagógicas para el semestre</div><ul class="reco-list">';
+  pd.reco.forEach(r => { html += '<li>'+r+'</li>'; });
+  html += '</ul></div>';
+
+  // Contexto operativo
+  html += '<div class="result-section anim"><div class="rs-title">Contexto operativo</div>';
+  if (obj.length) { html += '<div style="margin-bottom:10px"><span style="font-size:12px;font-weight:500;color:var(--ink3)">Objetivos familia</span><br>'; obj.forEach(o=>html+='<span class="tag tag-teal">'+o+'</span>'); html+='</div>'; }
+  html += '<div style="margin-bottom:10px"><span style="font-size:12px;font-weight:500;color:var(--ink3)">Disponibilidad</span><br><span class="tag tag-amber">'+hrs+'</span></div>';
+  if (rec.length) { html += '<div><span style="font-size:12px;font-weight:500;color:var(--ink3)">Recursos disponibles</span><br>'; rec.forEach(r=>html+='<span class="tag tag-coral">'+r+'</span>'); html+='</div>'; }
+  html += '</div>';
+
+  // Respuestas abiertas
+  const abiertas = [
+    {id:'motivacion_abierta',label:'¿Qué le gusta de la química?'},
+    {id:'pregunta_favorita',label:'Pregunta favorita de ciencias'},
+    {id:'pensamiento_complejo',label:'Ejemplo de pregunta compleja o sorprendente'},
+    {id:'notas_finales',label:'Notas adicionales del docente'}
+  ].filter(a => answers[a.id] && answers[a.id].trim());
+
+  if (abiertas.length) {
+    html += '<div class="result-section anim"><div class="rs-title">Respuestas abiertas del estudiante / docente</div>';
+    abiertas.forEach(a => {
+      html += '<div class="open-q"><div class="open-q-label">'+a.label+'</div><div class="open-q-val">'+answers[a.id]+'</div></div>';
+    });
+    html += '</div>';
+  }
+
+  // Disclaimer
+  html += '<div class="disclaimer"><strong>Nota interpretativa:</strong> Este instrumento es orientador, no prescriptivo. Las respuestas abiertas tienen más valor diagnóstico que las cerradas. El perfil obtenido es un punto de partida para la conversación pedagógica, no una etiqueta definitiva.</div>';
+
+  document.getElementById('result-content').innerHTML = html;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
