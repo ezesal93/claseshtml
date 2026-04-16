@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolución & Selección Natural — Biología 1° Medio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #1a6b4a;
+  --green-light: #e8f5ee;
+  --green-mid: #3da06e;
+  --green-dark: #0d3d2a;
+  --amber: #c97c1a;
+  --amber-light: #fdf3e3;
+  --blue: #1e5aa0;
+  --blue-light: #e8f0fc;
+  --coral: #c0412b;
+  --coral-light: #fdecea;
+  --purple: #5b3ea6;
+  --purple-light: #eeebfa;
+  --ink: #1a1a1a;
+  --ink-mid: #444;
+  --ink-muted: #777;
+  --ink-faint: #aaa;
+  --paper: #faf9f7;
+  --paper-warm: #f4f1ec;
+  --line: #e0dbd3;
+  --white: #ffffff;
+  --radius: 12px;
+  --radius-sm: 6px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  --shadow-md: 0 4px 32px rgba(0,0,0,0.11);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* ===== HEADER ===== */
+.site-header {
+  background: var(--green-dark);
+  color: white;
+  padding: 3rem 2rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(61,160,110,0.3) 0%, transparent 70%);
+}
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+.header-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 0.6rem;
+}
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: white;
+  margin-bottom: 0.8rem;
+}
+.header-title em {
+  font-style: italic;
+  color: #7edbb0;
+}
+.header-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  max-width: 540px;
+  margin-bottom: 1.8rem;
+}
+.header-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ===== PROGRESS TRACKER ===== */
+.progress-bar-wrap {
+  background: var(--paper-warm);
+  border-bottom: 1px solid var(--line);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+.progress-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.progress-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-muted);
+  white-space: nowrap;
+  letter-spacing: 0.08em;
+}
+.progress-steps {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+.pstep {
+  height: 4px;
+  flex: 1;
+  background: var(--line);
+  border-radius: 2px;
+  transition: background 0.4s ease;
+  cursor: pointer;
+}
+.pstep.done { background: var(--green-mid); }
+.pstep.active { background: var(--green); }
+.progress-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-mid);
+  white-space: nowrap;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ===== STEP NAV ===== */
+.step-nav {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 1.5rem 0 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.2rem;
+}
+.step-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1.5px solid var(--line);
+  background: white;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--ink-mid);
+  transition: all 0.2s;
+  position: relative;
+}
+.step-btn:hover { border-color: var(--green-mid); color: var(--green); }
+.step-btn.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+  font-weight: 500;
+}
+.step-btn .snum {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--line);
+  font-size: 11px;
+  font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-mid);
+  transition: all 0.2s;
+}
+.step-btn.active .snum { background: rgba(255,255,255,0.25); color: white; }
+.step-btn.done-step .snum { background: var(--green-mid); color: white; }
+.step-btn.done-step { border-color: var(--green-mid); color: var(--green); }
+
+/* ===== SECTION ===== */
+.section { display: none; animation: fadeUp 0.4s ease; }
+.section.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTION HEADER ===== */
+.sec-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.sec-kicker {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-mid);
+  margin-bottom: 0.4rem;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.sec-desc {
+  font-size: 15px;
+  color: var(--ink-muted);
+  max-width: 600px;
+}
+
+/* ===== GUIDING QUESTION ===== */
+.guiding-q {
+  background: var(--green-dark);
+  color: white;
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.gq-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.gq-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: #7edbb0;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.gq-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.5;
+  color: white;
+}
+
+/* ===== CARDS ===== */
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  margin-bottom: 1.2rem;
+  box-shadow: var(--shadow);
+}
+.card.accent-green { border-left: 4px solid var(--green-mid); }
+.card.accent-blue { border-left: 4px solid var(--blue); }
+.card.accent-amber { border-left: 4px solid var(--amber); }
+.card.accent-purple { border-left: 4px solid var(--purple); }
+.card.accent-coral { border-left: 4px solid var(--coral); }
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card p { font-size: 14.5px; color: var(--ink-mid); line-height: 1.7; }
+.card p + p { margin-top: 0.6rem; }
+
+/* ===== HIGHLIGHT BOX ===== */
+.highlight {
+  border-radius: var(--radius);
+  padding: 1.3rem 1.5rem;
+  margin: 1.2rem 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+.highlight.green { background: var(--green-light); color: var(--green-dark); border: 1px solid #b3ddc7; }
+.highlight.amber { background: var(--amber-light); color: #5a3500; border: 1px solid #f0c888; }
+.highlight.blue { background: var(--blue-light); color: #0d2f5c; border: 1px solid #b0caf0; }
+.highlight.purple { background: var(--purple-light); color: #2d1e6b; border: 1px solid #c9c0f0; }
+.highlight.coral { background: var(--coral-light); color: #6b1a10; border: 1px solid #f0b0a8; }
+.highlight strong { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.7; }
+
+/* ===== HEADINGS ===== */
+h2.section-h {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 2.2rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--green-light);
+}
+h3.sub-h {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 1.4rem 0 0.5rem;
+}
+p.body { font-size: 15px; color: var(--ink-mid); line-height: 1.75; margin-bottom: 0.9rem; }
+
+/* ===== POSTULATES ===== */
+.postulate-list { display: flex; flex-direction: column; gap: 12px; margin: 1rem 0; }
+.postulate-item {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.post-num {
+  background: var(--green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.post-body { padding: 1rem 1.2rem; }
+.post-title { font-weight: 500; font-size: 15px; margin-bottom: 4px; }
+.post-desc { font-size: 13.5px; color: var(--ink-muted); line-height: 1.6; }
+
+/* ===== EVIDENCE GRID ===== */
+.ev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 1.2rem 0; }
+.ev-card {
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.ev-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.ev-card.green { background: var(--green-light); border: 1px solid #b3ddc7; }
+.ev-card.blue { background: var(--blue-light); border: 1px solid #b0caf0; }
+.ev-card.amber { background: var(--amber-light); border: 1px solid #f0c888; }
+.ev-card.purple { background: var(--purple-light); border: 1px solid #c9c0f0; }
+.ev-icon { font-size: 28px; margin-bottom: 10px; }
+.ev-name { font-weight: 500; font-size: 14px; margin-bottom: 6px; }
+.ev-desc { font-size: 13px; line-height: 1.55; }
+.ev-card.green .ev-name { color: var(--green-dark); }
+.ev-card.green .ev-desc { color: #2a6b4a; }
+.ev-card.blue .ev-name { color: var(--blue); }
+.ev-card.blue .ev-desc { color: #1e4a8a; }
+.ev-card.amber .ev-name { color: #7a4a00; }
+.ev-card.amber .ev-desc { color: #6b4000; }
+.ev-card.purple .ev-name { color: var(--purple); }
+.ev-card.purple .ev-desc { color: #3d2880; }
+
+/* ===== TABLE ===== */
+.bio-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 1.2rem 0;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.bio-table th {
+  background: var(--green-dark);
+  color: white;
+  padding: 11px 14px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 13px;
+}
+.bio-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-mid);
+  line-height: 1.55;
+}
+.bio-table tr:last-child td { border-bottom: none; }
+.bio-table tr:nth-child(even) td { background: var(--paper-warm); }
+
+/* ===== SCIENTISTS ===== */
+.sci-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 1.2rem 0; }
+.sci-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+.sci-card:hover { transform: translateY(-2px); }
+.sci-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.sci-name { font-weight: 500; font-size: 15px; margin-bottom: 2px; }
+.sci-dates { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-faint); margin-bottom: 10px; }
+.sci-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; margin-bottom: 10px; }
+.sci-tag { display: inline-block; font-size: 11px; padding: 3px 9px; border-radius: 100px; font-family: 'DM Mono', monospace; }
+
+/* ===== TIMELINE ===== */
+.timeline { position: relative; padding-left: 28px; margin: 1.2rem 0; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+.tl-item { position: relative; margin-bottom: 1.4rem; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: var(--green-mid); border: 2px solid white; box-shadow: 0 0 0 2px var(--green-mid); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--green); margin-bottom: 3px; }
+.tl-text { font-size: 14px; color: var(--ink-mid); line-height: 1.6; }
+
+/* ===== FOSSIL TYPES ===== */
+.fossil-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 1.2rem 0; }
+.fossil-card {
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  text-align: center;
+}
+.fossil-icon { font-size: 26px; margin-bottom: 8px; }
+.fossil-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.fossil-desc { font-size: 12px; color: var(--ink-muted); line-height: 1.5; }
+
+/* ===== QUIZ & TF ===== */
+.score-banner {
+  background: var(--green-dark);
+  color: white;
+  border-radius: var(--radius);
+  padding: 1rem 1.4rem;
+  display: none;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+.score-banner.show { display: flex; }
+.score-big { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #7edbb0; }
+.score-info p { font-size: 14px; color: rgba(255,255,255,0.8); }
+.score-info span { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+.quiz-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+  transition: border-color 0.3s;
+}
+.quiz-card.answered-correct { border-color: var(--green-mid); }
+.quiz-card.answered-wrong { border-color: var(--coral); }
+.q-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-faint); margin-bottom: 6px; }
+.q-text { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 1rem; line-height: 1.55; }
+.options { display: flex; flex-direction: column; gap: 7px; }
+.opt-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 13px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink-mid);
+  transition: all 0.2s;
+  background: var(--paper);
+}
+.opt-label:hover { background: var(--green-light); border-color: var(--green-mid); }
+.opt-label input { margin-top: 3px; accent-color: var(--green); }
+.opt-label.correct-opt { background: var(--green-light); border-color: var(--green-mid); color: var(--green-dark); font-weight: 500; }
+.opt-label.wrong-opt { background: var(--coral-light); border-color: var(--coral); color: #6b1a10; }
+.feedback-box {
+  margin-top: 10px;
+  padding: 10px 13px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  line-height: 1.6;
+  display: none;
+}
+.feedback-box.correct { background: var(--green-light); color: var(--green-dark); border: 1px solid #b3ddc7; }
+.feedback-box.wrong { background: var(--coral-light); color: #6b1a10; border: 1px solid #f0b0a8; }
+.feedback-box.show { display: block; }
+.check-btn {
+  margin-top: 12px;
+  padding: 8px 20px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.check-btn:hover { background: var(--green-dark); }
+.check-btn:disabled { background: var(--line); color: var(--ink-faint); cursor: not-allowed; }
+
+/* ===== TRUE/FALSE ===== */
+.tf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
+.tf-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  transition: border-color 0.3s;
+}
+.tf-card.answered-correct { border-color: var(--green-mid); }
+.tf-card.answered-wrong { border-color: var(--coral); }
+.tf-stmt { font-size: 14px; line-height: 1.65; color: var(--ink-mid); margin-bottom: 12px; }
+.tf-btns { display: flex; gap: 8px; }
+.tf-btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--ink-mid);
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.tf-btn:hover { background: var(--green-light); border-color: var(--green-mid); color: var(--green-dark); }
+.tf-btn.v-btn.correct-pick { background: var(--green-light); border-color: var(--green-mid); color: var(--green-dark); }
+.tf-btn.f-btn.correct-pick { background: var(--green-light); border-color: var(--green-mid); color: var(--green-dark); }
+.tf-btn.wrong-pick { background: var(--coral-light); border-color: var(--coral); color: #6b1a10; }
+.tf-exp {
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  display: none;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.tf-exp.show { display: block; }
+
+/* ===== GLOSSARY ===== */
+.glos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+.glos-item {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+.glos-term { font-weight: 500; font-size: 14px; margin-bottom: 4px; color: var(--green-dark); }
+.glos-def { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+
+/* ===== RESET / NAV BTNS ===== */
+.reset-btn {
+  padding: 9px 22px;
+  background: transparent;
+  border: 1.5px solid var(--line);
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--ink-mid);
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+.reset-btn:hover { border-color: var(--green-mid); color: var(--green); }
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.nav-btn {
+  padding: 10px 22px;
+  border-radius: 100px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-btn.prev { background: var(--paper-warm); border: 1px solid var(--line); color: var(--ink-mid); }
+.nav-btn.next { background: var(--green); color: white; }
+.nav-btn.prev:hover { background: var(--line); }
+.nav-btn.next:hover { background: var(--green-dark); }
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ===== SELF-CHECK ===== */
+.self-check {
+  background: var(--amber-light);
+  border: 1px solid #f0c888;
+  border-radius: var(--radius);
+  padding: 1.3rem 1.5rem;
+  margin-top: 2rem;
+}
+.sc-title { font-size: 13px; font-weight: 500; color: #7a4a00; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.sc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.sc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #5a3500;
+  line-height: 1.55;
+}
+.sc-check {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid #f0c888;
+  background: white;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  font-size: 11px;
+  color: transparent;
+}
+.sc-check.checked { background: var(--amber); border-color: var(--amber); color: white; }
+
+/* ===== READING TIME ===== */
+.meta-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.meta-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.06em;
+}
+
+/* ===== ADAPT3 TEXT ===== */
+.concept-block {
+  display: grid;
+  grid-template-columns: 3px 1fr;
+  gap: 16px;
+  margin: 1.2rem 0;
+}
+.concept-line { background: var(--green-mid); border-radius: 2px; }
+.concept-body {}
+
+ul.bio-list {
+  list-style: none;
+  margin: 0.8rem 0 0.8rem 0.2rem;
+}
+ul.bio-list li {
+  padding: 5px 0 5px 20px;
+  font-size: 14.5px;
+  color: var(--ink-mid);
+  line-height: 1.65;
+  position: relative;
+}
+ul.bio-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--green-mid);
+  font-size: 12px;
+  top: 7px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .site-header { padding: 2rem 1.2rem 1.8rem; }
+  .main-wrap { padding: 0 1rem 3rem; }
+  .step-nav { gap: 4px; }
+  .step-btn { font-size: 12px; padding: 6px 12px; }
+  .progress-bar-wrap { padding: 0.8rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-kicker">Biología · 1° Medio · Unidad 2</div>
+    <h1 class="header-title">Evolución &<br><em>Selección Natural</em></h1>
+    <p class="header-desc">Guía de estudio progresiva: desde los fundamentos de la teoría evolutiva hasta las evidencias científicas que la sustentan.</p>
+    <div class="header-pills">
+      <span class="pill">Darwin & Wallace</span>
+      <span class="pill">Selección natural</span>
+      <span class="pill">Registro fósil</span>
+      <span class="pill">Anatomía comparada</span>
+      <span class="pill">ADN</span>
+    </div>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <span class="progress-label">Progreso</span>
+    <div class="progress-steps" id="prog-steps"></div>
+    <span class="progress-text" id="prog-text">1 / 7</span>
+  </div>
+</div>
+
+<!-- STEP NAV + MAIN -->
+<div class="main-wrap">
+  <nav class="step-nav" id="step-nav"></nav>
+
+  <!-- ========== SECCIÓN 1: INTRO ========== -->
+  <div class="section active" id="sec-0">
+    <div class="sec-header">
+      <div class="sec-kicker">Punto de partida · Paso 1 de 7</div>
+      <h1 class="sec-title">¿Cómo llegó la vida a ser tan diversa?</h1>
+      <p class="sec-desc">Antes de estudiar la teoría, activemos lo que ya sabemos sobre la vida en la Tierra.</p>
+    </div>
+
+    <div class="guiding-q">
+      <div class="gq-icon">🔍</div>
+      <div>
+        <div class="gq-label">Pregunta guía</div>
+        <div class="gq-text">Si un perro chihuahua y un lobo son parientes, ¿qué proceso produjo diferencias tan grandes entre ellos?</div>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-chip">⏱ 5 min de lectura</span>
+      <span class="meta-chip">📚 Conceptos base</span>
+    </div>
+
+    <p class="body">En el planeta Tierra existen más de <strong>8 millones de especies</strong> de organismos conocidos. Cada una está perfectamente ajustada a su ambiente: los pingüinos al frío extremo, los cactus a la sequía, los murciélagos a la oscuridad total. ¿Cómo es posible esta diversidad tan extraordinaria?</p>
+
+    <p class="body">Durante siglos, la respuesta dominante fue religiosa o filosófica. Fue recién en el siglo XIX cuando la ciencia ofreció una explicación basada en evidencias: la teoría evolutiva.</p>
+
+    <h2 class="section-h">¿Qué es la evolución biológica?</h2>
+
+    <div class="concept-block">
+      <div class="concept-line"></div>
+      <div class="concept-body">
+        <p class="body">La <strong>evolución biológica</strong> es el proceso de cambio en las características heredables de las poblaciones a través de las generaciones. No ocurre en individuos —tú no evolucionas durante tu vida— sino en poblaciones, a lo largo de miles o millones de años.</p>
+      </div>
+    </div>
+
+    <div class="highlight green">
+      <strong>💡 Idea clave</strong>
+      Toda la diversidad de vida que existe hoy es el resultado de miles de millones de años de cambios acumulados. Todos los seres vivos —desde una bacteria hasta un ser humano— compartimos un ancestro común.
+    </div>
+
+    <h2 class="section-h">¿Qué NO es la evolución?</h2>
+    <p class="body">Existen varios malentendidos frecuentes que conviene aclarar desde el inicio:</p>
+
+    <table class="bio-table">
+      <tr><th>Mito</th><th>Realidad</th></tr>
+      <tr><td>"Los animales evolucionan porque quieren adaptarse"</td><td>La evolución no tiene intención ni dirección. Es un proceso sin propósito consciente.</td></tr>
+      <tr><td>"Los humanos descienden de los chimpancés"</td><td>Ambos compartimos un ancestro común. Somos como dos "primos" que divergieron hace ~6-7 millones de años.</td></tr>
+      <tr><td>"La evolución siempre mejora a los organismos"</td><td>La evolución produce cambios. Si el ambiente cambia, algo que antes era ventajoso puede volverse desventajoso.</td></tr>
+      <tr><td>"Los individuos evolucionan durante su vida"</td><td>Las poblaciones evolucionan; no los individuos. Los cambios se producen entre generaciones.</td></tr>
+    </table>
+
+    <h2 class="section-h">Pensamiento previo: antes de Darwin</h2>
+    <p class="body">Antes de que Darwin y Wallace formularan la selección natural, otros científicos ya sospechaban que las especies cambiaban con el tiempo:</p>
+
+    <ul class="bio-list">
+      <li><strong>Aristóteles</strong> clasificó más de 500 especies y notó semejanzas entre ellas, pero creía que eran fijas.</li>
+      <li><strong>Linneo (1735)</strong> creó el sistema de clasificación taxonómica. Sus categorías reflejaban, sin saberlo, relaciones evolutivas reales.</li>
+      <li><strong>Lamarck (1809)</strong> fue el primero en proponer que las especies cambian con el tiempo, aunque su mecanismo (herencia de caracteres adquiridos) era incorrecto.</li>
+      <li><strong>Lyell y Hutton</strong> demostraron que la Tierra era mucho más antigua de lo que se creía, lo que abría tiempo para que ocurrieran cambios graduales.</li>
+    </ul>
+
+    <div class="self-check">
+      <div class="sc-title">✅ Antes de continuar, comprueba que puedes:</div>
+      <ul class="sc-list">
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar qué es la evolución biológica con tus propias palabras</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Diferenciar entre evolución de individuo vs. evolución de población</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Nombrar al menos dos científicos que pensaron en la evolución antes de Darwin</li>
+      </ul>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" disabled>← Anterior</button>
+      <button class="nav-btn next" onclick="goTo(1)">Siguiente: Selección natural →</button>
+    </div>
+  </div>
+
+  <!-- ========== SECCIÓN 2: SELECCIÓN NATURAL ========== -->
+  <div class="section" id="sec-1">
+    <div class="sec-header">
+      <div class="sec-kicker">El mecanismo · Paso 2 de 7</div>
+      <h1 class="sec-title">La Selección Natural</h1>
+      <p class="sec-desc">El motor que impulsa la evolución: por qué algunos individuos sobreviven y otros no.</p>
+    </div>
+
+    <div class="guiding-q">
+      <div class="gq-icon">🎯</div>
+      <div>
+        <div class="gq-label">Pregunta guía</div>
+        <div class="gq-text">Si en un bosque oscuro nacen ratones de distintos colores, ¿por qué con el tiempo predominarán los ratones más oscuros?</div>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <span class="meta-chip">⏱ 8 min de lectura</span>
+      <span class="meta-chip">⭐ Contenido central</span>
+    </div>
+
+    <p class="body">Darwin y Wallace notaron que en la naturaleza nacen más individuos de los que pueden sobrevivir. Hay competencia. ¿Qué decide quién sobrevive? Las características que cada uno tiene para enfrentarse a su ambiente.</p>
+
+    <h2 class="section-h">Los 4 postulados de la selección natural</h2>
+    <p class="body">Para que la selección natural actúe, deben cumplirse estas cuatro condiciones:</p>
+
+    <div class="postulate-list">
+      <div class="postulate-item">
+        <div class="post-num">1</div>
+        <div class="post-body">
+          <div class="post-title">Variación entre individuos</div>
+          <div class="post-desc">En cualquier población existen diferencias entre individuos: de tamaño, color, velocidad, resistencia a enfermedades, etc. Ningún organismo es idéntico a otro, ni siquiera los hermanos.</div>
+        </div>
+      </div>
+      <div class="postulate-item">
+        <div class="post-num">2</div>
+        <div class="post-body">
+          <div class="post-title">Herencia de las variaciones</div>
+          <div class="post-desc">Muchas de estas variaciones tienen base genética y se transmiten de padres a hijos. Si un progenitor es rápido, sus crías tenderán también a ser rápidas. La herencia es el "motor" que perpetúa los cambios.</div>
+        </div>
+      </div>
+      <div class="postulate-item">
+        <div class="post-num">3</div>
+        <div class="post-body">
+          <div class="post-title">Lucha por la supervivencia</div>
+          <div class="post-desc">Los recursos (alimento, agua, territorio, pareja) son limitados. Los organismos deben competir entre sí y con su ambiente. No todos pueden sobrevivir ni reproducirse con igual éxito.</div>
+        </div>
+      </div>
+      <div class="postulate-item">
+        <div class="post-num">4</div>
+        <div class="post-body">
+          <div class="post-title">Éxito reproductivo diferencial</div>
+          <div class="post-desc">Los individuos con variaciones más favorables para su ambiente sobreviven más y dejan más descendencia, transmitiendo esas características. Con el tiempo, estas características se vuelven más frecuentes en la población.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-h">Adaptación y especiación</h2>
+
+    <div class="card accent-green">
+      <div class="card-title">🌿 ¿Qué es una adaptación?</div>
+      <p>Una <strong>adaptación</strong> es una característica que aumenta la probabilidad de supervivencia o reproducción de un organismo en su ambiente. Se puede heredar y fue "seleccionada" porque beneficiaba a quienes la tenían.</p>
+    </div>
+
+    <p class="body">Las adaptaciones pueden ser de tres tipos:</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin:1rem 0">
+      <div class="card accent-blue" style="margin:0">
+        <div class="card-title" style="font-size:13px">🦷 Morfológicas</div>
+        <p style="font-size:13px">Cambios en forma o estructura. Ej: pico del picaflor adaptado para extraer néctar; camuflaje del pulpo.</p>
+      </div>
+      <div class="card accent-amber" style="margin:0">
+        <div class="card-title" style="font-size:13px">⚗️ Fisiológicas</div>
+        <p style="font-size:13px">Cambios en procesos internos. Ej: resistencia al veneno en ciertas serpientes; producción de anticongelante en peces árticos.</p>
+      </div>
+      <div class="card accent-purple" style="margin:0">
+        <div class="card-title" style="font-size:13px">🐦 Conductuales</div>
+        <p style="font-size:13px">Cambios en comportamiento. Ej: migración estacional, danzas de cortejo, construcción de nidos.</p>
+      </div>
+    </div>
+
+    <div class="card accent-coral" style="margin-top:1.4rem">
+      <div class="card-title">🌍 ¿Cuándo ocurre la especiación?</div>
+      <p>Cuando una población queda <strong>aislada</strong> (por una montaña, un océano u otra barrera), acumula variaciones propias. Con el tiempo, sus miembros pueden volverse tan diferentes que ya no pueden reproducirse con la población original. ¡Se ha formado una especie nueva!</p>
+      <p style="margin-top:8px">Ejemplo clásico: los pinzones de Galápagos. Una misma especie ancestral colonizó islas distintas y se diversificó según los alimentos disponibles en cada una.</p>
+    </div>
+
+    <h2 class="section-h">Selección natural vs. Selección artificial</h2>
+    <table class="bio-table">
+      <tr><th>Característica</th><th>Selección Natural</th><th>Selección Artificial</th></tr>
+      <tr><td>¿Quién selecciona?</td><td>El ambiente</td><td>El ser humano</td></tr>
+      <tr><td>¿Qué favorece?</td><td>Supervivencia y reproducción en el ambiente</td><td>Características deseadas por humanos</td></tr>
+      <tr><td>Velocidad</td><td>Miles o millones de años</td><td>Pocas generaciones</td></tr>
+      <tr><td>Ejemplo</td><td>Jirafa con cuello más largo alcanza más hojas</td><td>Perros seleccionados por tamaño o comportamiento</td></tr>
+    </table>
+
+    <div class="self-check">
+      <div class="sc-title">✅ Antes de continuar, comprueba que puedes:</div>
+      <ul class="sc-list">
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar los 4 postulados de la selección natural en orden</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Dar un ejemplo de adaptación morfológica, fisiológica y conductual</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar bajo qué condiciones puede ocurrir una especiación</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Diferenciar selección natural de selección artificial</li>
+      </ul>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" onclick="goTo(0)">← Introducción</button>
+      <button class="nav-btn next" onclick="goTo(2)">Siguiente: Los científicos →</button>
+    </div>
+  </div>
+
+  <!-- ========== SECCIÓN 3: CIENTÍFICOS ========== -->
+  <div class="section" id="sec-2">
+    <div class="sec-header">
+      <div class="sec-kicker">Las personas detrás de la ciencia · Paso 3 de 7</div>
+      <h1 class="sec-title">Darwin, Wallace y otros</h1>
+      <p class="sec-desc">Las mentes que construyeron el pensamiento evolutivo moderno.</p>
+    </div>
+
+    <div class="guiding-q">
+      <div class="gq-icon">🧑‍🔬</div>
+      <div>
+        <div class="gq-label">Pregunta guía</div>
+        <div class="gq-text">¿Cómo es posible que dos científicos en continentes distintos llegaran a la misma conclusión al mismo tiempo? ¿Qué dice eso sobre el método científico?</div>
+      </div>
+    </div>
+
+    <div class="sci-grid">
+      <div class="sci-card">
+        <div class="sci-avatar" style="background:#e8f5ee;color:#0d3d2a">CD</div>
+        <div class="sci-name">Charles Darwin</div>
+        <div class="sci-dates">1809 – 1882 · Reino Unido</div>
+        <div class="sci-desc">Naturalista inglés. Su viaje en el HMS Beagle (1831–1836) por Sudamérica y las islas Galápagos fue transformador. Observó la variación en los pinzones de Galápagos y los fósiles de megafauna en Argentina. Tardó 20 años en publicar su teoría por temor a la controversia.</div>
+        <div class="sci-desc">Publicó <em>El origen de las especies</em> en 1859, revolucionando la biología.</div>
+        <span class="sci-tag" style="background:#e8f5ee;color:#0d3d2a">Selección natural · Ancestro común · Árbol de la vida</span>
+      </div>
+      <div class="sci-card">
+        <div class="sci-avatar" style="background:#e8f0fc;color:#0d2f5c">AW</div>
+        <div class="sci-name">Alfred Russel Wallace</div>
+        <div class="sci-dates">1823 – 1913 · Reino Unido</div>
+        <div class="sci-desc">Naturalista autodidacta. Trabajando en el archipiélago malayo (Indonesia), llegó de forma independiente a la misma conclusión que Darwin sobre la selección natural. En 1858 envió su manuscrito a Darwin, lo que precipitó la publicación conjunta.</div>
+        <div class="sci-desc">También es padre de la biogeografía: estudió cómo la distribución geográfica de especies refleja su historia evolutiva.</div>
+        <span class="sci-tag" style="background:#e8f0fc;color:#0d2f5c">Selección natural (codescubridor) · Biogeografía</span>
+      </div>
+      <div class="sci-card">
+        <div class="sci-avatar" style="background:#fdf3e3;color:#5a3500">JL</div>
+        <div class="sci-name">Jean-Baptiste Lamarck</div>
+        <div class="sci-dates">1744 – 1829 · Francia</div>
+        <div class="sci-desc">Propuso la primera teoría evolutiva formal. Planteó que los organismos adquieren características útiles durante su vida (principio de uso y desuso) y las transmiten a sus hijos. Ejemplo: la jirafa estira el cuello y sus crías nacen con el cuello más largo.</div>
+        <div class="sci-desc">Su mecanismo era erróneo, pero fue pionero al proponer que las especies no son fijas.</div>
+        <span class="sci-tag" style="background:#fdf3e3;color:#5a3500">Precursor del evolucionismo · Herencia adquirida (descartada)</span>
+      </div>
+      <div class="sci-card">
+        <div class="sci-avatar" style="background:#eaf3de;color:#173404">CL</div>
+        <div class="sci-name">Carlos Linneo</div>
+        <div class="sci-dates">1707 – 1778 · Suecia</div>
+        <div class="sci-desc">Creó el sistema de nomenclatura binomial (género + especie) y la clasificación taxonómica jerárquica. Aunque creía en la fijeza de las especies, su sistema reveló similitudes entre organismos que más tarde apoyarían la idea de ancestro común.</div>
+        <span class="sci-tag" style="background:#eaf3de;color:#173404">Taxonomía · Nomenclatura binomial</span>
+      </div>
+    </div>
+
+    <h2 class="section-h">¿Qué propuso Lamarck vs. qué propuso Darwin?</h2>
+    <table class="bio-table">
+      <tr><th>Aspecto</th><th>Lamarck (1809)</th><th>Darwin/Wallace (1858)</th></tr>
+      <tr><td>¿Las especies cambian?</td><td>Sí</td><td>Sí</td></tr>
+      <tr><td>Mecanismo del cambio</td><td>Uso y desuso + herencia de caracteres adquiridos</td><td>Variación heredable + selección natural</td></tr>
+      <tr><td>Ejemplo de la jirafa</td><td>Estiró el cuello toda su vida → crías con cuello más largo</td><td>Las jirafas con cuello naturalmente más largo sobrevivieron y se reprodujeron más</td></tr>
+      <tr><td>¿Es correcto hoy?</td><td>El mecanismo fue descartado (no se heredan rasgos adquiridos)</td><td>Confirmado por la genética moderna</td></tr>
+    </table>
+
+    <h2 class="section-h">Línea de tiempo del pensamiento evolutivo</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1735</div><div class="tl-text">Linneo publica <em>Systema Naturae</em> — clasifica seres vivos con nomenclatura binomial y muestra similitudes entre especies.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1809</div><div class="tl-text">Lamarck publica <em>Philosophie Zoologique</em> — primera teoría evolutiva formal, propone herencia de caracteres adquiridos.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1831–1836</div><div class="tl-text">Darwin realiza su viaje en el HMS Beagle. Observa variaciones en pinzones de Galápagos, tortugas gigantes y fósiles de megafauna en Argentina.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1858</div><div class="tl-text">Darwin y Wallace presentan conjuntamente su teoría de la selección natural ante la Linnean Society de Londres.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1859</div><div class="tl-text">Darwin publica <em>El origen de las especies</em> — uno de los libros más influyentes de la historia científica. Propone el árbol de la vida y la descendencia con modificación.</div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1953</div><div class="tl-text">Watson y Crick describen la estructura del ADN. La genética confirma y enriquece la teoría evolutiva: nace la <em>teoría sintética de la evolución</em>.</div></div>
+    </div>
+
+    <div class="self-check">
+      <div class="sc-title">✅ Antes de continuar, comprueba que puedes:</div>
+      <ul class="sc-list">
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar el aporte de Darwin a la biología evolutiva</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar el aporte de Wallace y por qué fue importante</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Comparar la teoría de Lamarck con la de Darwin (diferencias y similitudes)</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Ordenar cronológicamente los hitos del pensamiento evolutivo</li>
+      </ul>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" onclick="goTo(1)">← Selección natural</button>
+      <button class="nav-btn next" onclick="goTo(3)">Siguiente: Evidencias →</button>
+    </div>
+  </div>
+
+  <!-- ========== SECCIÓN 4: EVIDENCIAS ========== -->
+  <div class="section" id="sec-3">
+    <div class="sec-header">
+      <div class="sec-kicker">Las pruebas · Paso 4 de 7</div>
+      <h1 class="sec-title">Evidencias de la evolución</h1>
+      <p class="sec-desc">La evolución no es solo una idea: tiene múltiples tipos de evidencias independientes que la confirman.</p>
+    </div>
+
+    <div class="guiding-q">
+      <div class="gq-icon">🔬</div>
+      <div>
+        <div class="gq-label">Pregunta guía</div>
+        <div class="gq-text">¿Por qué un brazo humano, una aleta de delfín y un ala de murciélago tienen los mismos huesos en su interior, aunque sirven para cosas completamente distintas?</div>
+      </div>
+    </div>
+
+    <p class="body">Una teoría científica es válida cuando múltiples líneas de evidencia independientes la apoyan. La teoría evolutiva cuenta con al menos cuatro grandes tipos de evidencias:</p>
+
+    <div class="ev-grid">
+      <div class="ev-card green">
+        <div class="ev-icon">🦴</div>
+        <div class="ev-name">Registro fósil</div>
+        <div class="ev-desc">Restos de organismos del pasado que muestran formas de vida anteriores y transiciones entre grupos.</div>
+      </div>
+      <div class="ev-card blue">
+        <div class="ev-icon">🦾</div>
+        <div class="ev-name">Anatomía comparada</div>
+        <div class="ev-desc">Estructuras homólogas, análogas y vestigiales que revelan relaciones de parentesco entre especies.</div>
+      </div>
+      <div class="ev-card amber">
+        <div class="ev-icon">🐣</div>
+        <div class="ev-name">Embriología comparada</div>
+        <div class="ev-desc">Similitudes en el desarrollo embrionario de distintas especies apuntan a genes ancestrales compartidos.</div>
+      </div>
+      <div class="ev-card purple">
+        <div class="ev-icon">🧬</div>
+        <div class="ev-name">Secuencias de ADN</div>
+        <div class="ev-desc">Mayor similitud genética entre dos especies indica un ancestro común más reciente.</div>
+      </div>
+    </div>
+
+    <h2 class="section-h">1. Registro fósil</h2>
+    <p class="body">Los <strong>fósiles</strong> son restos o huellas de organismos que vivieron en el pasado, conservados en rocas sedimentarias. El registro fósil permite:</p>
+    <ul class="bio-list">
+      <li>Conocer organismos que se extinguieron antes de que la humanidad existiera</li>
+      <li>Observar formas de transición entre grupos (ej: Archaeopteryx, entre dinosaurios y aves)</li>
+      <li>Estimar cuándo vivieron los organismos mediante datación radiométrica</li>
+      <li>Reconstruir la historia evolutiva de linajes completos</li>
+    </ul>
+
+    <div class="highlight amber">
+      <strong>📌 Fósil de transición clave: Archaeopteryx</strong>
+      El Archaeopteryx (aprox. 150 millones de años) es uno de los fósiles de transición más famosos. Tenía dientes y cola ósea (como dinosaurios) y plumas (como aves modernas). Representa una etapa intermedia en la evolución de dinosaurios terópodos hacia las aves.
+    </div>
+
+    <h2 class="section-h">2. Anatomía comparada: estructuras homólogas, análogas y vestigiales</h2>
+
+    <table class="bio-table">
+      <tr><th>Tipo</th><th>Definición</th><th>Ejemplo</th><th>¿Qué evidencian?</th></tr>
+      <tr>
+        <td><strong>Homólogas</strong></td>
+        <td>Mismo origen embrionario, distintas funciones</td>
+        <td>Brazo humano / aleta de delfín / ala de murciélago</td>
+        <td>Ancestro común (evolución divergente)</td>
+      </tr>
+      <tr>
+        <td><strong>Análogas</strong></td>
+        <td>Misma función, distinto origen evolutivo</td>
+        <td>Ala de mariposa vs. ala de ave</td>
+        <td>Convergencia evolutiva (ambientes similares)</td>
+      </tr>
+      <tr>
+        <td><strong>Vestigiales</strong></td>
+        <td>Sin función aparente, reducidas respecto al ancestro</td>
+        <td>Huesos pélvicos en ballenas; apéndice humano; alas de avestruz</td>
+        <td>Herencia de ancestros que sí las usaban</td>
+      </tr>
+    </table>
+
+    <div class="highlight blue">
+      <strong>💡 Homólogas vs. Análogas — cómo no confundirlas</strong>
+      Las homólogas tienen el MISMO origen pero DISTINTA función. Las análogas tienen DISTINTO origen pero MISMA función. Las homólogas evidencian parentesco; las análogas evidencian que ambientes similares generan soluciones similares (convergencia).
+    </div>
+
+    <h2 class="section-h">3. Embriología comparada</h2>
+    <p class="body">Karl Ernst von Baer (1828) observó que embriones de peces, anfibios, reptiles, aves y mamíferos son notablemente similares en las primeras etapas de su desarrollo: todos presentan hendiduras branquiales y colas en las etapas iniciales.</p>
+    <p class="body">Esto indica que todos comparten genes ancestrales (genes Hox) que controlan el desarrollo embrionario. A medida que el desarrollo avanza, las diferencias se hacen más marcadas, reflejando las divergencias evolutivas entre los grupos.</p>
+
+    <h2 class="section-h">4. Evidencias moleculares (ADN)</h2>
+    <div class="card accent-purple">
+      <div class="card-title">🧬 ¿Qué nos dice el ADN?</div>
+      <p>Cuanto más similar es el ADN de dos especies, más reciente es su ancestro común. Comparando secuencias de ADN podemos construir árboles filogenéticos precisos.</p>
+      <p style="margin-top:8px">Ejemplo revelador: Los humanos compartimos aproximadamente el <strong>98.7% del ADN con los chimpancés</strong>, el 85% con los ratones y el 60% con las moscas de la fruta. Incluso compartimos genes con las bacterias.</p>
+    </div>
+
+    <div class="self-check">
+      <div class="sc-title">✅ Antes de continuar, comprueba que puedes:</div>
+      <ul class="sc-list">
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar las 4 grandes evidencias de la evolución</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Diferenciar estructuras homólogas de análogas con ejemplos</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar qué son las estructuras vestigiales y qué evidencian</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar cómo el ADN apoya la teoría evolutiva</li>
+      </ul>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" onclick="goTo(2)">← Científicos</button>
+      <button class="nav-btn next" onclick="goTo(4)">Siguiente: Fosilización →</button>
+    </div>
+  </div>
+
+  <!-- ========== SECCIÓN 5: FÓSILES ========== -->
+  <div class="section" id="sec-4">
+    <div class="sec-header">
+      <div class="sec-kicker">El registro del pasado · Paso 5 de 7</div>
+      <h1 class="sec-title">Fosilización y parentesco</h1>
+      <p class="sec-desc">Cómo se forman los fósiles, cómo se leen los estratos y cómo establecemos relaciones entre especies.</p>
+    </div>
+
+    <div class="guiding-q">
+      <div class="gq-icon">🏔️</div>
+      <div>
+        <div class="gq-label">Pregunta guía</div>
+        <div class="gq-text">Si encontramos fósiles de organismos marinos en lo alto de una montaña, ¿qué nos dice eso sobre la historia de ese lugar y del tiempo que ha pasado?</div>
+      </div>
+    </div>
+
+    <h2 class="section-h">¿Cómo se forman los fósiles?</h2>
+    <p class="body">La fosilización es un proceso poco común: la gran mayoría de los organismos se descomponen sin dejar rastro. Se requieren condiciones muy específicas:</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:1rem 0">
+      <div class="card accent-green" style="margin:0">
+        <div class="card-title" style="font-size:13px">1. Entierro rápido</div>
+        <p style="font-size:13px">El organismo debe quedar cubierto por sedimentos (arena, barro, ceniza volcánica) antes de descomponerse. Los ambientes acuáticos o volcánicos favorecen este proceso.</p>
+      </div>
+      <div class="card accent-blue" style="margin:0">
+        <div class="card-title" style="font-size:13px">2. Partes duras</div>
+        <p style="font-size:13px">Huesos, dientes, conchas y madera se preservan mejor que tejidos blandos. Los organismos sin partes duras rara vez se fosilizan, a menos que queden en condiciones excepcionales.</p>
+      </div>
+      <div class="card accent-amber" style="margin:0">
+        <div class="card-title" style="font-size:13px">3. Ambiente anóxico</div>
+        <p style="font-size:13px">Sin oxígeno, las bacterias descomponedoras actúan más lento. Fondos marinos profundos, turberas o el interior de ámbar pueden crear estas condiciones.</p>
+      </div>
+      <div class="card accent-purple" style="margin:0">
+        <div class="card-title" style="font-size:13px">4. Mineralización</div>
+        <p style="font-size:13px">Con el tiempo, los minerales del sedimento penetran y reemplazan los materiales orgánicos del organismo, "petrificándolo". Este proceso puede tomar miles de años.</p>
+      </div>
+    </div>
+
+    <h2 class="section-h">Tipos de fósiles</h2>
+    <div class="fossil-grid">
+      <div class="fossil-card"><div class="fossil-icon">🦴</div><div class="fossil-name">Fósiles de cuerpo</div><div class="fossil-desc">Restos directos: huesos, dientes, conchas. Los más comunes y estudiados.</div></div>
+      <div class="fossil-card"><div class="fossil-icon">👣</div><div class="fossil-name">Fósiles traza</div><div class="fossil-desc">Evidencias de actividad: huellas, madrigueras, excrementos (coprolitos).</div></div>
+      <div class="fossil-card"><div class="fossil-icon">🟡</div><div class="fossil-name">En ámbar</div><div class="fossil-desc">Organismos atrapados en resina de árbol petrificada. Conservación extraordinaria.</div></div>
+      <div class="fossil-card"><div class="fossil-icon">🖨️</div><div class="fossil-name">Compresión</div><div class="fossil-desc">Organismo comprimido entre capas de roca. Frecuente en hojas y peces planos.</div></div>
+      <div class="fossil-card"><div class="fossil-icon">🔑</div><div class="fossil-name">Fósiles guía</div><div class="fossil-desc">Especies muy abundantes y de corta duración geológica. Permiten fechar estratos.</div></div>
+    </div>
+
+    <h2 class="section-h">Lectura de estratos: el principio de superposición</h2>
+    <div class="highlight green">
+      <strong>📚 Principio de superposición (Steno, 1669)</strong>
+      En rocas sedimentarias no alteradas, los estratos más profundos son más antiguos y los más superficiales son más recientes. Así podemos leer la historia de la vida como las páginas de un libro, de abajo hacia arriba.
+    </div>
+
+    <h2 class="section-h">Relaciones de parentesco entre especies</h2>
+    <p class="body">Las relaciones evolutivas entre especies se representan mediante <strong>árboles filogenéticos</strong> o <strong>cladogramas</strong>. Los organismos que comparten un nodo más reciente en el árbol son más cercanos evolutivamente.</p>
+
+    <div class="card accent-blue">
+      <div class="card-title">🌳 ¿Qué es la cladística?</div>
+      <p>La cladística es el método moderno para clasificar seres vivos según su historia evolutiva compartida. Usa evidencias de morfología, ADN y registro fósil para construir árboles filogenéticos. A diferencia de la clasificación tradicional (Linneo), agrupa organismos por parentesco evolutivo real.</p>
+    </div>
+
+    <div class="self-check">
+      <div class="sc-title">✅ Antes de continuar, comprueba que puedes:</div>
+      <ul class="sc-list">
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar las condiciones necesarias para que ocurra la fosilización</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Nombrar al menos 4 tipos de fósiles con sus características</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Aplicar el principio de superposición para determinar qué estrato es más antiguo</li>
+        <li><span class="sc-check" onclick="toggleCheck(this)">✓</span> Explicar para qué sirve un árbol filogenético</li>
+      </ul>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" onclick="goTo(3)">← Evidencias</button>
+      <button class="nav-btn next" onclick="goTo(5)">Siguiente: Verdadero / Falso →</button>
+    </div>
+  </div>
+
+  <!-- ========== SECCIÓN 6: V/F ========== -->
+  <div class="section" id="sec-5">
+    <div class="sec-header">
+      <div class="sec-kicker">Práctica · Paso 6 de 7</div>
+      <h1 class="sec-title">Verdadero o Falso</h1>
+      <p class="sec-desc">Pon a prueba tu comprensión. Si te equivocas, lee la explicación: es parte del aprendizaje.</p>
+    </div>
+
+    <div class="guiding-q">
+      <div class="gq-icon">⚡</div>
+      <div>
+        <div class="gq-label">Cómo practicar</div>
+        <div class="gq-text">Lee cada enunciado con cuidado. No adivines: piensa primero. Si la explicación te sorprende, vuelve al contenido a repasar ese punto.</div>
+      </div>
+    </div>
+
+    <div id="vf-score-banner" class="score-banner">
+      <div class="score-big" id="vf-pts">0</div>
+      <div class="score-info"><p>respuestas correctas</p><span id="vf-total-txt"></span></div>
+    </div>
+
+    <div class="tf-grid" id="tf-container"></div>
+    <button class="reset-btn" onclick="resetVF()">↺ Reiniciar práctica</button>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" onclick="goTo(4)">← Fosilización</button>
+      <button class="nav-btn next" onclick="goTo(6)">Siguiente: Preguntas finales →</button>
+    </div>
+  </div>
+
+  <!-- ========== SECCIÓN 7: QUIZ ========== -->
+  <div class="section" id="sec-6">
+    <div class="sec-header">
+      <div class="sec-kicker">Evaluación · Paso 7 de 7</div>
+      <h1 class="sec-title">Preguntas de selección múltiple</h1>
+      <p class="sec-desc">Tipo prueba. Responde con calma, verifica cada pregunta y revisa los errores.</p>
+    </div>
+
+    <div class="guiding-q">
+      <div class="gq-icon">📝</div>
+      <div>
+        <div class="gq-label">Objetivo</div>
+        <div class="gq-text">Si logras 8 o más respuestas correctas, estás listo para la prueba. Si no, identifica qué pasos debes repasar.</div>
+      </div>
+    </div>
+
+    <div id="quiz-score-banner" class="score-banner">
+      <div class="score-big" id="quiz-pts">0</div>
+      <div class="score-info"><p>respuestas correctas</p><span id="quiz-total-txt"></span></div>
+    </div>
+
+    <div id="quiz-container"></div>
+    <button class="reset-btn" onclick="resetQuiz()">↺ Reiniciar preguntas</button>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" onclick="goTo(5)">← Verdadero / Falso</button>
+      <button class="nav-btn next" disabled style="opacity:0.3">🎉 ¡Llegaste al final!</button>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<script>
+const STEPS = [
+  {label:'Introducción', icon:'🌍'},
+  {label:'Sel. Natural', icon:'🎯'},
+  {label:'Científicos', icon:'🧑‍🔬'},
+  {label:'Evidencias', icon:'🔬'},
+  {label:'Fósiles', icon:'🦴'},
+  {label:'V / F', icon:'⚡'},
+  {label:'Preguntas', icon:'📝'}
+];
+let currentStep = 0;
+let doneSteps = new Set();
+
+function buildNav(){
+  const nav = document.getElementById('step-nav');
+  const prog = document.getElementById('prog-steps');
+  nav.innerHTML = '';
+  prog.innerHTML = '';
+  STEPS.forEach((s,i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'step-btn' + (i===currentStep?' active':'') + (doneSteps.has(i)&&i!==currentStep?' done-step':'');
+    btn.innerHTML = `<span class="snum">${doneSteps.has(i)&&i!==currentStep?'✓':(i+1)}</span>${s.label}`;
+    btn.onclick = ()=>goTo(i);
+    nav.appendChild(btn);
+
+    const ps = document.createElement('div');
+    ps.className = 'pstep' + (i===currentStep?' active':'') + (doneSteps.has(i)?' done':'');
+    ps.onclick = ()=>goTo(i);
+    prog.appendChild(ps);
+  });
+  document.getElementById('prog-text').textContent = (currentStep+1)+' / '+STEPS.length;
+}
+
+function goTo(idx){
+  doneSteps.add(currentStep);
+  document.getElementById('sec-'+currentStep).classList.remove('active');
+  currentStep = idx;
+  document.getElementById('sec-'+currentStep).classList.add('active');
+  buildNav();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleCheck(el){
+  el.classList.toggle('checked');
+}
+
+// ===== TRUE/FALSE DATA =====
+const tfData=[
+  {stmt:"La selección natural actúa sobre los individuos, haciendo que evolucionen durante su propia vida.",ans:false,exp:"La selección natural actúa sobre poblaciones a lo largo de generaciones. Los individuos no evolucionan; lo hacen las poblaciones en el tiempo."},
+  {stmt:"Darwin y Wallace llegaron de forma independiente a conclusiones muy similares sobre la selección natural.",ans:true,exp:"Correcto. Ambos desarrollaron la idea de la selección natural de manera independiente y la presentaron conjuntamente en 1858."},
+  {stmt:"Las estructuras homólogas tienen la misma función pero diferente origen evolutivo.",ans:false,exp:"Esas son las estructuras análogas. Las homólogas tienen el mismo origen embrionario pero pueden tener distintas funciones (ej: brazo humano y aleta de delfín)."},
+  {stmt:"El registro fósil es la única evidencia que tenemos de que los seres vivos han evolucionado.",ans:false,exp:"Existen múltiples evidencias independientes: registro fósil, anatomía comparada, embriología, secuencias de ADN y biogeografía, entre otras."},
+  {stmt:"Los fósiles se forman más fácilmente en organismos con partes duras como huesos o conchas.",ans:true,exp:"Correcto. Las partes duras resisten mejor la descomposición y se mineralizan con mayor facilidad, favoreciendo su preservación."},
+  {stmt:"Según la teoría de Lamarck, los caracteres adquiridos durante la vida se heredan a los hijos.",ans:true,exp:"Esto proponía Lamarck, pero su mecanismo fue descartado. La herencia se basa en información genética, no en rasgos adquiridos durante la vida."},
+  {stmt:"La similitud entre embriones de distintas especies apoya la idea de que comparten un ancestro común.",ans:true,exp:"La embriología comparada muestra genes ancestrales compartidos que guían el desarrollo embrionario de forma similar en grupos muy distintos."},
+  {stmt:"Una especie perfectamente adaptada a su ambiente no puede cambiar más ni extinguirse.",ans:false,exp:"No existe adaptación perfecta y definitiva. Si el ambiente cambia, la selección natural favorecerá nuevas características. Las especies pueden extinguirse si el cambio es muy rápido."},
+  {stmt:"El Archaeopteryx es considerado un fósil de transición entre dinosaurios y aves.",ans:true,exp:"Correcto. Archaeopteryx tenía características de ambos grupos: dientes y cola ósea (dinosaurios) y plumas (aves). Es uno de los fósiles de transición más importantes."},
+  {stmt:"A mayor similitud en secuencias de ADN entre dos especies, más reciente es su ancestro común.",ans:true,exp:"Correcto. La similitud genética refleja la cercanía evolutiva. Humanos y chimpancés comparten ~98.7% del ADN, indicando un ancestro muy reciente en términos geológicos."},
+  {stmt:"Las estructuras vestigiales son evidencia de que los organismos comparten ancestros que sí usaban esas estructuras.",ans:true,exp:"Exacto. Los huesos pélvicos de las ballenas son vestigios de ancestros terrestres con extremidades posteriores funcionales."},
+  {stmt:"En el principio de superposición, los estratos más profundos son más recientes que los superficiales.",ans:false,exp:"Es al revés: los estratos más profundos son los más antiguos y los superficiales son los más recientes. Así se lee la historia de la vida en las rocas."}
+];
+
+// ===== QUIZ DATA =====
+const quizData=[
+  {
+    q:"¿Cuál es el mecanismo central propuesto por Darwin y Wallace para explicar la evolución?",
+    opts:["Herencia de caracteres adquiridos","Selección natural","Mutación aleatoria sin selección","Migración entre poblaciones"],
+    ans:1,
+    exp:"La selección natural es el mecanismo central: individuos con variaciones favorables sobreviven más y se reproducen más, transmitiendo esas características a su descendencia."
+  },
+  {
+    q:"En una población de insectos, algunos tienen alas más largas que otros. Esta variación es heredable. Luego de un período de fuertes vientos, solo sobreviven los de alas más cortas. ¿Qué postulado de Darwin explica mejor este resultado?",
+    opts:["Solo el de variación entre individuos","El de herencia de caracteres adquiridos (Lamarck)","Los cuatro postulados juntos: variación, herencia, competencia y selección diferencial","Solo el de lucha por la supervivencia"],
+    ans:2,
+    exp:"El escenario completo ilustra los cuatro postulados: existe variación (distintas longitudes de ala), esta es heredable, los recursos (sobrevivir) son limitados, y los más cortos tuvieron éxito diferencial en ese ambiente."
+  },
+  {
+    q:"Un naturalista encuentra en dos especies distintas (pez y murciélago) huesos con la misma estructura interna pero funciones completamente diferentes. Esto es un ejemplo de:",
+    opts:["Estructuras análogas","Convergencia evolutiva","Estructuras homólogas","Estructuras vestigiales"],
+    ans:2,
+    exp:"Las estructuras homólogas tienen el mismo origen embrionario pero distintas funciones, indicando un ancestro común. Diferente a las análogas, que tienen la misma función pero distinto origen."
+  },
+  {
+    q:"¿Cuál de los siguientes NO es un postulado de la teoría de la selección natural de Darwin?",
+    opts:["Variación entre individuos de una población","Los rasgos favorables se heredan a la descendencia","Los organismos adquieren rasgos durante su vida y los transmiten","Algunos individuos sobreviven y se reproducen más que otros"],
+    ans:2,
+    exp:"La herencia de caracteres adquiridos es la teoría de Lamarck, no de Darwin. La selección natural opera sobre variaciones heredables presentes desde el nacimiento, no adquiridas durante la vida."
+  },
+  {
+    q:"¿Por qué el registro fósil es incompleto?",
+    opts:["Porque los científicos no han excavado suficientemente","Porque la fosilización requiere condiciones muy específicas y poco comunes","Porque los fósiles desaparecen al ser encontrados","Porque solo los vertebrados pueden fosilizarse"],
+    ans:1,
+    exp:"La fosilización requiere entierro rápido, partes duras, ausencia de oxígeno y mineralización. La mayoría de organismos se descomponen sin dejar rastro."
+  },
+  {
+    q:"¿Qué revelan principalmente las secuencias de ADN similares entre dos especies?",
+    opts:["Que viven en el mismo hábitat","Que tienen el mismo comportamiento","Que comparten un ancestro común más reciente","Que pertenecen exactamente a la misma especie"],
+    ans:2,
+    exp:"A mayor similitud en el ADN, más reciente es el ancestro compartido. Es evidencia molecular directa de las relaciones evolutivas entre especies."
+  },
+  {
+    q:"La similitud entre embriones de vertebrados en etapas tempranas de desarrollo es un tipo de evidencia llamada:",
+    opts:["Evidencia por registro fósil","Evidencia por anatomía comparada vestigial","Evidencia embriológica","Evidencia por selección artificial"],
+    ans:2,
+    exp:"La embriología comparada es el estudio de las similitudes en el desarrollo embrionario de distintas especies. Refleja genes ancestrales comunes (genes Hox)."
+  },
+  {
+    q:"¿Cuál es la principal diferencia entre la propuesta de Lamarck y la de Darwin?",
+    opts:["Lamarck creía que las especies no cambian; Darwin sí","Lamarck propuso herencia de caracteres adquiridos; Darwin propuso selección natural sobre variación heredable","Solo Darwin realizó trabajo de campo","Son exactamente iguales, solo difieren en el nombre"],
+    ans:1,
+    exp:"La diferencia clave está en el mecanismo: Lamarck propuso uso/desuso y herencia de caracteres adquiridos (incorrecto). Darwin propuso variación heredable + selección natural (confirmado por genética)."
+  },
+  {
+    q:"Las ballenas tienen pequeños huesos pélvicos que no usan para nada. Estos son un ejemplo de:",
+    opts:["Estructuras análogas","Estructuras homólogas funcionales","Estructuras vestigiales","Fósiles de transición"],
+    ans:2,
+    exp:"Las estructuras vestigiales son remanentes de estructuras que eran funcionales en ancestros. Los huesos pélvicos de las ballenas son vestigios de las extremidades traseras de sus ancestros terrestres."
+  },
+  {
+    q:"Al comparar dos estratos rocosos, el estrato A está sobre el estrato B. ¿Cuál es más antiguo?",
+    opts:["El estrato A, porque está arriba","El estrato B, porque está abajo","Ambos tienen la misma edad","No es posible saberlo sin analizar los fósiles"],
+    ans:1,
+    exp:"Según el principio de superposición, en rocas no alteradas los estratos inferiores son más antiguos. El estrato B, al estar bajo el A, se formó primero."
+  },
+  {
+    q:"¿Qué observación de Darwin en las islas Galápagos fue más importante para desarrollar su teoría?",
+    opts:["Encontró fósiles de dinosaurios en las playas","Observó que los pinzones de distintas islas tenían picos diferentes adaptados al alimento disponible","Descubrió que las tortugas eran idénticas en todas las islas","Comprobó que las plantas eran iguales en todas las islas"],
+    ans:1,
+    exp:"Los pinzones de Galápagos mostraron variaciones de pico adaptadas a los alimentos de cada isla, sugiriendo un ancestro común que se diversificó. Este fue uno de los hallazgos más influyentes del viaje."
+  },
+  {
+    q:"¿Cuándo se considera que ha ocurrido una especiación?",
+    opts:["Cuando dos individuos de la misma especie tienen hijos","Cuando una población acumula diferencias suficientes para no poder reproducirse con la población original","Cuando una especie migra a otro continente","Cuando cambia el color de una población"],
+    ans:1,
+    exp:"La especiación ocurre cuando dos poblaciones acumulan suficientes diferencias genéticas —generalmente por aislamiento— que impiden la reproducción exitosa entre ellas, dando origen a dos especies distintas."
+  }
+];
+
+let vfAnswered = {};
+let quizAnswered = {};
+
+function buildVF(){
+  vfAnswered = {};
+  const c = document.getElementById('tf-container');
+  c.innerHTML = '';
+  document.getElementById('vf-score-banner').classList.remove('show');
+  tfData.forEach((item,i)=>{
+    const d = document.createElement('div');
+    d.className = 'tf-card';
+    d.id = 'tfc'+i;
+    d.innerHTML = `<div class="tf-stmt">${item.stmt}</div>
+    <div class="tf-btns">
+      <button class="tf-btn v-btn" onclick="checkTF(${i},true)">✓ Verdadero</button>
+      <button class="tf-btn f-btn" onclick="checkTF(${i},false)">✗ Falso</button>
+    </div>
+    <div class="tf-exp" id="tfexp${i}">${item.exp}</div>`;
+    c.appendChild(d);
+  });
+}
+
+function checkTF(i, pick){
+  if(vfAnswered[i]) return;
+  vfAnswered[i] = pick;
+  const correct = tfData[i].ans === pick;
+  const card = document.getElementById('tfc'+i);
+  card.classList.add(correct ? 'answered-correct' : 'answered-wrong');
+  const vBtn = card.querySelector('.v-btn');
+  const fBtn = card.querySelector('.f-btn');
+  if(pick){
+    vBtn.classList.add(correct ? 'correct-pick' : 'wrong-pick');
+    if(!correct) fBtn.classList.add('correct-pick');
+  } else {
+    fBtn.classList.add(correct ? 'correct-pick' : 'wrong-pick');
+    if(!correct) vBtn.classList.add('correct-pick');
+  }
+  document.getElementById('tfexp'+i).classList.add('show');
+  updateVFScore();
+}
+
+function updateVFScore(){
+  const answered = Object.keys(vfAnswered).length;
+  let correct = 0;
+  Object.keys(vfAnswered).forEach(i=>{
+    if(vfAnswered[i] === tfData[i].ans) correct++;
+  });
+  if(answered > 0){
+    document.getElementById('vf-score-banner').classList.add('show');
+    document.getElementById('vf-pts').textContent = correct;
+    document.getElementById('vf-total-txt').textContent = answered + ' de ' + tfData.length + ' respondidas';
+  }
+}
+
+function resetVF(){ buildVF(); }
+
+function buildQuiz(){
+  quizAnswered = {};
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = '';
+  document.getElementById('quiz-score-banner').classList.remove('show');
+  quizData.forEach((item,i)=>{
+    const d = document.createElement('div');
+    d.className = 'quiz-card';
+    d.id = 'qqc'+i;
+    let opts = '';
+    item.opts.forEach((o,j)=>{
+      opts += `<label class="opt-label" id="opt${i}_${j}"><input type="radio" name="q${i}" value="${j}"> ${o}</label>`;
+    });
+    d.innerHTML = `<div class="q-num">Pregunta ${i+1} de ${quizData.length}</div>
+    <div class="q-text">${item.q}</div>
+    <div class="options">${opts}</div>
+    <button class="check-btn" onclick="checkQ(${i})">Verificar respuesta</button>
+    <div class="feedback-box" id="fb${i}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function checkQ(i){
+  if(quizAnswered[i] !== undefined) return;
+  const sel = document.querySelector(`input[name="q${i}"]:checked`);
+  if(!sel) return;
+  const chosen = parseInt(sel.value);
+  const correct = chosen === quizData[i].ans;
+  quizAnswered[i] = correct;
+  const card = document.getElementById('qqc'+i);
+  card.classList.add(correct ? 'answered-correct' : 'answered-wrong');
+  document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>{
+    r.disabled = true;
+    const lbl = r.parentElement;
+    if(parseInt(r.value) === quizData[i].ans) lbl.classList.add('correct-opt');
+    else if(parseInt(r.value) === chosen && !correct) lbl.classList.add('wrong-opt');
+  });
+  const fb = document.getElementById('fb'+i);
+  fb.className = 'feedback-box show ' + (correct?'correct':'wrong');
+  fb.innerHTML = (correct ? '✓ Correcto. ' : '✗ Incorrecto. ') + quizData[i].exp;
+  card.querySelector('.check-btn').disabled = true;
+  updateQuizScore();
+}
+
+function updateQuizScore(){
+  const answered = Object.keys(quizAnswered).length;
+  const correct = Object.values(quizAnswered).filter(v=>v).length;
+  if(answered > 0){
+    document.getElementById('quiz-score-banner').classList.add('show');
+    document.getElementById('quiz-pts').textContent = correct;
+    document.getElementById('quiz-total-txt').textContent = answered + ' de ' + quizData.length + ' respondidas';
+  }
+}
+
+function resetQuiz(){ buildQuiz(); }
+
+// Init
+buildNav();
+buildVF();
+buildQuiz();
+</script>
+</body>
+</html>
