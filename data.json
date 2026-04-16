@@ -3,7 +3,7 @@
     "materia": "Biología 1M",
     "icono": "🧬",
     "color": "#2e7d32",
-    "carpeta": "Biologia 1M",
+    "carpeta": "biologia 1M",
     "archivos": [
       { "nombre": "La historia de los patrones", "archivo": "La historia de los patrones.html" },
       { "nombre": "Guia 1 Evolucion", "archivo": "Guia-1-Evolucion.html"},
