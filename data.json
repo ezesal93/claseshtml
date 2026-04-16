@@ -5,7 +5,8 @@
     "color": "#2e7d32",
     "carpeta": "Biologia 1M",
     "archivos": [
-      { "nombre": "La historia de los patrones", "archivo": "La historia de los patrones.html" }
+      { "nombre": "La historia de los patrones", "archivo": "La historia de los patrones.html" },
+      { "nombre": "Guia 1 Evolucion", "archivo": "Guia-1-Evolucion.html"}
     ]
   },
   {
@@ -62,7 +63,7 @@
     "materia": "Orientacion",
     "icono": "⚗️",
     "color": "#0277bd",
-    "carpeta": "Quimica1M",
+    "carpeta": "Orientacion",
     "archivos": [
       { "nombre": "Clase Vapers", "archivo": "Clase-vapers.html" }
     ]
@@ -71,7 +72,7 @@
     "materia": "Clases-Quimica-Marcos",
     "icono": "⚗️",
     "color": "#0277bd",
-    "carpeta": "Quimica1M",
+    "carpeta": "Clases-Quimica-Marcos",
     "archivos": [
       { "nombre": "Diagnóstico", "archivo": "diagnostico.html" }
     ]
