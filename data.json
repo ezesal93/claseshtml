@@ -6,7 +6,8 @@
     "carpeta": "Biologia 1M",
     "archivos": [
       { "nombre": "La historia de los patrones", "archivo": "La historia de los patrones.html" },
-      { "nombre": "Guia 1 Evolucion", "archivo": "Guia-1-Evolucion.html"}
+      { "nombre": "Guia 1 Evolucion", "archivo": "Guia-1-Evolucion.html"},
+      { "nombre": "Recurso Estudio Prueba Evolución", "archivo": "Evolucion-Estudio.html"}
     ]
   },
   {
