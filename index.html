@@ -31,27 +31,35 @@
 <p id="error">No se pudo cargar data.json. Asegúrate de que el archivo existe en el repositorio.</p>
 <footer>Clases publicadas con GitHub Pages</footer>
 <script>
+  const COLORS = [
+    '#4e6ef2','#1a9e75','#d85a30','#9b59b6',
+    '#2980b9','#e67e22','#16a085','#8e44ad','#c0392b'
+  ];
+
   fetch('data.json')
     .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-    .then(materias => {
+    .then(data => {
       const grid = document.getElementById('grid');
-      materias.forEach(m => {
+      data.asignaturas.forEach((asignatura, i) => {
         const card = document.createElement('div');
         card.className = 'card';
+
         const header = document.createElement('div');
         header.className = 'card-header';
-        header.style.background = m.color || '#444';
-        header.innerHTML = '<span style="font-size:1.2rem">' + (m.icono || '') + '</span> ' + m.materia;
+        header.style.background = COLORS[i % COLORS.length];
+        header.textContent = asignatura.categoria;
+
         const ul = document.createElement('ul');
-        m.archivos.forEach(f => {
+        asignatura.archivos.forEach(f => {
           const li = document.createElement('li');
           const a = document.createElement('a');
-          a.href = m.carpeta + '/' + f.archivo;
+          a.href = f.url;
           a.target = '_blank';
           a.textContent = f.nombre;
           li.appendChild(a);
           ul.appendChild(li);
         });
+
         card.appendChild(header);
         card.appendChild(ul);
         grid.appendChild(card);
