@@ -1,81 +1,65 @@
-[
-  {
-    "materia": "Biología 1M",
-    "icono": "🧬",
-    "color": "#2e7d32",
-    "carpeta": "biologia 1M",
-    "archivos": [
-      { "nombre": "La historia de los patrones", "archivo": "La historia de los patrones.html" },
-      { "nombre": "Guia 1 Evolucion", "archivo": "Guia-1-Evolucion.html"},
-      { "nombre": "Recurso Estudio Prueba Evolución", "archivo": "Evolucion-Estudio.html"}
-    ]
-  },
-  {
-    "materia": "Ciencias 3-4",
-    "icono": "🔬",
-    "color": "#1565c0",
-    "carpeta": "Ciencias 3-4",
-    "archivos": [
-      { "nombre": "Guia Infografía 3M", "archivo": "Guia-Infografia-3M.html" },
-      { "nombre": "Guia Infografía 4M", "archivo": "Guia-Infografia-4M.html" }
-    ]
-  },
-  {
-    "materia": "Ciencias Salud 3M",
-    "icono": "🧠",
-    "color": "#6a1b9a",
-    "carpeta": "Ciencias Salud 3M",
-    "archivos": [
-      { "nombre": "Cerebro adolescente 3M", "archivo": "cerebro-adolescente-3M.html" }
-    ]
-  },
-  {
-    "materia": "Ecología 4M",
-    "icono": "🌿",
-    "color": "#558b2f",
-    "carpeta": "Ecologia 4M",
-    "archivos": [
-      { "nombre": "4M - La historia de los patrones", "archivo": "4M-La historia de los patrones.html" }
-    ]
-  },
-  {
-    "materia": "Física 1M",
-    "icono": "⚡",
-    "color": "#d84315",
-    "carpeta": "Fisica1M",
-    "archivos": [
-      { "nombre": "Ecuaciones - Ondas - Simulación", "archivo": "Ecuaciones-Ondas-Simulacion.html" },
-      { "nombre": "Guía Ondas", "archivo": "Guia Ondas.html" },
-      { "nombre": "Laboratorio introducción a ondas", "archivo": "Laboratorio-introduccion-ondas.html" },
-      { "nombre": "Laboratorio ondas - variables", "archivo": "Laboratorio-ondas-variables.html" },
-      { "nombre": "Ondas 1M", "archivo": "ondas1M.html" }
-    ]
-  },
-  {
-    "materia": "Química 1M",
-    "icono": "⚗️",
-    "color": "#0277bd",
-    "carpeta": "Quimica1M",
-    "archivos": [
-      { "nombre": "Laboratorio introducción al átomo", "archivo": "Laboratorio-introducion-atomo.html" }
-    ]
-  },
-  {
-    "materia": "Orientacion",
-    "icono": "⚗️",
-    "color": "#0277bd",
-    "carpeta": "Orientacion",
-    "archivos": [
-      { "nombre": "Clase Vapers", "archivo": "Clase-vapers.html" }
-    ]
-  },
-  {
-    "materia": "Clases-Quimica-Marcos",
-    "icono": "⚗️",
-    "color": "#0277bd",
-    "carpeta": "Clases-Quimica-Marcos",
-    "archivos": [
-      { "nombre": "Diagnóstico", "archivo": "diagnostico.html" }
-    ]
-  }
-]
+{
+  "asignaturas": [
+    {
+      "categoria": "Biología 1M",
+      "archivos": [
+        { "nombre": "Guía 1: Evolución", "url": "Biologia-1M/guia-1-evolucion.html" },
+        { "nombre": "Guía de Estudio: Evolución", "url": "Biologia-1M/guia-estudio-evolucion.html" },
+        { "nombre": "La Historia de los Patrones", "url": "Biologia-1M/la-historia-de-los-patrones.html" }
+      ]
+    },
+    {
+      "categoria": "Ciencias 3° y 4° Medio",
+      "archivos": [
+        { "nombre": "Guía Infografía 3M", "url": "Ciencias-3-4/guia-infografia-3M.html" },
+        { "nombre": "Guía Infografía 4M", "url": "Ciencias-3-4/guia-infografia-4M.html" }
+      ]
+    },
+    {
+      "categoria": "Ciencias para la Salud 3M",
+      "archivos": [
+        { "nombre": "El Cerebro Adolescente", "url": "Ciencias-Salud-3M/cerebro-adolescente-3M.html" }
+      ]
+    },
+    {
+      "categoria": "Física 1M",
+      "archivos": [
+        { "nombre": "Simulación: Ecuaciones de Ondas", "url": "Fisica-1M/ecuaciones-ondas-simulacion.html" },
+        { "nombre": "Guía 1: Ondas", "url": "Fisica-1M/guia-1-ondas.html" },
+        { "nombre": "Laboratorio: Introducción Ondas", "url": "Fisica-1M/laboratorio-introduccion-ondas.html" },
+        { "nombre": "Laboratorio: Ondas Variables", "url": "Fisica-1M/laboratorio-ondas-variables.html" },
+        { "nombre": "Simulador de Ondas", "url": "Fisica-1M/simulador-onda.html" }
+      ]
+    },
+    {
+      "categoria": "Química 1M",
+      "archivos": [
+        { "nombre": "Laboratorio: Introducción al Átomo", "url": "Quimica-1M/laboratorio-introduccion-atomo.html" }
+      ]
+    },
+    {
+      "categoria": "Ecología 4M",
+      "archivos": [
+        { "nombre": "4M: Historia de los Patrones", "url": "Ecologia-4M/4M-la-historia-de-los-patrones.html" }
+      ]
+    },
+    {
+      "categoria": "Material Extra",
+      "archivos": [
+        { "nombre": "Guía Mapa Conceptual", "url": "Material-Extra/guia-mapa-conceptual.html" }
+      ]
+    },
+    {
+      "categoria": "Orientación",
+      "archivos": [
+        { "nombre": "Clase: Vapers", "url": "Orientacion/clase-vapers.html" }
+      ]
+    },
+    {
+      "categoria": "Química Marcos",
+      "archivos": [
+        { "nombre": "Diagnóstico", "url": "Clases-Quimica-Marcos/diagnostico.html" }
+      ]
+    }
+  ]
+}
