@@ -28,13 +28,16 @@
         { "nombre": "Guía 1: Ondas", "url": "Fisica-1M/guia-1-ondas.html" },
         { "nombre": "Laboratorio: Introducción Ondas", "url": "Fisica-1M/laboratorio-introduccion-ondas.html" },
         { "nombre": "Laboratorio: Ondas Variables", "url": "Fisica-1M/laboratorio-ondas-variables.html" },
-        { "nombre": "Simulador de Ondas", "url": "Fisica-1M/simulador-onda.html" }
+        { "nombre": "Simulador de Ondas", "url": "Fisica-1M/simulador-onda.html" },
+        { "nombre": "Guía 2 : Ondas", "url": "Fisica-1M/guia-2-ondas.html" },
+        { "nombre": "Guía 2 : Ondas", "url": "Fisica-1M/guia-3-ondas.html" }
       ]
     },
     {
       "categoria": "Química 1M",
       "archivos": [
-        { "nombre": "Laboratorio: Introducción al Átomo", "url": "Quimica-1M/laboratorio-introduccion-atomo.html" }
+        { "nombre": "Laboratorio: Introducción al Átomo", "url": "Quimica-1M/laboratorio-introduccion-atomo.html" },
+        { "nombre": "Guía Estructura Átomica", "url": "Quimica-1M/guia-quimica-estructra-atomica" }       
       ]
     },
     {

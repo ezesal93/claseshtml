@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía — Estructura Atómica y Configuración Electrónica — Química 1° Medio</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+
+.paper {
+  width: 210mm; min-height: 297mm; background: white;
+  margin: 20px auto; padding: 14mm 16mm 16mm 16mm;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.22);
+}
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TÍTULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:19pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJA CONTENIDOS */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* ÍTEM HEADER */
+.item-header {
+  background:white; color:#111; border:1.5px solid #111;
+  padding:4px 10px; font-size:9pt; font-weight:bold;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase;
+}
+
+/* INSTRUCCIÓN */
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; }
+
+/* LECTURA INFO */
+.lectura-info {
+  border:1.5px solid #111; border-radius:6px;
+  padding:8pt 10pt; margin-bottom:9pt;
+  background:white; font-size:10pt; line-height:1.65; text-align:justify;
+}
+.lectura-info-header {
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:6pt; padding-bottom:4pt; border-bottom:1.5px solid #111;
+}
+.lectura-info-header .icono { font-size:13pt; line-height:1; }
+.lectura-info-header .titulo-lectura { font-size:10pt; font-weight:bold; color:#111; text-transform:uppercase; letter-spacing:.06em; }
+.lectura-info p { margin-bottom:5pt; }
+.lectura-info p:last-child { margin-bottom:0; }
+
+.concepto { background:white; border:1px solid #111; border-left:4px solid #111; padding:4pt 9pt; margin:6pt 0; font-size:9.5pt; }
+
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6pt; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-top:6pt; }
+.cols4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:7px; margin-top:6pt; }
+.col-box { background:white; border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.5; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+/* FÓRMULAS */
+.formula-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:7pt 0; }
+.formula-box { border:1.5px solid #111; border-radius:4px; padding:6pt 9pt; text-align:center; }
+.formula-box .f-titulo { font-size:8.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.05em; margin-bottom:4pt; border-bottom:1px solid #111; padding-bottom:3pt; }
+.formula-box .f-expr { font-family:'Times New Roman',Times,serif; font-size:14pt; font-style:italic; line-height:1.4; margin:5pt 0; }
+.formula-box .f-desc { font-size:8.5pt; line-height:1.5; border-top:1px solid #ddd; padding-top:4pt; margin-top:4pt; text-align:left; }
+
+/* TABLA DATOS */
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:3px 6px; text-align:center; line-height:1.35; }
+table.datos th { background:white; color:#111; font-size:8pt; font-weight:bold; }
+table.datos td:first-child { text-align:left; }
+.tabla-tit { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#444; margin-bottom:3px; }
+
+/* MOELLER */
+.moeller-wrap { border:1.5px solid #111; border-radius:4px; padding:7pt 10pt; margin:7pt 0; }
+.moeller-tit { font-size:8.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6pt; border-bottom:1px solid #111; padding-bottom:3pt; }
+
+/* BANCO */
+.banco { font-size:8.5pt; font-weight:bold; color:#333; margin-bottom:5px; }
+.banco em { font-style:italic; font-weight:normal; }
+
+/* COMPLETACIÓN */
+.completacion { font-size:10.5pt; line-height:2.2; text-align:justify; margin-bottom:9pt; }
+.bf { display:inline-block; border-bottom:1.2px solid #111; min-width:70pt; height:14pt; vertical-align:bottom; margin:0 2pt; }
+.bf-l { min-width:110pt; }
+.bf-s { min-width:44pt; }
+.bf-m { min-width:80pt; }
+
+/* SM */
+.sm-p { margin-bottom:10px; }
+.sm-e { font-size:10.5pt; line-height:1.5; margin-bottom:5px; }
+.sm-opts { display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; padding-left:10px; }
+.sm-op { display:flex; align-items:flex-start; gap:5px; font-size:10pt; line-height:1.4; }
+.circulo { width:14pt; height:14pt; border:1.2px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+
+/* VF */
+.vf-enc { display:flex; justify-content:flex-end; gap:3px; font-size:8pt; font-weight:bold; margin-bottom:3px; letter-spacing:.06em; }
+.vf-enc span { width:16pt; text-align:center; }
+.vf-item { display:flex; align-items:flex-start; gap:6px; margin-bottom:6px; font-size:10pt; line-height:1.5; }
+.vf-n { font-weight:bold; min-width:14pt; flex-shrink:0; }
+.vf-txt { flex:1; }
+.vf-cas { display:flex; gap:3px; flex-shrink:0; margin-left:auto; padding-left:6px; }
+.casilla { width:16pt; height:16pt; border:1.2px solid #111; flex-shrink:0; }
+.corr-linea { display:block; border-bottom:.8px solid #aaa; height:15pt; width:100%; margin-top:2px; }
+
+/* DESARROLLO Y EJERCICIOS */
+.dev-p { margin-bottom:10px; }
+.dev-e { font-size:10.5pt; line-height:1.55; margin-bottom:5px; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:1px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:3px; }
+
+/* EJERCICIO BOX */
+.ej-box { border:1px solid #111; border-radius:4px; padding:6pt 9pt; margin-bottom:8pt; }
+.ej-tit { font-size:9pt; font-weight:bold; text-transform:uppercase; letter-spacing:.05em; margin-bottom:5pt; border-bottom:1px solid #ddd; padding-bottom:3pt; }
+
+/* TABLA EJERCICIO CONFIGU */
+.tbl-config { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+.tbl-config th { border:1px solid #111; padding:3px 5px; text-align:center; background:white; font-size:8pt; font-weight:bold; }
+.tbl-config td { border:1px solid #111; padding:4px 5px; text-align:center; }
+.tbl-config td:first-child { text-align:left; font-style:italic; font-weight:bold; }
+.tbl-config .res { min-width:80pt; }
+
+/* LECTURA LATERAL */
+.lectura { border:1px solid #111; border-left:4px solid #111; padding:6pt 9pt; margin-bottom:9pt; background:white; font-size:10pt; line-height:1.65; text-align:justify; }
+.lectura-label { font-size:7.5pt; font-weight:bold; letter-spacing:.09em; color:#333; text-transform:uppercase; margin-bottom:4px; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+
+/* BOTÓN */
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:8mm 12mm 10mm 12mm; min-height:unset; }
+  .btn-print { display:none; }
+  .lectura-info { margin-bottom:6pt; padding:6pt 8pt; }
+  .lectura-info-header { margin-bottom:4pt; padding-bottom:3pt; }
+  .lectura-info p { margin-bottom:3pt; }
+  .concepto { padding:3pt 7pt; margin:4pt 0; }
+  .cols2,.cols3,.cols4 { margin-top:4pt; gap:5px; }
+  .col-box { padding:3pt 6pt; }
+  .tbl-pts { margin-bottom:5px; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  .sep { margin:5px 0; }
+  .sm-p { margin-bottom:7px; }
+  .vf-item { margin-bottom:4px; }
+  .dev-p,.ej-box { margin-bottom:7px; }
+  .linea-r { height:16pt; }
+  .completacion { line-height:2.0; margin-bottom:7pt; }
+  .banco { margin-bottom:3px; }
+  .box-cont { padding:4pt 8pt; margin-bottom:5pt; }
+  .main-title { margin-bottom:4pt; }
+  .main-title h1 { font-size:16pt; }
+  .enc-wrap { margin-bottom:5pt; }
+  table.datos th,table.datos td { padding:2px 5px; }
+  .lectura { padding:4pt 8pt; margin-bottom:6pt; }
+  .formula-box { padding:4pt 7pt; }
+  .formula-box .f-expr { font-size:12pt; margin:3pt 0; }
+  .moeller-wrap { padding:5pt 8pt; margin:5pt 0; }
+  .ej-box { padding:4pt 7pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Estructura Atómica y Configuración Electrónica</h1>
+    <p class="subtitulo">(Química — 1° Medio)</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">72</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenidos:</strong> Modelos atómicos (Dalton, Thomson, Rutherford, Bohr), estructura del átomo, número atómico y másico, partículas en átomos neutros y cargados (iones), configuración electrónica (diagrama de Moeller), grupo y período.</p>
+    <p><strong>Capacidades:</strong> Comprensión, Análisis, Aplicación de fórmulas y modelos.</p>
+    <p><strong>Destrezas:</strong> Identificar, Calcular, Representar, Determinar, Argumentar.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Ítem</th><th>Descripción</th><th>Preguntas</th><th>Pts c/u</th><th>Total</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>I</td><td>Completación de párrafos</td><td>2 párrafos</td><td>—</td><td>10 pts</td><td></td></tr>
+      <tr><td>II</td><td>Selección múltiple</td><td>7 preguntas</td><td>3 pts</td><td>21 pts</td><td></td></tr>
+      <tr><td>III</td><td>Verdadero y Falso</td><td>6 afirmaciones</td><td>2 pts</td><td>12 pts</td><td></td></tr>
+      <tr><td>IV</td><td>Cálculo: partículas y átomos cargados</td><td>tabla + 2 ejerc.</td><td>—</td><td>16 pts</td><td></td></tr>
+      <tr><td>V</td><td>Configuración electrónica, grupo y período</td><td>tabla + desarrollo</td><td>—</td><td>13 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="4">TOTAL</td><td>72 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 1 — MODELOS ATÓMICOS
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Historia de los modelos atómicos</span>
+    </div>
+    <p>A lo largo de la historia, los científicos han propuesto distintos modelos para explicar cómo es el átomo por dentro. Cada modelo fue superado cuando nuevos experimentos revelaron información que el modelo anterior no podía explicar.</p>
+
+    <div class="cols2">
+      <div class="col-box">
+        <span class="col-tit">Dalton (1803) — Esfera maciza</span>
+        Propuso que la materia está formada por átomos: esferas sólidas, indivisibles e indestructibles. Cada elemento tiene átomos de un tipo único. Los compuestos se forman al combinarse átomos de distintos elementos en proporciones fijas.<br>
+        <em>Limitación: no explica la electricidad ni los fenómenos eléctricos de la materia.</em>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Thomson (1897) — "Budín de pasas"</span>
+        Descubrió el electrón con el tubo de rayos catódicos. Propuso que el átomo es una esfera de carga positiva uniforme con electrones incrustados en ella, como pasas en un budín.<br>
+        <em>Limitación: no explica cómo está distribuida la masa del átomo.</em>
+      </div>
+    </div>
+    <div class="cols2" style="margin-top:7px">
+      <div class="col-box">
+        <span class="col-tit">Rutherford (1911) — Núcleo central</span>
+        Con su experimento de la lámina de oro descubrió que el átomo tiene un <strong>núcleo</strong> pequeño, denso y con carga positiva, rodeado de un gran espacio vacío donde orbitan los electrones.<br>
+        <em>Limitación: no explica por qué los electrones en órbita no emiten energía y caen al núcleo (según la física clásica, deberían).</em>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Bohr (1913) — Órbitas cuantizadas</span>
+        Propuso que los electrones se mueven en <strong>órbitas circulares fijas</strong> (niveles de energía) alrededor del núcleo. Solo pueden estar en ciertos niveles: al absorber energía saltan a un nivel mayor; al emitirla, bajan. Explica el espectro del hidrógeno.<br>
+        <em>Limitación: solo funciona bien para el hidrógeno.</em>
+      </div>
+    </div>
+    <div class="concepto" style="margin-top:8pt">
+      <strong>Modelo actual (mecánico-cuántico):</strong> Los electrones no tienen órbitas fijas, sino que se encuentran en <em>orbitales</em>: regiones del espacio donde hay una alta probabilidad de encontrar al electrón. Es el modelo que da origen a la configuración electrónica con subniveles s, p, d, f.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 2 — ESTRUCTURA DEL ÁTOMO + FÓRMULAS
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Estructura del átomo: partículas y fórmulas clave</span>
+    </div>
+    <p>El átomo tiene dos zonas: el <strong>núcleo</strong> (protones y neutrones) y la <strong>corteza</strong> (electrones). Las fórmulas del número atómico y másico permiten calcular cuántas partículas tiene cualquier átomo.</p>
+
+    <div class="cols3">
+      <div class="col-box">
+        <span class="col-tit">Protón (p⁺)</span>
+        Carga: <strong>+1</strong><br>
+        Ubicación: núcleo<br>
+        Masa: 1 u.m.a.<br>
+        Su cantidad define la identidad del elemento.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Neutrón (n⁰)</span>
+        Carga: <strong>0</strong> (neutro)<br>
+        Ubicación: núcleo<br>
+        Masa: 1 u.m.a.<br>
+        Estabiliza el núcleo.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Electrón (e⁻)</span>
+        Carga: <strong>−1</strong><br>
+        Ubicación: corteza<br>
+        Masa: ≈ 0 (despreciable)<br>
+        En átomo neutro: e⁻ = p⁺
+      </div>
+    </div>
+
+    <div class="formula-grid" style="margin-top:9pt">
+      <div class="formula-box">
+        <div class="f-titulo">Número Atómico — Z</div>
+        <div class="f-expr"><em>Z</em> = N° de protones</div>
+        <div class="f-desc">
+          Define la identidad del elemento.<br>
+          En átomo neutro: <strong>Z = N° electrones</strong>.<br>
+          Ej: Cloro Z = 17 → 17 p⁺ y 17 e⁻
+        </div>
+      </div>
+      <div class="formula-box">
+        <div class="f-titulo">Número Másico — A</div>
+        <div class="f-expr"><em>A</em> = <em>Z</em> + <em>N</em></div>
+        <div class="f-desc">
+          <em>N</em> = neutrones; despejar: <strong>N = A − Z</strong><br>
+          Ej: Cloro A = 35, Z = 17 → N = 35 − 17 = <strong>18 n⁰</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Representación simbólica -->
+    <p style="margin-top:8pt;margin-bottom:5pt">En la tabla periódica cada elemento se representa:</p>
+    <div style="text-align:center;margin:5pt 0 7pt 0;">
+      <span style="display:inline-block;border:1.5px solid #111;padding:7pt 20pt;border-radius:4px;font-family:'Times New Roman',serif;font-size:13pt;line-height:1.7">
+        <sup style="font-size:10pt;font-weight:bold">A</sup><sub style="font-size:10pt;font-weight:bold;margin-left:-4px">Z</sub> X
+        &nbsp;&nbsp;&rarr;&nbsp;&nbsp;
+        <sup style="font-size:10pt">35</sup><sub style="font-size:10pt;margin-left:-5px">17</sub> Cl &nbsp; (Cloro)
+      </span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 3 — ÁTOMOS CARGADOS (IONES)
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Átomos cargados: cationes y aniones</span>
+    </div>
+    <p>Un átomo neutro tiene el mismo número de protones que de electrones. Pero cuando un átomo <strong>gana o pierde electrones</strong>, se convierte en un <strong>ion</strong>, que es un átomo con carga eléctrica. La clave es que los protones <em>nunca cambian</em> (cambiar protones significaría cambiar de elemento). Solo cambia el número de electrones.</p>
+
+    <div class="cols2">
+      <div class="col-box">
+        <span class="col-tit">Catión (carga positiva)</span>
+        Se forma cuando el átomo <strong>pierde electrones</strong>. Al tener menos electrones que protones, queda con carga positiva.<br><br>
+        <strong>Regla:</strong> e⁻ = Z − carga<br><br>
+        <em>Ejemplo: Na⁺ (Sodio, Z=11) perdió 1 e⁻<br>
+        → p⁺ = 11 &nbsp;|&nbsp; e⁻ = 11 − 1 = <strong>10</strong></em>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Anión (carga negativa)</span>
+        Se forma cuando el átomo <strong>gana electrones</strong>. Al tener más electrones que protones, queda con carga negativa.<br><br>
+        <strong>Regla:</strong> e⁻ = Z + carga (valor absoluto)<br><br>
+        <em>Ejemplo: Cl⁻ (Cloro, Z=17) ganó 1 e⁻<br>
+        → p⁺ = 17 &nbsp;|&nbsp; e⁻ = 17 + 1 = <strong>18</strong></em>
+      </div>
+    </div>
+
+    <div class="concepto" style="margin-top:8pt">
+      <strong>Regla general para iones:</strong><br>
+      • Protones: <strong>siempre = Z</strong> (nunca cambian).<br>
+      • Neutrones: <strong>siempre = A − Z</strong> (tampoco cambian).<br>
+      • Electrones en ion: <strong>e⁻ = Z − (carga del ion)</strong><br>
+      &nbsp;&nbsp;&nbsp;Catión (carga +): e⁻ = Z − carga &nbsp;|&nbsp; Anión (carga −): e⁻ = Z + carga
+    </div>
+
+    <div style="margin-top:8pt">
+      <div class="tabla-tit">Ejemplo resuelto — Fe³⁺ (Hierro, Z=26, A=56)</div>
+      <table class="datos">
+        <thead><tr><th>Partícula</th><th>Fórmula</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>Protones (p⁺)</td><td>= Z</td><td>26 p⁺</td></tr>
+          <tr><td>Neutrones (n⁰)</td><td>= A − Z = 56 − 26</td><td>30 n⁰</td></tr>
+          <tr><td>Electrones (e⁻)</td><td>= Z − carga = 26 − 3</td><td>23 e⁻</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 4 — CONFIGURACIÓN ELECTRÓNICA Y TABLA PERIÓDICA
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Configuración electrónica, grupo y período</span>
+    </div>
+    <p>La <strong>configuración electrónica</strong> muestra cómo se distribuyen los electrones de un átomo en sus subniveles de energía, siguiendo el diagrama de Moeller (de menor a mayor energía).</p>
+
+    <div class="cols2">
+      <div class="col-box">
+        <span class="col-tit">Capacidad de cada subnivel</span>
+        • Subnivel <strong>s</strong>: máximo <strong>2 e⁻</strong><br>
+        • Subnivel <strong>p</strong>: máximo <strong>6 e⁻</strong><br>
+        • Subnivel <strong>d</strong>: máximo <strong>10 e⁻</strong><br>
+        • Subnivel <strong>f</strong>: máximo <strong>14 e⁻</strong>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Reglas de llenado</span>
+        1. <strong>Aufbau:</strong> de menor a mayor energía.<br>
+        2. <strong>Pauli:</strong> capacidad máxima por subnivel.<br>
+        3. <strong>Hund:</strong> electrones se ubican solos antes de emparejarse.
+      </div>
+    </div>
+
+    <!-- Diagrama de Moeller -->
+    <div class="moeller-wrap" style="margin-top:8pt">
+      <div class="moeller-tit">Diagrama de Moeller — Orden de llenado</div>
+      <table style="border-collapse:collapse;font-family:'Times New Roman',serif;font-size:10pt;margin:0 auto 6pt auto;">
+        <tr>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">1s</td>
+          <td style="padding:3px 8px;border:none"></td><td style="padding:3px 8px;border:none"></td><td style="padding:3px 8px;border:none"></td>
+        </tr>
+        <tr>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">2s</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">2p</td>
+          <td style="padding:3px 8px;border:none"></td><td style="padding:3px 8px;border:none"></td>
+        </tr>
+        <tr>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">3s</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">3p</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">3d</td>
+          <td style="padding:3px 8px;border:none"></td>
+        </tr>
+        <tr>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">4s</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">4p</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">4d</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">4f</td>
+        </tr>
+        <tr>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">5s</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">5p</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">5d</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">5f</td>
+        </tr>
+        <tr>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">6s</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">6p</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">6d</td>
+          <td style="padding:3px 8px;border:none"></td>
+        </tr>
+        <tr>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">7s</td>
+          <td style="padding:3px 8px;border:1px solid #111;font-style:italic;font-weight:bold;text-align:center">7p</td>
+          <td style="padding:3px 8px;border:none"></td><td style="padding:3px 8px;border:none"></td>
+        </tr>
+      </table>
+      <div style="font-size:8.5pt;font-weight:bold;margin-bottom:3pt">Orden siguiendo las diagonales ↗ :</div>
+      <div style="font-family:'Times New Roman',serif;font-size:10pt;line-height:1.9;border:1px solid #ccc;padding:4pt 8pt;border-radius:3px">
+        1<em>s</em> → 2<em>s</em> → 2<em>p</em> → 3<em>s</em> → 3<em>p</em> → 4<em>s</em> → 3<em>d</em> → 4<em>p</em> → 5<em>s</em> → 4<em>d</em> → 5<em>p</em> → 6<em>s</em> → 4<em>f</em> → 5<em>d</em> → 6<em>p</em> → 7<em>s</em>…
+      </div>
+    </div>
+
+    <!-- Ejemplo Cl -->
+    <div class="concepto" style="margin-top:8pt">
+      <strong>Ejemplo — Cloro (Cl, Z = 17):</strong>&nbsp;&nbsp;
+      <span style="font-family:'Times New Roman',serif;font-size:11pt;font-style:italic">1s² 2s² 2p⁶ 3s² 3p⁵</span>
+      &nbsp;→ suma: 2+2+6+2+5 = <strong>17 ✔</strong>
+    </div>
+
+    <!-- Cómo determinar grupo y período -->
+    <div style="margin-top:9pt">
+      <p><strong>¿Cómo determinar el Período y el Grupo desde la configuración electrónica?</strong></p>
+      <div class="cols2" style="margin-top:6pt">
+        <div class="col-box">
+          El período es el <strong>número del último nivel de energía</strong> que contiene electrones (el mayor número que aparece en la configuración).<br><br>
+          <em>Cl: 1s² 2s² 2p⁶ 3s² 3p⁵ → último nivel = <strong>3</strong> → Período 3</em>
+        </div>
+        <div class="col-box">
+          El grupo depende del <strong>último subnivel llenado</strong> y los electrones que tiene:<br>
+          • Termina en <em>s</em> o <em>p</em> → grupo = N° e⁻ en último nivel (elementos representativos).<br>
+          • Termina en <em>d</em> → metales de transición.<br><br>
+          <em>Cl: último nivel 3 → 3s²3p⁵ → 2+5 = <strong>7 e⁻</strong> → Grupo VIIA</em>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de ejemplos resueltos -->
+    <div style="margin-top:8pt">
+      <div class="tabla-tit">Ejemplos resueltos — Configuración, Período y Grupo</div>
+      <table class="datos">
+        <thead><tr><th>Elemento</th><th>Z</th><th>Configuración electrónica</th><th>Período</th><th>Grupo</th></tr></thead>
+        <tbody>
+          <tr><td>Litio (Li)</td><td>3</td><td style="text-align:left;font-style:italic">1s² 2s¹</td><td>2</td><td>IA</td></tr>
+          <tr><td>Carbono (C)</td><td>6</td><td style="text-align:left;font-style:italic">1s² 2s² 2p²</td><td>2</td><td>IVA</td></tr>
+          <tr><td>Neón (Ne)</td><td>10</td><td style="text-align:left;font-style:italic">1s² 2s² 2p⁶</td><td>2</td><td>VIIIA (gas noble)</td></tr>
+          <tr><td>Cloro (Cl)</td><td>17</td><td style="text-align:left;font-style:italic">1s² 2s² 2p⁶ 3s² 3p⁵</td><td>3</td><td>VIIA</td></tr>
+          <tr><td>Calcio (Ca)</td><td>20</td><td style="text-align:left;font-style:italic">1s² 2s² 2p⁶ 3s² 3p⁶ 4s²</td><td>4</td><td>IIA</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       ÍTEM I — COMPLETACIÓN
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem I · Completación</span>
+    <span>10 puntos — 5 pts por párrafo</span>
+  </div>
+  <p class="instruccion">Completa los párrafos usando solo las palabras del banco correspondiente.</p>
+
+  <div class="banco">Banco — Párrafo 1: <em>Dalton · Thomson · Rutherford · Bohr · electrón · núcleo · órbitas · positiva · indivisible · vacío</em></div>
+  <p class="completacion">
+    El modelo atómico de <span class="bf bf-m"></span> propuso que el átomo era una esfera sólida e <span class="bf bf-s"></span>. Más tarde, <span class="bf bf-m"></span> descubrió el <span class="bf bf-s"></span> y propuso que los electrones estaban incrustados en una esfera de carga <span class="bf bf-s"></span>. El experimento de la lámina de oro llevó a <span class="bf bf-m"></span> a concluir que el átomo tiene un <span class="bf bf-s"></span> pequeño y denso rodeado de gran <span class="bf bf-s"></span>. Finalmente, <span class="bf bf-s"></span> propuso que los electrones se mueven en <span class="bf bf-s"></span> circulares fijas de energía definida.
+  </p>
+
+  <div class="banco">Banco — Párrafo 2: <em>número atómico · número másico · neutrones · protones · electrones · catión · anión · pierde · gana · igual</em></div>
+  <p class="completacion">
+    El <span class="bf bf-m"></span> (Z) indica la cantidad de <span class="bf bf-s"></span> en el núcleo y define la identidad del elemento. El <span class="bf bf-m"></span> (A) es la suma de protones y <span class="bf bf-s"></span>. En un átomo neutro, el número de <span class="bf bf-s"></span> es <span class="bf bf-s"></span> al de protones. Cuando un átomo <span class="bf bf-s"></span> electrones se convierte en un <span class="bf bf-s"></span> (carga positiva). Cuando los <span class="bf bf-s"></span>, se convierte en un <span class="bf bf-s"></span> (carga negativa).
+  </p>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM II — SELECCIÓN MÚLTIPLE
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem II · Selección Múltiple</span>
+    <span>21 puntos — 3 pts por pregunta · Solo una alternativa correcta</span>
+  </div>
+  <p class="instruccion">Encierra en un círculo la letra de la alternativa correcta.</p>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>1.</strong> ¿Cuál fue el aporte fundamental del experimento de Rutherford con la lámina de oro?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Descubrió el electrón como partícula subatómica.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Demostró que el átomo tiene un núcleo pequeño, denso y cargado positivamente.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Propuso que los electrones se mueven en órbitas de energía fija.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Confirmó que el átomo es indivisible y no tiene estructura interna.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>2.</strong> El átomo de Fósforo tiene Z = 15 y A = 31. ¿Cuántos neutrones posee?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>31 neutrones.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>15 neutrones.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>16 neutrones.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>46 neutrones.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>3.</strong> El ion Mg²⁺ tiene Z = 12 y A = 24. ¿Cuántos electrones posee?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>14 electrones.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>12 electrones.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>10 electrones.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>24 electrones.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>4.</strong> El ion S²⁻ tiene Z = 16. ¿Cuántos electrones posee?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>14 electrones.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>16 electrones.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>18 electrones.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>32 electrones.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>5.</strong> Según el diagrama de Moeller, ¿cuál es el orden correcto de llenado de los subniveles después del 3p?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>3p → 3d → 4s → 4p</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>3p → 4s → 3d → 4p</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>3p → 4p → 4s → 3d</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>3p → 4s → 4p → 3d</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>6.</strong> Un elemento tiene la configuración electrónica: 1s² 2s² 2p⁶ 3s² 3p⁴. ¿En qué período y grupo se encuentra en la tabla periódica?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Período 2, Grupo VIA.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Período 3, Grupo IVA.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Período 3, Grupo VIA.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Período 2, Grupo IVA.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>7.</strong> ¿Cuál de las siguientes configuraciones electrónicas corresponde al ion Ca²⁺ (Z = 20)?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>1s² 2s² 2p⁶ 3s² 3p⁶ 4s²</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d²</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>1s² 2s² 2p⁶ 3s² 3p⁶</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>1s² 2s² 2p⁶ 3s² 3p⁴</span></div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM III — VERDADERO Y FALSO
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem III · Verdadero y Falso</span>
+    <span>12 puntos — 2 pts por afirmación</span>
+  </div>
+  <p class="instruccion">Marca con una <strong>X</strong> en V o F. Corrige las afirmaciones falsas en la línea.</p>
+
+  <div class="vf-enc"><span>V</span><span>F</span></div>
+
+  <div class="vf-item">
+    <span class="vf-n">1.</span>
+    <span class="vf-txt">En un átomo neutro, el número de protones siempre es igual al número de electrones.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">2.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">El modelo de Bohr propuso que los electrones se distribuyen aleatoriamente alrededor del núcleo, sin órbitas definidas.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <div class="vf-item">
+    <span class="vf-n">3.</span>
+    <span class="vf-txt">Cuando un átomo forma un catión, pierde electrones y su carga se vuelve positiva. Los protones no cambian.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">4.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">El número de neutrones de un ion cambia respecto al átomo neutro porque al ganar o perder electrones también cambia la masa del átomo.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <div class="vf-item">
+    <span class="vf-n">5.</span>
+    <span class="vf-txt">El período de un elemento en la tabla periódica corresponde al número del último nivel de energía que contiene electrones en su configuración electrónica.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">6.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">Un elemento cuya configuración termina en 4s² 3d⁵ pertenece a los elementos representativos del Grupo IIA porque termina en el subnivel s.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM IV — CÁLCULO DE PARTÍCULAS
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem IV · Cálculo de Partículas en Átomos Neutros y Cargados</span>
+    <span>16 puntos</span>
+  </div>
+  <p class="instruccion">Calcula el número de protones, neutrones y electrones para cada especie. Muestra las fórmulas utilizadas.</p>
+
+  <!-- Tabla principal de ejercicios -->
+  <div class="ej-box">
+    <div class="ej-tit">Ejercicio 1 — Completa la tabla (10 pts · 1 pt por casilla correcta)</div>
+    <p style="font-size:9pt;margin-bottom:6pt;font-style:italic">Usa las fórmulas: Z = p⁺ &nbsp;|&nbsp; N = A − Z &nbsp;|&nbsp; e⁻ = Z (neutro) &nbsp;|&nbsp; e⁻ = Z − carga (catión) &nbsp;|&nbsp; e⁻ = Z + carga (anión)</p>
+    <table class="tbl-config">
+      <thead>
+        <tr>
+          <th>Especie</th>
+          <th>Símbolo</th>
+          <th>Z</th>
+          <th>A</th>
+          <th>Protones (p⁺)</th>
+          <th>Neutrones (n⁰)</th>
+          <th>Electrones (e⁻)</th>
+          <th>¿Neutro o Ion?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sodio neutro</td>
+          <td>Na</td><td>11</td><td>23</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Sodio ion</td>
+          <td>Na⁺</td><td>11</td><td>23</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Oxígeno neutro</td>
+          <td>O</td><td>8</td><td>16</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Oxígeno ion</td>
+          <td>O²⁻</td><td>8</td><td>16</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Aluminio ion</td>
+          <td>Al³⁺</td><td>13</td><td>27</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Hierro ion</td>
+          <td>Fe²⁺</td><td>26</td><td>56</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Nitrógeno ion</td>
+          <td>N³⁻</td><td>7</td><td>14</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Potasio ion</td>
+          <td>K⁺</td><td>19</td><td>39</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Flúor ion</td>
+          <td>F⁻</td><td>9</td><td>19</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+        <tr>
+          <td>Calcio ion</td>
+          <td>Ca²⁺</td><td>20</td><td>40</td>
+          <td class="res"></td><td class="res"></td><td class="res"></td><td class="res"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Ejercicio 2 — Identificar el elemento -->
+  <div class="ej-box">
+    <div class="ej-tit">Ejercicio 2 — Identifica el elemento o ion (6 pts · 2 pts c/u)</div>
+    <p style="font-size:9pt;margin-bottom:7pt;font-style:italic">Con los datos entregados, determina Z, A y la carga del ion (si corresponde).</p>
+
+    <div class="dev-p">
+      <div class="dev-e"><strong>a)</strong> Un ion tiene 18 protones, 22 neutrones y 16 electrones. ¿Cuál es su símbolo completo (<sup>A</sup><sub>Z</sub>X<sup>carga</sup>)?</div>
+      <span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+    <div class="dev-p">
+      <div class="dev-e"><strong>b)</strong> Un átomo neutro tiene 15 protones y 16 neutrones. ¿Cuál es su símbolo completo y cuántos electrones tiene?</div>
+      <span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+    <div class="dev-p" style="margin-bottom:0">
+      <div class="dev-e"><strong>c)</strong> Un ion tiene Z = 26, A = 56 y 23 electrones. ¿Qué elemento es y cuál es su carga iónica?</div>
+      <span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM V — CONFIGURACIÓN ELECTRÓNICA
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem V · Configuración Electrónica, Grupo y Período</span>
+    <span>13 puntos</span>
+  </div>
+  <p class="instruccion">Escribe la configuración electrónica de cada elemento o ion usando el diagrama de Moeller. Luego determina período y grupo.</p>
+
+  <!-- Tabla de configuraciones -->
+  <div class="ej-box">
+    <div class="ej-tit">Ejercicio 1 — Completa la tabla (9 pts · 1 pt por columna correcta)</div>
+    <table class="tbl-config">
+      <thead>
+        <tr>
+          <th>Elemento / Ion</th>
+          <th>Z</th>
+          <th>N° e⁻</th>
+          <th>Configuración electrónica completa</th>
+          <th>Período</th>
+          <th>Grupo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hidrógeno (H)</td><td>1</td><td>1</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Carbono (C)</td><td>6</td><td>6</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Nitrógeno (N)</td><td>7</td><td>7</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Neón (Ne)</td><td>10</td><td>10</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Magnesio (Mg)</td><td>12</td><td>12</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Azufre (S)</td><td>16</td><td>16</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Argón (Ar)</td><td>18</td><td>18</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Potasio (K)</td><td>19</td><td>19</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr>
+          <td>Ion Na⁺</td><td>11</td><td>10</td>
+          <td></td><td>—</td><td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="rubrica">Rúbrica: 1 pt por cada configuración correcta · Período y Grupo se evalúan solo si la configuración es correcta.</p>
+  </div>
+
+  <!-- Ejercicio de desarrollo -->
+  <div class="ej-box">
+    <div class="ej-tit">Ejercicio 2 — Preguntas de desarrollo (4 pts)</div>
+
+    <div class="dev-p">
+      <div class="dev-e"><strong>a) (2 pts)</strong> Un elemento desconocido tiene la siguiente configuración electrónica: <span style="font-family:'Times New Roman',serif;font-style:italic">1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p³</span>. Determina su número atómico (Z), período y grupo. Explica cómo llegaste a esa conclusión.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 1 pt por Z correcto (33) y período correcto (4) · 1 pt por grupo correcto (VA) con justificación.</p>
+    </div>
+
+    <div class="dev-p" style="margin-bottom:0">
+      <div class="dev-e"><strong>b) (2 pts)</strong> El ion Cl⁻ y el átomo de Ar (Z=18) tienen exactamente la misma configuración electrónica. ¿Por qué entonces son elementos diferentes? Explica usando los conceptos de número atómico, protones y electrones.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 2 pts si explica que la identidad la define Z (protones), no los electrones, y que Cl tiene Z=17 y Ar tiene Z=18 aunque ambos tengan 18 e⁻.</p>
+    </div>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Química — 1° Medio · Estructura Atómica</span>
+    <span>Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>

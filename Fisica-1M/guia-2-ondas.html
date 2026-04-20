@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 2 — El Sonido — Física 1° Medio</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+
+.paper {
+  width: 210mm; min-height: 297mm; background: white;
+  margin: 20px auto; padding: 14mm 16mm 16mm 16mm;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.22);
+}
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TÍTULO */
+.main-title { text-align:center; margin-bottom:6pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:20pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJA CONTENIDOS */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:6pt 10pt; font-size:9.5pt; margin-bottom:10pt; line-height:1.6; }
+.box-cont p+p { margin-top:2px; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:10px 0; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:10px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3.5px 7px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* ÍTEM HEADER */
+.item-header {
+  background:white; color:#111; border:1.5px solid #111;
+  padding:4px 10px; font-size:9pt; font-weight:bold;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:7px; letter-spacing:.04em; text-transform:uppercase;
+}
+
+/* INSTRUCCIÓN */
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:8px; color:#333; }
+
+/* LECTURA INFO */
+.lectura-info {
+  border:1.5px solid #111; border-radius:6px;
+  padding:9pt 11pt; margin-bottom:11pt;
+  background:white; font-size:10pt; line-height:1.7; text-align:justify;
+}
+.lectura-info-header {
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:7pt; padding-bottom:5pt; border-bottom:1.5px solid #111;
+}
+.lectura-info-header .icono { font-size:14pt; line-height:1; }
+.lectura-info-header .titulo-lectura { font-size:10pt; font-weight:bold; color:#111; text-transform:uppercase; letter-spacing:.06em; }
+.lectura-info p { margin-bottom:6pt; }
+.lectura-info p:last-child { margin-bottom:0; }
+
+.concepto { background:white; border:1px solid #111; border-left:4px solid #111; padding:5pt 9pt; margin:7pt 0; font-size:9.5pt; }
+
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:7pt; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:7pt; }
+.col-box { background:white; border:1px solid #111; border-radius:4px; padding:6pt 8pt; font-size:9.5pt; line-height:1.5; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+/* LECTURA con borde lateral */
+.lectura {
+  border:1px solid #111; border-left:4px solid #111;
+  padding:7pt 10pt; margin-bottom:10pt;
+  background:white; font-size:10pt; line-height:1.65; text-align:justify;
+}
+.lectura-label { font-size:7.5pt; font-weight:bold; letter-spacing:.09em; color:#333; text-transform:uppercase; margin-bottom:5px; }
+.lectura p+p { margin-top:5px; }
+.destacado { background:white; border:1px solid #111; border-left:3px solid #111; padding:5px 9px; margin-top:7px; font-size:9.5pt; font-style:italic; }
+
+/* SITUACIÓN COTIDIANA */
+.situacion {
+  border:1px dashed #111; border-radius:6px;
+  padding:7pt 10pt; margin:8pt 0; font-size:9.5pt; line-height:1.6;
+}
+.situacion-label { font-size:7.5pt; font-weight:bold; letter-spacing:.09em; text-transform:uppercase; margin-bottom:4px; }
+
+/* TABLA DATOS */
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:7px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:3.5px 7px; text-align:center; line-height:1.35; }
+table.datos th { background:white; color:#111; font-size:8pt; font-weight:bold; }
+table.datos td:first-child { text-align:left; }
+.tabla-tit { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#444; margin-bottom:3px; }
+
+/* BANCO */
+.banco { font-size:8.5pt; font-weight:bold; color:#333; margin-bottom:6px; }
+.banco em { font-style:italic; font-weight:normal; }
+
+/* COMPLETACIÓN */
+.completacion { font-size:10.5pt; line-height:2.35; text-align:justify; margin-bottom:11pt; }
+.bf { display:inline-block; border-bottom:1.2px solid #111; min-width:70pt; height:14pt; vertical-align:bottom; margin:0 2pt; }
+.bf-l { min-width:110pt; }
+.bf-s { min-width:44pt; }
+.bf-m { min-width:80pt; }
+
+/* SM */
+.sm-p { margin-bottom:11px; }
+.sm-e { font-size:10.5pt; line-height:1.5; margin-bottom:5px; }
+.sm-opts { display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; padding-left:10px; }
+.sm-op { display:flex; align-items:flex-start; gap:5px; font-size:10pt; line-height:1.4; }
+.circulo { width:14pt; height:14pt; border:1.2px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+
+/* VF */
+.vf-enc { display:flex; justify-content:flex-end; gap:3px; font-size:8pt; font-weight:bold; margin-bottom:3px; letter-spacing:.06em; }
+.vf-enc span { width:16pt; text-align:center; }
+.vf-item { display:flex; align-items:flex-start; gap:6px; margin-bottom:7px; font-size:10pt; line-height:1.5; }
+.vf-n { font-weight:bold; min-width:14pt; flex-shrink:0; }
+.vf-txt { flex:1; }
+.vf-cas { display:flex; gap:3px; flex-shrink:0; margin-left:auto; padding-left:6px; }
+.casilla { width:16pt; height:16pt; border:1.2px solid #111; flex-shrink:0; }
+.corr-linea { display:block; border-bottom:.8px solid #aaa; height:15pt; width:100%; margin-top:2px; }
+
+/* DESARROLLO */
+.dev-p { margin-bottom:12px; }
+.dev-e { font-size:10.5pt; line-height:1.55; margin-bottom:6px; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:19pt; width:100%; margin-bottom:1px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:3px; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:12px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+
+/* BOTÓN */
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@media print {
+  body { background:white; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:11mm 15mm 15mm 15mm; }
+  .btn-print { display:none; }
+  .sm-p,.dev-p { page-break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>El Sonido: Origen, Características y Fenómenos</h1>
+    <p class="subtitulo">(Física — 1° Medio · Guía N°2)</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:10pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:220pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:55pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:65pt"></span></span>
+    </div>
+    <div style="display:flex;gap:28px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">58</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:40pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:8pt">
+    <p><strong>Contenidos:</strong> Origen y propagación del sonido, características (tono, intensidad, timbre), fuentes sonoras, ondas estacionarias, fenómenos sonoros (reflexión, refracción, absorción, difracción, interferencia, pulsación) y rapidez del sonido.</p>
+    <p><strong>Capacidades:</strong> Comprensión, Análisis, Aplicación del modelo ondulatorio.</p>
+    <p><strong>Destrezas:</strong> Identificar, Describir, Explicar, Relacionar.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Ítem</th><th>Descripción</th><th>N° preguntas</th><th>Pts c/u</th><th>Total</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>I</td><td>Completación de párrafos</td><td>2 párrafos</td><td>—</td><td>10 pts</td><td></td></tr>
+      <tr><td>II</td><td>Selección múltiple</td><td>6 preguntas</td><td>3 pts</td><td>18 pts</td><td></td></tr>
+      <tr><td>III</td><td>Verdadero y Falso</td><td>6 afirmaciones</td><td>2 pts</td><td>12 pts</td><td></td></tr>
+      <tr><td>IV</td><td>Análisis y desarrollo</td><td>3 preguntas</td><td>—</td><td>18 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="4">TOTAL</td><td>58 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════
+       LECTURA 1 — ORIGEN Y PROPAGACIÓN DEL SONIDO
+  ═══════════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">¿Qué es el sonido y cómo se origina?</span>
+    </div>
+    <p>Cuando alguien toca una guitarra, las cuerdas vibran y esa vibración se transmite al aire que las rodea. El aire se comprime y se expande en forma de ondas, igual que los círculos que se forman en el agua al tirar una piedra. Esas ondas llegan a tu oído y tus tímpanos vibran: eso es lo que percibes como sonido.</p>
+    <p>El <strong>sonido</strong> es una onda mecánica longitudinal que se origina cuando un objeto vibra (fuente emisora), se transmite a través de un medio material (sólido, líquido o gas) y llega a un receptor que también vibra (por ejemplo, el tímpano del oído).</p>
+    <div class="concepto">
+      <strong>Condición fundamental:</strong> El sonido necesita un medio material para propagarse. En el vacío no hay sonido porque no hay partículas que transmitan la vibración. Por eso, en el espacio exterior no se escucharía ninguna explosión.
+    </div>
+    <div class="cols2" style="margin-top:8pt">
+      <div class="col-box">
+        <span class="col-tit">Fuente emisora</span>
+        Es el objeto que vibra y origina el sonido. Ejemplos: cuerdas de guitarra, cuerdas vocales, membrana de un parlante, diapasón.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Fuente receptora</span>
+        Es el objeto que recibe las ondas y vibra al captar el sonido. Ejemplos: tímpano del oído, micrófono, membrana de un altavoz.
+      </div>
+    </div>
+
+    <div style="margin-top:9pt">
+      <p><strong>Rapidez del sonido:</strong> La velocidad a la que se propaga el sonido depende del medio. En general, es más rápido en sólidos que en líquidos, y más rápido en líquidos que en gases.</p>
+    </div>
+    <div style="margin-top:6pt">
+      <div class="tabla-tit">Tabla 1: Rapidez del sonido en distintos medios</div>
+      <table class="datos">
+        <thead><tr><th>Medio</th><th>Rapidez aproximada</th><th>¿Por qué?</th></tr></thead>
+        <tbody>
+          <tr><td>Aire (20 °C)</td><td>343 m/s</td><td style="text-align:left">Las partículas están separadas, la vibración se transmite lentamente.</td></tr>
+          <tr><td>Agua</td><td>1.480 m/s</td><td style="text-align:left">Las partículas están más juntas, transmiten la vibración mejor.</td></tr>
+          <tr><td>Acero</td><td>5.000 m/s</td><td style="text-align:left">Las partículas están muy unidas; la vibración se transmite muy rápido.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="situacion" style="margin-top:9pt">
+      <div class="situacion-label">Situación de la vida cotidiana</div>
+      <p>Cuando en el campo ves el relámpago de un rayo y escuchas el trueno unos segundos después, estás experimentando la diferencia entre la velocidad de la luz (300.000 km/s) y la del sonido (343 m/s). Si cuentas los segundos entre el relámpago y el trueno y los multiplicas por 343, obtienes la distancia aproximada a la que cayó el rayo. Por ejemplo, si pasan 3 segundos: 3 × 343 = <strong>1.029 metros</strong> de distancia.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       LECTURA 2 — CARACTERÍSTICAS DEL SONIDO
+  ═══════════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Características del sonido: tono, intensidad y timbre</span>
+    </div>
+    <p>Todos los sonidos son ondas, pero no todos suenan igual. La física del sonido describe tres características principales que permiten distinguir un sonido de otro, y cada una depende de una propiedad de la onda.</p>
+
+    <div class="cols3">
+      <div class="col-box">
+        <span class="col-tit">Tono (frecuencia)</span>
+        Indica si el sonido es <strong>agudo o grave</strong>. A mayor frecuencia (Hz), el tono es más agudo. A menor frecuencia, es más grave.<br><br>
+        <em>Ejemplo: la voz de soprano es aguda (frecuencia alta); la voz de bajo es grave (frecuencia baja).</em>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Intensidad (amplitud)</span>
+        Indica si el sonido es <strong>fuerte o débil</strong>. A mayor amplitud de onda, mayor intensidad. Se mide en decibeles (dB).<br><br>
+        <em>Ejemplo: un susurro (~30 dB) vs. un concierto de rock (~110 dB).</em>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Timbre (forma de onda)</span>
+        Permite distinguir dos sonidos de <strong>igual tono e intensidad</strong> producidos por fuentes distintas. Depende de la forma de la onda.<br><br>
+        <em>Ejemplo: la misma nota La tocada en un violín suena distinto que en una flauta.</em>
+      </div>
+    </div>
+
+    <div class="situacion" style="margin-top:9pt">
+      <div class="situacion-label">Situación de la vida cotidiana</div>
+      <p>Cuando llamas por teléfono a un familiar, puedes reconocer su voz aunque no lo veas. Eso ocurre gracias al <strong>timbre</strong>: la forma única de la onda de su voz. Aunque diga las mismas palabras con el mismo volumen que otra persona, su timbre es diferente porque la forma en que vibran sus cuerdas vocales es única.</p>
+    </div>
+
+    <div style="margin-top:8pt">
+      <div class="tabla-tit">Tabla 2: Resumen de las características del sonido</div>
+      <table class="datos">
+        <thead><tr><th>Característica</th><th>Propiedad de la onda</th><th>Percepción auditiva</th><th>Unidad</th></tr></thead>
+        <tbody>
+          <tr><td>Tono</td><td>Frecuencia</td><td>Agudo / Grave</td><td>Hz</td></tr>
+          <tr><td>Intensidad</td><td>Amplitud</td><td>Fuerte / Débil</td><td>dB</td></tr>
+          <tr><td>Timbre</td><td>Forma de la onda</td><td>Identidad del sonido</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       LECTURA 3 — FUENTES SONORAS
+  ═══════════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Fuentes sonoras: cuerdas, láminas y columnas de aire</span>
+    </div>
+    <p>Los instrumentos musicales y otras fuentes sonoras producen sonido de tres maneras principales, todas basadas en la vibración:</p>
+    <div class="cols3">
+      <div class="col-box">
+        <span class="col-tit">Vibración de cuerdas</span>
+        Guitarra, violín, piano, cuerdas vocales. La cuerda tensa vibra y produce ondas estacionarias. La frecuencia depende de la <strong>longitud, tensión y grosor</strong> de la cuerda.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Vibración de láminas</span>
+        Platillos, tambores, membranas de parlante. Una superficie delgada vibra al golpe o por variación de corriente eléctrica (parlante).
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Columna de aire</span>
+        Flauta, trompeta, órgano, cuerdas vocales (la laringe actúa como una cavidad). El aire vibra dentro de un tubo o cavidad.
+      </div>
+    </div>
+    <div class="concepto" style="margin-top:9pt">
+      <strong>Ondas estacionarias:</strong> Cuando una cuerda vibra entre dos puntos fijos (como en una guitarra), se forman ondas que "parecen estar quietas" porque van y vienen entre los extremos. El punto central que vibra más se llama <strong>vientre</strong> y los extremos fijos se llaman <strong>nodos</strong>. La vibración más simple (modo fundamental) produce un solo vientre. Los <strong>armónicos</strong> son vibraciones más complejas (2, 3, 4… vientres) que dan riqueza al sonido. Lo mismo ocurre en las columnas de aire de instrumentos de viento.
+    </div>
+    <div class="situacion" style="margin-top:8pt">
+      <div class="situacion-label">Situación de la vida cotidiana</div>
+      <p>Cuando un cantante afina un micrófono haciendo "aaaaah", sus cuerdas vocales (repliegues de tejido en la laringe) vibran y el aire de su tráquea y boca actúa como columna de resonancia. Al tensar o relajar sus cuerdas vocales, cambia la frecuencia y por eso puede cantar notas agudas o graves. Un cantante de ópera bien entrenado puede romper una copa de cristal si canta la nota exacta a la que la copa resuena.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       LECTURA 4 — FENÓMENOS SONOROS
+  ═══════════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Fenómenos sonoros en la vida cotidiana</span>
+    </div>
+    <p>Las ondas de sonido, al igual que otras ondas, pueden experimentar distintos fenómenos cuando se encuentran con obstáculos, cambios de medio o con otras ondas. Conocerlos permite entender muchas situaciones del día a día.</p>
+
+    <div class="cols2">
+      <div class="col-box">
+        <span class="col-tit">Reflexión</span>
+        El sonido rebota al chocar contra una superficie. El <strong>eco</strong> es el ejemplo más conocido: al gritar en una montaña o en un edificio grande, escuchas tu voz repetida un instante después porque la onda rebotó y llegó de vuelta a tu oído.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Refracción</span>
+        El sonido cambia de dirección al pasar de un medio a otro de diferente densidad. Por eso a veces en la noche se escuchan con más claridad sonidos lejanos: las capas de aire frío y cálido desvían las ondas hacia el suelo.
+      </div>
+    </div>
+    <div class="cols2" style="margin-top:8px">
+      <div class="col-box">
+        <span class="col-tit">Absorción</span>
+        El sonido pierde energía al atravesar ciertos materiales blandos como cortinas gruesas, alfombras o espuma acústica. Las salas de cine están tapizadas con materiales absorbentes para mejorar la calidad del audio.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Difracción</span>
+        El sonido puede "doblar" esquinas y rodear obstáculos. Por eso escuchas música en otra habitación aunque la puerta esté cerrada: las ondas de sonido se difractan al pasar por las rendijas.
+      </div>
+    </div>
+    <div class="cols2" style="margin-top:8px">
+      <div class="col-box">
+        <span class="col-tit">〰 Interferencia</span>
+        Cuando dos ondas se encuentran, se suman o se restan. Si dos parlantes emiten el mismo sonido, en algunos puntos del cuarto el sonido se amplifica (interferencia constructiva) y en otros se cancela (interferencia destructiva). Los audífonos con cancelación de ruido funcionan con este principio.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Pulsación (batimiento)</span>
+        Cuando dos sonidos de frecuencias muy parecidas (pero no iguales) se superponen, se escucha un sonido que sube y baja de intensidad periódicamente. Los músicos usan este fenómeno para afinar: cuando las pulsaciones desaparecen, los instrumentos están en la misma nota.
+      </div>
+    </div>
+    <div class="situacion" style="margin-top:9pt">
+      <div class="situacion-label">Situación de la vida cotidiana — El eco en el estadio</div>
+      <p>En un estadio de fútbol, cuando el público grita, escuchas el sonido de forma confusa porque miles de reflexiones llegan a tu oído con distintos retardos. Eso se llama <strong>reverberación</strong>. Los ingenieros acústicos diseñan teatros y auditorios para controlar estas reflexiones: suficiente reverberación hace el sonido rico y envolvente, pero demasiada lo hace incomprensible.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       ÍTEM I — COMPLETACIÓN
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem I · Completación</span>
+    <span>10 puntos — 5 puntos por párrafo</span>
+  </div>
+  <p class="instruccion">Completa los párrafos escribiendo el concepto correcto en cada línea.</p>
+
+  <div class="banco">Banco — Párrafo 1: <em>vibración · medio material · ondas longitudinales · mecánicas · receptor · emisora · vacío · comprime · transversal</em></div>
+  <p class="completacion">
+    El sonido es una onda <span class="bf bf-s"></span> que se origina cuando una fuente <span class="bf bf-s"></span> produce una <span class="bf bf-s"></span>. Esta vibración se transmite a través de un <span class="bf bf-m"></span> porque el sonido no puede propagarse en el <span class="bf bf-s"></span>. Las partículas del medio se mueven en la misma dirección en que se propaga la onda (por eso son <span class="bf bf-m"></span>): el medio se <span class="bf bf-s"></span> y se expande. Finalmente, la onda llega a un <span class="bf bf-s"></span> que también vibra.
+  </p>
+
+  <div class="banco">Banco — Párrafo 2: <em>tono · frecuencia · intensidad · amplitud · timbre · forma · grave · agudo · decibeles · Hz</em></div>
+  <p class="completacion">
+    Las características del sonido son tres. El <span class="bf bf-s"></span> depende de la <span class="bf bf-s"></span> de la onda: a mayor frecuencia, el sonido es más <span class="bf bf-s"></span>, y a menor frecuencia, es más <span class="bf bf-s"></span>. La <span class="bf bf-s"></span> depende de la <span class="bf bf-s"></span> de la onda y se mide en <span class="bf bf-s"></span>. Finalmente, el <span class="bf bf-s"></span> depende de la <span class="bf bf-s"></span> de la onda y permite distinguir dos sonidos del mismo tono e intensidad producidos por fuentes diferentes.
+  </p>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM II — SELECCIÓN MÚLTIPLE
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem II · Selección Múltiple</span>
+    <span>18 puntos — 3 puntos por pregunta</span>
+  </div>
+  <p class="instruccion">Encierra en un círculo la alternativa correcta.</p>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>1.</strong> Dos astronautas están en el espacio exterior. Uno golpea fuertemente un objeto metálico. El otro, a 5 metros de distancia, ¿escuchará el sonido?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Sí, el sonido viaja a 343 m/s en el vacío.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>No, el sonido necesita un medio material para propagarse.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Sí, pero el sonido llegará más lento que en la Tierra.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>No, porque la velocidad del sonido es cero en el espacio.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>2.</strong> Una cantante de ópera sube progresivamente el tono de su voz hasta llegar a una nota muy aguda. ¿Qué ocurre con la frecuencia de las ondas que emite?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>La frecuencia disminuye progresivamente.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>La frecuencia no cambia, solo cambia la amplitud.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>La frecuencia aumenta progresivamente.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>La frecuencia se mantiene constante en toda la escala musical.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>3.</strong> Cuando escuchas un trueno varios segundos después de ver el relámpago, esto se debe a que:</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>El rayo produce primero luz y luego sonido.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>La luz viaja mucho más rápido que el sonido.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>El sonido viaja más rápido que la luz en la atmósfera.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>El trueno se produce en las nubes y tarda en bajar.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>4.</strong> Escuchas música en otra habitación aunque la puerta esté casi cerrada. ¿Qué fenómeno ondulatorio explica esto?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Reflexión del sonido.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Absorción del sonido.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Difracción del sonido.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Interferencia del sonido.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>5.</strong> Un guitarrista presiona una cuerda en distintos trastes para cambiar la nota. Al presionar un traste más alto (cuerda más corta), ¿qué le ocurre al sonido?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>El sonido se vuelve más grave porque tiene menos tensión.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>El sonido se vuelve más agudo porque la frecuencia aumenta.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>El sonido se vuelve más intenso porque la amplitud aumenta.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>El timbre cambia pero el tono se mantiene igual.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>6.</strong> Un músico está afinando su guitarra con otro instrumento. Escucha un "wah-wah-wah" que se va lentamente haciendo más lento hasta desaparecer. Cuando desaparece, ¿qué significa?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Los instrumentos producen la misma amplitud.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Los instrumentos producen exactamente la misma frecuencia (afinados).</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Se produjo absorción total del sonido.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Los instrumentos dejaron de producir sonido simultáneamente.</span></div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM III — VERDADERO Y FALSO
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem III · Verdadero y Falso</span>
+    <span>12 puntos — 2 puntos por afirmación</span>
+  </div>
+  <p class="instruccion">Marca con una <strong>X</strong> en V o F. Corrige las afirmaciones falsas.</p>
+
+  <div class="vf-enc"><span>V</span><span>F</span></div>
+
+  <div class="vf-item">
+    <span class="vf-n">1.</span>
+    <span class="vf-txt">El sonido es una onda mecánica longitudinal que necesita un medio material para propagarse.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">2.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">El sonido viaja más rápido en el aire que en el agua, porque en el aire las moléculas están más juntas.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <div class="vf-item">
+    <span class="vf-n">3.</span>
+    <span class="vf-txt">El timbre de un sonido depende de la forma de la onda y permite reconocer la fuente que lo produce, aunque tenga el mismo tono e intensidad que otro sonido.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">4.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">El eco es un fenómeno de absorción del sonido que ocurre cuando las ondas son atrapadas por materiales blandos como alfombras.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <div class="vf-item">
+    <span class="vf-n">5.</span>
+    <span class="vf-txt">En una guitarra, al acortar la longitud de la cuerda (pisando un traste), la frecuencia de vibración aumenta y el sonido se vuelve más agudo.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">6.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">Los audífonos con cancelación de ruido funcionan usando el fenómeno de interferencia constructiva para amplificar los sonidos del ambiente.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM IV — ANÁLISIS Y DESARROLLO
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem IV · Análisis y Desarrollo</span>
+    <span>18 puntos</span>
+  </div>
+  <p class="instruccion">Responde con argumentos científicos completos. Muestra procedimientos cuando corresponda.</p>
+
+  <div class="lectura" style="margin-bottom:10pt">
+    <div class="lectura-label">Situación para las preguntas 1 y 2</div>
+    <p>Valentina y su familia están de vacaciones en el campo. Durante una tormenta, Valentina ve un relámpago y cuenta 4 segundos hasta escuchar el trueno. Su hermano dice que el rayo cayó muy lejos. Su papá dice que el sonido viaja a 343 m/s en el aire y que en el agua viaja a 1.480 m/s.</p>
+  </div>
+
+  <div class="dev-p">
+    <div class="dev-e"><strong>Pregunta 1 (4 pts):</strong> Calcula a qué distancia aproximada cayó el rayo. Muestra el procedimiento completo.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts procedimiento correcto · 2 pts resultado correcto con unidad (1.372 m).</p>
+  </div>
+
+  <div class="dev-p">
+    <div class="dev-e"><strong>Pregunta 2 (6 pts):</strong> Si el trueno hubiera viajado por el agua de un lago en lugar de por el aire, ¿llegaría antes o después al oído de Valentina? Explica usando el concepto de rapidez del sonido en distintos medios y por qué ocurre esta diferencia.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 3 pts por conclusión correcta (llegaría antes en el agua) · 3 pts por explicar la relación entre densidad del medio y rapidez de propagación.</p>
+  </div>
+
+  <div class="dev-p">
+    <div class="dev-e"><strong>Pregunta 3 — Síntesis (8 pts):</strong> Imagina que eres ingeniero de sonido de un teatro y debes mejorar la acústica. El problema es que el sonido llega con eco, en algunas zonas es muy débil y los músicos se quejan de que no pueden afinar bien. Describe qué fenómenos ondulatorios están causando cada problema y qué soluciones propondrías para cada uno. Usa los conceptos de reflexión, absorción, interferencia y pulsación.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts por cada problema identificado con su fenómeno y solución correcta (máx. 4 = 8 pts).</p>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Física — 1° Medio · OA10 · Guía N°2</span>
+    <span>Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
