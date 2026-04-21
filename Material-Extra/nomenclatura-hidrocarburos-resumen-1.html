@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidrocarburos — Nomenclatura IUPAC Moderna</title>
+<style>
+  :root {
+    --bg:#ffffff;--bg2:#f5f5f3;--bg3:#eeece8;
+    --text:#1a1a1a;--text2:#5a5a58;--text3:#8a8a87;
+    --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);
+    --blue50:#E6F1FB;--blue800:#0C447C;
+    --teal50:#E1F5EE;--teal800:#085041;
+    --amber50:#FAEEDA;--amber800:#633806;
+    --purple50:#EEEDFE;--purple800:#3C3489;
+    --coral50:#FAECE7;--coral800:#712B13;
+    --green50:#EAF3DE;--green800:#27500A;
+    --red50:#FCEBEB;--red800:#791F1F;
+    --radius:10px;--radius-sm:6px;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --bg:#1e1e1c;--bg2:#2a2a27;--bg3:#333330;
+      --text:#f0ede8;--text2:#a8a5a0;--text3:#6a6a66;
+      --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
+      --blue50:#0c2d4a;--blue800:#85B7EB;
+      --teal50:#073326;--teal800:#9FE1CB;
+      --amber50:#3a2608;--amber800:#FAC775;
+      --purple50:#221d4a;--purple800:#AFA9EC;
+      --coral50:#3a1a0e;--coral800:#F0997B;
+      --green50:#172e08;--green800:#C0DD97;
+      --red50:#2e0e0e;--red800:#F09595;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);font-size:15px;line-height:1.6}
+  .layout{display:flex;min-height:100vh}
+  .sidebar{width:220px;min-width:220px;background:var(--bg);border-right:0.5px solid var(--border);padding:1.5rem 0;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .nav-item{display:block;padding:8px 1.25rem;font-size:13px;color:var(--text2);cursor:pointer;border-left:2px solid transparent;transition:all .15s;background:none;border-top:none;border-right:none;border-bottom:none;text-align:left;width:100%}
+  .nav-item:hover{color:var(--text);background:var(--bg2)}
+  .nav-item.active{color:var(--text);border-left-color:var(--text);background:var(--bg2);font-weight:500}
+  .nav-sep{height:0.5px;background:var(--border);margin:.5rem 1.25rem}
+  .nav-label{font-size:11px;color:var(--text3);padding:8px 1.25rem 2px;font-weight:500}
+  .main{flex:1;padding:2rem;max-width:860px}
+  .section{display:none}.section.active{display:block}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.25rem}
+  .card-sm{background:var(--bg2);border-radius:var(--radius-sm);padding:.75rem 1rem;margin:.4rem 0;font-size:13px}
+  .tag{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:.75rem}
+  .t-blue{background:var(--blue50);color:var(--blue800)}
+  .t-teal{background:var(--teal50);color:var(--teal800)}
+  .t-amber{background:var(--amber50);color:var(--amber800)}
+  .t-purple{background:var(--purple50);color:var(--purple800)}
+  .t-coral{background:var(--coral50);color:var(--coral800)}
+  .t-green{background:var(--green50);color:var(--green800)}
+  h1{font-size:22px;font-weight:500;margin-bottom:.4rem}
+  h2{font-size:18px;font-weight:500;margin-bottom:.4rem}
+  h3{font-size:15px;font-weight:500;margin-bottom:.4rem}
+  p{color:var(--text2);margin-bottom:.5rem}
+  p:last-child{margin-bottom:0}
+  ul,ol{padding-left:1.4rem;color:var(--text2)}
+  li{margin-bottom:.3rem;font-size:14px}
+  strong{color:var(--text);font-weight:500}
+  code{font-family:'SF Mono','Fira Code',monospace;font-size:12.5px;background:var(--bg2);padding:2px 6px;border-radius:4px;color:var(--text)}
+  .steps{margin:.75rem 0}
+  .step{display:flex;gap:12px;align-items:flex-start;margin-bottom:.75rem}
+  .step-n{min-width:26px;height:26px;border-radius:50%;background:var(--text);color:var(--bg);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .step p{margin:0;font-size:14px}
+  .g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:.5rem 0}
+  .g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:.5rem 0}
+  .tbl-wrap{overflow-x:auto;margin:.5rem 0}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;font-size:11px;font-weight:500;color:var(--text3);padding:6px 10px;border-bottom:0.5px solid var(--border2)}
+  td{padding:7px 10px;border-bottom:0.5px solid var(--border);color:var(--text)}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:var(--bg2)}
+  .hl{border-radius:var(--radius-sm);padding:.75rem 1rem;margin:.6rem 0;font-size:13px}
+  .hl-green{background:var(--green50);color:var(--green800)}
+  .hl-amber{background:var(--amber50);color:var(--amber800)}
+  .hl-blue{background:var(--blue50);color:var(--blue800)}
+  .hl-coral{background:var(--coral50);color:var(--coral800)}
+  .cmp{display:flex;align-items:center;gap:8px;margin:.35rem 0;font-size:13px;flex-wrap:wrap}
+  .cmp .old{color:var(--text3);text-decoration:line-through}
+  .cmp .arr{color:var(--text3)}
+  .cmp .new{color:var(--text);font-weight:500}
+  .div{height:0.5px;background:var(--border);margin:.9rem 0}
+  .chain{display:flex;align-items:center;gap:3px;flex-wrap:wrap;padding:.6rem .75rem;background:var(--bg2);border-radius:var(--radius-sm);margin:.6rem 0}
+  .atom{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;position:relative;border:1.5px solid;flex-shrink:0}
+  .atom .n{position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--text3)}
+  .atom-b{background:var(--blue50);border-color:#185FA5;color:var(--blue800)}
+  .atom-t{background:var(--teal50);border-color:#0F6E56;color:var(--teal800)}
+  .atom-p{background:var(--purple50);border-color:#534AB7;color:var(--purple800)}
+  .atom-g{background:var(--bg2);border-color:var(--border2);color:var(--text2)}
+  .bond1{width:16px;height:2px;background:var(--text3);border-radius:1px}
+  .bond2{display:flex;flex-direction:column;gap:3px}
+  .bond2 span{width:16px;height:2px;background:#0F6E56;border-radius:1px}
+  .bond3{display:flex;flex-direction:column;gap:2px}
+  .bond3 span{width:16px;height:2px;background:#534AB7;border-radius:1px}
+  .fband{display:flex;align-items:center;gap:12px;background:var(--bg2);border-radius:var(--radius-sm);padding:.6rem 1rem;margin:.5rem 0;font-size:13px}
+  .page-header{margin-bottom:1.75rem}
+  .mol-wrap{background:var(--bg2);border-radius:var(--radius-sm);padding:1rem;margin:.75rem 0;overflow-x:auto}
+  .mol-label{font-size:12px;color:var(--text3);margin-top:.4rem;text-align:center}
+  svg text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+  .quiz-q{font-size:15px;font-weight:500;color:var(--text);margin-bottom:.9rem;line-height:1.5}
+  .quiz-opts{display:flex;flex-direction:column;gap:8px}
+  .qopt{padding:10px 14px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:transparent;text-align:left;cursor:pointer;font-size:13px;color:var(--text);transition:all .15s;width:100%}
+  .qopt:hover{background:var(--bg2)}
+  .qopt.ok{background:var(--green50);border-color:#3B6D11;color:var(--green800)}
+  .qopt.bad{background:var(--red50);border-color:#A32D2D;color:var(--red800)}
+  .fb{font-size:13px;padding:.6rem .85rem;border-radius:var(--radius-sm);margin-top:.75rem;display:none;line-height:1.55}
+  .fb.show{display:block}
+  .fb.ok{background:var(--green50);color:var(--green800)}
+  .fb.bad{background:var(--red50);color:var(--red800)}
+  .qnav{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+  .qprog{font-size:12px;color:var(--text3)}
+  .qbar-wrap{height:4px;background:var(--bg3);border-radius:2px;margin-bottom:1rem}
+  .qbar{height:4px;background:var(--text);border-radius:2px;transition:width .3s}
+  .btn{padding:8px 18px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:transparent;cursor:pointer;font-size:13px;color:var(--text);transition:all .15s}
+  .btn:hover{background:var(--bg2)}
+  .btn-p{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .btn-p:hover{opacity:.85;background:var(--text)}
+  .result-circle{width:90px;height:90px;border-radius:50%;border:2px solid var(--border2);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem}
+  .result-num{font-size:24px;font-weight:500}
+  .result-den{font-size:12px;color:var(--text3)}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="sidebar">
+  <div style="padding:0 1.25rem 1rem">
+    <div style="font-size:14px;font-weight:500;color:var(--text)">Química Orgánica</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:2px">Nomenclatura IUPAC moderna</div>
+  </div>
+  <div class="nav-sep"></div>
+  <div class="nav-label">Fundamentos</div>
+  <button class="nav-item active" onclick="show('clasificacion')">Clasificación</button>
+  <button class="nav-item" onclick="show('cadena')">Cadena principal</button>
+  <div class="nav-sep"></div>
+  <div class="nav-label">Hidrocarburos</div>
+  <button class="nav-item" onclick="show('alcanos')">Alcanos</button>
+  <button class="nav-item" onclick="show('alquenos')">Alquenos</button>
+  <button class="nav-item" onclick="show('alquinos')">Alquinos</button>
+  <button class="nav-item" onclick="show('ciclicos')">Cíclicos</button>
+  <div class="nav-sep"></div>
+  <div class="nav-label">Práctica</div>
+  <button class="nav-item" onclick="show('quiz')">Quiz</button>
+</nav>
+
+<main class="main">
+
+<!-- ══ CLASIFICACION ══ -->
+<div id="clasificacion" class="section active">
+  <div class="page-header"><h1>Clasificación de compuestos orgánicos</h1><p>Visión general de todos los tipos y subtipos de compuestos con carbono.</p></div>
+  <div class="card">
+    <span class="tag t-blue">Definición</span>
+    <h2>¿Qué es un compuesto orgánico?</h2>
+    <p>Todo compuesto que tiene <strong>carbono</strong> como elemento principal. El C tiene tetravalencia: forma exactamente 4 enlaces, lo que le permite crear cadenas, anillos y estructuras ramificadas de gran complejidad.</p>
+    <div class="div"></div>
+    <div class="g2">
+      <div><h3 style="margin-bottom:.4rem">Hidrocarburos</h3><p style="font-size:13px">Solo contienen <strong>C</strong> y <strong>H</strong>. Son la base de toda la química orgánica.</p></div>
+      <div><h3 style="margin-bottom:.4rem">Hidrocarburos sustituidos</h3><p style="font-size:13px">C y H más otros elementos: O, N, halógenos, S, etc.</p></div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-blue">Árbol completo</span>
+    <h2>Clasificación</h2>
+    <div class="g2" style="margin-top:.5rem">
+      <div class="card" style="margin:0">
+        <span class="tag t-teal">Alifáticos</span>
+        <p style="font-size:13px;margin-bottom:.5rem">Cadenas abiertas (acíclicas) o cerradas (cíclicas), sin anillo aromático.</p>
+        <ul>
+          <li><strong>Saturados</strong> — solo enlaces simples<ul style="margin-top:.2rem"><li>Alcanos: <code>CₙH₂ₙ₊₂</code></li><li>Cicloalcanos: <code>CₙH₂ₙ</code></li></ul></li>
+          <li style="margin-top:.4rem"><strong>No saturados</strong> — con enlaces múltiples<ul style="margin-top:.2rem"><li>Alquenos: <code>CₙH₂ₙ</code></li><li>Alquinos: <code>CₙH₂ₙ₋₂</code></li><li>Cicloalquenos</li></ul></li>
+        </ul>
+      </div>
+      <div class="card" style="margin:0">
+        <span class="tag t-purple">Aromáticos</span>
+        <p style="font-size:13px;margin-bottom:.5rem">Contienen anillo bencénico. Alta estabilidad por deslocalización de electrones.</p>
+        <ul><li>Benceno</li><li>Tolueno, xileno</li><li>Naftaleno</li></ul>
+        <div class="div"></div>
+        <span class="tag t-coral">Sustituidos</span>
+        <ul>
+          <li><strong>Oxigenados:</strong> alcoholes, ácidos, aldehídos, cetonas, ésteres, éteres</li>
+          <li><strong>Nitrogenados:</strong> aminas, amidas, nitrilos</li>
+          <li><strong>Halogenados:</strong> haluros, haluros de acilo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-amber">Tipos de carbono</span>
+    <h2>Clasificación según cuántos C vecinos tiene</h2>
+    <div class="g2">
+      <div class="card-sm"><strong>1° primario</strong><br><span style="color:var(--text2)">Unido a 1 solo C. Ej: CH₃— en extremos</span></div>
+      <div class="card-sm"><strong>2° secundario</strong><br><span style="color:var(--text2)">Unido a 2 C. Ej: —CH₂— en la mitad</span></div>
+      <div class="card-sm"><strong>3° terciario</strong><br><span style="color:var(--text2)">Unido a 3 C. Ej: —CH&lt; en ramificaciones</span></div>
+      <div class="card-sm"><strong>4° cuaternario</strong><br><span style="color:var(--text2)">Unido a 4 C. Ej: —C&lt; sin H</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-purple">Grupos funcionales — prioridad</span>
+    <h2>Orden de prioridad IUPAC (de mayor a menor)</h2>
+    <p style="font-size:13px;margin-bottom:.75rem">Cuando una molécula tiene varios grupos, el de mayor prioridad determina el sufijo. Los demás se nombran como prefijos.</p>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>#</th><th>Grupo funcional</th><th>Fórmula</th><th>Sufijo</th></tr>
+        <tr><td>1</td><td>Ácido carboxílico</td><td><code>R–COOH</code></td><td>-oico</td></tr>
+        <tr><td>2</td><td>Éster</td><td><code>R–COO–R'</code></td><td>-oato de</td></tr>
+        <tr><td>3</td><td>Amida</td><td><code>R–CO–NH₂</code></td><td>-amida</td></tr>
+        <tr><td>4</td><td>Nitrilo</td><td><code>R–C≡N</code></td><td>-nitrilo</td></tr>
+        <tr><td>5</td><td>Aldehído</td><td><code>R–CHO</code></td><td>-al</td></tr>
+        <tr><td>6</td><td>Cetona</td><td><code>R–CO–R'</code></td><td>-ona</td></tr>
+        <tr><td>7</td><td>Alcohol / fenol</td><td><code>R–OH</code></td><td>-ol</td></tr>
+        <tr><td>8</td><td>Amina</td><td><code>R–NH₂</code></td><td>-amina</td></tr>
+        <tr><td>9</td><td>Éter</td><td><code>R–O–R'</code></td><td>-oxi- (pref.)</td></tr>
+        <tr><td>10</td><td>Alqueno</td><td><code>R=R'</code></td><td>-eno</td></tr>
+        <tr><td>11</td><td>Alquino</td><td><code>R≡R'</code></td><td>-ino</td></tr>
+        <tr><td>12</td><td>Halógeno</td><td><code>R–X</code></td><td>halo- (pref.)</td></tr>
+        <tr><td>13</td><td>Nitrocompuesto</td><td><code>R–NO₂</code></td><td>nitro- (pref.)</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CADENA PRINCIPAL ══ -->
+<div id="cadena" class="section">
+  <div class="page-header"><h1>Cadena principal</h1><p>La regla más importante antes de nombrar cualquier hidrocarburo.</p></div>
+
+  <div class="card">
+    <span class="tag t-green">¿Qué es?</span>
+    <h2>Definición</h2>
+    <p>La cadena principal es la <strong>secuencia continua de átomos de carbono</strong> que se toma como base del nombre. Todo lo que quede fuera de ella es un <strong>sustituyente</strong> y se nombra como prefijo.</p>
+    <div class="hl hl-blue">No es simplemente la que se ve "de izquierda a derecha" en la fórmula. Hay que buscarla activamente siguiendo los criterios en orden.</div>
+  </div>
+
+  <!-- CRITERIO 1 -->
+  <div class="card">
+    <span class="tag t-green">Criterio 1</span>
+    <h2>La cadena de carbonos más larga</h2>
+    <p style="margin-bottom:.75rem">Se busca la secuencia continua de C más extensa. Es el primer filtro y el más importante.</p>
+    <div class="mol-wrap">
+      <!-- 5 átomos en fila, 1 sustituyente abajo, resultado a la derecha con espacio -->
+      <!-- ancho total: 5 átomos × 80 de separación + margen + caja resultado -->
+      <!-- átomos en x: 60,140,220,300,380  radio 28 -->
+      <!-- caja resultado: x=430 ancho=170 → total viewBox = 620 -->
+      <!-- sustituyente cuelga hacia abajo de C3 (x=220) y=160 -->
+      <!-- altura total: encabezado arriba 30, átomo centro 100, sust abajo 175, etiqueta mol 200 → viewBox height=210 -->
+      <svg width="100%" viewBox="0 0 620 215" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- flecha de extensión cadena -->
+        <line x1="60" y1="36" x2="380" y2="36" stroke="#185FA5" stroke-width="1.2" stroke-dasharray="4,2"/>
+        <polygon points="385,36 377,32 377,40" fill="#185FA5"/>
+        <polygon points="55,36 63,32 63,40" fill="#185FA5"/>
+        <text x="220" y="26" text-anchor="middle" font-size="11" fill="#185FA5">cadena principal: 5 carbonos (pentano)</text>
+
+        <!-- bonds cadena principal -->
+        <line x1="60"  y1="100" x2="140" y2="100" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="140" y1="100" x2="220" y2="100" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="220" y1="100" x2="300" y2="100" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="300" y1="100" x2="380" y2="100" stroke="#185FA5" stroke-width="2.5"/>
+
+        <!-- bond sustituyente -->
+        <line x1="220" y1="128" x2="220" y2="162" stroke="#888" stroke-width="1.8" stroke-dasharray="5,3"/>
+
+        <!-- átomos cadena -->
+        <circle cx="60"  cy="100" r="28" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="60"  y="96"  text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₃</text>
+        <text x="60"  y="109" text-anchor="middle" font-size="11" fill="#185FA5">C1</text>
+
+        <circle cx="140" cy="100" r="28" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="140" y="96"  text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="140" y="109" text-anchor="middle" font-size="11" fill="#185FA5">C2</text>
+
+        <circle cx="220" cy="100" r="28" fill="#E6F1FB" stroke="#185FA5" stroke-width="2.5"/>
+        <text x="220" y="96"  text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH</text>
+        <text x="220" y="109" text-anchor="middle" font-size="11" fill="#185FA5">C3</text>
+
+        <circle cx="300" cy="100" r="28" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="300" y="96"  text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="300" y="109" text-anchor="middle" font-size="11" fill="#185FA5">C4</text>
+
+        <circle cx="380" cy="100" r="28" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="380" y="96"  text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₃</text>
+        <text x="380" y="109" text-anchor="middle" font-size="11" fill="#185FA5">C5</text>
+
+        <!-- sustituyente metilo debajo de C3 -->
+        <circle cx="220" cy="178" r="24" fill="#F1EFE8" stroke="#888780" stroke-width="1.5"/>
+        <text x="220" y="174" text-anchor="middle" font-size="11" fill="#5F5E5A">CH₃</text>
+        <text x="220" y="186" text-anchor="middle" font-size="10" fill="#888">sustituyente</text>
+
+        <!-- resultado — bien a la derecha, sin tocar nada -->
+        <rect x="428" y="78" width="175" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+        <text x="515" y="99"  text-anchor="middle" font-size="13" font-weight="500" fill="#085041">3-metilpentano</text>
+        <text x="515" y="116" text-anchor="middle" font-size="11" fill="#0F6E56">no "2-metilbutano" ✓</text>
+      </svg>
+      <p class="mol-label">La cadena más larga tiene 5 C (pentano base). El –CH₃ lateral queda como sustituyente metilo en C3.</p>
+    </div>
+    <div class="hl hl-blue" style="margin-top:.5rem">Si hay dos cadenas igualmente largas, se pasa al criterio 2.</div>
+  </div>
+
+  <!-- CRITERIO 2 -->
+  <div class="card">
+    <span class="tag t-green">Criterio 2</span>
+    <h2>La que tenga más sustituyentes</h2>
+    <p style="margin-bottom:.75rem">Con igual longitud, se elige la cadena que deje el <strong>mayor número de ramificaciones</strong> como sustituyentes colgantes.</p>
+
+    <div class="mol-wrap">
+      <!--
+        Diseño: 7 átomos separados 68px, radio 24
+        x posiciones: 32, 100, 168, 236, 304, 372, 440
+        resultado: x=470 ancho=140 → viewBox width=620
+        Camino A: sustituyentes ABAJO (y=134+24=158)
+        Camino B: sustituyentes ARRIBA (y=más arriba)
+        Separador entre ambos caminos
+        Total altura: A arriba con sust abajo + separador + B abajo con sust arriba
+        A: título y=18, átomos cy=72, sust abajo cy=128, resultado cx=555 cy=72
+        Sep: y=160
+        B: título y=178, átomos cy=232, sust arriba cy=190, resultado cy=232
+        Total height = 280
+      -->
+      <svg width="100%" viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ═══ CAMINO A (incorrecto) ═══ -->
+        <text x="10" y="18" font-size="12" font-weight="500" fill="#A32D2D">Camino A — incorrecto (3 sustituyentes)</text>
+
+        <!-- bonds A -->
+        <line x1="32"  y1="72" x2="100" y2="72" stroke="#B4B2A9" stroke-width="1.8"/>
+        <line x1="100" y1="72" x2="168" y2="72" stroke="#B4B2A9" stroke-width="1.8"/>
+        <line x1="168" y1="72" x2="236" y2="72" stroke="#B4B2A9" stroke-width="1.8"/>
+        <line x1="236" y1="72" x2="304" y2="72" stroke="#B4B2A9" stroke-width="1.8"/>
+        <line x1="304" y1="72" x2="372" y2="72" stroke="#B4B2A9" stroke-width="1.8"/>
+        <line x1="372" y1="72" x2="440" y2="72" stroke="#B4B2A9" stroke-width="1.8"/>
+
+        <!-- sustituyentes A hacia abajo -->
+        <line x1="100" y1="96" x2="100" y2="118" stroke="#B4B2A9" stroke-width="1.4" stroke-dasharray="4,3"/>
+        <line x1="236" y1="96" x2="236" y2="118" stroke="#B4B2A9" stroke-width="1.4" stroke-dasharray="4,3"/>
+        <line x1="372" y1="96" x2="372" y2="118" stroke="#B4B2A9" stroke-width="1.4" stroke-dasharray="4,3"/>
+
+        <!-- átomos A -->
+        <circle cx="32"  cy="72" r="24" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.5"/>
+        <text x="32"  y="68" text-anchor="middle" font-size="11" fill="#5F5E5A">CH₃</text>
+        <text x="32"  y="81" text-anchor="middle" font-size="10" fill="#888">C1</text>
+        <circle cx="100" cy="72" r="24" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.5"/>
+        <text x="100" y="68" text-anchor="middle" font-size="11" fill="#5F5E5A">CH</text>
+        <text x="100" y="81" text-anchor="middle" font-size="10" fill="#888">C2</text>
+        <circle cx="168" cy="72" r="24" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.5"/>
+        <text x="168" y="68" text-anchor="middle" font-size="11" fill="#5F5E5A">CH₂</text>
+        <text x="168" y="81" text-anchor="middle" font-size="10" fill="#888">C3</text>
+        <circle cx="236" cy="72" r="24" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.5"/>
+        <text x="236" y="68" text-anchor="middle" font-size="11" fill="#5F5E5A">CH</text>
+        <text x="236" y="81" text-anchor="middle" font-size="10" fill="#888">C4</text>
+        <circle cx="304" cy="72" r="24" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.5"/>
+        <text x="304" y="68" text-anchor="middle" font-size="11" fill="#5F5E5A">CH₂</text>
+        <text x="304" y="81" text-anchor="middle" font-size="10" fill="#888">C5</text>
+        <circle cx="372" cy="72" r="24" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.5"/>
+        <text x="372" y="68" text-anchor="middle" font-size="11" fill="#5F5E5A">CH</text>
+        <text x="372" y="81" text-anchor="middle" font-size="10" fill="#888">C6</text>
+        <circle cx="440" cy="72" r="24" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1.5"/>
+        <text x="440" y="68" text-anchor="middle" font-size="11" fill="#5F5E5A">CH₃</text>
+        <text x="440" y="81" text-anchor="middle" font-size="10" fill="#888">C7</text>
+
+        <!-- sustituyentes A abajo -->
+        <circle cx="100" cy="134" r="20" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1"/>
+        <text x="100" y="138" text-anchor="middle" font-size="10" fill="#888">Me</text>
+        <circle cx="236" cy="134" r="20" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1"/>
+        <text x="236" y="138" text-anchor="middle" font-size="10" fill="#888">Me</text>
+        <circle cx="372" cy="134" r="20" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="1"/>
+        <text x="372" y="138" text-anchor="middle" font-size="10" fill="#888">Me</text>
+
+        <!-- resultado A a la derecha -->
+        <rect x="470" y="54" width="138" height="42" rx="7" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.2"/>
+        <text x="539" y="72"  text-anchor="middle" font-size="12" font-weight="500" fill="#791F1F">7C, 3 sust. ✗</text>
+        <text x="539" y="87"  text-anchor="middle" font-size="11" fill="#A32D2D">incorrecto</text>
+
+        <!-- ═══ SEPARADOR ═══ -->
+        <line x1="0" y1="168" x2="620" y2="168" stroke="#ccc" stroke-width="0.8"/>
+
+        <!-- ═══ CAMINO B (correcto): título bien por encima de los metilos ═══ -->
+        <!-- título y=184, metilos cy=220, átomos cy=272, resultado alineado con átomos -->
+        <text x="10" y="184" font-size="12" font-weight="500" fill="#27500A">Camino B — correcto (4 sustituyentes)</text>
+
+        <!-- sustituyentes B arriba (cy=220), bonds desde átomos (cy=272) a metilos -->
+        <line x1="32"  y1="248" x2="32"  y2="240" stroke="#3B6D11" stroke-width="1.4" stroke-dasharray="4,3"/>
+        <line x1="168" y1="248" x2="168" y2="240" stroke="#3B6D11" stroke-width="1.4" stroke-dasharray="4,3"/>
+        <line x1="304" y1="248" x2="304" y2="240" stroke="#3B6D11" stroke-width="1.4" stroke-dasharray="4,3"/>
+        <line x1="440" y1="248" x2="440" y2="240" stroke="#3B6D11" stroke-width="1.4" stroke-dasharray="4,3"/>
+
+        <!-- metilos B -->
+        <circle cx="32"  cy="220" r="20" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
+        <text x="32"  y="224" text-anchor="middle" font-size="10" fill="#27500A">Me</text>
+        <circle cx="168" cy="220" r="20" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
+        <text x="168" y="224" text-anchor="middle" font-size="10" fill="#27500A">Me</text>
+        <circle cx="304" cy="220" r="20" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
+        <text x="304" y="224" text-anchor="middle" font-size="10" fill="#27500A">Me</text>
+        <circle cx="440" cy="220" r="20" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
+        <text x="440" y="224" text-anchor="middle" font-size="10" fill="#27500A">Me</text>
+
+        <!-- bonds B -->
+        <line x1="32"  y1="272" x2="100" y2="272" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="100" y1="272" x2="168" y2="272" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="168" y1="272" x2="236" y2="272" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="236" y1="272" x2="304" y2="272" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="304" y1="272" x2="372" y2="272" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="372" y1="272" x2="440" y2="272" stroke="#185FA5" stroke-width="2.5"/>
+
+        <!-- átomos B -->
+        <circle cx="32"  cy="272" r="24" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="32"  y="268" text-anchor="middle" font-size="11" font-weight="500" fill="#0C447C">CH</text>
+        <text x="32"  y="281" text-anchor="middle" font-size="10" fill="#185FA5">C1</text>
+        <circle cx="100" cy="272" r="24" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="100" y="268" text-anchor="middle" font-size="11" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="100" y="281" text-anchor="middle" font-size="10" fill="#185FA5">C2</text>
+        <circle cx="168" cy="272" r="24" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="168" y="268" text-anchor="middle" font-size="11" font-weight="500" fill="#0C447C">CH</text>
+        <text x="168" y="281" text-anchor="middle" font-size="10" fill="#185FA5">C3</text>
+        <circle cx="236" cy="272" r="24" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="236" y="268" text-anchor="middle" font-size="11" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="236" y="281" text-anchor="middle" font-size="10" fill="#185FA5">C4</text>
+        <circle cx="304" cy="272" r="24" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="304" y="268" text-anchor="middle" font-size="11" font-weight="500" fill="#0C447C">CH</text>
+        <text x="304" y="281" text-anchor="middle" font-size="10" fill="#185FA5">C5</text>
+        <circle cx="372" cy="272" r="24" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="372" y="268" text-anchor="middle" font-size="11" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="372" y="281" text-anchor="middle" font-size="10" fill="#185FA5">C6</text>
+        <circle cx="440" cy="272" r="24" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="440" y="268" text-anchor="middle" font-size="11" font-weight="500" fill="#0C447C">CH</text>
+        <text x="440" y="281" text-anchor="middle" font-size="10" fill="#185FA5">C7</text>
+
+        <!-- resultado B a la derecha, alineado con los átomos -->
+        <rect x="470" y="256" width="138" height="42" rx="7" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
+        <text x="539" y="274" text-anchor="middle" font-size="12" font-weight="500" fill="#27500A">7C, 4 sust. ✓</text>
+        <text x="539" y="289" text-anchor="middle" font-size="11" fill="#3B6D11">correcto</text>
+      </svg>
+      <p class="mol-label">Misma molécula, dos recorridos posibles de 7 C. Se elige el camino B (azul) porque deja 4 sustituyentes (verde).</p>
+    </div>
+
+    <div class="hl hl-green"><strong>Regla mnemotécnica:</strong> más sustituyentes en el nombre = nombre más completo = nombre correcto IUPAC.</div>
+  </div>
+
+  <!-- CRITERIO EXTRA ALQUENOS -->
+  <div class="card">
+    <span class="tag t-amber">Criterio extra para alquenos</span>
+    <h2>Incluir el máximo de dobles enlaces</h2>
+    <p style="margin-bottom:.75rem">En alquenos, la cadena principal debe incluir el <strong>mayor número posible de dobles enlaces</strong>, aunque eso implique sacrificar longitud de cadena.</p>
+
+    <div class="mol-wrap">
+      <!--
+        6 átomos, separación 82px, radio 26
+        x: 50, 132, 214, 296, 378, 460
+        sustituyente metilo debajo de C4 (x=296) → cy=174
+        resultado: x=490, bien a la derecha, top=82
+        fila átomos: cy=110
+        altura: título 22, átomo 110+26=136, sust 174+24=198 → viewBox height=215
+      -->
+      <svg width="100%" viewBox="0 0 620 225" xmlns="http://www.w3.org/2000/svg">
+
+        <text x="255" y="20" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">La cadena principal siempre incluye el doble enlace</text>
+
+        <!-- bonds: C1-C2 simple teal, C2=C3 doble teal, C3-C4-C5-C6 simples azul -->
+        <line x1="44"  y1="110" x2="118" y2="110" stroke="#0F6E56" stroke-width="2.5"/>
+        <line x1="118" y1="105" x2="192" y2="105" stroke="#0F6E56" stroke-width="2.2"/>
+        <line x1="118" y1="115" x2="192" y2="115" stroke="#0F6E56" stroke-width="2.2"/>
+        <line x1="192" y1="110" x2="266" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="266" y1="110" x2="340" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="340" y1="110" x2="414" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <!-- bond sustituyente -->
+        <line x1="266" y1="136" x2="266" y2="165" stroke="#888" stroke-width="1.8" stroke-dasharray="5,3"/>
+
+        <!-- etiqueta doble enlace -->
+        <text x="155" y="88" text-anchor="middle" font-size="10" fill="#0F6E56">doble enlace</text>
+        <line x1="155" y1="91" x2="155" y2="101" stroke="#0F6E56" stroke-width="1"/>
+
+        <!-- átomos -->
+        <circle cx="44"  cy="110" r="26" fill="#E1F5EE" stroke="#0F6E56" stroke-width="2"/>
+        <text x="44"  y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">CH₂</text>
+        <text x="44"  y="119" text-anchor="middle" font-size="11" fill="#0F6E56">C1</text>
+
+        <circle cx="118" cy="110" r="26" fill="#E1F5EE" stroke="#0F6E56" stroke-width="2.5"/>
+        <text x="118" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">CH</text>
+        <text x="118" y="119" text-anchor="middle" font-size="11" fill="#0F6E56">C2</text>
+
+        <circle cx="192" cy="110" r="26" fill="#E1F5EE" stroke="#0F6E56" stroke-width="2.5"/>
+        <text x="192" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#085041">CH</text>
+        <text x="192" y="119" text-anchor="middle" font-size="11" fill="#0F6E56">C3</text>
+
+        <circle cx="266" cy="110" r="26" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="266" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH</text>
+        <text x="266" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C4</text>
+
+        <circle cx="340" cy="110" r="26" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="340" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="340" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C5</text>
+
+        <circle cx="414" cy="110" r="26" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="414" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₃</text>
+        <text x="414" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C6</text>
+
+        <!-- sustituyente metilo debajo de C4 -->
+        <circle cx="266" cy="179" r="24" fill="#F1EFE8" stroke="#888780" stroke-width="1.5"/>
+        <text x="266" y="175" text-anchor="middle" font-size="11" fill="#5F5E5A">CH₃</text>
+        <text x="266" y="187" text-anchor="middle" font-size="10" fill="#888">sustituyente</text>
+
+        <!-- resultado — debajo del último átomo para no solaparse -->
+        <rect x="452" y="88" width="156" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="1.2"/>
+        <text x="530" y="111" text-anchor="middle" font-size="14" font-weight="500" fill="#085041">4-metil</text>
+        <text x="530" y="130" text-anchor="middle" font-size="14" font-weight="500" fill="#085041">hex-2-eno</text>
+      </svg>
+      <p class="mol-label">Los C del doble enlace (teal) están incluidos en la cadena principal de 6 C → 4-metilhex-2-eno</p>
+    </div>
+
+    <div class="hl hl-amber">
+      <strong>Orden de prioridad en alquenos:</strong><br>
+      1° Máximo dobles enlaces incluidos &nbsp; 2° Cadena más larga &nbsp; 3° Más sustituyentes
+    </div>
+  </div>
+
+  <!-- NUMERACIÓN -->
+  <div class="card">
+    <span class="tag t-blue">Numeración</span>
+    <h2>¿Desde qué extremo se empieza a numerar?</h2>
+
+    <div class="mol-wrap">
+      <!--
+        7 átomos, separación 72px, radio 25
+        x: 36, 108, 180, 252, 324, 396, 468
+        sustituyentes en C2(x=108), C3(x=180), C5(x=324) → arriba cy=54
+        átomos cy=110
+        flecha numeración: y=152
+        resultado correcto y=168
+        notas incorrecto y=168 lado derecho x=510
+        viewBox width=620, height=210
+      -->
+      <svg width="100%" viewBox="0 0 620 215" xmlns="http://www.w3.org/2000/svg">
+
+        <text x="252" y="20" text-anchor="middle" font-size="12" font-weight="500" fill="#633806">Elegir el extremo que dé los localizadores más bajos</text>
+
+        <!-- bonds cadena -->
+        <line x1="36"  y1="110" x2="108" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="108" y1="110" x2="180" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="180" y1="110" x2="252" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="252" y1="110" x2="324" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="324" y1="110" x2="396" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+        <line x1="396" y1="110" x2="468" y2="110" stroke="#185FA5" stroke-width="2.5"/>
+
+        <!-- bonds sustituyentes hacia arriba -->
+        <line x1="108" y1="85"  x2="108" y2="66"  stroke="#3B6D11" stroke-width="1.8" stroke-dasharray="5,3"/>
+        <line x1="180" y1="85"  x2="180" y2="66"  stroke="#3B6D11" stroke-width="1.8" stroke-dasharray="5,3"/>
+        <line x1="324" y1="85"  x2="324" y2="66"  stroke="#3B6D11" stroke-width="1.8" stroke-dasharray="5,3"/>
+
+        <!-- sustituyentes arriba -->
+        <circle cx="108" cy="54" r="22" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
+        <text x="108" y="50" text-anchor="middle" font-size="11" fill="#27500A">CH₃</text>
+        <text x="108" y="63" text-anchor="middle" font-size="10" fill="#3B6D11">Me</text>
+
+        <circle cx="180" cy="54" r="22" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
+        <text x="180" y="50" text-anchor="middle" font-size="11" fill="#27500A">CH₃</text>
+        <text x="180" y="63" text-anchor="middle" font-size="10" fill="#3B6D11">Me</text>
+
+        <circle cx="324" cy="54" r="22" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/>
+        <text x="324" y="50" text-anchor="middle" font-size="11" fill="#27500A">CH₃</text>
+        <text x="324" y="63" text-anchor="middle" font-size="10" fill="#3B6D11">Me</text>
+
+        <!-- átomos cadena -->
+        <circle cx="36"  cy="110" r="25" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="36"  y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₃</text>
+        <text x="36"  y="119" text-anchor="middle" font-size="11" fill="#185FA5">C1</text>
+
+        <circle cx="108" cy="110" r="25" fill="#E6F1FB" stroke="#185FA5" stroke-width="2.5"/>
+        <text x="108" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH</text>
+        <text x="108" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C2</text>
+
+        <circle cx="180" cy="110" r="25" fill="#E6F1FB" stroke="#185FA5" stroke-width="2.5"/>
+        <text x="180" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH</text>
+        <text x="180" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C3</text>
+
+        <circle cx="252" cy="110" r="25" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="252" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="252" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C4</text>
+
+        <circle cx="324" cy="110" r="25" fill="#E6F1FB" stroke="#185FA5" stroke-width="2.5"/>
+        <text x="324" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH</text>
+        <text x="324" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C5</text>
+
+        <circle cx="396" cy="110" r="25" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="396" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₂</text>
+        <text x="396" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C6</text>
+
+        <circle cx="468" cy="110" r="25" fill="#E6F1FB" stroke="#185FA5" stroke-width="2"/>
+        <text x="468" y="106" text-anchor="middle" font-size="12" font-weight="500" fill="#0C447C">CH₃</text>
+        <text x="468" y="119" text-anchor="middle" font-size="11" fill="#185FA5">C7</text>
+
+        <!-- flecha numeración correcta (izquierda→derecha) debajo de los átomos -->
+        <line x1="36" y1="150" x2="468" y2="150" stroke="#185FA5" stroke-width="1.5"/>
+        <polygon points="473,150 465,146 465,154" fill="#185FA5"/>
+        <text x="252" y="165" text-anchor="middle" font-size="11" fill="#185FA5">→ numeración correcta</text>
+
+        <!-- resultado correcto debajo centrado -->
+        <rect x="100" y="174" width="305" height="26" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1"/>
+        <text x="252" y="191" text-anchor="middle" font-size="12" font-weight="500" fill="#27500A">2,3,5-trimetilheptano ✓  (suma localizadores = 10)</text>
+
+        <!-- nota incorrecto a la derecha -->
+        <rect x="498" y="140" width="115" height="50" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+        <text x="555" y="157" text-anchor="middle" font-size="10" fill="#791F1F">desde derecha:</text>
+        <text x="555" y="170" text-anchor="middle" font-size="10" fill="#791F1F">3,5,6-trimetil ✗</text>
+        <text x="555" y="183" text-anchor="middle" font-size="10" fill="#A32D2D">(suma = 14)</text>
+      </svg>
+      <p class="mol-label">Desde la izquierda los sustituyentes caen en C2, C3 y C5 (suma 10). Desde la derecha caerían en C3, C5 y C6 (suma 14). Se elige la izquierda.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><p>En <strong>alquenos/alquinos</strong>: desde el extremo más cercano al primer enlace múltiple.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><p>En <strong>alcanos</strong>: desde el extremo que dé el conjunto de localizadores más bajos a los sustituyentes.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><p>Si los localizadores resultan iguales al comparar uno a uno, se elige el extremo cuyo primer sustituyente diferente tenga <strong>orden alfabético anterior</strong>.</p></div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ ALCANOS ══ -->
+<div id="alcanos" class="section">
+  <div class="page-header"><h1>Alcanos</h1><p>Hidrocarburos saturados — solo enlaces simples C–C y C–H.</p></div>
+  <div class="card">
+    <span class="tag t-blue">Generalidades</span>
+    <h2>Características</h2>
+    <div class="g2">
+      <div><ul>
+        <li>Solo <strong>enlaces sigma</strong> (simples)</li>
+        <li>Hibridación <strong>sp³</strong> en todos los C</li>
+        <li>Ángulo de enlace ≈ 109.5°</li>
+        <li>Geometría <strong>tetraédrica</strong></li>
+        <li>Los menos reactivos de todos los HC</li>
+        <li>Apolar → insolubles en agua</li>
+      </ul></div>
+      <div>
+        <div class="fband"><code>CₙH₂ₙ₊₂</code><span style="color:var(--text2)">lineales</span></div>
+        <div class="fband"><code>CₙH₂ₙ</code><span style="color:var(--text2)">cicloalcanos</span></div>
+        <div class="card-sm" style="margin-top:.4rem">Solo reaccionan en condiciones extremas: combustión, halogenación con luz UV.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-blue">Nomenclatura lineal</span>
+    <h2>Prefijo + sufijo "ano"</h2>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>N° C</th><th>Prefijo</th><th>Alcano</th><th>Fórmula</th><th>Estado (25°C)</th></tr>
+        <tr><td>1</td><td>Met-</td><td>Metano</td><td><code>CH₄</code></td><td>Gas</td></tr>
+        <tr><td>2</td><td>Et-</td><td>Etano</td><td><code>C₂H₆</code></td><td>Gas</td></tr>
+        <tr><td>3</td><td>Prop-</td><td>Propano</td><td><code>C₃H₈</code></td><td>Gas</td></tr>
+        <tr><td>4</td><td>But-</td><td>Butano</td><td><code>C₄H₁₀</code></td><td>Gas</td></tr>
+        <tr><td>5</td><td>Pent-</td><td>Pentano</td><td><code>C₅H₁₂</code></td><td>Líquido</td></tr>
+        <tr><td>6</td><td>Hex-</td><td>Hexano</td><td><code>C₆H₁₄</code></td><td>Líquido</td></tr>
+        <tr><td>7</td><td>Hept-</td><td>Heptano</td><td><code>C₇H₁₆</code></td><td>Líquido</td></tr>
+        <tr><td>8</td><td>Oct-</td><td>Octano</td><td><code>C₈H₁₈</code></td><td>Líquido</td></tr>
+        <tr><td>9</td><td>Non-</td><td>Nonano</td><td><code>C₉H₂₀</code></td><td>Líquido</td></tr>
+        <tr><td>10</td><td>Dec-</td><td>Decano</td><td><code>C₁₀H₂₂</code></td><td>Líquido</td></tr>
+        <tr><td>12</td><td>Dodec-</td><td>Dodecano</td><td><code>C₁₂H₂₆</code></td><td>Líquido</td></tr>
+        <tr><td>20</td><td>Eicos-</td><td>Eicosano</td><td><code>C₂₀H₄₂</code></td><td>Sólido</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-amber">Ramificados — radicales alquilo</span>
+    <h2>Reglas IUPAC</h2>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><p><strong>Cadena principal:</strong> la más larga (y con más sustituyentes si empatan en largo).</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><p><strong>Numeración:</strong> desde el extremo que dé localizadores más bajos.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><p><strong>Sustituyentes:</strong> reemplaza <code>-ano</code> por <code>-il/-ilo</code>. Usa <code>di-</code>, <code>tri-</code>, <code>tetra-</code> si hay varios iguales.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div><p><strong>Orden alfabético</strong> (ignorando di-, tri-, tetra- pero respetando iso-, sec-, ter-, ciclo-).</p></div></div>
+    </div>
+    <div class="div"></div>
+    <h3>Radicales alquilo</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Fórmula</th><th>Nombre IUPAC</th><th>Nombre común</th></tr>
+        <tr><td><code>CH₃–</code></td><td>metilo</td><td>metilo</td></tr>
+        <tr><td><code>CH₃CH₂–</code></td><td>etilo</td><td>etilo</td></tr>
+        <tr><td><code>CH₃CH₂CH₂–</code></td><td>propilo</td><td>n-propilo</td></tr>
+        <tr><td><code>(CH₃)₂CH–</code></td><td>1-metiletilo</td><td>isopropilo</td></tr>
+        <tr><td><code>CH₃CH₂CH₂CH₂–</code></td><td>butilo</td><td>n-butilo</td></tr>
+        <tr><td><code>(CH₃)₂CHCH₂–</code></td><td>2-metilpropilo</td><td>isobutilo</td></tr>
+        <tr><td><code>CH₃CH₂CH(CH₃)–</code></td><td>1-metilpropilo</td><td>sec-butilo</td></tr>
+        <tr><td><code>(CH₃)₃C–</code></td><td>1,1-dimetiletilo</td><td>ter-butilo</td></tr>
+        <tr><td><code>(CH₃)₂CHCH₂CH₂–</code></td><td>3-metilbutilo</td><td>isopentilo</td></tr>
+      </table>
+    </div>
+    <div class="div"></div>
+    <h3>Ejemplos resueltos</h3>
+    <div class="card-sm"><strong>3-metilhexano</strong> — 6 C, –CH₃ en C3</div>
+    <div class="card-sm"><strong>4-etil-3-metilheptano</strong> — 7 C, etilo en C4, metilo en C3 (e antes de m)</div>
+    <div class="card-sm"><strong>3-etil-2,4,5-trimetilheptano</strong> — 7 C, etilo en C3, tres metilos en C2, C4, C5</div>
+  </div>
+  <div class="card">
+    <span class="tag t-coral">Sustituyentes ramificados (complejos)</span>
+    <h2>Cuando el sustituyente tiene sus propias ramas</h2>
+    <p style="margin-bottom:.75rem">Si el sustituyente no es lineal sino que tiene sus propias ramificaciones, se nombra sistemáticamente entre <strong>paréntesis</strong>. El C de unión a la cadena principal = C1 del sustituyente.</p>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><p>Identifica el sustituyente ramificado. El C que se une a la cadena principal es su C1.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><p>Nómbralo con las reglas normales de alcanos ramificados.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><p>Escríbelo entre paréntesis precedido del localizador: <code>4-(1-metiletil)heptano</code>.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div><p><code>iso-</code>, <code>sec-</code>, <code>ter-</code>, <code>ciclo-</code> SÍ cuentan en el orden alfabético. <code>di-</code>, <code>tri-</code>, <code>tetra-</code> NO.</p></div></div>
+    </div>
+    <div class="div"></div>
+    <div class="card-sm"><strong>4-(1-metiletil)heptano</strong> = 4-isopropilheptano<br><span style="color:var(--text2);font-size:12px">Sustituyente –CH(CH₃)₂ en C4</span></div>
+    <div class="card-sm"><strong>5-(2-metilpropil)decano</strong> = 5-isobutildecano<br><span style="color:var(--text2);font-size:12px">Sustituyente –CH₂CH(CH₃)₂ en C5</span></div>
+    <div class="card-sm"><strong>5-(1,1-dimetiletil)-3-etiloctano</strong> = 5-ter-butil-3-etiloctano<br><span style="color:var(--text2);font-size:12px">Sustituyente –C(CH₃)₃ en C5</span></div>
+    <div class="hl hl-amber"><strong>Nombres comunes aceptados:</strong> iso-, sec-, ter- pueden usarse en lugar del nombre sistemático entre paréntesis.</div>
+  </div>
+</div>
+
+<!-- ══ ALQUENOS ══ -->
+<div id="alquenos" class="section">
+  <div class="page-header"><h1>Alquenos</h1><p>Hidrocarburos con al menos un doble enlace C=C.</p></div>
+  <div class="card">
+    <span class="tag t-teal">Generalidades</span>
+    <h2>Características</h2>
+    <div class="g2">
+      <div><ul>
+        <li>Al menos un <strong>doble enlace</strong> C=C</li>
+        <li>Doble enlace = 1 sigma + 1 <strong>pi</strong></li>
+        <li>Hibridación <strong>sp²</strong> en los C del doble enlace</li>
+        <li>Geometría <strong>plana trigonal</strong> (120°)</li>
+        <li>Reactivos por el enlace π</li>
+        <li>El doble enlace impide la rotación → isomería cis/trans</li>
+      </ul></div>
+      <div>
+        <div class="fband"><code>CₙH₂ₙ</code><span style="color:var(--text2)">1 doble enlace</span></div>
+        <div class="fband"><code>CₙH₂ₙ₋₂</code><span style="color:var(--text2)">2 dobles enlaces</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-teal">Nomenclatura moderna — lineales</span>
+    <h2>Localizador pegado al sufijo <code>-eno</code></h2>
+    <div class="hl" style="background:var(--teal50);color:var(--teal800);margin-bottom:.75rem"><strong>Clave:</strong> "hex-2-eno" ✓ &nbsp; "2-hexeno" ✗ (nomenclatura antigua)</div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Fórmula</th><th>Nombre moderno</th><th>Antiguo</th></tr>
+        <tr><td><code>CH₂=CH₂</code></td><td><strong>eteno</strong></td><td>etileno</td></tr>
+        <tr><td><code>CH₂=CH–CH₃</code></td><td><strong>prop-1-eno</strong></td><td>propeno</td></tr>
+        <tr><td><code>CH₂=CH–CH₂–CH₃</code></td><td><strong>but-1-eno</strong></td><td>1-buteno</td></tr>
+        <tr><td><code>CH₃–CH=CH–CH₃</code></td><td><strong>but-2-eno</strong></td><td>2-buteno</td></tr>
+        <tr><td><code>CH₃–CH₂–CH=CH–CH₃</code></td><td><strong>pent-2-eno</strong></td><td>2-penteno</td></tr>
+        <tr><td>6 C, dobles en C1 y C4</td><td><strong>hexa-1,4-dieno</strong></td><td>1,4-hexadieno</td></tr>
+        <tr><td>6 C, dobles en C1, C3, C5</td><td><strong>hexa-1,3,5-trieno</strong></td><td>1,3,5-hexatrieno</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-amber">Ramificados — sustituyentes simples</span>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><p><strong>Cadena principal:</strong> la más larga con el máximo de dobles enlaces.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><p>El <strong>doble enlace tiene prioridad</strong>: obtiene el localizador más bajo, pegado al sufijo.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><p>Si el doble enlace queda equidistante, elige el extremo con localizadores más bajos para los radicales.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div><p>Empate total → <strong>orden alfabético del radical</strong>.</p></div></div>
+    </div>
+    <div class="div"></div>
+    <div class="cmp"><span class="old">5-metil-2-hexeno</span><span class="arr">→</span><span class="new">5-metilhex-2-eno</span></div>
+    <div class="cmp"><span class="old">2-etil-1,4-hexadieno</span><span class="arr">→</span><span class="new">2-etilhexa-1,4-dieno</span></div>
+    <div class="cmp"><span class="old">3-etil-2,4,5-trimetil-3-hepteno</span><span class="arr">→</span><span class="new">3-etil-2,4,5-trimetilhept-3-eno</span></div>
+    <div class="cmp"><span class="old">2-metil-3-hexeno</span><span class="arr">→</span><span class="new">2-metilhex-3-eno</span></div>
+    <div class="cmp"><span class="old">2-etil-5-metil-1,5-hexadieno</span><span class="arr">→</span><span class="new">2-etil-5-metilhexa-1,5-dieno</span></div>
+  </div>
+  <div class="card">
+    <span class="tag t-coral">Sustituyentes ramificados</span>
+    <h2>Paréntesis — igual que en alcanos</h2>
+    <p style="margin-bottom:.5rem">El doble enlace de la cadena principal sigue teniendo prioridad en la numeración.</p>
+    <div class="card-sm"><strong>2-(1-metiletil)hex-4-eno</strong><br><span style="color:var(--text2);font-size:12px">6 C, doble en C4, sustituyente –CH(CH₃)₂ en C2</span></div>
+    <div class="card-sm"><strong>3-(2-metilpropil)hept-1-eno</strong><br><span style="color:var(--text2);font-size:12px">7 C, doble en C1, sustituyente isobutilo en C3</span></div>
+    <div class="div"></div>
+    <h3>Sustituyentes con enlace múltiple propio</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Sustituyente</th><th>Nombre IUPAC</th><th>Nombre común</th></tr>
+        <tr><td><code>=CH₂</code></td><td>metilideno</td><td>—</td></tr>
+        <tr><td><code>–CH=CH₂</code></td><td>etenil</td><td>vinilo</td></tr>
+        <tr><td><code>–CH₂–CH=CH₂</code></td><td>2-propenil</td><td>alilo</td></tr>
+        <tr><td><code>–CH=CH–CH₃</code></td><td>prop-1-enil</td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ALQUINOS ══ -->
+<div id="alquinos" class="section">
+  <div class="page-header"><h1>Alquinos</h1><p>Hidrocarburos con al menos un triple enlace C≡C.</p></div>
+  <div class="card">
+    <span class="tag t-purple">Generalidades</span>
+    <h2>Características</h2>
+    <div class="g2">
+      <div><ul>
+        <li>Al menos un <strong>triple enlace</strong> C≡C</li>
+        <li>Triple enlace = 1 sigma + 2 <strong>pi</strong></li>
+        <li>Hibridación <strong>sp</strong> en los C del triple enlace</li>
+        <li>Geometría <strong>lineal</strong> (180°)</li>
+        <li>Muy reactivos por los dos enlaces π</li>
+        <li>El alquino terminal (HC≡C–) tiene H ácido (pKa ≈ 25)</li>
+      </ul></div>
+      <div>
+        <div class="fband"><code>CₙH₂ₙ₋₂</code><span style="color:var(--text2)">1 triple enlace</span></div>
+        <div class="fband"><code>CₙH₂ₙ₋₄</code><span style="color:var(--text2)">2 triples enlaces</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-purple">Nomenclatura moderna</span>
+    <h2>Localizador pegado al sufijo <code>-ino</code></h2>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Fórmula</th><th>Nombre moderno</th><th>Antiguo / común</th></tr>
+        <tr><td><code>HC≡CH</code></td><td><strong>etino</strong></td><td>acetileno</td></tr>
+        <tr><td><code>HC≡C–CH₃</code></td><td><strong>prop-1-ino</strong></td><td>propino</td></tr>
+        <tr><td><code>HC≡C–CH₂–CH₃</code></td><td><strong>but-1-ino</strong></td><td>1-butino</td></tr>
+        <tr><td><code>CH₃–C≡C–CH₃</code></td><td><strong>but-2-ino</strong></td><td>2-butino</td></tr>
+        <tr><td><code>HC≡C–(CH₂)₂–CH₃</code></td><td><strong>pent-1-ino</strong></td><td>1-pentino</td></tr>
+        <tr><td>8 C, triples en C1 y C6</td><td><strong>octa-1,6-diino</strong></td><td>octa-1,6-diino</td></tr>
+      </table>
+    </div>
+    <div class="div"></div>
+    <div class="cmp"><span class="old">6-metil-3-octino</span><span class="arr">→</span><span class="new">6-metiloct-3-ino</span></div>
+    <div class="cmp"><span class="old">3-metil-1,5-hexadiino</span><span class="arr">→</span><span class="new">3-metilhexa-1,5-diino</span></div>
+  </div>
+  <div class="card">
+    <span class="tag t-coral">Sustituyentes ramificados</span>
+    <h2>Mismo principio: paréntesis</h2>
+    <p style="margin-bottom:.5rem">El triple enlace tiene prioridad en la numeración.</p>
+    <div class="card-sm"><strong>4-(1-metiletil)oct-2-ino</strong><br><span style="color:var(--text2);font-size:12px">8 C, triple en C2, sustituyente –CH(CH₃)₂ en C4</span></div>
+    <div class="card-sm"><strong>5-(2-metilpropil)non-2-ino</strong><br><span style="color:var(--text2);font-size:12px">9 C, triple en C2, sustituyente isobutilo en C5</span></div>
+    <div class="div"></div>
+    <h3>Sustituyentes con triple enlace propio</h3>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Sustituyente</th><th>Nombre IUPAC</th><th>Nombre común</th></tr>
+        <tr><td><code>–C≡CH</code></td><td>etinilo</td><td>—</td></tr>
+        <tr><td><code>–C≡C–CH₃</code></td><td>prop-1-inilo</td><td>—</td></tr>
+        <tr><td><code>–CH₂–C≡CH</code></td><td>prop-2-inilo</td><td>propargilo</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CICLICOS ══ -->
+<div id="ciclicos" class="section">
+  <div class="page-header"><h1>Compuestos cíclicos</h1><p>Cicloalcanos y cicloalquenos — cadenas cerradas en anillo.</p></div>
+  <div class="card">
+    <span class="tag t-coral">Generalidades</span>
+    <h2>¿Qué son?</h2>
+    <p>Cadena de C que forma un <strong>anillo cerrado</strong>. El prefijo <strong>ciclo-</strong> se antepone al nombre del hidrocarburo base.</p>
+    <div class="tbl-wrap" style="margin-top:.75rem">
+      <table>
+        <tr><th>Anillo</th><th>N° C</th><th>Cicloalcano</th><th>Fórmula</th></tr>
+        <tr><td>Triangular</td><td>3</td><td>ciclopropano</td><td><code>C₃H₆</code></td></tr>
+        <tr><td>Cuadrado</td><td>4</td><td>ciclobutano</td><td><code>C₄H₈</code></td></tr>
+        <tr><td>Pentagonal</td><td>5</td><td>ciclopentano</td><td><code>C₅H₁₀</code></td></tr>
+        <tr><td>Hexagonal</td><td>6</td><td>ciclohexano</td><td><code>C₆H₁₂</code></td></tr>
+        <tr><td>Heptagonal</td><td>7</td><td>cicloheptano</td><td><code>C₇H₁₄</code></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-coral">Cicloalcanos ramificados</span>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><p>Si hay un solo sustituyente, no se indica localizador: <strong>metilciclopentano</strong> (no "1-metilciclopentano").</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><p>Con dos o más sustituyentes, el C con el primer sustituyente (por orden alfabético) recibe localizador <strong>1</strong>.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><p>Numera en el sentido que dé los localizadores <strong>más bajos</strong> al conjunto.</p></div></div>
+      <div class="step"><div class="step-n">4</div><div><p>Sustituyentes ramificados van entre paréntesis igual que en alcanos.</p></div></div>
+    </div>
+    <div class="div"></div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Descripción</th><th>Correcto</th><th>Incorrecto</th></tr>
+        <tr><td>Anillo 5C, 1 metilo</td><td><strong>metilciclopentano</strong></td><td>1-metilciclopentano</td></tr>
+        <tr><td>Anillo 6C, 2 metilos</td><td><strong>1,3-dimetilciclohexano</strong></td><td>1,5-dimetilciclohexano</td></tr>
+        <tr><td>Anillo 5C, etilo+metilo</td><td><strong>2-etil-1-metilciclopentano</strong></td><td>1-etil-2-metilciclopentano</td></tr>
+        <tr><td>Anillo 4C, isopropilo</td><td><strong>(1-metiletil)ciclobutano</strong></td><td>—</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <span class="tag t-amber">Cicloalquenos — nomenclatura moderna</span>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div><p>Un C del doble enlace recibe localizador <strong>1</strong>, el otro es C2.</p></div></div>
+      <div class="step"><div class="step-n">2</div><div><p>Numera en el sentido del doble enlace que dé los localizadores más bajos a los sustituyentes.</p></div></div>
+      <div class="step"><div class="step-n">3</div><div><p>Localizador del doble enlace pegado al sufijo en nomenclatura moderna.</p></div></div>
+    </div>
+    <div class="div"></div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Descripción</th><th>Nombre moderno</th><th>Antiguo</th></tr>
+        <tr><td>Anillo 6C, 1 doble</td><td><strong>ciclohex-1-eno</strong></td><td>ciclohexeno</td></tr>
+        <tr><td>Anillo 6C, 2 dobles (C1,C4)</td><td><strong>ciclohexa-1,4-dieno</strong></td><td>1,4-ciclohexadieno</td></tr>
+        <tr><td>Anillo 6C, metilo en C1</td><td><strong>1-metilciclohex-1-eno</strong></td><td>1-metilciclohexeno</td></tr>
+        <tr><td>Anillo 5C, etilo en C3</td><td><strong>3-etilciclopent-1-eno</strong></td><td>3-etilciclopenteno</td></tr>
+        <tr><td>Anillo 6C, metilos C4 y C5</td><td><strong>4,5-dimetilciclohex-1-eno</strong></td><td>4,5-dimetilciclohexeno</td></tr>
+        <tr><td>Anillo 6C, etilo C4, metilo C3</td><td><strong>4-etil-3-metilciclohex-1-eno</strong></td><td>4-etil-3-metilciclohexeno</td></tr>
+      </table>
+    </div>
+    <div class="card-sm" style="margin-top:.5rem"><strong>Del material del profesor:</strong> 1-isopropil-4-metilciclohexa-1,3-dieno<br><span style="color:var(--text2);font-size:12px">Anillo 6C, dobles en C1 y C3, isopropilo en C1, metilo en C4</span></div>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div id="quiz" class="section">
+  <div class="page-header"><h1>Quiz de práctica</h1><p>12 preguntas sobre nomenclatura IUPAC moderna. Todo el material del resumen.</p></div>
+  <div class="card">
+    <div class="qbar-wrap"><div class="qbar" id="qbar" style="width:0%"></div></div>
+    <div id="quiz-area">
+      <p class="qprog" id="qprog">Pregunta 1 de 12</p>
+      <div class="div" style="margin:.4rem 0 .9rem"></div>
+      <p class="quiz-q" id="qtext"></p>
+      <div class="quiz-opts" id="qopts"></div>
+      <div class="fb" id="qfb"></div>
+      <div class="qnav">
+        <span id="qscore" class="qprog"></span>
+        <button class="btn btn-p" id="qnext" onclick="nextQ()" style="display:none">Siguiente →</button>
+      </div>
+    </div>
+    <div id="quiz-result" style="display:none;text-align:center;padding:1.5rem 0">
+      <div class="result-circle"><span class="result-num" id="rnum"></span><span class="result-den" id="rden"></span></div>
+      <h2 id="rtitle" style="margin-bottom:.4rem"></h2>
+      <p id="rmsg" style="margin-bottom:1.5rem"></p>
+      <button class="btn btn-p" onclick="restartQuiz()">Reiniciar quiz</button>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+const tabs=['clasificacion','cadena','alcanos','alquenos','alquinos','ciclicos','quiz'];
+function show(id){
+  tabs.forEach(t=>{document.getElementById(t).classList.toggle('active',t===id)});
+  document.querySelectorAll('.nav-item').forEach((b,i)=>{b.classList.toggle('active',tabs[i]===id)});
+  window.scrollTo(0,0);
+}
+const Qs=[
+  {q:'¿Cuáles son los dos criterios para elegir la cadena principal, en orden de prioridad?',
+   opts:['1° más sustituyentes, 2° más larga','1° más larga, 2° más sustituyentes','1° más larga, 2° orden alfabético','1° más sustituyentes, 2° orden alfabético'],
+   ans:1,exp:'Primero se busca la cadena continua de C más larga. Si empatan en longitud, se elige la que deje más sustituyentes colgando.'},
+  {q:'En alquenos, ¿qué criterio adicional se aplica para elegir la cadena principal?',
+   opts:['Que no tenga sustituyentes','Que incluya el máximo de dobles enlaces posibles','Que empiece en C1','Que sea la más corta'],
+   ans:1,exp:'En alquenos la cadena principal debe incluir el máximo número de dobles enlaces. Ese criterio tiene prioridad incluso sobre la longitud de la cadena.'},
+  {q:'¿Cuál es el nombre moderno de CH₃–CH=CH–CH₂–CH₃?',
+   opts:['2-penteno','pent-3-eno','pent-2-eno','hex-2-eno'],
+   ans:2,exp:'5 carbonos (pent-), doble entre C2 y C3 → localizador 2 pegado al sufijo: pent-2-eno.'},
+  {q:'¿Cuál es el nombre moderno de 3-etil-2,4,5-trimetil-3-hepteno?',
+   opts:['3-etil-2,4,5-trimetilhept-3-eno','3-etil-2,4,5-trimetil-hept-3-eno','hept-3-eno-3-etil-2,4,5-trimetil','3-etil-trimetilhept-3-eno'],
+   ans:0,exp:'El localizador del doble enlace va pegado al sufijo sin guion extra: 3-etil-2,4,5-trimetilhept-3-eno.'},
+  {q:'¿Cómo se nombra el sustituyente –CH(CH₃)₂ en posición C4 de un heptano?',
+   opts:['4-propilheptano','4-isopropilheptano o 4-(1-metiletil)heptano','4-(2-metiletil)heptano','4-(dimetiletil)heptano'],
+   ans:1,exp:'–CH(CH₃)₂ es un sustituyente ramificado. Nombre sistemático: 1-metiletilo → 4-(1-metiletil)heptano. Nombre común aceptado: 4-isopropilheptano.'},
+  {q:'Hay dos cadenas de 7 C posibles: una con 3 sustituyentes y otra con 4. ¿Cuál es la cadena principal?',
+   opts:['La de 3 sustituyentes','La de 4 sustituyentes','Da igual','La que esté más a la izquierda'],
+   ans:1,exp:'Con igual longitud de cadena, se elige la que deje más sustituyentes. La cadena con 4 sustituyentes es la correcta.'},
+  {q:'¿Cuál es el nombre moderno de 2-etil-1,4-hexadieno?',
+   opts:['2-etil-hexa-1,4-dieno','2-etilhex-1,4-dieno','2-etilhexa-1,4-dieno','hexa-1,4-dieno-2-etil'],
+   ans:2,exp:'6 C = hexa-, dos dobles = -dieno, localizadores 1 y 4, etilo en C2 → 2-etilhexa-1,4-dieno.'},
+  {q:'¿Cuál es la hibridación del carbono en el triple enlace de los alquinos?',
+   opts:['sp³','sp²','sp','sp³d'],
+   ans:2,exp:'En el triple enlace los C tienen hibridación sp: 1 enlace sigma + 2 enlaces pi, geometría lineal (180°).'},
+  {q:'¿Cuál es el nombre moderno de un alquino de 8 C con triple enlace en C3 y metilo en C6?',
+   opts:['6-metil-3-octino','6-metiloct-3-ino','6-metil-oct-3-ino','oct-3-ino-6-metil'],
+   ans:1,exp:'8 C = oct-, triple en C3 → oct-3-ino, metilo en C6. Nombre moderno: 6-metiloct-3-ino.'},
+  {q:'En un cicloalqueno, ¿qué localizador recibe el carbono del doble enlace?',
+   opts:['El más alto disponible','El número 2','El número 1','El del sustituyente principal'],
+   ans:2,exp:'Siempre se asigna el localizador 1 a uno de los C del doble enlace. Luego se numera en el sentido que dé localizadores más bajos a los sustituyentes.'},
+  {q:'¿Cuál es el nombre moderno de un cicloalqueno de 6 C con metilos en C4 y C5?',
+   opts:['4,5-dimetilciclohexeno','4,5-dimetilciclohex-1-eno','1-ciclohexeno-4,5-dimetil','ciclohex-1-eno-4,5-dimetil'],
+   ans:1,exp:'Doble enlace en C1-C2 → ciclohex-1-eno. Metilos en C4 y C5 → 4,5-dimetilciclohex-1-eno.'},
+  {q:'Al numerar una cadena con sustituyentes desde ambos extremos se obtiene 2,3,5 vs 3,5,6. ¿Cuál es correcto?',
+   opts:['3,5,6 — suma mayor','2,3,5 — localizadores más bajos','Da igual si la suma es la misma','El que empiece con el radical de mayor tamaño'],
+   ans:1,exp:'Se elige siempre el conjunto de localizadores más bajos comparados uno a uno. 2 < 3, por lo tanto 2,3,5 es correcto.'},
+];
+let cur=0,score=0,answered=false;
+function loadQ(){
+  const q=Qs[cur];
+  document.getElementById('qprog').textContent=`Pregunta ${cur+1} de ${Qs.length}`;
+  document.getElementById('qbar').style.width=`${Math.round(cur/Qs.length*100)}%`;
+  document.getElementById('qtext').textContent=q.q;
+  const opts=document.getElementById('qopts');opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='qopt';b.textContent=o;b.onclick=()=>answer(i);opts.appendChild(b);
+  });
+  document.getElementById('qfb').className='fb';
+  document.getElementById('qfb').textContent='';
+  document.getElementById('qnext').style.display='none';
+  document.getElementById('qscore').textContent=`Aciertos: ${score} / ${cur}`;
+  answered=false;
+}
+function answer(i){
+  if(answered)return;answered=true;
+  const q=Qs[cur];
+  const btns=document.querySelectorAll('.qopt');
+  btns[q.ans].classList.add('ok');
+  if(i!==q.ans)btns[i].classList.add('bad');
+  else score++;
+  btns.forEach(b=>b.style.pointerEvents='none');
+  const fb=document.getElementById('qfb');
+  fb.textContent=(i===q.ans?'Correcto. ':'Incorrecto. ')+q.exp;
+  fb.className='fb show '+(i===q.ans?'ok':'bad');
+  document.getElementById('qscore').textContent=`Aciertos: ${score} / ${cur+1}`;
+  if(cur<Qs.length-1)document.getElementById('qnext').style.display='block';
+  else setTimeout(showResult,1400);
+}
+function nextQ(){cur++;loadQ();}
+function showResult(){
+  document.getElementById('quiz-area').style.display='none';
+  document.getElementById('quiz-result').style.display='block';
+  document.getElementById('qbar').style.width='100%';
+  const pct=Math.round(score/Qs.length*100);
+  document.getElementById('rnum').textContent=score;
+  document.getElementById('rden').textContent=`de ${Qs.length}`;
+  document.getElementById('rtitle').textContent=`${pct}% correcto`;
+  let msg='';
+  if(pct>=92)msg='Excelente. Dominas la nomenclatura IUPAC moderna completamente.';
+  else if(pct>=75)msg='Muy bien. Repasa los temas donde fallaste para consolidar.';
+  else if(pct>=50)msg='Buen avance. Enfócate en cadena principal y sustituyentes ramificados.';
+  else msg='Sigue practicando. Comienza por la sección de cadena principal.';
+  document.getElementById('rmsg').textContent=msg;
+}
+function restartQuiz(){
+  cur=0;score=0;answered=false;
+  document.getElementById('quiz-area').style.display='block';
+  document.getElementById('quiz-result').style.display='none';
+  document.getElementById('qbar').style.width='0%';
+  loadQ();
+}
+loadQ();
+</script>
+</body>
+</html>
