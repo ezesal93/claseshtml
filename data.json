@@ -5,7 +5,7 @@
       "archivos": [
         { "nombre": "Guía 1: Evolución", "url": "Biologia-1M/guia-1-evolucion.html" },
         { "nombre": "Guía de Estudio: Evolución", "url": "Biologia-1M/guia-estudio-evolucion.html" },
-        { "nombre": "Guía de Estudio: Selección Natural", "url": "Biologia-1M/guia-2- seleccion-ntural.html" },
+        { "nombre": "Guía de Estudio: Selección Natural", "url": "Biologia-1M/guia-2-seleccion-natural.html" },
         { "nombre": "La Historia de los Patrones", "url": "Biologia-1M/la-historia-de-los-patrones.html" }
       ]
     },
@@ -51,7 +51,7 @@
       "categoria": "Material Extra",
       "archivos": [
         { "nombre": "Guía Mapa Conceptual", "url": "Material-Extra/guia-mapa-conceptual.html" },
-        { "nombre": "Nomenclatura Hidrocarburos", "url": "nomenclatura-hidrocarburos-resumen-1.html" }
+        { "nombre": "Nomenclatura Hidrocarburos", "url": "Material-Extra/nomenclatura-hidrocarburos-resumen-1.html" }
       ]
     },
     {
