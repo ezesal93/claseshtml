@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía — Selección Natural y Teoría Evolutiva — Biología 1° Medio</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+
+.paper {
+  width: 210mm; min-height: 297mm; background: white;
+  margin: 20px auto; padding: 14mm 16mm 16mm 16mm;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.22);
+}
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TÍTULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:19pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJA CONTENIDOS */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* ÍTEM HEADER */
+.item-header {
+  background:white; color:#111; border:1.5px solid #111;
+  padding:4px 10px; font-size:9pt; font-weight:bold;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase;
+}
+
+/* INSTRUCCIÓN */
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; }
+
+/* LECTURA INFO */
+.lectura-info {
+  border:1.5px solid #111; border-radius:6px;
+  padding:8pt 10pt; margin-bottom:9pt;
+  background:white; font-size:10pt; line-height:1.65; text-align:justify;
+}
+.lectura-info-header {
+  display:flex; align-items:center; gap:8px;
+  margin-bottom:6pt; padding-bottom:4pt; border-bottom:1.5px solid #111;
+}
+.lectura-info-header .icono { font-size:13pt; line-height:1; }
+.lectura-info-header .titulo-lectura { font-size:10pt; font-weight:bold; color:#111; text-transform:uppercase; letter-spacing:.06em; }
+.lectura-info p { margin-bottom:5pt; }
+.lectura-info p:last-child { margin-bottom:0; }
+
+.concepto { background:white; border:1px solid #111; border-left:4px solid #111; padding:4pt 9pt; margin:6pt 0; font-size:9.5pt; }
+
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6pt; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-top:6pt; }
+.col-box { background:white; border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+/* POSTULADOS */
+.postulado-lista { list-style:none; margin:7pt 0; }
+.postulado-item { display:flex; gap:10px; margin-bottom:7pt; align-items:flex-start; }
+.post-num {
+  min-width:22pt; height:22pt; border:1.5px solid #111; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:9pt; font-weight:bold; flex-shrink:0;
+}
+.post-body { flex:1; font-size:10pt; line-height:1.6; }
+.post-body strong { display:block; font-size:9.5pt; margin-bottom:2pt; }
+
+/* CITA */
+.cita {
+  border:1px solid #111; border-left:4px solid #111;
+  padding:6pt 10pt; margin:7pt 0;
+  font-family:'Times New Roman',Times,serif;
+  font-style:italic; font-size:10.5pt; line-height:1.6;
+  text-align:justify;
+}
+.cita-autor { font-style:normal; font-size:8.5pt; font-family:Arial,sans-serif; margin-top:4pt; text-align:right; }
+
+/* LECTURA LATERAL */
+.lectura { border:1px solid #111; border-left:4px solid #111; padding:6pt 9pt; margin-bottom:8pt; background:white; font-size:10pt; line-height:1.65; text-align:justify; }
+.lectura-label { font-size:7.5pt; font-weight:bold; letter-spacing:.09em; color:#333; text-transform:uppercase; margin-bottom:4px; }
+.lectura p+p { margin-top:5px; }
+.destacado { background:white; border:1px solid #111; border-left:3px solid #111; padding:4px 8px; margin-top:6px; font-size:9.5pt; font-style:italic; }
+
+/* TABLA DATOS */
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:3px 6px; text-align:center; line-height:1.35; }
+table.datos th { background:white; color:#111; font-size:8pt; font-weight:bold; }
+table.datos td:first-child { text-align:left; }
+.tabla-tit { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#444; margin-bottom:3px; }
+
+/* LÍNEA DE TIEMPO */
+.timeline { margin:8pt 0; }
+.tl-item { display:flex; gap:10px; margin-bottom:6pt; align-items:flex-start; }
+.tl-año {
+  min-width:38pt; font-weight:bold; font-size:9pt;
+  border:1px solid #111; padding:2pt 4pt;
+  text-align:center; flex-shrink:0; background:white;
+}
+.tl-body { flex:1; font-size:9.5pt; line-height:1.5; border-bottom:0.5px solid #ddd; padding-bottom:5pt; }
+.tl-body strong { font-size:9.5pt; }
+
+/* BANCO */
+.banco { font-size:8.5pt; font-weight:bold; color:#333; margin-bottom:5px; }
+.banco em { font-style:italic; font-weight:normal; }
+
+/* COMPLETACIÓN */
+.completacion { font-size:10.5pt; line-height:2.2; text-align:justify; margin-bottom:9pt; }
+.bf { display:inline-block; border-bottom:1.2px solid #111; min-width:70pt; height:14pt; vertical-align:bottom; margin:0 2pt; }
+.bf-l { min-width:110pt; }
+.bf-s { min-width:44pt; }
+.bf-m { min-width:82pt; }
+
+/* SM */
+.sm-p { margin-bottom:10px; }
+.sm-e { font-size:10.5pt; line-height:1.5; margin-bottom:5px; }
+.sm-opts { display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; padding-left:10px; }
+.sm-op { display:flex; align-items:flex-start; gap:5px; font-size:10pt; line-height:1.4; }
+.circulo { width:14pt; height:14pt; border:1.2px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+
+/* VF */
+.vf-enc { display:flex; justify-content:flex-end; gap:3px; font-size:8pt; font-weight:bold; margin-bottom:3px; letter-spacing:.06em; }
+.vf-enc span { width:16pt; text-align:center; }
+.vf-item { display:flex; align-items:flex-start; gap:6px; margin-bottom:6px; font-size:10pt; line-height:1.5; }
+.vf-n { font-weight:bold; min-width:14pt; flex-shrink:0; }
+.vf-txt { flex:1; }
+.vf-cas { display:flex; gap:3px; flex-shrink:0; margin-left:auto; padding-left:6px; }
+.casilla { width:16pt; height:16pt; border:1.2px solid #111; flex-shrink:0; }
+.corr-linea { display:block; border-bottom:.8px solid #aaa; height:15pt; width:100%; margin-top:2px; }
+
+/* DESARROLLO */
+.dev-p { margin-bottom:10px; }
+.dev-e { font-size:10.5pt; line-height:1.55; margin-bottom:5px; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:1px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:3px; }
+
+/* EJERCICIO BOX */
+.ej-box { border:1px solid #111; border-radius:4px; padding:6pt 9pt; margin-bottom:8pt; }
+.ej-tit { font-size:9pt; font-weight:bold; text-transform:uppercase; letter-spacing:.05em; margin-bottom:5pt; border-bottom:1px solid #ddd; padding-bottom:3pt; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+
+/* BOTÓN */
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:8mm 12mm 10mm 12mm; min-height:unset; }
+  .btn-print { display:none; }
+  .lectura-info { margin-bottom:6pt; padding:6pt 8pt; }
+  .lectura-info-header { margin-bottom:4pt; padding-bottom:3pt; }
+  .lectura-info p { margin-bottom:3pt; }
+  .concepto { padding:3pt 7pt; margin:4pt 0; }
+  .cols2,.cols3 { margin-top:4pt; gap:5px; }
+  .col-box { padding:3pt 6pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  .sep { margin:5px 0; }
+  .sm-p { margin-bottom:7px; }
+  .vf-item { margin-bottom:4px; }
+  .dev-p,.ej-box { margin-bottom:7px; }
+  .linea-r { height:16pt; }
+  .completacion { line-height:2.0; margin-bottom:7pt; }
+  .banco { margin-bottom:3px; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .main-title { margin-bottom:4pt; }
+  .main-title h1 { font-size:16pt; }
+  .enc-wrap { margin-bottom:5pt; }
+  table.datos th,table.datos td { padding:2px 5px; }
+  .lectura { padding:4pt 8pt; margin-bottom:6pt; }
+  .postulado-item { margin-bottom:5pt; }
+  .tl-item { margin-bottom:4pt; }
+  .tl-body { padding-bottom:3pt; }
+  .cita { padding:4pt 8pt; margin:5pt 0; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Selección Natural y Teoría Evolutiva</h1>
+    <p class="subtitulo">(Biología — 1° Medio · Unidad 1: Evolución y Biodiversidad)</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">64</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenidos:</strong> Antecedentes históricos de la teoría evolutiva, aportes de Darwin y Wallace, postulados de la selección natural, variación, adaptación, competencia y supervivencia diferencial.</p>
+    <p><strong>Capacidades:</strong> Análisis e interpretación de datos, razonamiento científico, comprensión lectora.</p>
+    <p><strong>Destrezas:</strong> Identificar, Describir, Relacionar, Argumentar, Interpretar.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Ítem</th><th>Descripción</th><th>Preguntas</th><th>Pts c/u</th><th>Total</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>I</td><td>Completación de párrafos</td><td>2 párrafos</td><td>—</td><td>10 pts</td><td></td></tr>
+      <tr><td>II</td><td>Selección múltiple</td><td>6 preguntas</td><td>3 pts</td><td>18 pts</td><td></td></tr>
+      <tr><td>III</td><td>Verdadero y Falso</td><td>6 afirmaciones</td><td>2 pts</td><td>12 pts</td><td></td></tr>
+      <tr><td>IV</td><td>Análisis de datos y desarrollo</td><td>3 preguntas</td><td>—</td><td>24 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="4">TOTAL</td><td>64 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 1 — ANTECEDENTES HISTÓRICOS
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Antes de Darwin: ideas que prepararon el camino</span>
+    </div>
+    <p>La idea de que las especies cambian con el tiempo no surgió de la nada. Antes de Darwin, varios pensadores y naturalistas habían planteado preguntas que sembraron las semillas de la teoría evolutiva.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-año">1809</div>
+        <div class="tl-body">
+          <strong>Jean-Baptiste Lamarck</strong> propuso que los organismos podían <em>adquirir características durante su vida</em> y transmitirlas a sus descendientes. Su ejemplo famoso: la jirafa estiraba el cuello para alcanzar hojas altas y sus crías heredaban ese cuello más largo. Aunque esta idea resultó incorrecta (los caracteres adquiridos no se heredan), Lamarck fue el primero en proponer un mecanismo para el cambio de las especies a lo largo del tiempo.
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-año">1830</div>
+        <div class="tl-body">
+          <strong>Charles Lyell</strong> publicó sus <em>Principios de Geología</em>, demostrando que la Tierra es mucho más antigua de lo que se pensaba y que sus rasgos se formaron por procesos lentos y graduales. Esto le daría a Darwin el tiempo geológico necesario para que la evolución actuara.
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-año">1798</div>
+        <div class="tl-body">
+          <strong>Thomas Malthus</strong> publicó su <em>Ensayo sobre el principio de la población</em>, donde planteó que las poblaciones humanas crecen más rápido que los recursos disponibles, generando una lucha por la supervivencia. Esta idea influiría directamente en Darwin y Wallace para formular el mecanismo de la selección natural.
+        </div>
+      </div>
+    </div>
+
+    <div class="concepto">
+      <strong>Contexto histórico clave:</strong> Cuando Darwin zarpó en el HMS Beagle en 1831, la doctrina dominante era el <em>fijismo</em>: la creencia de que las especies fueron creadas tal como son y no cambian. El desafío de Darwin fue proponer un mecanismo basado en evidencia para explicar el cambio.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 2 — DARWIN Y WALLACE
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Darwin y Wallace: dos mentes, una misma idea</span>
+    </div>
+    <p>Una de las coincidencias más extraordinarias en la historia de la ciencia es que dos naturalistas, trabajando de forma independiente en lugares opuestos del planeta, llegaron a exactamente la misma conclusión al mismo tiempo.</p>
+
+    <div class="cols2" style="margin-top:7pt">
+      <div class="col-box">
+        <span class="col-tit">Charles Darwin (1809–1882)</span>
+        Darwin embarcó en el HMS Beagle en 1831 como naturalista. Durante cinco años observó una diversidad extraordinaria de formas de vida en América del Sur, las Islas Galápagos, Australia y muchos otros lugares. En las Galápagos notó que los <strong>pinzones</strong> de distintas islas tenían picos diferentes, perfectamente adaptados al tipo de alimento disponible en cada isla. También encontró fósiles de animales extintos parecidos a los que vivían actualmente, lo que le hizo pensar que las especies cambian con el tiempo.<br><br>
+        De regreso en Inglaterra, leyó a Malthus y en 1838 concibió el mecanismo de la <strong>selección natural</strong>. Trabajó durante más de 20 años reuniendo evidencias antes de publicar, en 1859, <em>El origen de las especies</em>.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Alfred Russel Wallace (1823–1913)</span>
+        Wallace era un naturalista de origen humilde que financiaba sus expediciones vendiendo especímenes. Exploró el Amazonas y el Archipiélago Malayo (actual Indonesia), donde recolectó miles de especies. Observó que las especies de un lado y del otro de un río o de un estrecho podían ser muy distintas, lo que lo llevó a reflexionar sobre cómo se originan las especies.<br><br>
+        En 1858, mientras convalecía de malaria en las islas Molucas, tuvo la misma idea que Darwin: la selección natural. Le escribió una carta a Darwin describiendo su teoría. Ante la coincidencia, ambos presentaron sus trabajos <strong>simultáneamente</strong> en la Sociedad Linneana de Londres en julio de 1858. Al año siguiente Darwin publicó <em>El origen de las especies</em>.
+      </div>
+    </div>
+
+    <div class="cita" style="margin-top:9pt">
+      "No es la especie más fuerte la que sobrevive, ni la más inteligente, sino la que mejor responde al cambio."
+      <div class="cita-autor">— Interpretación popular del pensamiento de Charles Darwin</div>
+    </div>
+
+    <div class="concepto" style="margin-top:7pt">
+      <strong>Aporte compartido de Darwin y Wallace:</strong> Ambos propusieron de forma independiente que la <strong>selección natural</strong> es el mecanismo principal por el cual las especies cambian a lo largo del tiempo. Su coincidencia es uno de los mejores ejemplos de cómo la ciencia avanza cuando muchos observadores acceden a las mismas evidencias del mundo natural.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 3 — POSTULADOS DE LA SELECCIÓN NATURAL
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">Los postulados de la teoría de la selección natural</span>
+    </div>
+    <p>La teoría de la selección natural de Darwin y Wallace se puede resumir en cuatro postulados fundamentales. Cada uno es necesario: si alguno no se cumpliera, la selección natural no podría actuar.</p>
+
+    <ul class="postulado-lista">
+      <li class="postulado-item">
+        <div class="post-num">1</div>
+        <div class="post-body">
+          <strong>Variación: los individuos de una población son diferentes entre sí.</strong>
+          Dentro de cualquier población, los individuos presentan diferencias en sus características: tamaño, color, forma, comportamiento, resistencia a enfermedades, etc. No hay dos individuos exactamente iguales (salvo los gemelos idénticos). Esta variación es el "material" sobre el que actúa la selección.<br>
+          <em>Ejemplo: en una población de escarabajos de color marrón, algunos son más oscuros y otros más claros.</em>
+        </div>
+      </li>
+      <li class="postulado-item">
+        <div class="post-num">2</div>
+        <div class="post-body">
+          <strong>Herencia: las variaciones se transmiten de padres a hijos.</strong>
+          Para que la selección natural tenga efecto a largo plazo, las variaciones deben ser heredables, es decir, deben tener una base genética que pueda transmitirse a la descendencia. Las variaciones adquiridas durante la vida (como músculos más grandes por ejercicio) no se heredan.<br>
+          <em>Ejemplo: si un escarabajo oscuro tiene descendientes, estos también tenderán a ser oscuros.</em>
+        </div>
+      </li>
+      <li class="postulado-item">
+        <div class="post-num">3</div>
+        <div class="post-body">
+          <strong>Competencia: se producen más individuos de los que el ambiente puede sostener.</strong>
+          Las poblaciones tienen una capacidad de reproducción que excede los recursos disponibles (alimento, espacio, pareja, luz). Esto genera una <strong>lucha por la supervivencia</strong>: no todos los individuos logran sobrevivir y reproducirse. Esta idea la tomó Darwin directamente de Malthus.<br>
+          <em>Ejemplo: una pareja de escarabajos puede producir cientos de huevos, pero el ambiente solo puede sostener a algunos adultos.</em>
+        </div>
+      </li>
+      <li class="postulado-item">
+        <div class="post-num">4</div>
+        <div class="post-body">
+          <strong>Supervivencia diferencial (selección): algunos individuos sobreviven y se reproducen más que otros debido a sus variaciones.</strong>
+          Los individuos con características mejor adaptadas a su ambiente tienen mayor probabilidad de sobrevivir, reproducirse y dejar descendencia. Con el tiempo, esas características ventajosas se vuelven más frecuentes en la población. A este proceso Darwin lo llamó <strong>selección natural</strong>.<br>
+          <em>Ejemplo: si el suelo es oscuro, los escarabajos oscuros son menos visibles para los depredadores → sobreviven más → sus genes se vuelven más frecuentes en la población.</em>
+        </div>
+      </li>
+    </ul>
+
+    <div class="concepto">
+      <strong>Resultado de los cuatro postulados:</strong> A lo largo de muchas generaciones, las características ventajosas se acumulan en la población y las desventajosas disminuyen. Si este proceso actúa durante suficiente tiempo en poblaciones separadas, puede dar origen a nuevas especies. Esto es la <strong>evolución por selección natural</strong>.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       LECTURA 4 — SELECCIÓN NATURAL EN ACCIÓN
+  ═══════════════════════════════════════ -->
+  <div class="lectura-info">
+    <div class="lectura-info-header">
+      <span class="titulo-lectura">La selección natural en acción: ejemplos reales</span>
+    </div>
+    <p>La selección natural no es solo una idea abstracta: hay casos documentados de evolución observable en períodos de tiempo relativamente cortos.</p>
+
+    <div class="cols2">
+      <div class="col-box">
+        <span class="col-tit">La mariposa del abedul (Biston betularia)</span>
+        En Inglaterra, antes de la Revolución Industrial, la mayoría de estas mariposas eran de color claro (se camuflaban en los árboles cubiertos de líquenes blancos). Las de color oscuro eran raras y fácilmente cazadas por aves.<br><br>
+        Con la industrialización, el hollín cubrió los árboles de negro. Ahora las mariposas claras eran visibles y las oscuras quedaban camufladas. En pocas décadas, la proporción se invirtió: las oscuras pasaron a ser mayoría. Cuando se redujo la contaminación, las claras volvieron a predominar.<br><br>
+        <strong>Esto se llama melanismo industrial y es uno de los ejemplos más citados de selección natural observable.</strong>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Los pinzones de las Galápagos</span>
+        Darwin observó que en las distintas islas del archipiélago había pinzones con picos muy diferentes. En islas con semillas duras, los pinzones tenían picos grandes y fuertes. En islas con flores e insectos, los picos eran finos y alargados.<br><br>
+        Darwin propuso que todos descendían de un ancestro común que llegó desde el continente. Una vez en las distintas islas, la selección natural favoreció distintas formas de pico según el alimento disponible en cada isla. Con el tiempo, las poblaciones se diferenciaron tanto que dieron origen a distintas especies.<br><br>
+        <strong>Este proceso se llama radiación adaptativa: diversificación de una especie en muchas al colonizar ambientes distintos.</strong>
+      </div>
+    </div>
+
+    <div style="margin-top:9pt">
+      <div class="tabla-tit">Tabla: Comparación entre la idea de Lamarck y la de Darwin/Wallace</div>
+      <table class="datos">
+        <thead>
+          <tr><th>Aspecto</th><th>Lamarck (1809)</th><th>Darwin y Wallace (1858)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Mecanismo del cambio</td><td style="text-align:left">Uso y desuso + herencia de caracteres adquiridos</td><td style="text-align:left">Variación heredable + selección natural</td></tr>
+          <tr><td>¿Los caracteres adquiridos se heredan?</td><td style="text-align:left">Sí (incorrecto)</td><td style="text-align:left">No. Solo se heredan variaciones genéticas</td></tr>
+          <tr><td>Rol del ambiente</td><td style="text-align:left">Provoca cambios directos en el organismo</td><td style="text-align:left">Selecciona qué variantes sobreviven mejor</td></tr>
+          <tr><td>¿La evolución tiene dirección?</td><td style="text-align:left">Sí, hacia mayor complejidad</td><td style="text-align:left">No. Depende del ambiente en cada momento</td></tr>
+          <tr><td>Validez actual</td><td style="text-align:left">Descartada por la genética</td><td style="text-align:left">Confirmada y ampliada por la biología moderna</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       ÍTEM I — COMPLETACIÓN
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem I · Completación</span>
+    <span>10 puntos — 5 pts por párrafo</span>
+  </div>
+  <p class="instruccion">Completa los párrafos usando solo las palabras del banco correspondiente.</p>
+
+  <div class="banco">Banco — Párrafo 1: <em>Wallace · Darwin · Beagle · Galápagos · pinzones · selección natural · Malthus · independiente · 1859 · adaptadas</em></div>
+  <p class="completacion">
+    Charles <span class="bf bf-s"></span> viajó en el HMS <span class="bf bf-s"></span> entre 1831 y 1836, donde observó en las islas <span class="bf bf-s"></span> que los <span class="bf bf-s"></span> de distintas islas tenían picos <span class="bf bf-s"></span> a los recursos de cada lugar. Inspirado en los escritos de <span class="bf bf-s"></span>, formuló el mecanismo de la <span class="bf bf-m"></span>. Alfred Russel <span class="bf bf-s"></span>, trabajando de forma <span class="bf bf-s"></span>, llegó a la misma conclusión, por lo que presentaron sus ideas juntos en 1858. Darwin publicó <em>El origen de las especies</em> en <span class="bf bf-s"></span>.
+  </p>
+
+  <div class="banco">Banco — Párrafo 2: <em>variación · herencia · competencia · supervivencia diferencial · recursos · adaptadas · selección natural · generaciones · frecuentes · heredables</em></div>
+  <p class="completacion">
+    La teoría de la <span class="bf bf-m"></span> se basa en cuatro postulados. Primero, existe <span class="bf bf-s"></span> entre los individuos de una población. Segundo, parte de esa variación es <span class="bf bf-s"></span>, es decir, se transmite por <span class="bf bf-s"></span>. Tercero, hay <span class="bf bf-s"></span>: se producen más individuos de los que los <span class="bf bf-s"></span> pueden sostener. Cuarto, la <span class="bf bf-m"></span>: los individuos mejor <span class="bf bf-s"></span> sobreviven y se reproducen más. Con el paso de muchas <span class="bf bf-s"></span>, las características ventajosas se vuelven más <span class="bf bf-s"></span> en la población.
+  </p>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM II — SELECCIÓN MÚLTIPLE
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem II · Selección Múltiple</span>
+    <span>18 puntos — 3 pts por pregunta · Solo una alternativa correcta</span>
+  </div>
+  <p class="instruccion">Encierra en un círculo la letra de la alternativa correcta.</p>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>1.</strong> ¿Cuál es la diferencia fundamental entre la explicación de Lamarck y la de Darwin sobre la evolución del cuello de la jirafa?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Lamarck decía que el cuello creció por selección natural; Darwin decía que fue por uso y desuso.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Lamarck decía que las jirafas estiraban el cuello y transmitían esa característica; Darwin decía que las jirafas con cuello más largo sobrevivían y se reproducían más.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Darwin decía que las jirafas adquirieron el cuello largo por adaptación directa al ambiente.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Ambos proponían exactamente el mismo mecanismo evolutivo.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>2.</strong> Darwin y Wallace presentaron sus trabajos en 1858 de forma simultánea porque:</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Wallace copió las ideas de Darwin sin su permiso.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Habían trabajado juntos en las islas Galápagos durante años.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Ambos llegaron de forma independiente a la misma conclusión sobre la selección natural.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>La Sociedad Linneana les exigió publicar al mismo tiempo para evitar disputas de prioridad.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>3.</strong> En una población de conejos que vive en un campo nevado, los conejos de pelaje más blanco sobreviven mejor porque los zorros no los ven. Con el tiempo, ¿qué ocurrirá con la proporción de conejos blancos en la población?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Disminuirá, porque el blanco es poco eficiente como camuflaje.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>No cambiará, porque la variación en el color es aleatoria en cada generación.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Aumentará, porque los conejos blancos se reproducen más al sobrevivir mejor.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Aumentará solo si los conejos oscuros aprenden a camuflarse activamente.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>4.</strong> ¿Cuál de los siguientes postulados de la selección natural explica por qué la evolución actúa sobre las poblaciones y no sobre los individuos?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Variación: los individuos difieren entre sí.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Herencia: las variaciones se transmiten a la descendencia a lo largo de generaciones.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Competencia: se producen más individuos de los que el ambiente puede sostener.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Supervivencia diferencial: algunos sobreviven más que otros.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>5.</strong> El caso de la mariposa del abedul (<em>Biston betularia</em>) en Inglaterra es un ejemplo de selección natural porque:</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Las mariposas cambiaron activamente de color oscuro a claro para adaptarse al ambiente.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>El cambio en el ambiente (hollín en los árboles) favoreció la supervivencia de un tipo de mariposa sobre otro, cambiando las proporciones en la población.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Los depredadores aprendieron a cazar las mariposas claras porque eran más lentas.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>El humo de las fábricas produjo mutaciones directas que oscurecieron a todas las mariposas.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>6.</strong> ¿Por qué el pensamiento de Thomas Malthus fue importante para que Darwin formulara la selección natural?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Porque Malthus demostró que las especies se originan de ancestros comunes.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Porque le dio a Darwin evidencias fósiles de que las especies cambian.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Porque planteó que las poblaciones producen más individuos de los que los recursos pueden sostener, lo que implica una lucha por la supervivencia.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Porque Malthus fue el primero en proponer que las características se heredan de padres a hijos.</span></div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM III — VERDADERO Y FALSO
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem III · Verdadero y Falso</span>
+    <span>12 puntos — 2 pts por afirmación</span>
+  </div>
+  <p class="instruccion">Marca con una <strong>X</strong> en V o F. Corrige las afirmaciones falsas en la línea.</p>
+
+  <div class="vf-enc"><span>V</span><span>F</span></div>
+
+  <div class="vf-item">
+    <span class="vf-n">1.</span>
+    <span class="vf-txt">Darwin y Wallace llegaron de forma independiente a proponer la selección natural como mecanismo de la evolución biológica.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">2.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">Según Lamarck, las características adquiridas durante la vida de un organismo se pueden transmitir a la descendencia. Esto fue confirmado posteriormente por la genética moderna.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <div class="vf-item">
+    <span class="vf-n">3.</span>
+    <span class="vf-txt">El postulado de la variación establece que dentro de una misma población los individuos presentan diferencias en sus características.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">4.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">La selección natural actúa directamente sobre los genes de los individuos, eligiendo cuáles mutaciones ocurrirán en la siguiente generación.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <div class="vf-item">
+    <span class="vf-n">5.</span>
+    <span class="vf-txt">Los pinzones de las Galápagos que observó Darwin son un ejemplo de radiación adaptativa: distintas especies derivaron de un ancestro común al colonizar ambientes con recursos diferentes.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+  </div>
+
+  <div class="vf-item" style="flex-wrap:wrap">
+    <span class="vf-n">6.</span>
+    <span class="vf-txt" style="width:calc(100% - 52px)">Para que la selección natural produzca cambios evolutivos en una población, basta con que exista variación entre los individuos, aunque esa variación no sea heredable.</span>
+    <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+    <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════
+       ÍTEM IV — ANÁLISIS Y DESARROLLO
+  ══════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem IV · Análisis de Datos y Desarrollo</span>
+    <span>24 puntos</span>
+  </div>
+  <p class="instruccion">Lee atentamente cada situación y responde con argumentos científicos completos.</p>
+
+  <!-- Situación 1 -->
+  <div class="lectura" style="margin-bottom:8pt">
+    <div class="lectura-label">Situación para las preguntas 1 y 2</div>
+    <p>En una isla imaginaria viven lagartos de color verde y lagartos de color café. El suelo de la isla está cubierto de hojarasca café. Un investigador registró los datos de la tabla durante 10 generaciones:</p>
+    <div style="margin-top:7px">
+      <div class="tabla-tit">Tabla: Proporción de lagartos por color en 10 generaciones</div>
+      <table class="datos">
+        <thead><tr><th>Generación</th><th>% Lagartos verdes</th><th>% Lagartos café</th><th>Depredadores presentes</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>50 %</td><td>50 %</td><td>Sí</td></tr>
+          <tr><td>3</td><td>38 %</td><td>62 %</td><td>Sí</td></tr>
+          <tr><td>5</td><td>25 %</td><td>75 %</td><td>Sí</td></tr>
+          <tr><td>8</td><td>11 %</td><td>89 %</td><td>Sí</td></tr>
+          <tr><td>10</td><td>4 %</td><td>96 %</td><td>Sí</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="dev-p">
+    <div class="dev-e"><strong>Pregunta 1 (8 pts):</strong> Analiza los datos de la tabla e identifica qué postulados de la selección natural están presentes en esta situación. Para cada postulado que identifiques, explica con un ejemplo tomado directamente de los datos de la tabla cómo se manifiesta.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts por cada postulado correctamente identificado y vinculado a un dato de la tabla (máx. 4 postulados × 2 pts = 8 pts).</p>
+  </div>
+
+  <div class="dev-p">
+    <div class="dev-e"><strong>Pregunta 2 (6 pts):</strong> Imagina que en la generación 11 una erupción volcánica cubre la isla con ceniza negra, haciendo que el suelo se vuelva completamente negro. Predice qué ocurrirá con las proporciones de lagartos en las siguientes generaciones y explica tu predicción usando los postulados de la selección natural.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 3 pts por la predicción correcta (los lagartos verdes aumentarían porque serían más difíciles de ver sobre suelo negro) · 3 pts por explicación con los postulados correctamente aplicados.</p>
+  </div>
+
+  <!-- Situación 2 -->
+  <div class="lectura" style="margin-bottom:8pt">
+    <div class="lectura-label">Situación para la pregunta 3</div>
+    <p>Lee el siguiente fragmento adaptado de <em>El origen de las especies</em> de Charles Darwin (1859):</p>
+    <div class="cita">
+      "Puede decirse metafóricamente que la selección natural está constantemente examinando, en todo el mundo, las más ligeras variaciones; rechazando las que son malas, conservando y sumando todas las que son buenas; trabajando silenciosamente e insensiblemente, siempre que se presente la ocasión, en el perfeccionamiento de cada ser orgánico."
+      <div class="cita-autor">— Charles Darwin, El origen de las especies, 1859</div>
+    </div>
+  </div>
+
+  <div class="dev-p">
+    <div class="dev-e"><strong>Pregunta 3 — Síntesis y argumentación (10 pts):</strong> Con base en el fragmento de Darwin y en lo aprendido en la guía:<br>
+    <strong>a)</strong> Explica en tus propias palabras qué quiere decir Darwin con "rechazando las que son malas, conservando las que son buenas". ¿Quién o qué hace esa "elección"? (3 pts)<br>
+    <strong>b)</strong> Describe brevemente el aporte específico de Wallace a la teoría evolutiva y explica por qué es científicamente importante que dos investigadores independientes lleguen a la misma conclusión. (3 pts)<br>
+    <strong>c)</strong> Un estudiante afirma: <em>"La selección natural significa que los animales más fuertes siempre sobreviven."</em> ¿Estás de acuerdo? Argumenta tu respuesta usando al menos un ejemplo concreto de la guía. (4 pts)</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: a) 3 pts si explica que el ambiente "selecciona" (no hay intención) y vincula con supervivencia diferencial · b) 3 pts si describe el aporte de Wallace y reflexiona sobre la replicabilidad científica · c) 4 pts si refuta con ejemplo (ej: mariposas del abedul: no es fuerza, sino camuflaje lo que importa) y explica que "ventaja" depende del ambiente.</p>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Biología — 1° Medio · Unidad 1: Evolución y Biodiversidad</span>
+    <span>Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
