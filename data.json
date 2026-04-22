@@ -51,6 +51,7 @@
       "categoria": "Material Extra",
       "archivos": [
         { "nombre": "Guía Mapa Conceptual", "url": "Material-Extra/guia-mapa-conceptual.html" },
+        { "nombre": "Nomenclatura Grupos Funcionales", "url": "Material-Extra/nomenclatura-iupac-funcionales.html" },
         { "nombre": "Nomenclatura Hidrocarburos", "url": "Material-Extra/nomenclatura-hidrocarburos-resumen-1.html" }
       ]
     },

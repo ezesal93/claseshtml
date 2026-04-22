@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nomenclatura IUPAC 2013 — Grupos Funcionales</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0d0f14; --surface:#13161d; --card:#1a1e28; --border:#252a38;
+    --accent1:#4ff0b7; --accent2:#f06060; --accent3:#f0c040;
+    --accent4:#6090f0; --accent5:#c060f0; --accent6:#f07040; --accent7:#40d0f0;
+    --warn:#f0a040; --text:#e8eaf2; --muted:#7a8099;
+    --mono:'Space Mono',monospace; --sans:'Syne',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+
+  .hero{position:relative;padding:80px 40px 60px;text-align:center;border-bottom:1px solid var(--border);overflow:hidden;}
+  .hero::after{content:'';position:absolute;top:-40%;left:30%;width:40%;height:200%;background:radial-gradient(ellipse,rgba(79,240,183,0.07) 0%,transparent 70%);pointer-events:none;}
+  .hero-tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--accent1);border:1px solid rgba(79,240,183,0.3);padding:4px 14px;border-radius:2px;margin-bottom:20px;text-transform:uppercase;}
+  .hero h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:16px;}
+  .hero h1 span{color:var(--accent1);}
+  .hero p{font-family:var(--mono);font-size:14px;color:var(--muted);max-width:560px;margin:0 auto 12px;line-height:1.7;}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--warn);background:rgba(240,160,64,0.1);border:1px solid rgba(240,160,64,0.3);padding:6px 16px;border-radius:2px;margin-top:12px;margin-bottom:32px;}
+
+  .nav-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 20px 40px;}
+  .nav-pill{font-family:var(--mono);font-size:12px;padding:8px 20px;border-radius:2px;cursor:pointer;transition:all 0.2s;border:1px solid var(--border);background:var(--surface);color:var(--muted);letter-spacing:1px;}
+  .nav-pill:hover{color:var(--text);border-color:var(--muted);}
+  .nav-pill.active{color:var(--bg);background:var(--accent1);border-color:var(--accent1);}
+
+  .container{max-width:1100px;margin:0 auto;padding:40px 24px 100px;position:relative;z-index:1;}
+  .section-header{display:flex;align-items:center;gap:16px;margin-bottom:36px;}
+  .section-num{font-family:var(--mono);font-size:11px;color:var(--accent1);letter-spacing:2px;}
+  .section-title{font-size:28px;font-weight:700;letter-spacing:-0.5px;}
+  .iupac-note{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--warn);background:rgba(240,160,64,0.08);border:1px solid rgba(240,160,64,0.25);padding:4px 12px;border-radius:2px;margin-bottom:28px;}
+
+  .groups-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:60px;}
+  .group-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:24px;cursor:pointer;transition:all 0.25s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;}
+  .group-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent-color);transform:scaleX(0);transform-origin:left;transition:transform 0.3s ease;}
+  .group-card:hover{border-color:var(--accent-color);transform:translateY(-2px);}
+  .group-card:hover::before,.group-card.expanded::before{transform:scaleX(1);}
+  .group-card.expanded{border-color:var(--accent-color);}
+  .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .card-icon{font-size:28px;margin-bottom:8px;display:block;}
+  .card-name{font-size:17px;font-weight:700;letter-spacing:-0.3px;}
+  .card-formula{font-family:var(--mono);font-size:13px;color:var(--accent-color);padding:3px 10px;border:1px solid currentColor;border-radius:2px;opacity:0.8;}
+  .card-desc{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px;}
+  .expand-panel{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
+  .expand-panel.open{display:block;animation:fadeSlide 0.3s ease;}
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+  .rules-section{margin-bottom:60px;}
+  .group-rule-block{background:var(--card);border:1px solid var(--border);border-radius:4px;margin-bottom:20px;overflow:hidden;}
+  .rule-header{display:flex;align-items:center;gap:14px;padding:18px 24px;cursor:pointer;transition:background 0.2s;}
+  .rule-header:hover{background:rgba(255,255,255,0.03);}
+  .rule-dot{width:10px;height:10px;border-radius:50%;background:var(--accent-color);flex-shrink:0;}
+  .rule-title{font-size:16px;font-weight:700;flex:1;}
+  .rule-toggle{font-family:var(--mono);font-size:18px;color:var(--muted);transition:transform 0.2s;}
+  .rule-toggle.open{color:var(--accent-color);}
+  .rule-body{display:none;padding:0 24px 24px;}
+  .rule-body.open{display:block;animation:fadeSlide 0.3s ease;}
+  .rules-list{list-style:none;margin-bottom:20px;}
+  .rules-list li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--muted);}
+  .rules-list li:last-child{border:none;}
+  .rules-list li::before{content:attr(data-n);color:var(--accent-color);font-weight:700;flex-shrink:0;min-width:20px;}
+  .rules-list li span{color:var(--text);}
+
+  .warn-box{background:rgba(240,160,64,0.07);border:1px solid rgba(240,160,64,0.3);border-radius:3px;padding:12px 16px;font-family:var(--mono);font-size:12px;color:var(--warn);line-height:1.6;margin-bottom:16px;}
+  .warn-box strong{color:var(--warn);}
+
+  .examples-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:16px;}
+  .example-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:16px;transition:border-color 0.2s;}
+  .example-card:hover{border-color:var(--accent-color);}
+  .ex-molecule{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--accent-color);margin-bottom:4px;letter-spacing:1px;}
+  .ex-name{font-size:15px;font-weight:700;margin-bottom:8px;color:var(--accent-color);}
+  .ex-steps{list-style:none;}
+  .ex-steps li{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.7;padding-left:14px;position:relative;}
+  .ex-steps li::before{content:'→';position:absolute;left:0;color:var(--accent-color);font-size:10px;}
+  .ex-steps li strong{color:var(--text);}
+
+  .quiz-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;margin-bottom:16px;}
+  .quiz-q{font-size:16px;font-weight:600;margin-bottom:8px;}
+  .quiz-molecule{font-family:var(--mono);font-size:26px;color:var(--accent3);margin-bottom:20px;letter-spacing:2px;}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+  .quiz-opt{font-family:var(--mono);font-size:13px;padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all 0.2s;color:var(--text);text-align:left;}
+  .quiz-opt:hover:not(.disabled){border-color:var(--accent3);color:var(--accent3);}
+  .quiz-opt.correct{background:rgba(79,240,183,0.1);border-color:var(--accent1);color:var(--accent1);}
+  .quiz-opt.wrong{background:rgba(240,96,96,0.1);border-color:var(--accent2);color:var(--accent2);}
+  .quiz-opt.disabled{pointer-events:none;opacity:0.6;}
+  .quiz-feedback{font-family:var(--mono);font-size:13px;padding:12px 16px;border-radius:3px;display:none;margin-top:8px;line-height:1.6;}
+  .quiz-feedback.show{display:block;animation:fadeSlide 0.3s ease;}
+  .quiz-feedback.ok{background:rgba(79,240,183,0.08);border:1px solid rgba(79,240,183,0.3);color:var(--accent1);}
+  .quiz-feedback.bad{background:rgba(240,96,96,0.08);border:1px solid rgba(240,96,96,0.3);color:var(--accent2);}
+  .quiz-score{display:flex;align-items:center;gap:16px;font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:24px;}
+  .score-val{font-size:22px;font-weight:700;color:var(--accent1);}
+  .progress-bar-wrap{background:var(--surface);border-radius:2px;height:4px;margin-bottom:24px;overflow:hidden;}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--accent1),var(--accent4));border-radius:2px;transition:width 0.4s ease;}
+
+  .tab-bar{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:36px;overflow-x:auto;}
+  .tab{font-family:var(--mono);font-size:12px;padding:12px 24px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;letter-spacing:1px;}
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--accent1);border-bottom-color:var(--accent1);}
+  .tab-content{display:none;}
+  .tab-content.active{display:block;animation:fadeSlide 0.3s ease;}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;padding:11px 24px;border-radius:3px;border:none;cursor:pointer;transition:all 0.2s;letter-spacing:1px;}
+  .btn-primary{background:var(--accent1);color:var(--bg);font-weight:700;}
+  .btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--accent4);border:1px solid var(--accent4);}
+  .btn-ghost:hover{background:rgba(96,144,240,0.1);}
+
+  [data-group="haluros"]{--accent-color:var(--accent2);}
+  [data-group="aromaticos"]{--accent-color:var(--accent3);}
+  [data-group="alcoholes"]{--accent-color:var(--accent4);}
+  [data-group="eteres"]{--accent-color:var(--accent5);}
+  [data-group="aminas"]{--accent-color:var(--accent6);}
+  [data-group="aldehidos"]{--accent-color:var(--accent1);}
+  [data-group="cetonas"]{--accent-color:var(--accent7);}
+
+  .step-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .step-box{background:var(--surface);padding:14px;border-radius:3px;}
+  .step-label{font-family:var(--mono);font-size:11px;margin-bottom:8px;}
+  .step-text{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.6;}
+  .mono-block{font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.9;}
+
+  footer{text-align:center;font-family:var(--mono);font-size:11px;color:var(--muted);padding:32px;border-top:1px solid var(--border);letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">QUÍMICA ORGÁNICA · IUPAC 2013</div>
+  <h1>Grupos <span>Funcionales</span><br>y Nomenclatura</h1>
+  <p>Identifica el grupo funcional, aprende las reglas IUPAC 2013<br>y pon a prueba tu conocimiento con ejemplos reales.</p>
+  <div class="hero-badge">⚠ Esta guía aplica exclusivamente nomenclatura IUPAC 2013. No se usan nombres comunes ni estilos tradicionales.</div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-pill active" onclick="showSection('grupos')">① Identificar</div>
+  <div class="nav-pill" onclick="showSection('reglas')">② Reglas IUPAC 2013</div>
+  <div class="nav-pill" onclick="showSection('ejemplos')">③ Ejemplos</div>
+  <div class="nav-pill" onclick="showSection('practica')">④ Practicar</div>
+</div>
+
+<!-- ══ SEC 1: IDENTIFICAR ══ -->
+<div id="sec-grupos" class="container">
+  <div class="section-header">
+    <span class="section-num">01 /</span>
+    <h2 class="section-title">Reconoce el Grupo Funcional</h2>
+  </div>
+  <div class="iupac-note">⚠ IUPAC 2013: los localizadores van intercalados inmediatamente antes del sufijo o prefijo que modifican. Ej: propan-1-ol (no 1-propanol).</div>
+
+  <div class="groups-grid">
+    <div class="group-card" data-group="haluros" onclick="toggleCard(this)">
+      <span class="card-icon">⚗️</span>
+      <div class="card-header"><div class="card-name">Haluros de Alquilo</div><div class="card-formula">R–X</div></div>
+      <div class="card-desc">Halógeno (F, Cl, Br, I) unido covalentemente a carbono sp³.</div>
+      <div class="expand-panel">
+        <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;">
+          <strong style="color:var(--accent2)">Prefijo IUPAC 2013:</strong> fluoro- / cloro- / bromo- / yodo-<br>
+          <strong style="color:var(--accent2)">Localizador:</strong> obligatorio antes del prefijo del halógeno<br>
+          <strong style="color:var(--accent2)">Reconócelo:</strong> F, Cl, Br o I en la fórmula
+        </p>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--accent2);border:1px solid rgba(240,96,96,0.3);padding:8px 12px;border-radius:3px;">CH₃CH₂Cl → <strong>1-cloroetano</strong></div>
+      </div>
+    </div>
+
+    <div class="group-card" data-group="aromaticos" onclick="toggleCard(this)">
+      <span class="card-icon">🔷</span>
+      <div class="card-header"><div class="card-name">Compuestos Aromáticos</div><div class="card-formula">C₆H₅–</div></div>
+      <div class="card-desc">Anillo bencénico (6 C con electrones π deslocalizados).</div>
+      <div class="expand-panel">
+        <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;">
+          <strong style="color:var(--accent3)">Nombre base IUPAC 2013:</strong> benceno<br>
+          <strong style="color:var(--accent3)">Como sustituyente:</strong> fenil- (C₆H₅–)<br>
+          <strong style="color:var(--accent3)">Localizadores:</strong> solo números, nunca orto/meta/para
+        </p>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--accent3);border:1px solid rgba(240,192,64,0.3);padding:8px 12px;border-radius:3px;">C₆H₄Cl₂(1,3) → <strong>1,3-diclorobenceno</strong></div>
+      </div>
+    </div>
+
+    <div class="group-card" data-group="alcoholes" onclick="toggleCard(this)">
+      <span class="card-icon">🍶</span>
+      <div class="card-header"><div class="card-name">Alcoholes</div><div class="card-formula">R–OH</div></div>
+      <div class="card-desc">Grupo hidroxilo (–OH) unido a carbono sp³.</div>
+      <div class="expand-panel">
+        <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;">
+          <strong style="color:var(--accent4)">Sufijo IUPAC 2013:</strong> -ol intercalado → alcan-N-ol<br>
+          <strong style="color:var(--accent4)">Formato correcto:</strong> propan-1-ol (❌ no 1-propanol)<br>
+          <strong style="color:var(--accent4)">Reconócelo:</strong> –OH en la fórmula
+        </p>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--accent4);border:1px solid rgba(96,144,240,0.3);padding:8px 12px;border-radius:3px;">CH₃CH₂OH → <strong>etanol</strong> &nbsp;|&nbsp; CH₃CH₂CH₂OH → <strong>propan-1-ol</strong></div>
+      </div>
+    </div>
+
+    <div class="group-card" data-group="eteres" onclick="toggleCard(this)">
+      <span class="card-icon">🔗</span>
+      <div class="card-header"><div class="card-name">Éteres</div><div class="card-formula">R–O–R'</div></div>
+      <div class="card-desc">Oxígeno entre dos grupos alquilo o arilo (sin C=O ni –OH).</div>
+      <div class="expand-panel">
+        <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;">
+          <strong style="color:var(--accent5)">IUPAC 2013:</strong> prefijo alcoxi- con localizador sobre cadena principal<br>
+          <strong style="color:var(--accent5)">Formato:</strong> N-(alcoxi)alcano<br>
+          <strong style="color:var(--accent5)">Reconócelo:</strong> –O– entre dos carbonos sin C=O ni –OH
+        </p>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--accent5);border:1px solid rgba(192,96,240,0.3);padding:8px 12px;border-radius:3px;">CH₃–O–C₂H₅ → <strong>1-metoxietano</strong></div>
+      </div>
+    </div>
+
+    <div class="group-card" data-group="aminas" onclick="toggleCard(this)">
+      <span class="card-icon">🔵</span>
+      <div class="card-header"><div class="card-name">Aminas</div><div class="card-formula">R–NH₂</div></div>
+      <div class="card-desc">Nitrógeno con uno, dos o tres sustituyentes carbocarbonados.</div>
+      <div class="expand-panel">
+        <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;">
+          <strong style="color:var(--accent6)">Sufijo IUPAC 2013:</strong> -amina intercalada → alcan-N-amina<br>
+          <strong style="color:var(--accent6)">2ª/3ª amina:</strong> grupos extra en N → N-alquil- / N,N-dialquil-<br>
+          <strong style="color:var(--accent6)">Reconócelo:</strong> N enlazado a carbono(s), sin C=O
+        </p>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--accent6);border:1px solid rgba(240,112,64,0.3);padding:8px 12px;border-radius:3px;">CH₃CH₂NH₂ → <strong>etan-1-amina</strong></div>
+      </div>
+    </div>
+
+    <div class="group-card" data-group="aldehidos" onclick="toggleCard(this)">
+      <span class="card-icon">🌿</span>
+      <div class="card-header"><div class="card-name">Aldehídos</div><div class="card-formula">R–CHO</div></div>
+      <div class="card-desc">Carbonilo (C=O) en el extremo de la cadena con H en el carbono carbonílico.</div>
+      <div class="expand-panel">
+        <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;">
+          <strong style="color:var(--accent1)">Sufijo IUPAC 2013:</strong> -al (CHO siempre es C-1, sin localizador)<br>
+          <strong style="color:var(--accent1)">Formato:</strong> alcanal (sin número)<br>
+          <strong style="color:var(--accent1)">Reconócelo:</strong> –CHO en extremo de cadena
+        </p>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--accent1);border:1px solid rgba(79,240,183,0.3);padding:8px 12px;border-radius:3px;">CH₃CHO → <strong>etanal</strong> &nbsp;|&nbsp; CH₃CH₂CHO → <strong>propanal</strong></div>
+      </div>
+    </div>
+
+    <div class="group-card" data-group="cetonas" onclick="toggleCard(this)">
+      <span class="card-icon">⚡</span>
+      <div class="card-header"><div class="card-name">Cetonas</div><div class="card-formula">R–CO–R'</div></div>
+      <div class="card-desc">Carbonilo (C=O) en posición interna, sin H en el carbono carbonílico.</div>
+      <div class="expand-panel">
+        <p style="font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;">
+          <strong style="color:var(--accent7)">Sufijo IUPAC 2013:</strong> -ona intercalada → alcan-N-ona<br>
+          <strong style="color:var(--accent7)">Formato correcto:</strong> pentan-2-ona (❌ no 2-pentanona)<br>
+          <strong style="color:var(--accent7)">Reconócelo:</strong> C=O interno sin H en ese carbono
+        </p>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--accent7);border:1px solid rgba(64,208,240,0.3);padding:8px 12px;border-radius:3px;">CH₃COCH₃ → <strong>propan-2-ona</strong> &nbsp;|&nbsp; CH₃COCH₂CH₃ → <strong>butan-2-ona</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLA RESUMEN -->
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:40px;">
+    <div style="padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;">
+      <div style="width:8px;height:8px;background:var(--accent1);border-radius:50%;"></div>
+      <span style="font-size:15px;font-weight:700;">Tabla Resumen — IUPAC 2013</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px;">
+        <thead><tr style="background:var(--surface);">
+          <th style="padding:12px 18px;text-align:left;color:var(--muted);font-weight:400;border-bottom:1px solid var(--border);">Grupo</th>
+          <th style="padding:12px 18px;text-align:left;color:var(--muted);font-weight:400;border-bottom:1px solid var(--border);">Fórmula</th>
+          <th style="padding:12px 18px;text-align:left;color:var(--muted);font-weight:400;border-bottom:1px solid var(--border);">Sufijo/Prefijo IUPAC 2013</th>
+          <th style="padding:12px 18px;text-align:left;color:var(--muted);font-weight:400;border-bottom:1px solid var(--border);">Nombre IUPAC 2013</th>
+          <th style="padding:12px 18px;text-align:left;color:var(--muted);font-weight:400;border-bottom:1px solid var(--border);">❌ NO válido</th>
+        </tr></thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 18px;color:var(--accent2);">Haluro de alquilo</td><td style="padding:11px 18px;">R–X</td>
+            <td style="padding:11px 18px;color:var(--text);">N-cloro- / N-bromo-…</td>
+            <td style="padding:11px 18px;color:var(--muted);">2-cloropropano</td>
+            <td style="padding:11px 18px;color:var(--accent2);opacity:0.6;">propil cloruro</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 18px;color:var(--accent3);">Aromático</td><td style="padding:11px 18px;">C₆H₅–R</td>
+            <td style="padding:11px 18px;color:var(--text);">benceno / fenil-</td>
+            <td style="padding:11px 18px;color:var(--muted);">1,4-dimetilbenceno</td>
+            <td style="padding:11px 18px;color:var(--accent2);opacity:0.6;">p-xileno / tolueno</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 18px;color:var(--accent4);">Alcohol</td><td style="padding:11px 18px;">R–OH</td>
+            <td style="padding:11px 18px;color:var(--text);">alcan-N-ol</td>
+            <td style="padding:11px 18px;color:var(--muted);">propan-1-ol</td>
+            <td style="padding:11px 18px;color:var(--accent2);opacity:0.6;">1-propanol / isopropanol</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 18px;color:var(--accent5);">Éter</td><td style="padding:11px 18px;">R–O–R'</td>
+            <td style="padding:11px 18px;color:var(--text);">N-(alcoxi)alcano</td>
+            <td style="padding:11px 18px;color:var(--muted);">1-metoxietano</td>
+            <td style="padding:11px 18px;color:var(--accent2);opacity:0.6;">etil metil éter</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 18px;color:var(--accent6);">Amina</td><td style="padding:11px 18px;">R–NH₂</td>
+            <td style="padding:11px 18px;color:var(--text);">alcan-N-amina</td>
+            <td style="padding:11px 18px;color:var(--muted);">propan-1-amina</td>
+            <td style="padding:11px 18px;color:var(--accent2);opacity:0.6;">propilamina</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:11px 18px;color:var(--accent1);">Aldehído</td><td style="padding:11px 18px;">R–CHO</td>
+            <td style="padding:11px 18px;color:var(--text);">-al (sin localizador)</td>
+            <td style="padding:11px 18px;color:var(--muted);">butanal</td>
+            <td style="padding:11px 18px;color:var(--accent2);opacity:0.6;">1-butanal / butan-1-al</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 18px;color:var(--accent7);">Cetona</td><td style="padding:11px 18px;">R–CO–R'</td>
+            <td style="padding:11px 18px;color:var(--text);">alcan-N-ona</td>
+            <td style="padding:11px 18px;color:var(--muted);">pentan-2-ona</td>
+            <td style="padding:11px 18px;color:var(--accent2);opacity:0.6;">2-pentanona / acetona</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div style="text-align:center;"><button class="btn btn-primary" onclick="showSection('reglas')">Continuar → Reglas IUPAC 2013</button></div>
+</div>
+
+<!-- ══ SEC 2: REGLAS ══ -->
+<div id="sec-reglas" class="container" style="display:none;">
+  <div class="section-header">
+    <span class="section-num">02 /</span>
+    <h2 class="section-title">Reglas IUPAC 2013 por Grupo</h2>
+  </div>
+  <div class="iupac-note">⚠ Regla clave IUPAC 2013: el localizador numérico se coloca inmediatamente antes del elemento del nombre al que hace referencia, no al inicio del nombre.</div>
+
+  <div class="rules-section">
+
+    <!-- HALUROS -->
+    <div class="group-rule-block" data-group="haluros">
+      <div class="rule-header" onclick="toggleRule(this)">
+        <div class="rule-dot"></div><div class="rule-title">⚗️ Haluros de Alquilo</div><div class="rule-toggle">+</div>
+      </div>
+      <div class="rule-body">
+        <div class="warn-box">⚠ IUPAC 2013: el localizador va <strong>antes del prefijo del halógeno</strong>: <strong>2-cloropropano</strong> ✓ &nbsp; ❌ "cloro-2-propano" incorrecto.</div>
+        <ul class="rules-list">
+          <li data-n="1"><span>Identifica la cadena más larga de carbonos → cadena principal.</span></li>
+          <li data-n="2"><span>Numera desde el extremo que le dé el <strong>localizador más bajo al halógeno</strong>.</span></li>
+          <li data-n="3"><span>Prefijo con localizador justo delante: <strong>fluoro-</strong>, <strong>cloro-</strong>, <strong>bromo-</strong>, <strong>yodo-</strong>.</span></li>
+          <li data-n="4"><span>Varios halógenos iguales: <strong>di-, tri-, tetra-</strong>. Distintos: <strong>orden alfabético</strong> para listarlos.</span></li>
+          <li data-n="5"><span>Formato final: <strong>[N-halógeno]alcano</strong> → ej: 1-cloroetano, 2-bromopropano.</span></li>
+        </ul>
+        <div class="examples-grid">
+          <div class="example-card" data-group="haluros">
+            <div class="ex-molecule">CH₃CH₂Cl</div><div class="ex-name">1-cloroetano</div>
+            <ul class="ex-steps">
+              <li>2C → <strong>etano</strong></li><li>Cl en C1 → localizador <strong>1</strong></li>
+              <li>Resultado: <strong>1-cloroetano</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="haluros">
+            <div class="ex-molecule">CH₃CHBrCH₃</div><div class="ex-name">2-bromopropano</div>
+            <ul class="ex-steps">
+              <li>3C → <strong>propano</strong></li><li>Br en C2 → localizador <strong>2</strong></li>
+              <li>Resultado: <strong>2-bromopropano</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="haluros">
+            <div class="ex-molecule">CH₂ClCH₂CH₂CH₃</div><div class="ex-name">1-clorobutano</div>
+            <ul class="ex-steps">
+              <li>4C → <strong>butano</strong></li><li>Cl en C1 → localizador <strong>1</strong></li>
+              <li>Resultado: <strong>1-clorobutano</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="haluros">
+            <div class="ex-molecule">CH₃CF(Cl)CH₃</div><div class="ex-name">2-cloro-2-fluoropropano</div>
+            <ul class="ex-steps">
+              <li>3C → <strong>propano</strong></li><li>Cl y F en C2</li>
+              <li>Orden alfab.: <strong>cloro</strong> antes que <strong>fluoro</strong></li>
+              <li>Resultado: <strong>2-cloro-2-fluoropropano</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AROMÁTICOS -->
+    <div class="group-rule-block" data-group="aromaticos">
+      <div class="rule-header" onclick="toggleRule(this)">
+        <div class="rule-dot"></div><div class="rule-title">🔷 Compuestos Aromáticos</div><div class="rule-toggle">+</div>
+      </div>
+      <div class="rule-body">
+        <div class="warn-box">⚠ IUPAC 2013: <strong>orto-, meta-, para- están abolidos</strong>. Solo se usan localizadores numéricos. "Tolueno", "xileno", "estireno" son nombres comunes, NO nombres IUPAC 2013.</div>
+        <ul class="rules-list">
+          <li data-n="1"><span>Anillo como cadena principal → nombre base: <strong>benceno</strong>. Como sustituyente: <strong>fenil-</strong>.</span></li>
+          <li data-n="2"><span>Un solo sustituyente: prefijo + benceno. No se numera.</span></li>
+          <li data-n="3"><span>Dos o más sustituyentes: numeración que dé el <strong>set de localizadores más bajo</strong>.</span></li>
+          <li data-n="4"><span>Si hay sustituyentes distintos: <strong>orden alfabético</strong> decide qué recibe C-1.</span></li>
+          <li data-n="5"><span>Si el grupo funcional principal supera en prioridad al anillo (–CHO, –COOH…), el anillo es <strong>fenil-</strong> sustituyente.</span></li>
+        </ul>
+        <div class="examples-grid">
+          <div class="example-card" data-group="aromaticos">
+            <div class="ex-molecule">C₆H₅–CH₃</div><div class="ex-name">metilbenceno</div>
+            <ul class="ex-steps">
+              <li>1 sustituyente CH₃ = <strong>metil-</strong></li><li>Sin número (1 sustituyente)</li>
+              <li>Resultado: <strong>metilbenceno</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aromaticos">
+            <div class="ex-molecule">C₆H₄(CH₃)₂ [1,4]</div><div class="ex-name">1,4-dimetilbenceno</div>
+            <ul class="ex-steps">
+              <li>2 CH₃ → <strong>dimetil-</strong></li><li>Posiciones 1,4 (set mínimo)</li>
+              <li>❌ NO "para-xileno"</li>
+              <li>Resultado: <strong>1,4-dimetilbenceno</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aromaticos">
+            <div class="ex-molecule">C₆H₅–Cl</div><div class="ex-name">clorobenceno</div>
+            <ul class="ex-steps">
+              <li>1 sustituyente Cl = <strong>cloro-</strong></li><li>Sin número</li>
+              <li>Resultado: <strong>clorobenceno</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aromaticos">
+            <div class="ex-molecule">C₆H₄Cl₂ [1,2]</div><div class="ex-name">1,2-diclorobenceno</div>
+            <ul class="ex-steps">
+              <li>2 Cl → <strong>dicloro-</strong></li><li>Posiciones 1,2</li>
+              <li>❌ NO "orto-diclorobenceno"</li>
+              <li>Resultado: <strong>1,2-diclorobenceno</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALCOHOLES -->
+    <div class="group-rule-block" data-group="alcoholes">
+      <div class="rule-header" onclick="toggleRule(this)">
+        <div class="rule-dot"></div><div class="rule-title">🍶 Alcoholes</div><div class="rule-toggle">+</div>
+      </div>
+      <div class="rule-body">
+        <div class="warn-box">⚠ IUPAC 2013: localizador intercalado → <strong>propan-1-ol</strong> ✓ &nbsp; ❌ "1-propanol" es estilo antiguo. "Isopropanol" es nombre común, NO IUPAC.</div>
+        <ul class="rules-list">
+          <li data-n="1"><span>Cadena más larga que contenga el C con –OH.</span></li>
+          <li data-n="2"><span>Numera desde el extremo que dé el <strong>localizador más bajo al –OH</strong>.</span></li>
+          <li data-n="3"><span>Sufijo intercalado: <strong>alcan-N-ol</strong>. El número va entre la raíz y -ol.</span></li>
+          <li data-n="4"><span>Dos –OH: sufijo <strong>-diol</strong> → alcan-N,N'-diol (ej: etano-1,2-diol).</span></li>
+          <li data-n="5"><span>Sustituyentes adicionales: prefijos con sus propios localizadores.</span></li>
+        </ul>
+        <div class="examples-grid">
+          <div class="example-card" data-group="alcoholes">
+            <div class="ex-molecule">CH₃OH</div><div class="ex-name">metanol</div>
+            <ul class="ex-steps">
+              <li>1C → <strong>met-</strong> + -anol</li><li>1 solo C: sin localizador</li>
+              <li>Resultado: <strong>metanol</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="alcoholes">
+            <div class="ex-molecule">CH₃CH₂CH₂OH</div><div class="ex-name">propan-1-ol</div>
+            <ul class="ex-steps">
+              <li>3C → <strong>propan-</strong></li><li>OH en C1 → localizador <strong>1</strong></li>
+              <li>Intercalado: propan-<strong>1</strong>-ol</li>
+              <li>Resultado: <strong>propan-1-ol</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="alcoholes">
+            <div class="ex-molecule">CH₃CH(OH)CH₃</div><div class="ex-name">propan-2-ol</div>
+            <ul class="ex-steps">
+              <li>3C → <strong>propan-</strong></li><li>OH en C2 → localizador <strong>2</strong></li>
+              <li>Resultado: <strong>propan-2-ol</strong> ❌ no isopropanol</li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="alcoholes">
+            <div class="ex-molecule">HOCH₂CH₂OH</div><div class="ex-name">etano-1,2-diol</div>
+            <ul class="ex-steps">
+              <li>2C → <strong>etano-</strong></li><li>2 OH en C1 y C2 → <strong>-diol</strong></li>
+              <li>Resultado: <strong>etano-1,2-diol</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTERES -->
+    <div class="group-rule-block" data-group="eteres">
+      <div class="rule-header" onclick="toggleRule(this)">
+        <div class="rule-dot"></div><div class="rule-title">🔗 Éteres</div><div class="rule-toggle">+</div>
+      </div>
+      <div class="rule-body">
+        <div class="warn-box">⚠ IUPAC 2013: los éteres se nombran como <strong>alcoxialcanos con localizador</strong>: <strong>1-metoxietano</strong> ✓ &nbsp; ❌ "etil metil éter" y "metoxietano" (sin número) son incorrectos.</div>
+        <ul class="rules-list">
+          <li data-n="1"><span>El grupo –OR más corto es el prefijo <strong>alcoxi-</strong>: metoxi- / etoxi- / propoxi-…</span></li>
+          <li data-n="2"><span>El grupo más largo es la <strong>cadena principal</strong> (alcano base).</span></li>
+          <li data-n="3"><span>Numera la cadena principal desde el extremo que dé el <strong>localizador más bajo al O</strong>.</span></li>
+          <li data-n="4"><span>Nombre completo: <strong>N-(alcoxi)alcano</strong>. El número va antes del prefijo alcoxi.</span></li>
+          <li data-n="5"><span>Si ambos grupos son iguales: el grupo de la cadena más corta sigue siendo el alcoxi-.</span></li>
+        </ul>
+        <div class="examples-grid">
+          <div class="example-card" data-group="eteres">
+            <div class="ex-molecule">CH₃–O–CH₃</div><div class="ex-name">1-metoximetano</div>
+            <ul class="ex-steps">
+              <li>Ambos CH₃ iguales: uno = <strong>metoxi-</strong></li>
+              <li>Cadena: <strong>metano</strong>; O en C1 → loc. <strong>1</strong></li>
+              <li>Resultado: <strong>1-metoximetano</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="eteres">
+            <div class="ex-molecule">CH₃–O–CH₂CH₃</div><div class="ex-name">1-metoxietano</div>
+            <ul class="ex-steps">
+              <li>Corto CH₃O → <strong>metoxi-</strong></li>
+              <li>Largo C₂H₅ → <strong>etano</strong>; O en C1</li>
+              <li>Resultado: <strong>1-metoxietano</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="eteres">
+            <div class="ex-molecule">C₂H₅–O–C₂H₅</div><div class="ex-name">1-etoxietano</div>
+            <ul class="ex-steps">
+              <li>Ambos C₂H₅: uno = <strong>etoxi-</strong></li>
+              <li>Cadena: <strong>etano</strong>; O en C1</li>
+              <li>Resultado: <strong>1-etoxietano</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="eteres">
+            <div class="ex-molecule">CH₃O–CH₂CH₂CH₃</div><div class="ex-name">1-metoxipropano</div>
+            <ul class="ex-steps">
+              <li>Corto CH₃O → <strong>metoxi-</strong></li>
+              <li>Largo C₃H₇ → <strong>propano</strong>; O en C1</li>
+              <li>Resultado: <strong>1-metoxipropano</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AMINAS -->
+    <div class="group-rule-block" data-group="aminas">
+      <div class="rule-header" onclick="toggleRule(this)">
+        <div class="rule-dot"></div><div class="rule-title">🔵 Aminas</div><div class="rule-toggle">+</div>
+      </div>
+      <div class="rule-body">
+        <div class="warn-box">⚠ IUPAC 2013: localizador intercalado → <strong>propan-1-amina</strong> ✓ &nbsp; ❌ "propilamina" es nombre común. Para aminas 2ª y 3ª, los grupos extra en N se indican con <strong>N-</strong>.</div>
+        <ul class="rules-list">
+          <li data-n="1"><span>Cadena más larga unida al N → cadena principal.</span></li>
+          <li data-n="2"><span>Numera desde el extremo que dé el <strong>localizador más bajo al N</strong>.</span></li>
+          <li data-n="3"><span>Sufijo intercalado: <strong>alcan-N-amina</strong>.</span></li>
+          <li data-n="4"><span>Amina 2ª: grupo extra en N = <strong>N-alquil-</strong> antes del nombre base.</span></li>
+          <li data-n="5"><span>Amina 3ª: dos grupos extra → <strong>N,N-dialquil-</strong> o N-alquil-N-alquil- si distintos (orden alfab.).</span></li>
+        </ul>
+        <div class="examples-grid">
+          <div class="example-card" data-group="aminas">
+            <div class="ex-molecule">CH₃NH₂</div><div class="ex-name">metanamina</div>
+            <ul class="ex-steps">
+              <li>1C → <strong>metan-</strong></li><li>1 solo C: sin localizador</li>
+              <li>Resultado: <strong>metanamina</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aminas">
+            <div class="ex-molecule">CH₃CH₂CH₂NH₂</div><div class="ex-name">propan-1-amina</div>
+            <ul class="ex-steps">
+              <li>3C → <strong>propan-</strong></li><li>NH₂ en C1 → localizador <strong>1</strong></li>
+              <li>Resultado: <strong>propan-1-amina</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aminas">
+            <div class="ex-molecule">(CH₃)₂NH</div><div class="ex-name">N-metilmetanamina</div>
+            <ul class="ex-steps">
+              <li>Cadena principal CH₃ → <strong>metanamina</strong></li>
+              <li>Grupo extra en N: CH₃ → <strong>N-metil-</strong></li>
+              <li>Resultado: <strong>N-metilmetanamina</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aminas">
+            <div class="ex-molecule">CH₃CH(NH₂)CH₃</div><div class="ex-name">propan-2-amina</div>
+            <ul class="ex-steps">
+              <li>3C → <strong>propan-</strong></li><li>NH₂ en C2 → localizador <strong>2</strong></li>
+              <li>Resultado: <strong>propan-2-amina</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALDEHÍDOS -->
+    <div class="group-rule-block" data-group="aldehidos">
+      <div class="rule-header" onclick="toggleRule(this)">
+        <div class="rule-dot"></div><div class="rule-title">🌿 Aldehídos</div><div class="rule-toggle">+</div>
+      </div>
+      <div class="rule-body">
+        <div class="warn-box">⚠ IUPAC 2013: el sufijo -al <strong>nunca lleva localizador</strong> porque el CHO es siempre C-1 por definición. <strong>butanal</strong> ✓ &nbsp; ❌ "1-butanal" y "butan-1-al" son incorrectos.</div>
+        <ul class="rules-list">
+          <li data-n="1"><span>La cadena principal incluye el C del –CHO, que es <strong>siempre C-1</strong>.</span></li>
+          <li data-n="2"><span>Cuenta todos los C incluyendo el del CHO para determinar la raíz.</span></li>
+          <li data-n="3"><span>Sufijo: reemplaza la –o del alcano por <strong>-al</strong>. Sin localizador.</span></li>
+          <li data-n="4"><span>Ramas y sustituyentes: prefijos con sus localizadores, numerando desde C-1 (el CHO).</span></li>
+          <li data-n="5"><span>Dos –CHO en extremos opuestos: sufijo <strong>-odial</strong> (ej: butanodial).</span></li>
+        </ul>
+        <div class="examples-grid">
+          <div class="example-card" data-group="aldehidos">
+            <div class="ex-molecule">HCHO</div><div class="ex-name">metanal</div>
+            <ul class="ex-steps">
+              <li>1C → <strong>met-</strong> + -anal</li>
+              <li>Resultado: <strong>metanal</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aldehidos">
+            <div class="ex-molecule">CH₃CHO</div><div class="ex-name">etanal</div>
+            <ul class="ex-steps">
+              <li>2C incluyendo CHO → <strong>et-</strong></li>
+              <li>CHO en C1 (fijo, sin número)</li>
+              <li>Resultado: <strong>etanal</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aldehidos">
+            <div class="ex-molecule">CH₃CH₂CH₂CHO</div><div class="ex-name">butanal</div>
+            <ul class="ex-steps">
+              <li>4C incluyendo CHO → <strong>but-</strong></li>
+              <li>Sufijo -al, sin número</li>
+              <li>Resultado: <strong>butanal</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="aldehidos">
+            <div class="ex-molecule">CH₃CH(CH₃)CHO</div><div class="ex-name">2-metilpropanal</div>
+            <ul class="ex-steps">
+              <li>3C principal → <strong>propanal</strong></li>
+              <li>CHO=C1; rama CH₃ en C2 → <strong>2-metil-</strong></li>
+              <li>Resultado: <strong>2-metilpropanal</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CETONAS -->
+    <div class="group-rule-block" data-group="cetonas">
+      <div class="rule-header" onclick="toggleRule(this)">
+        <div class="rule-dot"></div><div class="rule-title">⚡ Cetonas</div><div class="rule-toggle">+</div>
+      </div>
+      <div class="rule-body">
+        <div class="warn-box">⚠ IUPAC 2013: localizador intercalado → <strong>pentan-2-ona</strong> ✓ &nbsp; ❌ "2-pentanona" es estilo antiguo. "Acetona" es nombre común para propan-2-ona.</div>
+        <ul class="rules-list">
+          <li data-n="1"><span>Cadena más larga que incluya el C=O (mínimo 3 carbonos para cetonas).</span></li>
+          <li data-n="2"><span>Numera desde el extremo que dé al C=O el <strong>localizador más bajo</strong>.</span></li>
+          <li data-n="3"><span>Sufijo intercalado: <strong>alcan-N-ona</strong>. El número va entre la raíz y -ona.</span></li>
+          <li data-n="4"><span>Sustituyentes: prefijos con localizadores antes del nombre base.</span></li>
+          <li data-n="5"><span>Dos C=O internos: sufijo <strong>-diona</strong> con dos localizadores intercalados.</span></li>
+        </ul>
+        <div class="examples-grid">
+          <div class="example-card" data-group="cetonas">
+            <div class="ex-molecule">CH₃COCH₃</div><div class="ex-name">propan-2-ona</div>
+            <ul class="ex-steps">
+              <li>3C → <strong>propan-</strong></li><li>C=O en C2 (único posible)</li>
+              <li>Resultado: <strong>propan-2-ona</strong> ❌ no acetona</li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="cetonas">
+            <div class="ex-molecule">CH₃COCH₂CH₃</div><div class="ex-name">butan-2-ona</div>
+            <ul class="ex-steps">
+              <li>4C → <strong>butan-</strong></li><li>C=O en C2 (localizador menor)</li>
+              <li>Resultado: <strong>butan-2-ona</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="cetonas">
+            <div class="ex-molecule">CH₃CH₂COCH₂CH₃</div><div class="ex-name">pentan-3-ona</div>
+            <ul class="ex-steps">
+              <li>5C → <strong>pentan-</strong></li><li>C=O en C3 (centro)</li>
+              <li>Resultado: <strong>pentan-3-ona</strong></li>
+            </ul>
+          </div>
+          <div class="example-card" data-group="cetonas">
+            <div class="ex-molecule">CH₃COCH(CH₃)CH₃</div><div class="ex-name">3-metilbutan-2-ona</div>
+            <ul class="ex-steps">
+              <li>4C → <strong>butan-</strong></li><li>C=O en C2 → <strong>-2-ona</strong></li>
+              <li>Rama CH₃ en C3 → <strong>3-metil-</strong></li>
+              <li>Resultado: <strong>3-metilbutan-2-ona</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center;"><button class="btn btn-primary" onclick="showSection('ejemplos')">Continuar → Ejemplos Avanzados</button></div>
+</div>
+
+<!-- ══ SEC 3: EJEMPLOS ══ -->
+<div id="sec-ejemplos" class="container" style="display:none;">
+  <div class="section-header">
+    <span class="section-num">03 /</span>
+    <h2 class="section-title">Ejemplos Paso a Paso — IUPAC 2013</h2>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab active" onclick="showTab('tab-hal',this)">Haluros</div>
+    <div class="tab" onclick="showTab('tab-aro',this)">Aromáticos</div>
+    <div class="tab" onclick="showTab('tab-alc',this)">Alcoholes</div>
+    <div class="tab" onclick="showTab('tab-ete',this)">Éteres</div>
+    <div class="tab" onclick="showTab('tab-ami',this)">Aminas</div>
+    <div class="tab" onclick="showTab('tab-ald',this)">Aldehídos</div>
+    <div class="tab" onclick="showTab('tab-cet',this)">Cetonas</div>
+  </div>
+
+  <!-- HALUROS -->
+  <div id="tab-hal" class="tab-content active">
+    <div style="display:grid;gap:20px;">
+      <div style="background:var(--card);border:1px solid var(--accent2);border-radius:4px;padding:28px;" data-group="haluros">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent2);margin-bottom:4px;">CH₃CHClCH₂CH₃</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent2);margin-bottom:20px;">2-clorobutano</div>
+        <div class="step-grid">
+          <div class="step-box"><div class="step-label" style="color:var(--accent2);">PASO 1 · Cadena principal</div><div class="step-text">4C incluyendo el C con Cl → <strong style="color:var(--text);">butano</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent2);">PASO 2 · Numeración</div><div class="step-text">Cl en C2 desde izq. (da 2) vs C3 desde der. (da 3) → <strong style="color:var(--text);">2 es menor, correcto</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent2);">PASO 3 · Prefijo</div><div class="step-text">Cl → <strong style="color:var(--text);">cloro-</strong> con localizador 2 inmediatamente antes</div></div>
+          <div class="step-box" style="border:1px solid rgba(240,96,96,0.4);"><div class="step-label" style="color:var(--accent2);">RESULTADO IUPAC 2013</div><div class="step-text" style="color:var(--accent2);font-weight:700;font-size:15px;">2-clorobutano</div></div>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;" data-group="haluros">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent2);margin-bottom:4px;">CH₂ClCHBrCH₃</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent2);margin-bottom:16px;">2-bromo-1-cloropropano</div>
+        <div class="mono-block" data-group="haluros">
+          <span style="color:var(--accent2);">→</span> 3C → <strong style="color:var(--text);">propano</strong><br>
+          <span style="color:var(--accent2);">→</span> Comparar sets: Cl en C1, Br en C2 → {1,2} vs {2,3} desde el otro extremo → <strong style="color:var(--text);">{1,2} es menor</strong><br>
+          <span style="color:var(--accent2);">→</span> Orden alfabético para listar: <strong style="color:var(--text);">bromo</strong> (C2) antes que <strong style="color:var(--text);">cloro</strong> (C1)<br>
+          <span style="color:var(--accent2);">→</span> Nombre: <strong style="color:var(--accent2);">2-bromo-1-cloropropano</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AROMÁTICOS -->
+  <div id="tab-aro" class="tab-content">
+    <div style="display:grid;gap:20px;">
+      <div style="background:var(--card);border:1px solid var(--accent3);border-radius:4px;padding:28px;" data-group="aromaticos">
+        <div style="font-family:var(--mono);font-size:20px;color:var(--accent3);margin-bottom:4px;">C₆H₄(NO₂)(CH₃) — posic. 1,4</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent3);margin-bottom:20px;">1-metil-4-nitrobenceno</div>
+        <div class="step-grid">
+          <div class="step-box"><div class="step-label" style="color:var(--accent3);">PASO 1</div><div class="step-text">Base: anillo → <strong style="color:var(--text);">benceno</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent3);">PASO 2</div><div class="step-text">CH₃ = <strong style="color:var(--text);">metil-</strong> &nbsp; NO₂ = <strong style="color:var(--text);">nitro-</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent3);">PASO 3 · Numeración</div><div class="step-text">Orden alfab.: <em>metil</em> primero → C1. Nitro en C4. Set {1,4}</div></div>
+          <div class="step-box" style="border:1px solid rgba(240,192,64,0.4);"><div class="step-label" style="color:var(--accent3);">RESULTADO IUPAC 2013</div><div class="step-text" style="color:var(--accent3);font-weight:700;font-size:15px;">1-metil-4-nitrobenceno</div></div>
+        </div>
+        <div class="warn-box" style="margin-top:16px;">❌ <strong>Incorrecto en IUPAC 2013:</strong> "p-nitrotolueno" (usa orto/meta/para y nombre común "tolueno").</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;" data-group="aromaticos">
+        <div style="font-family:var(--mono);font-size:20px;color:var(--accent3);margin-bottom:4px;">C₆H₄(CH₃)₂ — posic. 1,2</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent3);margin-bottom:16px;">1,2-dimetilbenceno</div>
+        <div class="mono-block" data-group="aromaticos">
+          <span style="color:var(--accent3);">→</span> 2 CH₃ en posiciones adyacentes → <strong style="color:var(--text);">dimetil-</strong><br>
+          <span style="color:var(--accent3);">→</span> Set más bajo posible: <strong style="color:var(--text);">1,2</strong><br>
+          <span style="color:var(--accent3);">→</span> ❌ NO "orto-dimetilbenceno" ni "o-xileno" ni "xileno"<br>
+          <span style="color:var(--accent3);">→</span> Nombre: <strong style="color:var(--accent3);">1,2-dimetilbenceno</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALCOHOLES -->
+  <div id="tab-alc" class="tab-content">
+    <div style="display:grid;gap:20px;">
+      <div style="background:var(--card);border:1px solid var(--accent4);border-radius:4px;padding:28px;" data-group="alcoholes">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent4);margin-bottom:4px;">CH₃CH(OH)CH₂CH₃</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent4);margin-bottom:20px;">butan-2-ol</div>
+        <div class="step-grid">
+          <div class="step-box"><div class="step-label" style="color:var(--accent4);">PASO 1</div><div class="step-text">4C con C del OH → <strong style="color:var(--text);">butan-</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent4);">PASO 2</div><div class="step-text">OH en C2 (da localizador 2 vs 3 desde el otro extremo)</div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent4);">PASO 3</div><div class="step-text">Intercala: <strong style="color:var(--text);">butan-2-ol</strong> (2 entre "butan" y "ol")</div></div>
+          <div class="step-box" style="border:1px solid rgba(96,144,240,0.4);"><div class="step-label" style="color:var(--accent4);">RESULTADO IUPAC 2013</div><div class="step-text" style="color:var(--accent4);font-weight:700;font-size:15px;">butan-2-ol</div></div>
+        </div>
+        <div class="warn-box" style="margin-top:16px;">❌ <strong>Incorrecto en IUPAC 2013:</strong> "2-butanol" (localizador al inicio, estilo antiguo).</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;" data-group="alcoholes">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent4);margin-bottom:4px;">HOCH₂CH₂CH₂OH</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent4);margin-bottom:16px;">propano-1,3-diol</div>
+        <div class="mono-block" data-group="alcoholes">
+          <span style="color:var(--accent4);">→</span> 3C → <strong style="color:var(--text);">propano-</strong><br>
+          <span style="color:var(--accent4);">→</span> 2 OH en C1 y C3 → sufijo <strong style="color:var(--text);">-diol</strong><br>
+          <span style="color:var(--accent4);">→</span> Localizadores intercalados: <strong style="color:var(--text);">propano-1,3-diol</strong><br>
+          <span style="color:var(--accent4);">→</span> Nombre: <strong style="color:var(--accent4);">propano-1,3-diol</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÉTERES -->
+  <div id="tab-ete" class="tab-content">
+    <div style="display:grid;gap:20px;">
+      <div style="background:var(--card);border:1px solid var(--accent5);border-radius:4px;padding:28px;" data-group="eteres">
+        <div style="font-family:var(--mono);font-size:20px;color:var(--accent5);margin-bottom:4px;">CH₃CH₂–O–CH₂CH₂CH₃</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent5);margin-bottom:20px;">1-etoxipropano</div>
+        <div class="step-grid">
+          <div class="step-box"><div class="step-label" style="color:var(--accent5);">PASO 1 · Grupos</div><div class="step-text">C₂H₅– (2C) y –CH₂CH₂CH₃ (3C)</div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent5);">PASO 2 · Prefijo alcoxi</div><div class="step-text">El más corto C₂H₅O– = <strong style="color:var(--text);">etoxi-</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent5);">PASO 3 · Cadena + localiz.</div><div class="step-text">3C = <strong style="color:var(--text);">propano</strong>. O unido a C1 → localizador <strong style="color:var(--text);">1</strong></div></div>
+          <div class="step-box" style="border:1px solid rgba(192,96,240,0.4);"><div class="step-label" style="color:var(--accent5);">RESULTADO IUPAC 2013</div><div class="step-text" style="color:var(--accent5);font-weight:700;font-size:15px;">1-etoxipropano</div></div>
+        </div>
+        <div class="warn-box" style="margin-top:16px;">❌ <strong>Incorrecto en IUPAC 2013:</strong> "etil propil éter" (nomenclatura de radicales).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AMINAS -->
+  <div id="tab-ami" class="tab-content">
+    <div style="display:grid;gap:20px;">
+      <div style="background:var(--card);border:1px solid var(--accent6);border-radius:4px;padding:28px;" data-group="aminas">
+        <div style="font-family:var(--mono);font-size:20px;color:var(--accent6);margin-bottom:4px;">(CH₃)(C₂H₅)NH</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent6);margin-bottom:20px;">N-metiletan-1-amina</div>
+        <div class="step-grid">
+          <div class="step-box"><div class="step-label" style="color:var(--accent6);">PASO 1</div><div class="step-text">Cadena más larga al N: C₂H₅ (2C) → <strong style="color:var(--text);">etan-</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent6);">PASO 2</div><div class="step-text">N en C1 → loc. <strong style="color:var(--text);">1</strong> → <strong style="color:var(--text);">etan-1-amina</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent6);">PASO 3</div><div class="step-text">Grupo extra en N: CH₃ → <strong style="color:var(--text);">N-metil-</strong></div></div>
+          <div class="step-box" style="border:1px solid rgba(240,112,64,0.4);"><div class="step-label" style="color:var(--accent6);">RESULTADO IUPAC 2013</div><div class="step-text" style="color:var(--accent6);font-weight:700;font-size:15px;">N-metiletan-1-amina</div></div>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;" data-group="aminas">
+        <div style="font-family:var(--mono);font-size:20px;color:var(--accent6);margin-bottom:4px;">(CH₃)₃N</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent6);margin-bottom:16px;">N,N-dimetilmetanamina</div>
+        <div class="mono-block" data-group="aminas">
+          <span style="color:var(--accent6);">→</span> Cadena principal al N: CH₃ → <strong style="color:var(--text);">metanamina</strong><br>
+          <span style="color:var(--accent6);">→</span> 2 grupos extra CH₃ en N → <strong style="color:var(--text);">N,N-dimetil-</strong><br>
+          <span style="color:var(--accent6);">→</span> Nombre: <strong style="color:var(--accent6);">N,N-dimetilmetanamina</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALDEHÍDOS -->
+  <div id="tab-ald" class="tab-content">
+    <div style="display:grid;gap:20px;">
+      <div style="background:var(--card);border:1px solid var(--accent1);border-radius:4px;padding:28px;" data-group="aldehidos">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent1);margin-bottom:4px;">(CH₃)₂CHCHO</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent1);margin-bottom:20px;">2-metilpropanal</div>
+        <div class="step-grid">
+          <div class="step-box"><div class="step-label" style="color:var(--accent1);">PASO 1</div><div class="step-text">CHO (C1) + 2C más = 3C total → <strong style="color:var(--text);">propan-</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent1);">PASO 2</div><div class="step-text">Sufijo -al. CHO = C1 siempre, sin localizador → <strong style="color:var(--text);">propanal</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent1);">PASO 3</div><div class="step-text">Rama CH₃ en C2 → prefijo <strong style="color:var(--text);">2-metil-</strong></div></div>
+          <div class="step-box" style="border:1px solid rgba(79,240,183,0.4);"><div class="step-label" style="color:var(--accent1);">RESULTADO IUPAC 2013</div><div class="step-text" style="color:var(--accent1);font-weight:700;font-size:15px;">2-metilpropanal</div></div>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;" data-group="aldehidos">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent1);margin-bottom:4px;">OHC–CH₂–CH₂–CHO</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent1);margin-bottom:16px;">butanodial</div>
+        <div class="mono-block" data-group="aldehidos">
+          <span style="color:var(--accent1);">→</span> 2 CHO en ambos extremos; 4C total → <strong style="color:var(--text);">butan-</strong><br>
+          <span style="color:var(--accent1);">→</span> 2 grupos CHO terminales → sufijo <strong style="color:var(--text);">-odial</strong><br>
+          <span style="color:var(--accent1);">→</span> Sin localizadores (siempre son los extremos)<br>
+          <span style="color:var(--accent1);">→</span> Nombre: <strong style="color:var(--accent1);">butanodial</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CETONAS -->
+  <div id="tab-cet" class="tab-content">
+    <div style="display:grid;gap:20px;">
+      <div style="background:var(--card);border:1px solid var(--accent7);border-radius:4px;padding:28px;" data-group="cetonas">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent7);margin-bottom:4px;">CH₃CH₂COCH₂CH₂CH₃</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent7);margin-bottom:20px;">hexan-3-ona</div>
+        <div class="step-grid">
+          <div class="step-box"><div class="step-label" style="color:var(--accent7);">PASO 1</div><div class="step-text">6C incluyendo C=O → <strong style="color:var(--text);">hexan-</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent7);">PASO 2</div><div class="step-text">C=O en C3 desde izq. (3) vs C4 desde der. (4) → <strong style="color:var(--text);">3 es menor</strong></div></div>
+          <div class="step-box"><div class="step-label" style="color:var(--accent7);">PASO 3</div><div class="step-text">Intercala: <strong style="color:var(--text);">hexan-3-ona</strong></div></div>
+          <div class="step-box" style="border:1px solid rgba(64,208,240,0.4);"><div class="step-label" style="color:var(--accent7);">RESULTADO IUPAC 2013</div><div class="step-text" style="color:var(--accent7);font-weight:700;font-size:15px;">hexan-3-ona</div></div>
+        </div>
+        <div class="warn-box" style="margin-top:16px;">❌ <strong>Incorrecto en IUPAC 2013:</strong> "3-hexanona" (localizador al inicio, estilo antiguo).</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;" data-group="cetonas">
+        <div style="font-family:var(--mono);font-size:22px;color:var(--accent7);margin-bottom:4px;">CH₃COCH₂COCH₃</div>
+        <div style="font-size:19px;font-weight:700;color:var(--accent7);margin-bottom:16px;">pentano-2,4-diona</div>
+        <div class="mono-block" data-group="cetonas">
+          <span style="color:var(--accent7);">→</span> 5C → <strong style="color:var(--text);">pentan-</strong><br>
+          <span style="color:var(--accent7);">→</span> 2 grupos C=O en C2 y C4 → sufijo <strong style="color:var(--text);">-diona</strong><br>
+          <span style="color:var(--accent7);">→</span> Intercalado: <strong style="color:var(--text);">pentano-2,4-diona</strong><br>
+          <span style="color:var(--accent7);">→</span> Nombre: <strong style="color:var(--accent7);">pentano-2,4-diona</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:36px;"><button class="btn btn-primary" onclick="showSection('practica')">Continuar → ¡A Practicar!</button></div>
+</div>
+
+<!-- ══ SEC 4: QUIZ ══ -->
+<div id="sec-practica" class="container" style="display:none;">
+  <div class="section-header">
+    <span class="section-num">04 /</span>
+    <h2 class="section-title">¡Pon a Prueba tu Conocimiento!</h2>
+  </div>
+  <div class="iupac-note">⚠ Todas las respuestas correctas siguen estrictamente IUPAC 2013. Las opciones incorrectas incluyen errores comunes.</div>
+
+  <div class="quiz-score">
+    <div>Puntaje:</div>
+    <div class="score-val" id="scoreVal">0</div>
+    <div>/ <span id="totalQ">0</span> respondidas</div>
+    <div id="scorePercent" style="margin-left:auto;font-size:16px;font-weight:700;color:var(--accent1);"></div>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+  <div id="quizContainer"></div>
+  <div style="text-align:center;margin-top:32px;"><button class="btn btn-ghost" onclick="resetQuiz()">↺ Reiniciar Quiz</button></div>
+</div>
+
+<footer>NOMENCLATURA IUPAC 2013 · GRUPOS FUNCIONALES · QUÍMICA ORGÁNICA</footer>
+
+<script>
+function showSection(id) {
+  ['grupos','reglas','ejemplos','practica'].forEach(s=>document.getElementById('sec-'+s).style.display='none');
+  document.getElementById('sec-'+id).style.display='block';
+  document.querySelectorAll('.nav-pill').forEach((p,i)=>p.classList.toggle('active',['grupos','reglas','ejemplos','practica'][i]===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='practica') buildQuiz();
+}
+function toggleCard(el) {
+  const panel=el.querySelector('.expand-panel'), isOpen=panel.classList.contains('open');
+  document.querySelectorAll('.expand-panel').forEach(p=>p.classList.remove('open'));
+  document.querySelectorAll('.group-card').forEach(c=>c.classList.remove('expanded'));
+  if(!isOpen){panel.classList.add('open');el.classList.add('expanded');}
+}
+function toggleRule(header) {
+  const body=header.nextElementSibling, toggle=header.querySelector('.rule-toggle'), isOpen=body.classList.contains('open');
+  body.classList.toggle('open',!isOpen); toggle.classList.toggle('open',!isOpen); toggle.textContent=isOpen?'+':'×';
+}
+function showTab(id,el) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active'); el.classList.add('active');
+}
+
+const questions=[
+  {molecule:"CH₃CH₂Cl",group:"Haluro de Alquilo",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["cloroetano","1-cloroetano","etilcloruro","2-cloroetano"],correct:1,
+   explanation:"2C = etano. Cl en C1 → localizador 1 es obligatorio en IUPAC 2013. → 1-cloroetano. ❌ 'cloroetano' sin número no es válido en IUPAC 2013."},
+  {molecule:"CH₃CH₂CH₂OH",group:"Alcohol",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["1-propanol","propan-1-ol","propanol","3-propanol"],correct:1,
+   explanation:"3C = propan-. OH en C1. IUPAC 2013: localizador intercalado → propan-1-ol. ❌ '1-propanol' es estilo antiguo."},
+  {molecule:"CH₃COCH₂CH₃",group:"Cetona",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["2-butanona","butan-2-ona","butan-3-ona","butanona"],correct:1,
+   explanation:"4C = butan-. C=O en C2. IUPAC 2013: localizador intercalado → butan-2-ona. ❌ '2-butanona' es estilo antiguo."},
+  {molecule:"HCHO",group:"Aldehído",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["metanal","etanal","1-metanal","metanal-1"],correct:0,
+   explanation:"1C incluyendo CHO = metanal. El sufijo -al nunca lleva localizador (CHO es siempre C1). → metanal."},
+  {molecule:"CH₃–O–CH₂CH₃",group:"Éter",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["metoxietano","1-metoxietano","etoximetano","etil metil éter"],correct:1,
+   explanation:"metoxi- sobre la cadena etano. O en C1 → localizador 1. IUPAC 2013: 1-metoxietano. ❌ 'metoxietano' sin número es incompleto."},
+  {molecule:"CH₃CH₂NH₂",group:"Amina",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["etilamina","etan-1-amina","etan-2-amina","etano-1-amina"],correct:1,
+   explanation:"2C = etan-. NH₂ en C1. IUPAC 2013: localizador intercalado → etan-1-amina. ❌ 'etilamina' es nombre común."},
+  {molecule:"C₆H₅–CH₃",group:"Aromático",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["tolueno","fenilmetano","metilbenceno","bencilmetano"],correct:2,
+   explanation:"Anillo = benceno. CH₃ = metil-. 1 sustituyente, sin número. → metilbenceno. ❌ 'tolueno' es nombre común, NO IUPAC 2013."},
+  {molecule:"CH₃CH(OH)CH₃",group:"Alcohol",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["2-propanol","isopropanol","propan-2-ol","propan-1-ol"],correct:2,
+   explanation:"3C = propan-. OH en C2. IUPAC 2013: localizador intercalado → propan-2-ol. ❌ '2-propanol' e 'isopropanol' son incorrectos en IUPAC 2013."},
+  {molecule:"CH₃CH₂CH₂CHO",group:"Aldehído",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["1-butanal","butanal","butan-1-al","butano-1-al"],correct:1,
+   explanation:"4C incluyendo CHO = butan-. Sufijo -al sin localizador → butanal. ❌ '1-butanal' y 'butan-1-al' son incorrectos: -al NUNCA lleva localizador."},
+  {molecule:"CH₃COCH₂CH₂CH₃",group:"Cetona",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["2-pentanona","pentan-3-ona","pentan-2-ona","3-pentanona"],correct:2,
+   explanation:"5C = pentan-. C=O en C2 (localizador menor). IUPAC 2013: pentan-2-ona. ❌ '2-pentanona' es estilo antiguo."},
+  {molecule:"C₆H₄(CH₃)₂ posic. 1,4",group:"Aromático",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["para-xileno","p-dimetilbenceno","1,4-dimetilbenceno","xileno"],correct:2,
+   explanation:"2 CH₃ en posiciones 1 y 4 → 1,4-dimetilbenceno. ❌ 'para-xileno' y 'xileno': orto/meta/para y el nombre 'xileno' están abolidos en IUPAC 2013."},
+  {molecule:"C₆H₄Cl₂ posic. 1,2",group:"Aromático",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["orto-diclorobenceno","1,2-diclorobenceno","o-clorobenceno","2-clorobenceno"],correct:1,
+   explanation:"2 Cl en posiciones 1,2 → 1,2-diclorobenceno. ❌ 'orto-diclorobenceno': el prefijo orto está abolido en IUPAC 2013."},
+  {molecule:"CH₃–O–CH₂CH₂CH₃",group:"Éter",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["metil propil éter","1-metoxipropano","metoxipropano","propoxi-1-metano"],correct:1,
+   explanation:"metoxi- (CH₃O) sobre la cadena propano. O en C1 → localizador 1. IUPAC 2013: 1-metoxipropano. ❌ 'metoxipropano' sin localizador es incompleto."},
+  {molecule:"(CH₃)₂NH",group:"Amina",question:"¿Cuál es el nombre IUPAC 2013 correcto?",
+   options:["dimetilamina","N-metilmetanamina","2-metilmetanamina","metanamina-N-metil"],correct:1,
+   explanation:"Cadena principal CH₃ = metanamina. Grupo extra en N: otro CH₃ = N-metil-. → N-metilmetanamina. ❌ 'dimetilamina' es nombre común."}
+];
+
+let score=0,answered=0;
+function buildQuiz(){
+  const c=document.getElementById('quizContainer');
+  if(c.children.length>0) return;
+  questions.forEach((q,idx)=>{
+    const d=document.createElement('div'); d.className='quiz-card';
+    d.innerHTML=`<div style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px;">${q.group}</div>
+    <div class="quiz-q">Pregunta ${idx+1}: ${q.question}</div>
+    <div class="quiz-molecule">${q.molecule}</div>
+    <div class="quiz-options">${q.options.map((o,i)=>`<button class="quiz-opt" onclick="checkAnswer(this,${idx},${i})">${o}</button>`).join('')}</div>
+    <div class="quiz-feedback" id="fb-${idx}"></div>`;
+    c.appendChild(d);
+  });
+}
+function checkAnswer(btn,qIdx,optIdx){
+  const q=questions[qIdx],card=btn.closest('.quiz-card'),opts=card.querySelectorAll('.quiz-opt'),fb=document.getElementById('fb-'+qIdx);
+  if(opts[0].classList.contains('disabled')) return;
+  opts.forEach(o=>o.classList.add('disabled')); answered++;
+  if(optIdx===q.correct){btn.classList.add('correct');score++;fb.className='quiz-feedback show ok';fb.innerHTML='✓ ¡Correcto! '+q.explanation;}
+  else{btn.classList.add('wrong');opts[q.correct].classList.add('correct');fb.className='quiz-feedback show bad';fb.innerHTML='✗ Incorrecto. '+q.explanation;}
+  updateScore();
+}
+function updateScore(){
+  document.getElementById('scoreVal').textContent=score;
+  document.getElementById('totalQ').textContent=answered;
+  document.getElementById('scorePercent').textContent=answered>0?Math.round(score/answered*100)+'%':'';
+  document.getElementById('progressBar').style.width=(answered/questions.length*100)+'%';
+}
+function resetQuiz(){
+  score=0;answered=0;
+  document.getElementById('quizContainer').innerHTML='';
+  document.getElementById('scoreVal').textContent='0';
+  document.getElementById('totalQ').textContent='0';
+  document.getElementById('scorePercent').textContent='';
+  document.getElementById('progressBar').style.width='0%';
+  buildQuiz();
+}
+</script>
+</body>
+</html>
