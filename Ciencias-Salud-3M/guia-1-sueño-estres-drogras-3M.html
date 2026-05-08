@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 1 — Sueño, Estrés y Drogas</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; min-height: 297mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TÍTULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:18pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJAS */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* ÍTEM HEADER */
+.item-header {
+  background:white; color:#111; border:1.5px solid #111;
+  padding:4px 10px; font-size:9pt; font-weight:bold;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase;
+}
+
+/* INSTRUCCIÓN */
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+/* LECTURA CONTEXTO */
+.lectura-ctx {
+  border:1px solid #111; border-left:4px solid #111;
+  padding:6pt 10pt; margin-bottom:8pt;
+  font-size:10pt; line-height:1.65; text-align:justify;
+}
+.lectura-label { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.09em; color:#333; margin-bottom:4px; display:block; }
+.lectura-ctx p+p { margin-top:5pt; }
+
+/* CASO / SITUACIÓN */
+.caso {
+  border:1.5px solid #111; border-radius:5px;
+  padding:7pt 10pt; margin:7pt 0;
+  font-size:10pt; line-height:1.65; text-align:justify;
+}
+.caso-header {
+  font-size:8.5pt; font-weight:bold; text-transform:uppercase;
+  letter-spacing:.07em; color:#555; margin-bottom:5pt;
+  padding-bottom:4pt; border-bottom:1px solid #ccc; display:block;
+}
+
+/* TABLA DATOS */
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:3.5px 7px; line-height:1.4; }
+table.datos th { background:white; color:#111; font-size:8pt; font-weight:bold; text-align:center; }
+table.datos td { text-align:center; }
+table.datos td:first-child { text-align:left; }
+.tabla-tit { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#444; margin-bottom:3px; }
+
+/* COLUMNAS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6pt; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-top:6pt; }
+.col-box { background:white; border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+/* PREGUNTAS */
+.preg-bloque { margin-bottom:14pt; }
+.preg-num {
+  font-size:10pt; font-weight:bold; margin-bottom:5pt;
+  display:flex; align-items:flex-start; gap:8px; line-height:1.5;
+}
+.preg-pts {
+  font-size:8pt; font-weight:normal; border:1px solid #aaa;
+  padding:1pt 5pt; border-radius:3px; white-space:nowrap;
+  flex-shrink:0; margin-top:2pt;
+}
+.preg-body { font-size:10pt; line-height:1.6; margin-bottom:5pt; text-align:justify; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:3px; }
+
+/* ACTIVIDAD ESPECIAL */
+.actividad-box {
+  border:1.5px solid #111; border-radius:5px;
+  padding:8pt 10pt; margin:8pt 0;
+}
+.act-header {
+  font-size:9pt; font-weight:bold; text-transform:uppercase;
+  letter-spacing:.05em; margin-bottom:7pt;
+  padding-bottom:4pt; border-bottom:1.5px solid #111;
+  display:flex; justify-content:space-between;
+}
+
+/* TABLA RELLENAR */
+table.fill { width:100%; border-collapse:collapse; font-size:9.5pt; margin:6pt 0; }
+table.fill th,table.fill td { border:1px solid #111; padding:5pt 8pt; vertical-align:top; line-height:1.5; }
+table.fill th { background:white; font-weight:bold; font-size:8.5pt; text-align:center; }
+table.fill td.concepto { font-weight:bold; font-size:9.5pt; text-align:left; width:22%; }
+table.fill td.fill-cell { min-height:32pt; }
+
+/* ESQUEMA PARA COMPLETAR */
+.esquema-flechas {
+  display:flex; align-items:center; justify-content:center;
+  gap:4px; margin:8pt 0; flex-wrap:wrap; font-size:10pt;
+}
+.esq-box {
+  border:1.5px solid #111; border-radius:4px;
+  padding:5pt 8pt; text-align:center; font-size:9.5pt;
+  line-height:1.4; min-width:70pt;
+}
+.esq-blank {
+  border:1.5px dashed #111; border-radius:4px;
+  padding:5pt 8pt; text-align:center; font-size:9.5pt;
+  min-width:80pt; min-height:36pt;
+}
+.esq-arrow { font-size:14pt; flex-shrink:0; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:8mm 12mm 10mm 12mm; min-height:unset; }
+  .btn-print { display:none; }
+  .caso { padding:5pt 8pt; margin:5pt 0; }
+  .actividad-box { padding:6pt 8pt; margin:6pt 0; }
+  .preg-bloque { margin-bottom:10pt; }
+  .linea-r { height:16pt; }
+  .sep { margin:5px 0; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  .lectura-ctx { padding:4pt 8pt; margin-bottom:6pt; }
+  table.fill th,table.fill td { padding:4pt 6pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Sueño, Estrés y Drogas</h1>
+    <p class="subtitulo">Ciencias de la Salud</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha entrega: <span class="blank" style="min-width:65pt"></span></span>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">68</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenido:</strong> Sueño, Estrés y Drogas</p>
+    <p style="margin-top:3pt"><strong>Capacidades:</strong> Razonamiento Lógico, Comprensión</p>
+    <p style="margin-top:3pt"><strong>Destrezas:</strong> Comprender, Identificar, Aplicar, Determinar,Representar</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Ítem</th><th>Descripción</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>I</td><td>Esquema y completación de procesos</td><td>14 pts</td><td></td></tr>
+      <tr><td>II</td><td>Análisis de casos reales</td><td>24 pts</td><td></td></tr>
+      <tr><td>III</td><td>Tabla de relaciones y aplicación</td><td>14 pts</td><td></td></tr>
+      <tr><td>IV</td><td>Argumentación y postura fundamentada</td><td>16 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>68 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM I — ESQUEMAS Y COMPLETACIÓN DE PROCESOS
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem I · Esquema y Completación de Procesos</span>
+    <span>14 puntos</span>
+  </div>
+  <p class="instruccion">No basta con nombrar los conceptos: debes mostrar que entiendes cómo se conectan. Completa los esquemas y explica el mecanismo.</p>
+
+  <!-- Actividad 1 — Ciclo del sueño -->
+  <div class="actividad-box">
+    <div class="act-header">
+      <span>Actividad 1 · El ciclo del sueño y la memoria <span style="font-weight:normal;font-size:8.5pt">(6 pts)</span></span>
+    </div>
+    <p style="font-size:10pt;line-height:1.6;margin-bottom:8pt">El siguiente esquema muestra una noche de sueño incompleta. Completa los recuadros con la etapa o función que corresponde, y luego responde la pregunta al pie.</p>
+
+    <!-- Esquema simplificado del ciclo -->
+    <div style="display:flex;flex-direction:column;gap:5px;margin:6pt 0 8pt 0">
+      <div style="display:flex;align-items:center;gap:6px;font-size:9.5pt">
+        <span style="min-width:65pt;font-weight:bold;text-align:right">Inicio noche</span>
+        <span style="font-size:12pt">→</span>
+        <div class="esq-box" style="min-width:90pt">Sueño No REM<br><span style="font-size:8.5pt">Fase 1–2</span></div>
+        <span style="font-size:12pt">→</span>
+        <div class="esq-blank" style="min-width:90pt"><span style="font-size:8pt;color:#999">Función principal:</span></div>
+        <span style="font-size:12pt">→</span>
+        <div class="esq-blank" style="min-width:90pt"><span style="font-size:8pt;color:#999">Nombre de esta fase:</span></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:9.5pt;padding-left:71pt">
+        <span style="font-size:12pt">↓</span>
+        <span style="font-size:9pt;font-style:italic;color:#555">el ciclo se repite ~4 veces por noche</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:9.5pt">
+        <span style="min-width:65pt;font-weight:bold;text-align:right">Resultado</span>
+        <span style="font-size:12pt">→</span>
+        <div class="esq-blank" style="min-width:200pt"><span style="font-size:8pt;color:#999">¿Qué ocurrió con la memoria declarativa?</span></div>
+      </div>
+    </div>
+
+    <p style="font-size:9.5pt;font-weight:bold;margin-bottom:3pt">¿Por qué trasnochar para estudiar es contraproducente? Explica en 3 oraciones usando el esquema anterior.</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 3 pts por esquema correcto · 3 pts por explicación que vincula REM con consolidación de memoria y el efecto del desvelo.</p>
+  </div>
+
+  <!-- Actividad 2 — Respuesta al estrés -->
+  <div class="actividad-box">
+    <div class="act-header">
+      <span>Actividad 2 · Del estrés agudo al estrés crónico <span style="font-weight:normal;font-size:8.5pt">(8 pts)</span></span>
+    </div>
+    <p style="font-size:10pt;line-height:1.6;margin-bottom:7pt">El siguiente esquema muestra el paso del estrés agudo (útil) al estrés crónico (dañino). Completa los recuadros vacíos con los efectos correctos y luego responde.</p>
+
+    <div style="margin:6pt 0 8pt 0;font-size:9.5pt">
+      <div style="display:grid;grid-template-columns:1fr 30px 1fr;gap:5px;align-items:center;margin-bottom:6pt">
+        <div class="esq-box">
+          <strong>ESTRÉS AGUDO</strong><br>
+          Amenaza real → activación del SN simpático<br>
+          <span style="font-size:8.5pt">Liberación de: adrenalina y cortisol</span>
+        </div>
+        <div style="text-align:center;font-size:14pt">→</div>
+        <div class="esq-blank"><span style="font-size:8pt;color:#999">Efectos inmediatos en el cuerpo (nombra 3):</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 30px 1fr;gap:5px;align-items:center;margin-bottom:6pt">
+        <div style="text-align:center;font-size:10pt;font-style:italic;color:#555">Si la situación se resuelve → respuesta se apaga</div>
+        <div></div>
+        <div style="text-align:center;font-size:10pt;font-style:italic;color:#555;border:1px dashed #bbb;padding:4pt;border-radius:4px">Si persiste semanas o meses → estrés CRÓNICO</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 30px 1fr;gap:5px;align-items:center">
+        <div class="esq-blank"><span style="font-size:8pt;color:#999">¿Qué le ocurre al hipocampo con cortisol elevado de forma crónica?</span></div>
+        <div style="text-align:center;font-size:14pt">←</div>
+        <div class="esq-blank"><span style="font-size:8pt;color:#999">3 consecuencias del estrés crónico en la salud mental:</span></div>
+      </div>
+    </div>
+
+    <p style="font-size:9.5pt;font-weight:bold;margin-bottom:3pt">Un estudiante de 1° Medio dice: <em>"el estrés me ayuda a rendir mejor en las pruebas"</em>. ¿En qué tiene razón y en qué se equivoca? Distingue entre estrés agudo y crónico en tu respuesta.</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 4 pts por esquema con efectos y consecuencias correctas · 4 pts por respuesta que distingue con precisión ambos tipos de estrés y sus efectos opuestos.</p>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM II — ANÁLISIS DE CASOS REALES
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem II · Análisis de Casos Reales</span>
+    <span>24 puntos — 8 pts por caso</span>
+  </div>
+  <p class="instruccion">Lee cada caso con atención. Las preguntas no tienen una respuesta única: se evalúa la calidad del análisis, el uso de conceptos precisos y la coherencia del argumento.</p>
+
+  <!-- CASO 1 — SUEÑO -->
+  <div class="caso">
+    <span class="caso-header">📋 Caso 1 — "La semana de pruebas de Valentina"</span>
+    <p>Valentina, 16 años, tiene cinco pruebas en una semana. Su estrategia es estudiar hasta las 2 a.m. cada noche y despertar a las 6:30 a.m. para repasar. El miércoles, rinde una prueba de Historia que estudió el martes hasta las 3 a.m. A pesar de sentir que "sabía todo", obtuvo un 4,0. El jueves ya no puede concentrarse bien. El viernes, irritable y exhausta, discute con su mejor amiga por algo sin importancia. El domingo, después de dormir 10 horas seguidas, se siente "otra persona".</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">1. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Explica por qué Valentina obtuvo un resultado peor al esperado en Historia, aunque sintiera que sabía la materia. Tu respuesta debe mencionar qué ocurre con la memoria durante el sueño REM y por qué la falta de sueño impide ese proceso.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 4 pts si menciona consolidación de memoria en REM, explica que el sueño insuficiente impide ese proceso y conecta con el rendimiento bajo. 2 pts si la explicación es parcial.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">2. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">El jueves Valentina no se concentra y el viernes discute con su amiga. ¿Qué conexión existe entre la privación de sueño y estos dos síntomas aparentemente distintos (cognitivo uno, emocional el otro)? Usa lo que sabes sobre el efecto del sueño insuficiente en el cerebro y el cortisol.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 4 pts por explicar que la privación eleva el cortisol, afecta la corteza prefrontal (regulación emocional y concentración) y el sistema límbico. 2 pts si solo describe síntomas sin explicar el mecanismo.</p>
+  </div>
+
+  <!-- CASO 2 — ESTRÉS Y CONDUCTA -->
+  <div class="caso">
+    <span class="caso-header">📋 Caso 2 — "El año de Tomás"</span>
+    <p>Tomás, 17 años, lleva un año con problemas familiares serios en casa. Desde entonces come mal, ha engordado, tiene dolores de cabeza frecuentes, le cuesta dormirse y cuando lo logra tiene sueño muy liviano. Sus notas bajaron. Un médico le dice que tiene el cortisol muy elevado y que su sistema inmune está "suprimido": este año ha tenido tres resfríos que tardaron más de dos semanas en pasar. Tomás dice que "ya se acostumbró al estrés" y que no le afecta.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">3. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">¿Qué tipo de estrés presenta Tomás y cómo explicas, desde la fisiología, que el cortisol elevado crónico suprima el sistema inmune y dificulte el sueño? Conecta ambos efectos en tu respuesta.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 4 pts por identificar estrés crónico, explicar que el cortisol crónico suprime la respuesta inmune y altera los ciclos de sueño (especialmente el profundo). 2 pts si identifica el tipo pero la explicación fisiológica es superficial.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">4. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Tomás dice que "ya se acostumbró al estrés". Desde la biología, ¿es posible acostumbrarse al estrés crónico sin consecuencias? ¿Qué le dirías a Tomás usando al menos dos consecuencias concretas que aparecen en su caso y que él parece no relacionar con el estrés?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 4 pts por refutar la idea de "acostumbrarse" con evidencia biológica y conectar al menos 2 síntomas del caso (peso, inmunidad, notas, sueño) con el estrés crónico. 2 pts si el argumento es correcto pero no cita el caso.</p>
+  </div>
+
+  <!-- CASO 3 — DROGAS -->
+  <div class="caso">
+    <span class="caso-header">📋 Caso 3 — "Lo que no vimos en el documental"</span>
+    <p>En el documental <em>La mente en pocas palabras</em> se muestra cómo las drogas secuestran el sistema de recompensa del cerebro. Camila, 17 años, empezó a fumar marihuana los fines de semana "para relajarse" cuando el estrés del colegio era insoportable. Con el tiempo notó que necesitaba fumar más para sentir el mismo efecto. Ahora fuma entre semana también. Cuando intenta parar, se pone muy ansiosa e irritable y no puede dormir. Sus notas bajaron y tiene dificultades para recordar lo estudiado.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">5. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Identifica y explica dos fenómenos de la dependencia que aparecen en el caso de Camila. Para cada uno: nómbralo, explica qué ocurre a nivel del sistema nervioso y señala con qué parte del caso se relaciona.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts por cada fenómeno (tolerancia / abstinencia) correctamente nombrado, explicado a nivel neurológico y vinculado al caso.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">6. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Camila empezó a consumir <em>como respuesta al estrés</em>. Analizando esto desde lo visto en clases: ¿por qué usar una droga para "manejar" el estrés es una estrategia que empeora el problema a largo plazo? Considera el efecto de la marihuana sobre el sueño y la memoria en tu respuesta.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 4 pts por explicar que la marihuana como depresor altera el sueño REM (reduciendo la consolidación), y que la dependencia aumenta la carga de cortisol al cesar el consumo, cerrando un ciclo dañino. 2 pts si solo describe efectos sin el mecanismo de retroalimentación.</p>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM III — TABLA DE RELACIONES Y APLICACIÓN
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem III · Tabla de Relaciones y Aplicación</span>
+    <span>14 puntos</span>
+  </div>
+  <p class="instruccion">Completa las tablas usando tus propias palabras. En la columna "Ejemplo concreto" debes dar un ejemplo que no aparezca en la guía ni en tus apuntes: invéntalo tú.</p>
+
+  <!-- Tabla 1 — Tipos de drogas -->
+  <div class="actividad-box" style="margin-bottom:10pt">
+    <div class="act-header">
+      <span>Tabla 1 · Clasificación de drogas y mecanismo de acción <span style="font-weight:normal;font-size:8.5pt">(8 pts)</span></span>
+    </div>
+    <table class="fill">
+      <thead>
+        <tr>
+          <th style="width:16%">Clasificación</th>
+          <th style="width:26%">¿Cómo actúa sobre el SNC?</th>
+          <th style="width:24%">Dos efectos conductuales o físicos</th>
+          <th style="width:22%">Un ejemplo concreto de situación real (inventado por ti)</th>
+          <th style="width:12%">¿Qué neurotransmisor o sistema se ve más afectado?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="concepto">Depresoras</td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+        </tr>
+        <tr>
+          <td class="concepto">Estimulantes</td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+        </tr>
+        <tr>
+          <td class="concepto">Alucinógenas</td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+          <td class="fill-cell"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="rubrica">Rúbrica: 1 pt por cada celda correcta con palabras propias (no copia). El ejemplo inventado debe ser coherente con la categoría.</p>
+  </div>
+
+  <!-- Tabla 2 — Conexión sueño-estrés-drogas -->
+  <div class="actividad-box">
+    <div class="act-header">
+      <span>Tabla 2 · Conexiones entre los tres temas <span style="font-weight:normal;font-size:8.5pt">(6 pts)</span></span>
+    </div>
+    <p style="font-size:9.5pt;margin-bottom:7pt">Un aspecto central de esta unidad es que sueño, estrés y drogas no son temas separados: se afectan mutuamente. Completa la tabla explicando cómo cada relación funciona en una sola dirección.</p>
+    <table class="fill">
+      <thead>
+        <tr>
+          <th style="width:30%">Relación</th>
+          <th>Explica el mecanismo: ¿por qué y cómo ocurre?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="concepto" style="font-weight:normal">El <strong>mal sueño</strong> aumenta el <strong>estrés</strong></td>
+          <td class="fill-cell" style="min-height:40pt"></td>
+        </tr>
+        <tr>
+          <td class="concepto" style="font-weight:normal">El <strong>estrés crónico</strong> deteriora la <strong>calidad del sueño</strong></td>
+          <td class="fill-cell" style="min-height:40pt"></td>
+        </tr>
+        <tr>
+          <td class="concepto" style="font-weight:normal">El <strong>consumo de drogas</strong> altera el <strong>sueño</strong></td>
+          <td class="fill-cell" style="min-height:40pt"></td>
+        </tr>
+        <tr>
+          <td class="concepto" style="font-weight:normal">El <strong>estrés crónico</strong> aumenta el <strong>riesgo de consumo</strong> de drogas</td>
+          <td class="fill-cell" style="min-height:40pt"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="rubrica">Rúbrica: 1.5 pts por cada relación explicada con mecanismo preciso (no basta con decir "se relacionan": hay que explicar cómo).</p>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM IV — ARGUMENTACIÓN Y POSTURA
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem IV · Argumentación y Postura Fundamentada</span>
+    <span>16 puntos</span>
+  </div>
+  <p class="instruccion">Estas preguntas no tienen respuesta correcta única. Se evalúa que tu postura esté fundamentada en evidencia científica, que uses los conceptos con precisión y que tu argumento sea coherente.</p>
+
+  <div class="preg-bloque">
+    <div class="preg-num">Pregunta 1 <span class="preg-pts">8 pts</span></div>
+    <div class="preg-body">
+      Lee la siguiente afirmación y toma una postura:
+      <div style="border:1px solid #111;padding:6pt 10pt;margin:6pt 0;border-radius:4px;font-style:italic;font-size:10pt">
+        "El problema del consumo de drogas en adolescentes es individual: cada persona elige libremente si consume o no. Quien tiene problemas de adicción es porque no tuvo la fuerza de voluntad suficiente para resistir."
+      </div>
+      ¿Estás de acuerdo, en desacuerdo o tienes una postura intermedia? Argumenta usando al menos tres conceptos biológicos vistos en clases (sistema de recompensa, cortisol, factores de riesgo, cerebro adolescente, tolerancia, etc.). Tu respuesta debe ser un párrafo continuo de al menos 8 oraciones.
+    </div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 3 pts por postura clara y coherente · 3 pts por uso correcto de al menos 3 conceptos biológicos · 2 pts por argumento que integre factores biológicos Y sociales/contextuales sin caer en absolutos.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">Pregunta 2 <span class="preg-pts">8 pts</span></div>
+    <div class="preg-body">
+      Conecta los tres temas de esta guía (sueño, estrés y drogas) en una situación hipotética que tú mismo construyas: imagina un adolescente cuya historia muestre cómo los tres factores se retroalimentan negativamente. Luego, propón un "punto de intervención" — un momento en la historia donde una acción concreta podría haber roto ese ciclo — y explica por qué ese punto es el más efectivo desde la biología.<br><br>
+      Tu respuesta debe tener dos partes claramente separadas: (a) la historia y (b) el análisis del punto de intervención.
+    </div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 3 pts por historia coherente que muestre la retroalimentación entre los 3 temas con precisión biológica · 3 pts por identificar un punto de intervención con justificación científica · 2 pts por claridad de estructura y profundidad del análisis.</p>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Unidad 1: Salud, Sociedad y Estilos de Vida · Guía N°1</span>
+    <span>Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
