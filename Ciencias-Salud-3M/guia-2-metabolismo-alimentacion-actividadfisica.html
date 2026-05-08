@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 2 — Metabolismo, Alimentación y Actividad Física</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; min-height: 297mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:18pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+.item-header {
+  background:white; color:#111; border:1.5px solid #111;
+  padding:4px 10px; font-size:9pt; font-weight:bold;
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase;
+}
+
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+.lectura-ctx {
+  border:1px solid #111; border-left:4px solid #111;
+  padding:6pt 10pt; margin-bottom:8pt;
+  font-size:10pt; line-height:1.65; text-align:justify;
+}
+.lectura-label { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.09em; color:#333; margin-bottom:4px; display:block; }
+.lectura-ctx p+p { margin-top:5pt; }
+
+.caso {
+  border:1.5px solid #111; border-radius:5px;
+  padding:7pt 10pt; margin:7pt 0;
+  font-size:10pt; line-height:1.65; text-align:justify;
+}
+.caso-header {
+  font-size:8.5pt; font-weight:bold; text-transform:uppercase;
+  letter-spacing:.07em; color:#555; margin-bottom:5pt;
+  padding-bottom:4pt; border-bottom:1px solid #ccc; display:block;
+}
+
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:3.5px 7px; line-height:1.4; }
+table.datos th { background:white; color:#111; font-size:8pt; font-weight:bold; text-align:center; }
+table.datos td { text-align:center; }
+table.datos td:first-child { text-align:left; }
+.tabla-tit { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#444; margin-bottom:3px; }
+
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6pt; }
+.col-box { background:white; border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+.preg-bloque { margin-bottom:13pt; }
+.preg-num { font-size:10pt; font-weight:bold; margin-bottom:5pt; display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+.preg-pts { font-size:8pt; font-weight:normal; border:1px solid #aaa; padding:1pt 5pt; border-radius:3px; white-space:nowrap; flex-shrink:0; margin-top:2pt; }
+.preg-body { font-size:10pt; line-height:1.6; margin-bottom:5pt; text-align:justify; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:3px; }
+
+.actividad-box { border:1.5px solid #111; border-radius:5px; padding:8pt 10pt; margin:8pt 0; }
+.act-header { font-size:9pt; font-weight:bold; text-transform:uppercase; letter-spacing:.05em; margin-bottom:7pt; padding-bottom:4pt; border-bottom:1.5px solid #111; display:flex; justify-content:space-between; }
+
+table.fill { width:100%; border-collapse:collapse; font-size:9.5pt; margin:6pt 0; }
+table.fill th,table.fill td { border:1px solid #111; padding:5pt 8pt; vertical-align:top; line-height:1.5; }
+table.fill th { background:white; font-weight:bold; font-size:8.5pt; text-align:center; }
+table.fill td.concepto { font-weight:bold; font-size:9.5pt; text-align:left; }
+table.fill td.fill-cell { min-height:32pt; }
+
+.esq-box { border:1.5px solid #111; border-radius:4px; padding:5pt 8pt; text-align:center; font-size:9.5pt; line-height:1.4; min-width:65pt; }
+.esq-blank { border:1.5px dashed #111; border-radius:4px; padding:5pt 8pt; text-align:center; font-size:9.5pt; min-width:80pt; min-height:36pt; }
+
+/* MENÚ DIARIO */
+.menu-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:7pt 0; font-size:9.5pt; }
+.menu-item { border:1px solid #111; border-radius:4px; padding:5pt 8pt; }
+.menu-tit { font-weight:bold; font-size:8.5pt; border-bottom:1px solid #ccc; padding-bottom:2pt; margin-bottom:4pt; display:block; }
+
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:8mm 12mm 10mm 12mm; min-height:unset; }
+  .btn-print { display:none; }
+  .caso { padding:5pt 8pt; margin:5pt 0; }
+  .actividad-box { padding:6pt 8pt; margin:6pt 0; }
+  .preg-bloque { margin-bottom:10pt; }
+  .linea-r { height:16pt; }
+  .sep { margin:5px 0; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  table.fill th,table.fill td { padding:4pt 6pt; }
+  .menu-grid { gap:7px; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Metabolismo, Alimentación y Actividad Física</h1>
+    <p class="subtitulo">Ciencias de la Salud</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha entrega: <span class="blank" style="min-width:65pt"></span></span>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">68</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenido:</strong> Metabolismo, Alimentación, Actividad Física</p>
+    <p style="margin-top:3pt"><strong>Capacidades:</strong> Razonamiento Lógico, Comprensión</p>
+    <p style="margin-top:3pt"><strong>Destrezas:</strong> Comprender, Identificar, Aplicar, Determinar,Representar</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Ítem</th><th>Descripción</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>I</td><td>Análisis de menús y equilibrio energético</td><td>16 pts</td><td></td></tr>
+      <tr><td>II</td><td>Análisis de casos de desequilibrio metabólico</td><td>20 pts</td><td></td></tr>
+      <tr><td>III</td><td>Tabla de relaciones y aplicación</td><td>14 pts</td><td></td></tr>
+      <tr><td>IV</td><td>Argumentación: salud individual y colectiva</td><td>18 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>68 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM I — ANÁLISIS DE MENÚS
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem I · Análisis de Menús y Equilibrio Energético</span>
+    <span>16 puntos</span>
+  </div>
+  <p class="instruccion">El objetivo no es calcular calorías exactas, sino razonar sobre los macronutrientes, el equilibrio y las consecuencias metabólicas de distintos patrones alimenticios.</p>
+
+  <!-- Actividad 1 — Comparar dos menús -->
+  <div class="actividad-box">
+    <div class="act-header">
+      <span>Actividad 1 · Dos menús, dos perfiles metabólicos <span style="font-weight:normal;font-size:8.5pt">(10 pts)</span></span>
+    </div>
+    <p style="font-size:10pt;line-height:1.6;margin-bottom:7pt">Los siguientes menús corresponden a un día de alimentación de dos jóvenes de 16 años con el mismo peso y talla. Ambos son estudiantes, pero uno practica deporte 4 veces por semana y el otro es sedentario.</p>
+
+    <div class="menu-grid">
+      <div class="menu-item">
+        <span class="menu-tit">Menú de Javier (sedentario)</span>
+        <strong>Desayuno:</strong> Dos tazas de té con azúcar + 3 galletas rellenas<br>
+        <strong>Almuerzo:</strong> Tallarines con salsa de tomate + un vaso de bebida<br>
+        <strong>Once:</strong> Pan con mantequilla + jugo en polvo<br>
+        <strong>Cena:</strong> Completo + papas fritas + bebida<br>
+        <strong>Entre comidas:</strong> Chips + chocolates
+      </div>
+      <div class="menu-item">
+        <span class="menu-tit">Menú de Sofía (deportista)</span>
+        <strong>Desayuno:</strong> Avena con leche + fruta + huevo duro<br>
+        <strong>Almuerzo:</strong> Arroz + pollo al horno + ensalada + agua<br>
+        <strong>Once:</strong> Pan integral + palta + té sin azúcar<br>
+        <strong>Cena:</strong> Lentejas + ensalada + agua<br>
+        <strong>Entre comidas:</strong> Yogur natural + nueces
+      </div>
+    </div>
+
+    <div class="preg-bloque" style="margin-top:9pt">
+      <div class="preg-num">1a. <span class="preg-pts">4 pts</span></div>
+      <div class="preg-body">Analiza el menú de Javier desde la perspectiva de los macronutrientes. ¿Qué macronutriente predomina en exceso? ¿Qué tipo de carbohidratos consume principalmente (simples o complejos) y qué consecuencia tiene eso sobre su glucosa en sangre e insulina a lo largo del día? ¿Qué le falta en su dieta?</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 2 pts por análisis correcto de carbohidratos simples y efecto en glucosa/insulina · 2 pts por identificar carencias y excesos con justificación.</p>
+    </div>
+
+    <div class="preg-bloque">
+      <div class="preg-num">1b. <span class="preg-pts">3 pts</span></div>
+      <div class="preg-body">Javier y Sofía tienen el mismo peso hoy. Si ambos mantienen estos hábitos durante 6 meses, ¿qué cambio esperas en el peso y el metabolismo basal de cada uno? Explica considerando el rol de la masa muscular y el equilibrio entre ingesta y gasto energético.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 3 pts por predecir con fundamentación el aumento de peso en Javier y el mantenimiento/aumento de metabolismo basal en Sofía, usando el concepto de masa muscular y equilibrio energético.</p>
+    </div>
+
+    <div class="preg-bloque">
+      <div class="preg-num">1c. <span class="preg-pts">3 pts</span></div>
+      <div class="preg-body">Propón <strong>tres cambios concretos y realizables</strong> al menú de Javier. Para cada cambio explica exactamente qué macronutriente o mecanismo metabólico mejora y por qué. No basta con decir "come más verduras": justifica el mecanismo.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 1 pt por cada cambio con justificación metabólica precisa (no basta el cambio sin la razón biológica).</p>
+    </div>
+  </div>
+
+  <!-- Actividad 2 — Metabolismo basal -->
+  <div class="actividad-box">
+    <div class="act-header">
+      <span>Actividad 2 · ¿Quién tiene mayor metabolismo basal? <span style="font-weight:normal;font-size:8.5pt">(6 pts)</span></span>
+    </div>
+    <p style="font-size:10pt;line-height:1.6;margin-bottom:8pt">Los siguientes tres perfiles tienen el mismo peso (65 kg) y la misma edad (17 años). Ordénalos de <strong>mayor a menor metabolismo basal</strong> y justifica tu clasificación usando los factores que determinan el MB.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:9pt;font-size:9.5pt">
+      <div class="col-box">
+        <span class="col-tit">Perfil A — Roberto</span>
+        Practica fútbol 5 veces por semana. Masa muscular alta. Come principalmente proteínas y carbohidratos complejos.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Perfil B — Ignacio</span>
+        Sedentario. Pasa 8 horas frente a pantallas. Mayor proporción de tejido graso que muscular.
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Perfil C — Daniela</span>
+        Practica yoga 2 veces por semana. Alimentación equilibrada. Masa muscular moderada.
+      </div>
+    </div>
+
+    <div class="preg-bloque">
+      <div class="preg-num">2a. <span class="preg-pts">3 pts</span></div>
+      <div class="preg-body">Ordena de mayor a menor MB: <span style="border-bottom:1px solid #111;display:inline-block;min-width:40pt;height:14px;vertical-align:bottom"></span> &gt; <span style="border-bottom:1px solid #111;display:inline-block;min-width:40pt;height:14px;vertical-align:bottom"></span> &gt; <span style="border-bottom:1px solid #111;display:inline-block;min-width:40pt;height:14px;vertical-align:bottom"></span><br>Justifica por qué ese orden, explicando qué factor determina principalmente el metabolismo basal en cada caso.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 1 pt por orden correcto (A > C > B) · 2 pts por justificación que mencione masa muscular como factor principal del MB.</p>
+    </div>
+
+    <div class="preg-bloque">
+      <div class="preg-num">2b. <span class="preg-pts">3 pts</span></div>
+      <div class="preg-body">Ignacio quiere bajar de peso y decide comer muy poco: solo 800 kcal al día. Explica qué le ocurrirá a su metabolismo basal a largo plazo con esta estrategia y por qué es contraproducente. ¿Qué debería hacer en cambio?</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 3 pts por explicar que la restricción extrema baja el MB (pérdida de masa muscular) y proponer actividad física para aumentarlo como estrategia más efectiva.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM II — CASOS DE DESEQUILIBRIO METABÓLICO
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem II · Análisis de Casos de Desequilibrio Metabólico</span>
+    <span>20 puntos — 10 pts por caso</span>
+  </div>
+  <p class="instruccion">Cada caso presenta una persona con un desequilibrio metabólico. Debes ir más allá de identificar la enfermedad: analiza el mecanismo, las causas y las consecuencias con profundidad.</p>
+
+  <!-- Caso 1 — Prediabetes -->
+  <div class="caso">
+    <span class="caso-header">Caso 1 — "El diagnóstico de Martín"</span>
+    <p>Martín, 16 años, fue al médico por cansancio frecuente y sed excesiva. Los exámenes mostraron glucosa en sangre de 115 mg/dL en ayunas (lo normal es menos de 100). El médico le diagnosticó prediabetes. Martín pesa 82 kg, mide 1,68 m, va al colegio en auto, no hace deporte y consume principalmente carbohidratos simples (bebidas, pan blanco, dulces). Su médico le dijo que aún puede revertir la situación con cambios de estilo de vida, sin necesidad de medicamentos.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">1. <span class="preg-pts">5 pts</span></div>
+    <div class="preg-body">Explica el mecanismo por el cual la dieta de Martín llevó a su nivel elevado de glucosa en sangre. Tu respuesta debe seguir este hilo: tipo de carbohidratos que consume → efecto en glucosa sanguínea → rol de la insulina → qué ocurre cuando la insulina se "sobre-usa" → resistencia a la insulina → prediabetes.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 1 pt por cada eslabón del mecanismo explicado correctamente (5 eslabones = 5 pts). Se descuenta si el hilo se rompe o un eslabón es incorrecto.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">2. <span class="preg-pts">5 pts</span></div>
+    <div class="preg-body">El médico le dice que puede revertirlo sin medicamentos. Diseña un plan de 3 meses para Martín con:<br>
+    a) Un cambio alimenticio específico y el mecanismo biológico por el que ayuda (2 pts)<br>
+    b) Una rutina de actividad física con justificación metabólica (no basta con "hace deporte": explica exactamente qué mejora en el metabolismo de la glucosa con el ejercicio) (3 pts)</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: a) 2 pts por cambio con mecanismo preciso (ej: reemplazar carbohidratos simples por complejos para evitar picos de insulina) · b) 3 pts por explicar que el ejercicio aumenta la sensibilidad a la insulina y la captación de glucosa por el músculo.</p>
+  </div>
+
+  <!-- Caso 2 — Desnutrición y contexto social -->
+  <div class="caso">
+    <span class="caso-header">Caso 2 — "La situación de Paula"</span>
+    <p>Paula, 14 años, vive con su abuela en una zona rural de escasos recursos. Come principalmente pan, fideos y té con azúcar. Rara vez come legumbres, huevos o carne. El médico del consultorio señala que tiene bajo peso para su edad, anemia y que su desarrollo es más lento de lo esperado. Además, sus profesores reportan que le cuesta concentrarse en clases. Paula duerme bien y no tiene estrés aparente, pero llega al colegio sin haber desayunado varios días por semana.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">3. <span class="preg-pts">5 pts</span></div>
+    <div class="preg-body">Analiza el caso de Paula desde la perspectiva de los macronutrientes: ¿qué le falta en su dieta y qué consecuencias tiene esa deficiencia sobre (a) su desarrollo físico, (b) su función cognitiva y (c) su sistema inmune? Sé específico en cada punto.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 1 pt por identificar la deficiencia de proteínas (y posiblemente hierro) · 1.5 pts por cada consecuencia bien explicada (a, b, c) con el mecanismo biológico preciso.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">4. <span class="preg-pts">5 pts</span></div>
+    <div class="preg-body">El médico le dice a la abuela que "Paula necesita comer mejor". Sin embargo, el problema no es solo de elección: es también de acceso y recursos. Desde lo que aprendiste sobre metabolismo y macronutrientes, propón <strong>dos soluciones concretas y de bajo costo</strong> que mejoren el aporte proteico y energético de Paula. Explica por qué esos alimentos son una buena opción metabólicamente. Luego reflexiona: ¿puede la biología por sí sola resolver el problema de Paula, o hay otros factores que escapan a lo individual?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts por soluciones concretas y justificadas con macronutrientes · 3 pts por reflexión que integre la dimensión social/estructural de la salud sin abandonar el análisis biológico.</p>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM III — TABLA DE RELACIONES Y APLICACIÓN
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem III · Tabla de Relaciones y Aplicación</span>
+    <span>14 puntos</span>
+  </div>
+  <p class="instruccion">Completa las tablas usando tus propias palabras. El desafío no es llenar el espacio: es explicar el mecanismo.</p>
+
+  <!-- Tabla 1 — macronutrientes -->
+  <div class="actividad-box" style="margin-bottom:10pt">
+    <div class="act-header">
+      <span>Tabla 1 · Macronutrientes en acción <span style="font-weight:normal;font-size:8.5pt">(8 pts)</span></span>
+    </div>
+    <table class="fill">
+      <thead>
+        <tr>
+          <th style="width:15%">Macronutriente</th>
+          <th style="width:20%">¿Cómo se convierte en ATP?<br>(describe el proceso, no el nombre)</th>
+          <th style="width:20%">¿Qué ocurre si hay EXCESO crónico en la dieta?</th>
+          <th style="width:20%">¿Qué ocurre si hay DÉFICIT crónico en la dieta?</th>
+          <th style="width:25%">Ejemplo real de un alimento que lo contiene y por qué es "buena" o "mala" fuente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="concepto">Carbohidratos</td>
+          <td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td>
+        </tr>
+        <tr>
+          <td class="concepto">Lípidos / Grasas</td>
+          <td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td>
+        </tr>
+        <tr>
+          <td class="concepto">Proteínas</td>
+          <td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="rubrica">Rúbrica: 0.5 pts por cada celda correcta con explicación propia. La columna de ATP se evalúa con 1 pt (proceso descrito, no solo nombrado).</p>
+  </div>
+
+  <!-- Tabla 2 — actividad física y metabolismo -->
+  <div class="actividad-box">
+    <div class="act-header">
+      <span>Tabla 2 · El ejercicio y sus efectos metabólicos <span style="font-weight:normal;font-size:8.5pt">(6 pts)</span></span>
+    </div>
+    <p style="font-size:9.5pt;margin-bottom:7pt">Para cada beneficio del ejercicio, explica <em>cómo</em> ocurre a nivel metabólico o celular. No basta con decir que "mejora": explica el mecanismo.</p>
+    <table class="fill">
+      <thead>
+        <tr>
+          <th style="width:30%">Beneficio del ejercicio regular</th>
+          <th>¿Cómo ocurre ese beneficio a nivel metabólico o celular?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="concepto" style="font-weight:normal">Reduce el riesgo de diabetes tipo 2</td>
+          <td class="fill-cell" style="min-height:36pt"></td>
+        </tr>
+        <tr>
+          <td class="concepto" style="font-weight:normal">Aumenta el metabolismo basal a largo plazo</td>
+          <td class="fill-cell" style="min-height:36pt"></td>
+        </tr>
+        <tr>
+          <td class="concepto" style="font-weight:normal">Mejora el estado de ánimo y reduce el estrés</td>
+          <td class="fill-cell" style="min-height:36pt"></td>
+        </tr>
+        <tr>
+          <td class="concepto" style="font-weight:normal">Mejora la memoria y la concentración</td>
+          <td class="fill-cell" style="min-height:36pt"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="rubrica">Rúbrica: 1.5 pts por cada mecanismo explicado con precisión biológica (no basta describir el beneficio sin el cómo).</p>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════
+       ÍTEM IV — ARGUMENTACIÓN
+  ══════════════════════════════════════════════ -->
+  <div class="item-header">
+    <span>Ítem IV · Argumentación: Salud Individual y Colectiva</span>
+    <span>18 puntos</span>
+  </div>
+  <p class="instruccion">Las siguientes preguntas no tienen respuesta en ningún libro. Requieren que conectes lo aprendido con tu contexto y desarrolles un pensamiento propio y fundamentado.</p>
+
+  <div class="preg-bloque">
+    <div class="preg-num">Pregunta 1 <span class="preg-pts">8 pts</span></div>
+    <div class="preg-body">
+      Lee la siguiente afirmación y toma una postura argumentada:
+      <div style="border:1px solid #111;padding:6pt 10pt;margin:6pt 0;border-radius:4px;font-style:italic;font-size:10pt">
+        "La obesidad y la diabetes tipo 2 son enfermedades de la falta de voluntad: las personas simplemente eligen no comer bien y no hacer ejercicio. Si quisieran, podrían cambiar."
+      </div>
+      Usando al menos <strong>cuatro conceptos biológicos</strong> estudiados (metabolismo basal, resistencia a la insulina, masa muscular, cortisol, saciedad, etc.) y considerando también los factores contextuales que pueden dificultar los cambios de hábitos, argumenta por qué esta afirmación es simplista o incorrecta. Tu respuesta debe ser un párrafo continuo de al menos 10 oraciones.
+    </div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 3 pts por postura clara y coherente · 4 pts por uso correcto y articulado de al menos 4 conceptos biológicos · 1 pt por integrar la dimensión social/contextual sin abandonar el análisis científico.</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">Pregunta 2 <span class="preg-pts">10 pts</span></div>
+    <div class="preg-body">
+      Esta es la pregunta de síntesis de ambas guías de la unidad.<br><br>
+      En tu investigación sobre salud en Paillaco encontraste datos reales sobre los hábitos de tu comunidad. Considerando esos hallazgos y todo lo aprendido en la unidad (sueño, estrés, drogas, metabolismo, alimentación, actividad física):<br><br>
+      <strong>Escribe un texto argumentativo de tres párrafos</strong> que responda: ¿qué factor o combinación de factores representa el mayor riesgo para la salud de los jóvenes de Paillaco según la evidencia que tú recogiste, y qué intervención concreta propones basándote en la biología?<br><br>
+      Estructura esperada:<br>
+      • <strong>Párrafo 1:</strong> Presenta el problema con evidencia de tu investigación.<br>
+      • <strong>Párrafo 2:</strong> Explica el mecanismo biológico por el que ese factor representa un riesgo real.<br>
+      • <strong>Párrafo 3:</strong> Propón una intervención concreta y justifícala biológicamente.
+    </div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 3 pts por párrafo 1 (problema con evidencia propia coherente) · 4 pts por párrafo 2 (mecanismo biológico preciso con al menos 2 conceptos bien usados) · 3 pts por párrafo 3 (intervención realista con justificación biológica clara).</p>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Unidad 1: Salud, Sociedad y Estilos de Vida · Guía N°2</span>
+    <span>Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
