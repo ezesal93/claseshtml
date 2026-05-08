@@ -19,7 +19,9 @@
     {
       "categoria": "Ciencias para la Salud 3M",
       "archivos": [
-        { "nombre": "El Cerebro Adolescente", "url": "Ciencias-Salud-3M/cerebro-adolescente-3M.html" }
+        { "nombre": "El Cerebro Adolescente", "url": "Ciencias-Salud-3M/cerebro-adolescente-3M.html" },
+        { "nombre": "Guía 1 - Sueño, Estrés y Drogras", "url": "Ciencias-Salud-3M/guia-1-sueño-estres-drogas-3M.html" },
+        { "nombre": "Guía 2 - Metabolismo, Alimentación y Actividad Física", "url": "Ciencias-Salud-3M/guia-2-metabolismo-alimentacion-actividadfisica.html" }                
       ]
     },
     {
@@ -44,7 +46,9 @@
     {
       "categoria": "Ecología 4M",
       "archivos": [
-        { "nombre": "4M: Historia de los Patrones", "url": "Ecologia-4M/4M-la-historia-de-los-patrones.html" }
+        { "nombre": "4M: Historia de los Patrones", "url": "Ecologia-4M/4M-la-historia-de-los-patrones.html" },
+        { "nombre": "Guía 1 - Evidencias de la Evolución", "url": "Ecologia-4M/4M-guia-1-evolucion.html" },
+        { "nombre": "Guía 2 - Selección Natural y Teoría Evolutiva", "url": "Ecologia-4M/4M-guia-2-seleccion-natural.html" }                
       ]
     },
     {
