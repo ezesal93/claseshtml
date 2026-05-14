@@ -70,6 +70,12 @@
       "archivos": [
         { "nombre": "Diagnóstico", "url": "Clases-Quimica-Marcos/diagnostico.html" }
       ]
-    }
+    },
+    {
+      "categoria": "Simulaciones-Quimica",
+      "archivos": [
+        { "nombre": "Balance de Ecuaciones", "url": "Clases-Simulaciones-Quimica/balance-ecuaciones.html" }
+      ]
+    }    
   ]
 }

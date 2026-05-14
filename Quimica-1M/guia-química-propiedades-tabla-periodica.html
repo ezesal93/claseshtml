@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía N°2 — Propiedades de la Tabla Periódica — Química 1° Medio</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+
+.paper {
+  width: 210mm; min-height: 297mm; background: white;
+  margin: 20px auto; padding: 14mm 16mm 16mm 16mm;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.22);
+}
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TÍTULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:19pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJA CONTENIDOS */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:10px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:10px 0; }
+
+/* ═══════════════════════════════════════
+   BLOQUE LECTURA + EJERCICIO (el corazón)
+═══════════════════════════════════════ */
+
+/* Número de bloque flotante */
+.bloque {
+  margin-bottom: 14pt;
+}
+
+/* Etiqueta LEE */
+.lee-label {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 7.5pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: .08em; color: #444;
+  margin-bottom: 4pt;
+}
+.lee-label::before {
+  content: '📖';
+  font-size: 10pt;
+}
+
+/* Texto de lectura */
+.lectura {
+  border: 1px solid #111;
+  border-left: 4px solid #111;
+  border-radius: 0 4px 4px 0;
+  padding: 7pt 10pt;
+  font-size: 10pt;
+  line-height: 1.7;
+  text-align: justify;
+  margin-bottom: 0;
+}
+.lectura p { margin-bottom: 5pt; }
+.lectura p:last-child { margin-bottom: 0; }
+.lectura strong { color: #111; }
+.lectura em { font-style: italic; }
+
+/* Destacado dentro de lectura */
+.dest {
+  background: white;
+  border: 1px solid #111;
+  border-left: 3px solid #111;
+  padding: 4pt 8pt;
+  margin: 6pt 0;
+  font-size: 9.5pt;
+  line-height: 1.55;
+}
+
+/* Tabla dentro de lectura */
+table.tbl-lec { width:100%; border-collapse:collapse; font-size:9pt; margin:7pt 0; }
+table.tbl-lec th,table.tbl-lec td { border:1px solid #111; padding:3pt 6pt; text-align:center; line-height:1.35; }
+table.tbl-lec th { background:white; font-size:8.5pt; font-weight:bold; }
+table.tbl-lec td:first-child { text-align:left; }
+
+/* Cols dentro de lectura */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:7pt 0; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin:7pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 7pt; font-size:9.5pt; line-height:1.5; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+/* Flecha de conexión */
+.flecha-responde {
+  text-align: center;
+  font-size: 9pt;
+  color: #555;
+  margin: 4pt 0;
+  letter-spacing: .04em;
+}
+
+/* Etiqueta RESPONDE */
+.resp-label {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 7.5pt; font-weight: bold; text-transform: uppercase;
+  letter-spacing: .08em; color: #444;
+  margin-bottom: 5pt;
+}
+.resp-label::before {
+  content: '✏️';
+  font-size: 10pt;
+}
+
+/* Caja ejercicio */
+.ejercicio {
+  border: 1.5px solid #111;
+  border-radius: 4px;
+  padding: 7pt 10pt;
+  font-size: 10pt;
+  line-height: 1.6;
+}
+.ej-tit {
+  font-size: 9pt; font-weight: bold;
+  margin-bottom: 6pt; padding-bottom: 4pt;
+  border-bottom: 1px solid #ccc;
+  display: flex; justify-content: space-between;
+}
+.pts-badge {
+  font-size: 8pt; font-weight: normal; color: #444;
+  border: 1px solid #ccc; padding: 1pt 5pt; border-radius: 3px;
+}
+
+/* Líneas respuesta */
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.linea-r-m { display:block; border-bottom:.8px solid #ccc; height:24pt; width:100%; margin-bottom:2px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:4px; }
+
+/* SM dentro de ejercicio */
+.sm-e { font-size:10pt; line-height:1.5; margin-bottom:5px; }
+.sm-opts { display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; padding-left:10px; margin-bottom:5pt; }
+.sm-op { display:flex; align-items:flex-start; gap:5px; font-size:10pt; line-height:1.4; }
+.circulo { width:14pt; height:14pt; border:1.2px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+
+/* VF */
+.vf-enc { display:flex; justify-content:flex-end; gap:3px; font-size:8pt; font-weight:bold; margin-bottom:3px; letter-spacing:.06em; }
+.vf-enc span { width:16pt; text-align:center; }
+.vf-item { display:flex; align-items:flex-start; gap:6px; margin-bottom:6px; font-size:10pt; line-height:1.5; }
+.vf-n { font-weight:bold; min-width:14pt; flex-shrink:0; }
+.vf-txt { flex:1; }
+.vf-cas { display:flex; gap:3px; flex-shrink:0; margin-left:auto; padding-left:6px; }
+.casilla { width:16pt; height:16pt; border:1.2px solid #111; flex-shrink:0; }
+.corr-linea { display:block; border-bottom:.8px solid #aaa; height:14pt; width:100%; margin-top:2px; }
+
+/* Tabla fill */
+table.fill { width:100%; border-collapse:collapse; font-size:9.5pt; margin:5pt 0; }
+table.fill th,table.fill td { border:1px solid #111; padding:4pt 7pt; vertical-align:top; line-height:1.45; }
+table.fill th { background:white; font-size:8.5pt; font-weight:bold; text-align:center; }
+table.fill .fh { font-weight:bold; text-align:left; }
+table.fill .fill-cell { min-height:28pt; }
+
+/* banco */
+.banco { font-size:8.5pt; font-weight:bold; color:#333; margin-bottom:5px; }
+.banco em { font-style:italic; font-weight:normal; }
+
+/* completación */
+.completacion { font-size:10.5pt; line-height:2.2; text-align:justify; margin-bottom:5pt; }
+.bf { display:inline-block; border-bottom:1.2px solid #111; min-width:70pt; height:14pt; vertical-align:bottom; margin:0 2pt; }
+.bf-s { min-width:44pt; }
+.bf-m { min-width:82pt; }
+.bf-l { min-width:110pt; }
+
+/* caso */
+.caso {
+  border:1.5px dashed #111; border-radius:5px;
+  padding:6pt 9pt; margin-bottom:6pt;
+  font-size:10pt; line-height:1.6;
+}
+.caso-label { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#555; margin-bottom:4pt; display:block; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; min-height:unset; }
+  .btn-print { display:none; }
+  .bloque { margin-bottom:10pt; }
+  .lectura { padding:5pt 8pt; }
+  .ejercicio { padding:5pt 8pt; }
+  .linea-r { height:16pt; }
+  .linea-r-m { height:20pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  table.tbl-lec th,table.tbl-lec td { padding:2pt 5pt; }
+  .cols2,.cols3 { gap:5px; }
+  .col-box { padding:3pt 6pt; }
+  .caso { padding:4pt 7pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Guía N°2 Propiedades de la Tabla Periódica</h1>
+    <p class="subtitulo">(Química — 1° Medio)</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">66</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>¿Cómo funciona esta guía?</strong> Cada sección comienza con un texto corto marcado con 📖 <strong>LEE</strong>. Después de leerlo, encontrarás los ejercicios marcados con ✏️ <strong>RESPONDE</strong>. No avances a la siguiente lectura sin haber respondido primero. Así trabajas cada concepto apenas lo aprendes.</p>
+    <p><strong>Contenidos:</strong> Organización de la tabla periódica · Propiedades periódicas: radio atómico, energía de ionización, electronegatividad y afinidad electrónica · Tendencias en grupos y períodos.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Tema</th><th>Descripción</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Organización de la tabla periódica</td><td>10 pts</td><td></td></tr>
+      <tr><td>2</td><td>Radio atómico</td><td>14 pts</td><td></td></tr>
+      <tr><td>3</td><td>Energía de ionización</td><td>14 pts</td><td></td></tr>
+      <tr><td>4</td><td>Electronegatividad y afinidad electrónica</td><td>14 pts</td><td></td></tr>
+      <tr><td>5</td><td>Aplicación integrada</td><td>14 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>66 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ══════════════════════════════════════════════════════
+       TEMA 1 — ORGANIZACIÓN DE LA TABLA PERIÓDICA
+  ══════════════════════════════════════════════════════ -->
+
+  <!-- BLOQUE 1.1 — Lectura + Completación -->
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Organización de la tabla periódica</div>
+    <div class="lectura">
+      <p>La <strong>tabla periódica</strong> organiza todos los elementos químicos conocidos en orden creciente de <strong>número atómico (Z)</strong>. Esta organización no es aleatoria: los elementos con propiedades químicas similares quedan agrupados en la misma columna vertical, llamada <strong>grupo</strong> o familia. Las filas horizontales se llaman <strong>períodos</strong>.</p>
+      <p>Existen <strong>18 grupos</strong> y <strong>7 períodos</strong>. El período indica el último nivel de energía que contiene electrones. El grupo indica los electrones de valencia (los del último nivel), que son los responsables del comportamiento químico del elemento.</p>
+      <div class="dest">
+        <strong>Regla clave:</strong> Elementos del mismo grupo tienen la misma cantidad de electrones de valencia → propiedades químicas similares.<br>
+        Elementos del mismo período tienen el mismo número de niveles de energía ocupados.
+      </div>
+      <p>Los elementos se clasifican en tres grandes categorías según su posición en la tabla: <strong>metales</strong> (izquierda y centro), <strong>no metales</strong> (derecha) y <strong>metaloides</strong> (frontera entre ambos). Los metales son buenos conductores eléctricos y ceden electrones fácilmente. Los no metales tienden a ganar electrones. Los metaloides tienen propiedades intermedias.</p>
+    </div>
+
+    <div class="flecha-responde">Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 1.1 — Completación y clasificación <span class="pts-badge">6 pts</span></div>
+      <div class="banco">Banco: <em>número atómico · grupos · períodos · electrones de valencia · metales · no metales · metaloides · propiedades · nivel de energía</em></div>
+      <p class="completacion">
+        La tabla periódica organiza los elementos en orden de <span class="bf bf-m"></span>. Las columnas se llaman <span class="bf bf-s"></span> y las filas se llaman <span class="bf bf-s"></span>. El período indica el último <span class="bf bf-m"></span> ocupado, y el grupo indica el número de <span class="bf bf-m"></span>. Los elementos del mismo grupo tienen <span class="bf bf-s"></span> químicas similares porque comparten la misma cantidad de electrones de valencia. Los <span class="bf bf-s"></span> están a la izquierda, los <span class="bf bf-s"></span> a la derecha, y los <span class="bf bf-s"></span> en la frontera entre ambos.
+      </p>
+      <p class="rubrica">Rúbrica: 0.7 pts por cada concepto correcto.</p>
+    </div>
+  </div>
+
+  <!-- BLOQUE 1.2 — Lectura + SM -->
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Grupos especiales</div>
+    <div class="lectura">
+      <p>Algunos grupos tienen nombres especiales que vale la pena conocer porque aparecen frecuentemente en química:</p>
+      <div class="cols3">
+        <div class="col-box">
+          <span class="col-tit">Grupo IA — Metales alcalinos</span>
+          Li, Na, K, Rb, Cs, Fr. Muy reactivos. 1 electrón de valencia. Reaccionan violentamente con el agua.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Grupo IIA — Metales alcalinotérreos</span>
+          Be, Mg, Ca, Sr, Ba, Ra. 2 electrones de valencia. Menos reactivos que el grupo IA.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Grupo VIIA — Halógenos</span>
+          F, Cl, Br, I, At. 7 electrones de valencia. Muy reactivos, tienden a ganar 1 electrón.
+        </div>
+      </div>
+      <div class="cols2" style="margin-top:6pt">
+        <div class="col-box">
+          <span class="col-tit">Grupo VIIIA — Gases nobles</span>
+          He, Ne, Ar, Kr, Xe, Rn. 8 electrones de valencia (excepto He con 2). Muy estables, casi no reaccionan.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Grupos IIIB a IIB — Metales de transición</span>
+          Fe, Cu, Zn, Au, Ag, entre otros. Se llenan el subnivel d. Propiedades variables y complejas.
+        </div>
+      </div>
+    </div>
+
+    <div class="flecha-responde">Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 1.2 — Selección múltiple <span class="pts-badge">4 pts — 2 pts c/u</span></div>
+      <div class="sm-e"><strong>1.</strong> El Sodio (Na) reacciona violentamente con el agua y tiene 1 electrón de valencia. ¿A qué grupo pertenece y cuál de las siguientes afirmaciones es correcta?</div>
+      <div class="sm-opts">
+        <div class="sm-op"><div class="circulo">A</div><span>Grupo VIIA. Es un halógeno de alta reactividad.</span></div>
+        <div class="sm-op"><div class="circulo">B</div><span>Grupo IA. Es un metal alcalino con 1 electrón de valencia.</span></div>
+        <div class="sm-op"><div class="circulo">C</div><span>Grupo IIA. Es un metal alcalinotérreo muy estable.</span></div>
+        <div class="sm-op"><div class="circulo">D</div><span>Grupo VIIIA. Es un gas noble que no reacciona.</span></div>
+      </div>
+      <div class="sm-e" style="margin-top:6pt"><strong>2.</strong> El Cloro (Cl) tiene 7 electrones de valencia y tiende a ganar 1 electrón para completar su nivel. ¿A qué grupo pertenece y qué nombre recibe ese grupo?</div>
+      <div class="sm-opts">
+        <div class="sm-op"><div class="circulo">A</div><span>Grupo VIIIA — gases nobles.</span></div>
+        <div class="sm-op"><div class="circulo">B</div><span>Grupo IA — metales alcalinos.</span></div>
+        <div class="sm-op"><div class="circulo">C</div><span>Grupo VIIA — halógenos.</span></div>
+        <div class="sm-op"><div class="circulo">D</div><span>Grupo IIA — metales alcalinotérreos.</span></div>
+      </div>
+      <p class="rubrica">Rúbrica: 2 pts por cada alternativa correcta con argumento correcto.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════════════
+       TEMA 2 — RADIO ATÓMICO
+  ══════════════════════════════════════════════════════ -->
+
+  <!-- BLOQUE 2.1 — Lectura + Esquema -->
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — ¿Qué es el radio atómico?</div>
+    <div class="lectura">
+      <p>El <strong>radio atómico</strong> es la mitad de la distancia entre los núcleos de dos átomos del mismo elemento que están unidos. Mide, en definitiva, el "tamaño" del átomo. Se expresa en picómetros (pm) o en angstroms (Å).</p>
+      <p>El radio atómico depende de dos factores que actúan en direcciones opuestas:</p>
+      <div class="cols2">
+        <div class="col-box">
+          <span class="col-tit">⬆ Aumenta el radio cuando...</span>
+          Aumentan los niveles de energía (más períodos hacia abajo). Cada nivel nuevo añade una "capa" de electrones más lejos del núcleo.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">⬇ Disminuye el radio cuando...</span>
+          Aumenta la carga nuclear (más protones en el mismo período). El núcleo atrae con más fuerza a los electrones del mismo nivel.
+        </div>
+      </div>
+      <div class="dest" style="margin-top:7pt">
+        <strong>Tendencias del radio atómico:</strong><br>
+        • En un <strong>período</strong> (→ derecha): el radio <strong>disminuye</strong>. Aumentan los protones pero no los niveles → mayor atracción nuclear.<br>
+        • En un <strong>grupo</strong> (↓ abajo): el radio <strong>aumenta</strong>. Se agregan niveles de energía → electrones más lejos del núcleo.
+      </div>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 2.1 — Completar tabla de tendencias <span class="pts-badge">6 pts</span></div>
+      <p style="font-size:9.5pt;margin-bottom:6pt">Completa la tabla indicando si el radio atómico <strong>aumenta</strong> o <strong>disminuye</strong> en cada situación y escribe la razón en tus propias palabras.</p>
+      <table class="fill">
+        <thead>
+          <tr><th style="width:30%">Situación</th><th style="width:22%">¿Aumenta o disminuye?</th><th>Razón (en tus palabras)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="fh">De Li a Ne (período 2, de izquierda a derecha)</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">De Li a Cs (grupo IA, de arriba a abajo)</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">De Na a Cl (período 3, de izquierda a derecha)</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">De F a I (grupo VIIA, de arriba a abajo)</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+        </tbody>
+      </table>
+      <p class="rubrica">Rúbrica: 1 pt por dirección correcta · 0.5 pts por razón válida en palabras propias (c/fila).</p>
+    </div>
+  </div>
+
+  <!-- BLOQUE 2.2 — Lectura mínima + Ejercicio aplicado -->
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Radio atómico vs. radio iónico</div>
+    <div class="lectura">
+      <p>Cuando un átomo gana o pierde electrones se convierte en un <strong>ion</strong>. Esto cambia el radio:</p>
+      <div class="cols2">
+        <div class="col-box">
+          <span class="col-tit">Catión (pierde e⁻) → radio menor</span>
+          Al perder electrones, la atracción del núcleo sobre los restantes es más fuerte. El ion es más pequeño que el átomo neutro.<br><em>Ej: Na (186 pm) → Na⁺ (102 pm)</em>
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Anión (gana e⁻) → radio mayor</span>
+          Al ganar electrones, la repulsión entre ellos hace que la nube electrónica se expanda. El ion es más grande que el átomo neutro.<br><em>Ej: Cl (99 pm) → Cl⁻ (181 pm)</em>
+        </div>
+      </div>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 2.2 — Analiza y ordena <span class="pts-badge">8 pts</span></div>
+      <div class="caso">
+        <span class="caso-label">Situación</span>
+        <p>Considera las siguientes especies: <strong>Na (Z=11), Na⁺, Mg²⁺ (Z=12), F⁻ (Z=9), F (Z=9), O²⁻ (Z=8)</strong>. Todas tienen diferente radio a pesar de que algunas tienen el mismo número de electrones.</p>
+      </div>
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:4pt">a) Ordena de mayor a menor radio: <span style="font-weight:normal;font-size:8.5pt;color:#555">(4 pts)</span></p>
+      <p style="font-size:9.5pt;margin-bottom:3pt">Mayor radio → <span class="blank" style="min-width:30pt"></span> > <span class="blank" style="min-width:30pt"></span> > <span class="blank" style="min-width:30pt"></span> > <span class="blank" style="min-width:30pt"></span> > <span class="blank" style="min-width:30pt"></span> > <span class="blank" style="min-width:30pt"></span> → Menor radio</p>
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:7pt;margin-bottom:4pt">b) Explica por qué Na⁺ y Mg²⁺ tienen el mismo número de electrones (10) pero distinto radio: <span style="font-weight:normal;font-size:8.5pt;color:#555">(4 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: a) 4 pts por orden correcto (O²⁻ > F⁻ > Na > F > Na⁺ > Mg²⁺) · b) 4 pts por explicar que mayor Z con mismo N° e⁻ implica mayor atracción nuclear y menor radio.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════════════
+       TEMA 3 — ENERGÍA DE IONIZACIÓN
+  ══════════════════════════════════════════════════════ -->
+
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Energía de ionización</div>
+    <div class="lectura">
+      <p>La <strong>energía de ionización (EI)</strong> es la energía mínima necesaria para arrancar un electrón de un átomo en estado gaseoso y neutro. Cuanto más fuertemente el núcleo retiene a sus electrones, mayor es la energía necesaria para quitarlos.</p>
+      <div class="dest">
+        <strong>Tendencias de la energía de ionización:</strong><br>
+        • En un <strong>período</strong> (→ derecha): la EI <strong>aumenta</strong>. Más protones atraen más fuertemente los electrones del mismo nivel.<br>
+        • En un <strong>grupo</strong> (↓ abajo): la EI <strong>disminuye</strong>. Los electrones externos están más lejos del núcleo y se arrancan con menos energía.
+      </div>
+      <p>Nota importante: la EI y el radio atómico tienen una relación <strong>inversa</strong>. Cuando el radio es grande (electrones lejos del núcleo), la energía de ionización es baja porque los electrones se separan fácilmente. Cuando el radio es pequeño, la EI es alta.</p>
+      <table class="tbl-lec" style="margin-top:7pt">
+        <thead><tr><th>Elemento</th><th>Z</th><th>Radio atómico (pm)</th><th>EI (kJ/mol)</th></tr></thead>
+        <tbody>
+          <tr><td>Li</td><td>3</td><td>152</td><td>520</td></tr>
+          <tr><td>Na</td><td>11</td><td>186</td><td>496</td></tr>
+          <tr><td>K</td><td>19</td><td>227</td><td>419</td></tr>
+          <tr><td>F</td><td>9</td><td>64</td><td>1681</td></tr>
+          <tr><td>Cl</td><td>17</td><td>99</td><td>1251</td></tr>
+          <tr><td>Ne</td><td>10</td><td>38</td><td>2081</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 3 — Análisis de datos y VF <span class="pts-badge">14 pts</span></div>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:4pt">a) Analiza la tabla de la lectura y responde: <span style="font-weight:normal;font-size:8.5pt;color:#555">(6 pts)</span></p>
+      <p style="font-size:9.5pt;margin-bottom:3pt">¿Qué relación observas entre el radio atómico y la energía de ionización en los metales alcalinos (Li, Na, K)?</p>
+      <span class="linea-r"></span><span class="linea-r"></span>
+      <p style="font-size:9.5pt;margin-top:5pt;margin-bottom:3pt">El Neón tiene la EI más alta de la tabla. ¿Por qué un gas noble necesita tanta energía para perder un electrón? Relaciona con su configuración electrónica.</p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:8pt;margin-bottom:5pt">b) Verdadero y Falso: <span style="font-weight:normal;font-size:8.5pt;color:#555">(8 pts — 2 pts c/u)</span></p>
+      <div class="vf-enc"><span>V</span><span>F</span></div>
+
+      <div class="vf-item">
+        <span class="vf-n">1.</span>
+        <span class="vf-txt">La energía de ionización aumenta de izquierda a derecha en un período porque aumenta el número de protones que atraen a los electrones del mismo nivel.</span>
+        <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+      </div>
+      <div class="vf-item" style="flex-wrap:wrap">
+        <span class="vf-n">2.</span>
+        <span class="vf-txt" style="width:calc(100% - 52px)">Un elemento con radio atómico grande siempre tendrá energía de ionización alta, porque el núcleo atrae fuertemente a todos sus electrones.</span>
+        <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+        <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+      </div>
+      <div class="vf-item">
+        <span class="vf-n">3.</span>
+        <span class="vf-txt">En el grupo IA, la EI disminuye de Li a Cs porque los electrones de valencia están cada vez más lejos del núcleo.</span>
+        <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+      </div>
+      <div class="vf-item" style="flex-wrap:wrap">
+        <span class="vf-n">4.</span>
+        <span class="vf-txt" style="width:calc(100% - 52px)">Los gases nobles tienen EI alta porque tienen el nivel de energía completo y es necesario aportar mucha energía para alterar esa estabilidad.</span>
+        <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+        <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección si es falsa: </span><span class="corr-linea"></span></div>
+      </div>
+      <p class="rubrica">Rúbrica: a) 3 pts por cada análisis que mencione la relación inversa radio-EI con datos concretos de la tabla · b) 2 pts por afirmación: 1 pt V/F correcto + 1 pt corrección si corresponde.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════════════
+       TEMA 4 — ELECTRONEGATIVIDAD Y AFINIDAD ELECTRÓNICA
+  ══════════════════════════════════════════════════════ -->
+
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Electronegatividad y afinidad electrónica</div>
+    <div class="lectura">
+      <p>La <strong>electronegatividad</strong> es la capacidad de un átomo de atraer hacia sí los electrones compartidos en un enlace químico. La midió Linus Pauling y la expresó en una escala sin unidades (de 0 a 4). El elemento más electronegativo es el <strong>Flúor (F) con 3.98</strong>. El menos electronegativo es el Cesio (Cs) con 0.79.</p>
+      <p>La <strong>afinidad electrónica (AE)</strong> es la energía liberada cuando un átomo en estado gaseoso gana un electrón. Cuanto mayor es la AE, más fuertemente el átomo atrae electrones externos. Los halógenos tienen las AE más altas entre los elementos representativos.</p>
+      <div class="dest">
+        <strong>Tendencias — igual dirección para ambas propiedades:</strong><br>
+        • En un <strong>período</strong> (→ derecha): electronegatividad y AE <strong>aumentan</strong>. Mayor carga nuclear sin añadir niveles → mayor atracción sobre electrones externos.<br>
+        • En un <strong>grupo</strong> (↓ abajo): electronegatividad y AE <strong>disminuyen</strong>. Electrones externos más lejos del núcleo → menor atracción.
+      </div>
+      <p style="margin-top:5pt">La electronegatividad es fundamental para predecir el tipo de enlace: si la diferencia de electronegatividad entre dos átomos es grande, el enlace será <strong>iónico</strong>; si es pequeña o nula, será <strong>covalente</strong>.</p>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 4 — Tabla comparativa y aplicación <span class="pts-badge">14 pts</span></div>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:5pt">a) Completa la tabla de tendencias periódicas comparando las cuatro propiedades estudiadas: <span style="font-weight:normal;font-size:8.5pt;color:#555">(8 pts)</span></p>
+      <table class="fill">
+        <thead>
+          <tr>
+            <th style="width:22%">Propiedad</th>
+            <th style="width:26%">Tendencia en un período<br>(→ derecha)</th>
+            <th style="width:26%">Tendencia en un grupo<br>(↓ abajo)</th>
+            <th style="width:26%">Elemento con el valor más alto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="fh">Radio atómico</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Energía de ionización</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Electronegatividad</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Afinidad electrónica</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+        </tbody>
+      </table>
+      <p class="rubrica" style="margin-bottom:7pt">Rúbrica: 0.7 pts por cada celda correcta.</p>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:4pt">b) Aplica: Un estudiante dice que el enlace entre Na y Cl debe ser covalente porque ambos son elementos de la tabla periódica. ¿Está en lo correcto? Usa la electronegatividad de ambos (Na = 0.93, Cl = 3.16) para argumentar: <span style="font-weight:normal;font-size:8.5pt;color:#555">(6 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: 3 pts por calcular o estimar la diferencia de electronegatividad y concluir que es iónico · 3 pts por explicar por qué esa diferencia grande indica transferencia de electrón y no compartición.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ══════════════════════════════════════════════════════
+       TEMA 5 — APLICACIÓN INTEGRADA
+  ══════════════════════════════════════════════════════ -->
+
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Conectando las propiedades</div>
+    <div class="lectura">
+      <p>Las cuatro propiedades periódicas no son independientes: se explican todas a partir de dos factores fundamentales que ya conoces: la <strong>carga nuclear</strong> (número de protones) y la <strong>distancia de los electrones al núcleo</strong> (niveles de energía). Todo lo demás es consecuencia de la competencia entre estos dos factores.</p>
+      <div class="dest">
+        <strong>La regla unificadora:</strong> A mayor carga nuclear en el mismo nivel → más atracción → radio menor, EI mayor, electronegatividad mayor, AE mayor. A mayor número de niveles de energía → electrones más lejos → radio mayor, EI menor, electronegatividad menor, AE menor.
+      </div>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 5 — Casos integrados <span class="pts-badge">14 pts</span></div>
+
+      <div class="caso" style="margin-bottom:8pt">
+        <span class="caso-label">Situación 1 — El elemento misterioso <span style="font-weight:normal">(6 pts)</span></span>
+        <p>Un elemento X tiene las siguientes características: radio atómico pequeño, energía de ionización muy alta, electronegatividad de 3.44 y pertenece al período 2. Su configuración electrónica es 1s² 2s² 2p⁴.</p>
+      </div>
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:4pt">a) ¿Qué elemento es X? ¿A qué grupo pertenece? <span style="font-weight:normal;font-size:8.5pt;color:#555">(2 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span>
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:5pt;margin-bottom:4pt">b) ¿Cedería o ganaría electrones al reaccionar? ¿Por qué lo dice su configuración? <span style="font-weight:normal;font-size:8.5pt;color:#555">(2 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span>
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:5pt;margin-bottom:4pt">c) Compara a X con el elemento del mismo grupo en el período 3. ¿Cuál tiene mayor radio y menor EI? Justifica. <span style="font-weight:normal;font-size:8.5pt;color:#555">(2 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span>
+
+      <div class="caso" style="margin-top:9pt;margin-bottom:8pt">
+        <span class="caso-label">Situación 2 — Argumento y síntesis <span style="font-weight:normal">(8 pts)</span></span>
+        <p>Un compañero afirma: <em>"El Flúor es el elemento más peligroso y reactivo de la tabla periódica justamente porque tiene el átomo más pequeño de todos los no metales."</em></p>
+      </div>
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:4pt">¿Está en lo correcto? Elabora una respuesta que explique la relación entre el tamaño del átomo de Flúor y sus propiedades (EI, electronegatividad, AE). Tu respuesta debe ser un párrafo continuo de al menos 6 oraciones que conecte todas las propiedades periódicas estudiadas. <span style="font-weight:normal;font-size:8.5pt;color:#555">(8 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica situación 1: 2 pts c/u · Situación 2: 3 pts por relacionar correctamente radio pequeño con alta EI y electronegatividad · 3 pts por párrafo continuo que integre las 4 propiedades con precisión · 2 pts por evaluar si el compañero tiene razón y por qué.</p>
+    </div>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Química — 1° Medio · Propiedades de la Tabla Periódica</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>

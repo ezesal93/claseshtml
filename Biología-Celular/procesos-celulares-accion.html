@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía — Procesos Celulares en Acción — Biología Celular y Molecular</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; min-height: 297mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TÍTULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:17pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJA */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.6; }
+.box-cont p+p { margin-top:3px; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:10px 0; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* ETAPA HEADER */
+.etapa-header { display:flex; align-items:center; gap:10px; border:1.5px solid #111; padding:5pt 10pt; margin-bottom:7pt; }
+.etapa-num { font-family:'Times New Roman',Times,serif; font-size:22pt; font-weight:bold; color:#ccc; line-height:1; flex-shrink:0; }
+.etapa-info h2 { font-size:11pt; font-weight:bold; text-transform:uppercase; letter-spacing:.04em; }
+.etapa-info p { font-size:9pt; color:#555; margin-top:1pt; }
+
+/* PASO */
+.paso { display:flex; gap:10px; margin-bottom:10pt; align-items:flex-start; }
+.paso-num { min-width:22pt; height:22pt; border:1.5px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+.paso-body { flex:1; font-size:10pt; line-height:1.65; }
+.paso-body > strong { display:block; font-size:10pt; font-weight:bold; margin-bottom:4pt; }
+
+/* CONTRASTE BIEN/MAL */
+.contraste { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:7pt 0; }
+.c-bien { border:1.5px solid #111; border-left:4px solid #111; border-radius:0 4px 4px 0; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.c-mal { border:1.5px dashed #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.c-label { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; margin-bottom:3pt; display:block; }
+.c-bien .c-label { color:#1a4a1a; }
+.c-mal .c-label { color:#555; }
+
+/* CONCEPTO */
+.concepto { background:white; border:1px solid #111; border-left:4px solid #111; padding:4pt 9pt; margin:6pt 0; font-size:9.5pt; line-height:1.6; }
+
+/* COLS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:6pt; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin-top:6pt; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+/* REGISTRO */
+.registro-box { border:1px solid #ccc; border-radius:4px; padding:6pt 9pt; margin:6pt 0; font-size:9.5pt; line-height:1.6; }
+.reg-label { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#555; margin-bottom:5pt; display:block; }
+
+/* LÍNEAS */
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.linea-r-m { display:block; border-bottom:.8px solid #ccc; height:24pt; width:100%; margin-bottom:2px; }
+
+/* TABLA FILL */
+table.fill { width:100%; border-collapse:collapse; font-size:9.5pt; margin:5pt 0; }
+table.fill th,table.fill td { border:1px solid #111; padding:5pt 8pt; vertical-align:top; line-height:1.5; }
+table.fill th { background:white; font-size:8.5pt; font-weight:bold; text-align:center; }
+table.fill .fh { font-weight:bold; }
+table.fill .fill-cell { min-height:28pt; }
+
+/* TABLA DATOS */
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:4pt 7pt; line-height:1.4; vertical-align:top; }
+table.datos th { background:white; color:#111; font-size:8.5pt; font-weight:bold; text-align:center; }
+
+/* OPCIONES PROCESO */
+.opciones-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin:7pt 0; }
+.opcion-item { border:1px solid #111; border-radius:4px; padding:5pt 7pt; font-size:9.5pt; line-height:1.5; }
+.opcion-item .op-tit { font-weight:bold; font-size:9pt; margin-bottom:2pt; display:block; }
+
+/* RÚBRICA */
+.rubrica-titulo { font-size:9pt; font-weight:bold; padding:4pt 9pt; border:1.5px solid #111; border-bottom:none; display:flex; justify-content:space-between; }
+table.rubrica { width:100%; border-collapse:collapse; font-size:8pt; margin-bottom:8pt; }
+table.rubrica th,table.rubrica td { border:1px solid #111; padding:4pt 6pt; text-align:left; vertical-align:top; line-height:1.45; font-size:8pt; }
+table.rubrica th { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.04em; text-align:center; }
+table.rubrica td:first-child { font-weight:bold; width:22%; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; min-height:unset; }
+  .btn-print { display:none; }
+  .paso { margin-bottom:7pt; }
+  .linea-r { height:16pt; } .linea-r-m { height:20pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  table.rubrica th,table.rubrica td { padding:3pt 5pt; }
+  .cols2,.cols3 { gap:5px; } .col-box { padding:3pt 6pt; }
+  .opciones-grid { gap:5px; } .opcion-item { padding:3pt 6pt; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .concepto { padding:3pt 8pt; margin:4pt 0; }
+  .contraste { gap:5px; margin:5pt 0; }
+  .c-bien,.c-mal { padding:4pt 7pt; }
+  table.fill th,table.fill td { padding:3pt 6pt; }
+  .registro-box { padding:4pt 8pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Procesos Celulares en Acción</h1>
+    <p class="subtitulo">(Biología Celular y Molecular)</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Integrantes: <span class="blank" style="min-width:190pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:46pt"></span></span>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+      <span>Fecha inicio: <span class="blank" style="min-width:68pt"></span></span>
+      <span>Fecha presentación: <span class="blank" style="min-width:68pt"></span></span>
+      <span>Pje. ideal: <span class="val-bold">70</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:36pt"></span></span>
+    </div>
+  </div>
+
+  <!-- PRESENTACIÓN DE LA ACTIVIDAD -->
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>¿Qué van a hacer?</strong> Esta actividad tiene tres etapas. En la primera investigan cómo evolucionó históricamente el conocimiento sobre la célula. En la segunda construyen un modelo visual de un tipo de célula específico. En la tercera representan un proceso celular completo mostrando cómo funciona paso a paso.</p>
+    <p><strong>¿Cuánto tiempo tienen?</strong> 10 horas pedagógicas en total, divididas en las tres etapas.</p>
+    <p><strong>¿En qué grupos?</strong> Grupos de 3 a 4 personas. Cada integrante tiene responsabilidades propias en cada etapa.</p>
+  </div>
+
+  <!-- QUÉ ES UN MODELO -->
+  <div class="concepto">
+    <strong>Importante — ¿Qué es un "modelo" en esta actividad?</strong><br>
+    Un modelo <strong>no es una maqueta</strong> tridimensional hecha con goma espuma y palillos. Un modelo es una <strong>representación visual elaborada</strong> que explica cómo funciona algo: puede ser un diagrama detallado, una infografía, un esquema de flujo con flechas, una representación gráfica en papel o digital. Lo que importa es que <strong>explique el proceso o la estructura</strong>, no que se vea bonito o tridimensional.
+    <div class="contraste" style="margin-top:6pt">
+      <div class="c-bien">
+        <span class="c-label">✔ Esto SÍ es un modelo válido</span>
+        Un diagrama de la célula hepática con todas sus estructuras rotuladas, flechas que indican la función de cada organelo en la detoxificación, y un cuadro comparativo con una neurona.
+      </div>
+      <div class="c-mal">
+        <span class="c-label">✗ Esto NO es lo que se pide</span>
+        Una esfera de telgopor con palillos y bolitas de colores que "representa" la célula sin explicar para qué sirve cada parte.
+      </div>
+    </div>
+  </div>
+
+  <table class="tbl-pts">
+    <thead><tr><th>Etapa</th><th>Descripción</th><th>Pts</th><th>Obtenido</th></tr></thead>
+    <tbody>
+      <tr><td>I</td><td>Reflexión histórica e infografía</td><td>20 pts</td><td></td></tr>
+      <tr><td>II</td><td>Modelo celular y exposición</td><td>24 pts</td><td></td></tr>
+      <tr><td>III</td><td>Modelo del proceso celular y argumentación</td><td>26 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>70 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="sep">
+
+  <!-- ═══════════════════════════════════
+       ETAPA I — REFLEXIÓN HISTÓRICA
+  ═══════════════════════════════════ -->
+  <div class="etapa-header">
+    <div class="etapa-num">I</div>
+    <div class="etapa-info">
+      <h2>Reflexionando sobre los avances en Biología Celular y Molecular</h2>
+      <p>20 puntos · Investigación grupal + infografía digital + reflexión individual escrita</p>
+    </div>
+  </div>
+
+  <div class="concepto" style="margin-bottom:9pt">
+    <strong>¿Qué busca esta etapa?</strong> No se trata de hacer una línea de tiempo con fechas y nombres. Se trata de entender <em>cómo</em> los científicos construyeron el conocimiento: qué preguntas se hacían, qué evidencias encontraron, cómo el aporte de la física, la química o la matemática cambió lo que sabíamos sobre la célula. La ciencia no avanza sola ni de un día para otro: es una conversación entre personas, disciplinas y preguntas.
+  </div>
+
+  <!-- Paso 1 -->
+  <div class="paso">
+    <div class="paso-num">1</div>
+    <div class="paso-body">
+      <strong>Formulen preguntas de investigación genuinas</strong>
+      <p>Antes de buscar en internet, el grupo debe construir <strong>al menos 3 preguntas</strong> que guíen la investigación. Una buena pregunta no tiene respuesta inmediata en Google: obliga a leer, comparar y pensar.</p>
+      <div class="contraste">
+        <div class="c-bien">
+          <span class="c-label">✔ Preguntas que sí sirven</span>
+          "¿Por qué el descubrimiento del microscopio electrónico cambió completamente lo que se creía sobre la célula?" · "¿Cómo ayudó la cristalografía de rayos X a entender el ADN?" · "¿Qué preguntas abiertas todavía no tienen respuesta en biología celular?"
+        </div>
+        <div class="c-mal">
+          <span class="c-label">✗ Preguntas que NO sirven</span>
+          "¿Qué es la célula?" · "¿Cuándo se inventó el microscopio?" · "¿Quién descubrió el ADN?" (estas tienen respuesta directa y no implican análisis)
+        </div>
+      </div>
+      <div class="registro-box">
+        <span class="reg-label">Registren sus 3 preguntas</span>
+        <p style="font-size:9pt;color:#555;margin-bottom:2pt">Pregunta 1:</p>
+        <span class="linea-r-m"></span>
+        <p style="font-size:9pt;color:#555;margin-top:5pt;margin-bottom:2pt">Pregunta 2:</p>
+        <span class="linea-r-m"></span>
+        <p style="font-size:9pt;color:#555;margin-top:5pt;margin-bottom:2pt">Pregunta 3:</p>
+        <span class="linea-r-m"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 2 -->
+  <div class="paso">
+    <div class="paso-num">2</div>
+    <div class="paso-body">
+      <strong>Elaboren una infografía digital — elijan UNO de estos tres enfoques</strong>
+      <div class="cols3" style="margin-bottom:7pt">
+        <div class="col-box">
+          <span class="col-tit">Opción A</span>
+          Historia de los avances: cómo cada descubrimiento abrió nuevas preguntas y cambió ideas anteriores.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Opción B</span>
+          Líneas de investigación actuales: ¿hacia dónde va la biología celular y molecular hoy?
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Opción C</span>
+          Aportes de otras disciplinas: ¿cómo la física, la química, la matemática o la informática cambiaron el conocimiento celular?
+        </div>
+      </div>
+
+      <div class="concepto">
+        <strong>Requisitos mínimos de la infografía:</strong><br>
+        ① Título claro que indique el enfoque elegido.<br>
+        ② Al menos <strong>3 investigaciones o aportes</strong> descritos, cada uno con: qué se descubrió, qué evidencias lo sustentaban, y qué pregunta nueva abrió ese descubrimiento.<br>
+        ③ Al menos <strong>1 ejemplo de cómo una idea científica cambió</strong> por nuevas evidencias (no solo "avanzó": debe mostrar que algo que se creía correcto resultó incompleto o erróneo).<br>
+        ④ Imágenes o íconos pertinentes (no de relleno).<br>
+        ⑤ Fuentes citadas al pie de la infografía.
+      </div>
+
+      <div class="contraste" style="margin-top:6pt">
+        <div class="c-bien">
+          <span class="c-label">✔ Infografía que SÍ cumple</span>
+          Muestra cómo el modelo del átomo cambió la comprensión de los enlaces en moléculas biológicas. Incluye evidencias (experimentos de difracción) y explica por qué el modelo anterior era insuficiente.
+        </div>
+        <div class="c-mal">
+          <span class="c-label">✗ Infografía que NO cumple</span>
+          Una línea de tiempo con fotos de científicos y años: "1665 — Hooke describe la célula. 1838 — Schleiden propone la teoría celular." Sin evidencias ni análisis.
+        </div>
+      </div>
+
+      <div class="registro-box" style="margin-top:6pt">
+        <span class="reg-label">Opción elegida y razón científica (no "porque nos gustó más")</span>
+        <p style="font-size:9.5pt;margin-bottom:3pt">Opción: <span class="blank" style="min-width:28pt"></span> &nbsp; Razón:</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 4 — Reflexión individual -->
+  <div class="paso">
+    <div class="paso-num">3</div>
+    <div class="paso-body">
+      <strong>Reflexión individual — cada integrante responde por separado</strong>
+      <p>Esta parte es <strong>individual</strong>. No se puede copiar la respuesta de otro integrante. Se evalúa que cada persona haya realmente comprendido lo que investigó.</p>
+
+      <div class="registro-box">
+        <span class="reg-label">Nombre del integrante: <span class="blank" style="min-width:140pt"></span></span>
+
+        <p style="font-size:9.5pt;font-weight:bold;margin-bottom:3pt">a) Elige una investigación que estudiaste y explica: ¿qué evidencias la sustentaban?, ¿por qué esas evidencias eran suficientes para cambiar una idea anterior? <span style="font-weight:normal;font-size:8.5pt;color:#555">(5 pts)</span></p>
+        <div class="contraste" style="margin-bottom:5pt">
+          <div class="c-bien">
+            <span class="c-label">✔ Respuesta que SÍ cumple</span>
+            "Watson y Crick propusieron la doble hélice basándose en la fotografía 51 de Rosalind Franklin (cristalografía de rayos X) y en los datos de Chargaff sobre las proporciones de bases. Antes se creía que el ADN era una estructura simple; estas evidencias demostraron que tenía una estructura tridimensional específica que explicaba cómo se copiaba."
+          </div>
+          <div class="c-mal">
+            <span class="c-label">✗ Respuesta que NO cumple</span>
+            "Watson y Crick descubrieron el ADN en 1953 y fue muy importante para la biología porque cambió todo lo que se sabía."
+          </div>
+        </div>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+        <p style="font-size:9.5pt;font-weight:bold;margin-top:7pt;margin-bottom:3pt">b) Explica con un ejemplo concreto cómo una disciplina distinta a la biología (química, física, matemáticas, etc.) permitió entender algo de la célula que no era posible entender solo con biología. <span style="font-weight:normal;font-size:8.5pt;color:#555">(5 pts)</span></p>
+        <div class="contraste" style="margin-bottom:5pt">
+          <div class="c-bien">
+            <span class="c-label">✔ Respuesta que SÍ cumple</span>
+            "La física de los rayos X permitió visualizar la estructura tridimensional de proteínas y ácidos nucleicos. Sin esa técnica física, la biología no habría podido ver la forma de las moléculas, solo su composición química."
+          </div>
+          <div class="c-mal">
+            <span class="c-label">✗ Respuesta que NO cumple</span>
+            "La química ayudó mucho a la biología porque las células tienen moléculas químicas como el ADN y las proteínas."
+          </div>
+        </div>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ═══════════════════════════════════
+       ETAPA II — MODELO CELULAR
+  ═══════════════════════════════════ -->
+  <div class="etapa-header">
+    <div class="etapa-num">II</div>
+    <div class="etapa-info">
+      <h2>Modelo celular: diseñando y representando la célula elegida</h2>
+      <p>24 puntos · Modelo gráfico detallado + tabla de estructuras + exposición al curso</p>
+    </div>
+  </div>
+
+  <div class="concepto" style="margin-bottom:9pt">
+    <strong>¿Qué busca esta etapa?</strong> Que demuestren que entienden la relación entre la <em>estructura</em> de una célula y su <em>función</em>. No basta con dibujar las partes y ponerles nombre: el modelo debe mostrar por qué esa célula tiene esas estructuras y no otras, y cómo esas estructuras le permiten cumplir su función en el organismo.
+  </div>
+
+  <!-- Paso 1 -->
+  <div class="paso">
+    <div class="paso-num">1</div>
+    <div class="paso-body">
+      <strong>Elijan el tipo de célula — con criterio, no al azar</strong>
+      <p>Deben elegir un tipo de célula <strong>específico</strong>. "Célula animal" no es suficiente: hay miles de tipos de células animales, cada una muy distinta. Lo mismo aplica para "célula vegetal" o "bacteria".</p>
+
+      <div class="contraste" style="margin-bottom:7pt">
+        <div class="c-bien">
+          <span class="c-label">✔ Elecciones que SÍ son específicas</span>
+          Hepatocito (célula del hígado) · Neurona motora · Célula de guarda (estoma de hoja) · Célula beta del páncreas · Macrófago · Hifa de hongo · Cianobacteria · Célula del xilema · Paramecio · Levadura
+        </div>
+        <div class="c-mal">
+          <span class="c-label">✗ Elecciones demasiado genéricas</span>
+          "Célula animal" · "Célula vegetal" · "Una bacteria" · "Célula humana" — estas no tienen características específicas que permitan un modelo rico.
+        </div>
+      </div>
+
+      <div class="registro-box">
+        <span class="reg-label">Registren su elección y justifíquenla</span>
+        <p style="font-size:9.5pt;margin-bottom:3pt">Tipo de célula: <span class="blank" style="min-width:175pt"></span></p>
+        <p style="font-size:9.5pt;margin-top:5pt;margin-bottom:3pt">Organismo al que pertenece y dónde se ubica en ese organismo:</p>
+        <span class="linea-r"></span>
+        <p style="font-size:9.5pt;margin-top:5pt;margin-bottom:3pt">¿Por qué es interesante esta célula? ¿Qué tiene de especial en su estructura o función?</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 2 -->
+  <div class="paso">
+    <div class="paso-num">2</div>
+    <div class="paso-body">
+      <strong>Investiguen y completen la tabla de estructuras antes de diseñar</strong>
+      <p>Antes de dibujar o diseñar cualquier cosa, deben saber qué tiene esta célula y para qué. La tabla es el fundamento del modelo: si la completan bien, el modelo será preciso y con sentido.</p>
+      <table class="datos" style="font-size:9pt">
+        <thead>
+          <tr>
+            <th style="width:22%">Estructura / Organelo</th>
+            <th style="width:28%">Función específica en ESTA célula<br><span style="font-weight:normal;font-size:8pt">(no la función general, sino su rol particular)</span></th>
+            <th style="width:24%">¿Presente en todos los tipos de célula?<br><span style="font-weight:normal;font-size:8pt">(Sí / No / Solo en…)</span></th>
+            <th style="width:26%">¿Cómo la representarán visualmente en el modelo?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+          <tr style="height:26pt"><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <div class="contraste" style="margin-top:6pt">
+        <div class="c-bien">
+          <span class="c-label">✔ Función específica que SÍ sirve (hepatocito)</span>
+          "Retículo endoplásmico liso: en el hepatocito se encarga de metabolizar toxinas y sintetizar colesterol, más que de producir proteínas."
+        </div>
+        <div class="c-mal">
+          <span class="c-label">✗ Función genérica que NO sirve</span>
+          "Retículo endoplásmico liso: sintetiza lípidos." (esto aplica a cualquier célula, no muestra comprensión del hepatocito específicamente)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 3 -->
+  <div class="paso">
+    <div class="paso-num">3</div>
+    <div class="paso-body">
+      <strong>Diseñen el modelo</strong>
+      <p>Con la tabla completa, diseñen la representación visual. Puede ser en papel o digital. Lo que importa es que sea precisa, clara y que explique la célula, no solo que la muestre.</p>
+      <div class="concepto">
+        <strong>Checklist — el modelo debe tener todo esto antes de entregarlo:</strong><br>
+        ☐ Todas las estructuras de la tabla, representadas visualmente con claridad.<br>
+        ☐ Rótulos con el nombre de cada estructura.<br>
+        ☐ Al menos <strong>3 anotaciones</strong> que expliquen la función de esa estructura en esta célula (no solo el nombre: qué hace ahí).<br>
+        ☐ Una comparación visual con <strong>otro tipo de célula distinto</strong>: ¿qué estructuras tiene la tuya que la otra no tiene?, ¿por qué?<br>
+        ☐ Título con el nombre de la célula, el organismo, y el nombre del grupo.<br>
+        ☐ Una escala aproximada o referencia de tamaño (ej: "esta célula mide aprox. 20 µm").
+      </div>
+      <div class="contraste" style="margin-top:6pt">
+        <div class="c-bien">
+          <span class="c-label">✔ Anotación de función que SÍ cumple</span>
+          "Mitocondria → en el hepatocito produce gran cantidad de ATP porque esta célula realiza detoxificación, síntesis de glucosa y producción de proteínas plasmáticas, todas funciones que demandan mucha energía."
+        </div>
+        <div class="c-mal">
+          <span class="c-label">✗ Anotación que NO cumple</span>
+          "Mitocondria → produce energía." (es correcto pero no muestra que se entendió la célula específica)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 4 -->
+  <div class="paso">
+    <div class="paso-num">4</div>
+    <div class="paso-body">
+      <strong>Expongan al curso y registren lo que ven en las otras presentaciones</strong>
+      <p>La presentación dura entre 5 y 8 minutos. Deben explicar: qué célula eligieron y por qué, qué estructuras consideraron más relevantes y por qué, cómo se compara con otra célula. Mientras los otros grupos exponen, completen la tabla de comparación.</p>
+      <div class="registro-box">
+        <span class="reg-label">Tabla de comparación — completen durante las exposiciones de sus compañeros</span>
+        <table class="datos" style="font-size:8.5pt">
+          <thead>
+            <tr>
+              <th>Grupo</th><th>Tipo de célula presentada</th><th>Dominio / Reino</th>
+              <th>Estructura que tiene esa célula y la tuya NO</th>
+              <th>Estructura que tienen ambas células</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="height:20pt"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height:20pt"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height:20pt"><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr style="height:20pt"><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- ═══════════════════════════════════
+       ETAPA III — PROCESO CELULAR
+  ═══════════════════════════════════ -->
+  <div class="etapa-header">
+    <div class="etapa-num">III</div>
+    <div class="etapa-info">
+      <h2>Proceso celular en acción: modelando cómo funciona la célula</h2>
+      <p>26 puntos · Planificación + modelo del proceso + presentación y retroalimentación</p>
+    </div>
+  </div>
+
+  <div class="concepto" style="margin-bottom:9pt">
+    <strong>¿Qué busca esta etapa?</strong> Que representen un proceso celular completo mostrando no solo qué ocurre, sino <em>cómo</em> ocurre: qué moléculas participan, en qué orden, y qué pasaría si algo falla. El modelo del proceso es distinto al modelo de la célula: el de la célula muestra la estructura; este muestra el funcionamiento dinámico.
+  </div>
+
+  <!-- Paso 1 -->
+  <div class="paso">
+    <div class="paso-num">1</div>
+    <div class="paso-body">
+      <strong>Elijan el proceso celular — cada grupo elige uno distinto</strong>
+      <div class="opciones-grid">
+        <div class="opcion-item"><span class="op-tit">Opción 1</span>Síntesis y secreción de colágeno a la matriz extracelular</div>
+        <div class="opcion-item"><span class="op-tit">Opción 2</span>Respiración celular aeróbica (oxidación de glucosa)</div>
+        <div class="opcion-item"><span class="op-tit">Opción 3</span>Fotosíntesis (síntesis de glucosa en cloroplasto)</div>
+        <div class="opcion-item"><span class="op-tit">Opción 4</span>Regulación de la glicemia mediante insulina o glucagón</div>
+        <div class="opcion-item"><span class="op-tit">Opción 5</span>Reproducción celular: ciclo celular y citoesqueleto</div>
+        <div class="opcion-item"><span class="op-tit">Opción 6</span>Apoptosis: muerte de una célula infectada por virus</div>
+      </div>
+      <div class="registro-box" style="margin-top:6pt">
+        <span class="reg-label">Proceso elegido y conexión con la célula de la Etapa II</span>
+        <p style="font-size:9.5pt;margin-bottom:3pt">Proceso: <span class="blank" style="min-width:200pt"></span></p>
+        <p style="font-size:9.5pt;margin-top:5pt;margin-bottom:3pt">¿Ocurre este proceso en la célula que modelaron en la Etapa II? ¿Cómo se relacionan?</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 2 — Planificar -->
+  <div class="paso">
+    <div class="paso-num">2</div>
+    <div class="paso-body">
+      <strong>Planifiquen el proceso antes de diseñar el modelo</strong>
+      <p>Respondan estas preguntas antes de hacer cualquier cosa visual. Son el guión del modelo.</p>
+      <div class="registro-box">
+        <span class="reg-label">Guión de planificación</span>
+
+        <p style="font-size:9.5pt;font-weight:bold;margin-bottom:3pt">a) ¿Para qué sirve este proceso en la célula y en el organismo? (finalidad, no descripción)</p>
+        <div class="contraste" style="margin-bottom:4pt">
+          <div class="c-bien"><span class="c-label">✔ Finalidad que SÍ</span>"La respiración celular aeróbica sirve para convertir la energía química almacenada en glucosa en ATP, la molécula que la célula puede usar directamente para todas sus funciones."</div>
+          <div class="c-mal"><span class="c-label">✗ Descripción que NO</span>"La respiración celular es un proceso que ocurre en la mitocondria y que involucra glucosa y oxígeno."</div>
+        </div>
+        <span class="linea-r"></span><span class="linea-r"></span>
+
+        <p style="font-size:9.5pt;font-weight:bold;margin-top:7pt;margin-bottom:3pt">b) ¿Qué componentes moleculares o estructuras celulares participan? (mínimo 4, con su rol en el proceso)</p>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+        <p style="font-size:9.5pt;font-weight:bold;margin-top:7pt;margin-bottom:3pt">c) Describan la secuencia ordenada del proceso (mínimo 4 pasos; cada paso debe decir qué ocurre, no solo donde)</p>
+        <p style="font-size:9pt;color:#555;margin-bottom:2pt">Paso 1:</p><span class="linea-r"></span>
+        <p style="font-size:9pt;color:#555;margin-top:4pt;margin-bottom:2pt">Paso 2:</p><span class="linea-r"></span>
+        <p style="font-size:9pt;color:#555;margin-top:4pt;margin-bottom:2pt">Paso 3:</p><span class="linea-r"></span>
+        <p style="font-size:9pt;color:#555;margin-top:4pt;margin-bottom:2pt">Paso 4:</p><span class="linea-r"></span>
+        <p style="font-size:9pt;color:#555;margin-top:4pt;margin-bottom:2pt">Paso 5 (si corresponde):</p><span class="linea-r"></span>
+
+        <p style="font-size:9.5pt;font-weight:bold;margin-top:7pt;margin-bottom:3pt">d) ¿Qué ocurre si este proceso falla o se interrumpe? ¿Qué consecuencia tiene para la célula o el organismo?</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 3 — Modelo del proceso -->
+  <div class="paso">
+    <div class="paso-num">3</div>
+    <div class="paso-body">
+      <strong>Construyan el modelo del proceso</strong>
+      <p>Con el guión completo, diseñen el modelo visual que muestre el proceso paso a paso. Puede ser un diagrama de flujo, un esquema con flechas secuenciales, una infografía de etapas, o cualquier representación gráfica clara.</p>
+      <div class="concepto">
+        <strong>Checklist — el modelo del proceso debe tener todo esto:</strong><br>
+        ☐ Secuencia ordenada de eventos con flechas que indiquen dirección.<br>
+        ☐ Componentes moleculares o estructuras en cada etapa, con su nombre y rol.<br>
+        ☐ La finalidad del proceso indicada explícitamente al inicio o al final.<br>
+        ☐ Al menos una indicación de qué pasa si el proceso falla (enfermedad, consecuencia).<br>
+        ☐ Título, nombre del grupo y fuentes consultadas.
+      </div>
+      <div class="contraste" style="margin-top:6pt">
+        <div class="c-bien">
+          <span class="c-label">✔ Modelo del proceso que SÍ cumple</span>
+          Diagrama de flujo de la respiración celular: glucosa → glucólisis (citoplasma) → acetil-CoA → ciclo de Krebs (mitocondria) → cadena de transporte de electrones → ATP. Cada flecha indica qué molécula entra y qué sale. Al lado: "Si falla la cadena de transporte → la célula no produce suficiente ATP → muerte celular (necrosis)."
+        </div>
+        <div class="c-mal">
+          <span class="c-label">✗ Modelo que NO cumple</span>
+          Un dibujo de una mitocondria con la palabra "respiración celular" escrita dentro y una flecha que dice "produce energía." No hay secuencia, no hay componentes, no hay finalidad explícita.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Paso 4 — Presentación -->
+  <div class="paso">
+    <div class="paso-num">4</div>
+    <div class="paso-body">
+      <strong>Presenten al curso y reciban retroalimentación</strong>
+      <div class="cols2" style="margin-top:4pt">
+        <div class="col-box">
+          <span class="col-tit">Al presentar, expliquen (5–8 min):</span>
+          • Para qué sirve el proceso y por qué es relevante.<br>
+          • Qué componentes participan y cuál es el rol de cada uno.<br>
+          • La secuencia de eventos, paso a paso.<br>
+          • Qué pasa cuando el proceso falla.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Al escuchar a otros, retroalimenten:</span>
+          ¿El modelo es claro? ¿Falta algún componente clave? ¿La secuencia es correcta? ¿Se entiende la importancia del proceso? Anoten antes de hablar.
+        </div>
+      </div>
+      <div class="registro-box" style="margin-top:7pt">
+        <span class="reg-label">Retroalimentación que recibió su grupo</span>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+        <p style="font-size:9pt;color:#555;margin-top:5pt;margin-bottom:3pt">¿Qué mejorarían en su modelo después de escuchar la retroalimentación? ¿Por qué?</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- RÚBRICA -->
+  <div style="font-size:9.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:7pt">Rúbrica de Evaluación</div>
+
+  <div class="rubrica-titulo"><span>Criterio 1 — Investigación histórica e infografía (Etapa I)</span><span style="font-weight:normal;font-size:9pt">20 pts</span></div>
+  <table class="rubrica">
+    <thead><tr><th style="width:22%;text-align:left">Aspecto</th><th style="width:26%">Destacado</th><th style="width:26%">Bueno</th><th style="width:26%">Requiere reforzamiento</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Preguntas e infografía <em>(10 pts)</em></td>
+        <td>Las preguntas son genuinas y no tienen respuesta inmediata. La infografía describe ≥3 investigaciones con evidencias, muestra cómo una idea cambió y señala aportes de otras disciplinas. (9–10 pts)</td>
+        <td>Las preguntas son adecuadas. La infografía describe las investigaciones pero sin mostrar el cambio de ideas o el aporte interdisciplinario con claridad. (5–8 pts)</td>
+        <td>Las preguntas son triviales. La infografía es una lista de datos sin análisis de evidencias ni aportes de otras disciplinas. (0–4 pts)</td>
+      </tr>
+      <tr>
+        <td>Reflexión individual <em>(10 pts)</em></td>
+        <td>Identifica una investigación con sus evidencias concretas y explica el aporte de otra disciplina con un ejemplo preciso que muestra comprensión real. (9–10 pts)</td>
+        <td>Responde ambas preguntas pero de forma superficial: menciona evidencias sin analizarlas o el ejemplo interdisciplinario es vago. (5–8 pts)</td>
+        <td>Las respuestas son muy breves, sin evidencias ni ejemplos concretos. Se limita a nombrar sin explicar. (0–4 pts)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="rubrica-titulo" style="margin-top:5pt"><span>Criterio 2 — Modelo celular y exposición (Etapa II)</span><span style="font-weight:normal;font-size:9pt">24 pts</span></div>
+  <table class="rubrica">
+    <thead><tr><th style="width:22%;text-align:left">Aspecto</th><th style="width:26%">Destacado</th><th style="width:26%">Bueno</th><th style="width:26%">Requiere reforzamiento</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Tabla de estructuras y completitud del modelo <em>(8 pts)</em></td>
+        <td>La tabla tiene funciones específicas para esta célula (no genéricas). El modelo incluye todas las estructuras rotuladas, con ≥3 anotaciones de función específica y comparación con otra célula. (7–8 pts)</td>
+        <td>La tabla tiene algunas funciones específicas. El modelo incluye la mayoría de estructuras pero las anotaciones son genéricas o falta la comparación. (4–6 pts)</td>
+        <td>Las funciones en la tabla son genéricas. El modelo tiene pocas estructuras sin anotaciones o es copia de una imagen. (0–3 pts)</td>
+      </tr>
+      <tr>
+        <td>Relación estructura-función <em>(8 pts)</em></td>
+        <td>Las anotaciones del modelo muestran que entienden por qué esa célula específica tiene esas estructuras, vinculando estructura con función especializada. (7–8 pts)</td>
+        <td>Identifican estructuras con funciones correctas, pero las explicaciones no muestran comprensión de la especialización de esa célula en particular. (4–6 pts)</td>
+        <td>Nombran estructuras sin relacionarlas con la función de la célula elegida. El modelo podría corresponder a cualquier célula. (0–3 pts)</td>
+      </tr>
+      <tr>
+        <td>Exposición y tabla de comparación <em>(8 pts)</em></td>
+        <td>Explican con claridad por qué eligieron la célula, qué la hace única, y la comparan con evidencia con otras células del curso. La tabla de comparación está completa. (7–8 pts)</td>
+        <td>La exposición cubre los puntos pedidos pero sin profundidad. La tabla de comparación está incompleta o tiene errores. (4–6 pts)</td>
+        <td>La exposición es descriptiva y no justifica las elecciones. La tabla de comparación está en blanco o tiene muy pocos datos. (0–3 pts)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="rubrica-titulo" style="margin-top:5pt"><span>Criterio 3 — Modelo del proceso celular y argumentación (Etapa III)</span><span style="font-weight:normal;font-size:9pt">26 pts</span></div>
+  <table class="rubrica">
+    <thead><tr><th style="width:22%;text-align:left">Aspecto</th><th style="width:26%">Destacado</th><th style="width:26%">Bueno</th><th style="width:26%">Requiere reforzamiento</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Guión de planificación <em>(8 pts)</em></td>
+        <td>Finalidad precisa (no descripción). ≥4 componentes con su rol. Secuencia de ≥4 pasos que dicen qué ocurre, no solo dónde. Consecuencia de falla específica. (7–8 pts)</td>
+        <td>Planificación completa pero con pasos imprecisos, componentes sin rol definido o consecuencia de falla vaga. (4–6 pts)</td>
+        <td>La finalidad es una descripción. Faltan componentes, pasos o la consecuencia de falla. (0–3 pts)</td>
+      </tr>
+      <tr>
+        <td>Calidad del modelo del proceso <em>(12 pts)</em></td>
+        <td>Muestra la secuencia completa con componentes rotulados y su rol, flechas de dirección, finalidad explícita y consecuencia de falla. El modelo es suficientemente detallado para que alguien que no sabe el proceso pueda seguirlo. (10–12 pts)</td>
+        <td>El modelo muestra la secuencia con la mayoría de los elementos pero falta algún componente obligatorio, las flechas no son claras o la consecuencia de falla no está. (6–9 pts)</td>
+        <td>El modelo es incompleto, los componentes no tienen rol definido, la secuencia es incorrecta o es solo un dibujo sin explicación del proceso. (0–5 pts)</td>
+      </tr>
+      <tr>
+        <td>Presentación y retroalimentación <em>(6 pts)</em></td>
+        <td>Argumentan coherentemente la importancia del proceso. Registran la retroalimentación recibida y proponen mejoras concretas y fundadas biológicamente. (5–6 pts)</td>
+        <td>Presentan el proceso correctamente pero sin argumentar su importancia. Registran la retroalimentación pero las mejoras propuestas son superficiales. (3–4 pts)</td>
+        <td>La presentación es solo descriptiva. No registran la retroalimentación o las mejoras son irrelevantes. (0–2 pts)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Calificación final -->
+  <div style="margin-top:10pt;border:2px solid #111;border-radius:6px;padding:7pt 12pt;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;font-size:9.5pt">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:4pt">Puntaje total</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt;display:block"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">/ 70 puntos</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:4pt">Porcentaje</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt;display:block"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">pts ÷ 70 × 100 = ____%</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:4pt">Nota final</div>
+      <div style="border-bottom:2px solid #111;height:20pt;display:block"></div>
+    </div>
+  </div>
+  <div style="margin-top:8pt">
+    <div style="font-size:8.5pt;font-weight:bold;margin-bottom:4pt">Observaciones del docente:</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Biología Celular y Molecular · 3°/4° Medio · Unidad 1</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
