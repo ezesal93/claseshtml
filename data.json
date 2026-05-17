@@ -74,7 +74,8 @@
     {
       "categoria": "Simulaciones-Quimica",
       "archivos": [
-        { "nombre": "Balance de Ecuaciones", "url": "Simulaciones-Quimica/balance-ecuaciones.html" }
+        { "nombre": "Balance de Ecuaciones", "url": "Simulaciones-Quimica/balance-ecuaciones.html" },
+        { "nombre": "Mole Lab", "url": "Simulaciones-Quimica/molelab.html" }        
       ]
     }    
   ]
