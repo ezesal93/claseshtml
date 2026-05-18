@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 2 — Estructura y Organización Celular — Biología Celular y Molecular</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; min-height: 297mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:18pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+.item-header { background:white; color:#111; border:1.5px solid #111; padding:4px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase; }
+
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+.bloque { margin-bottom:14pt; }
+.lee-label { display:inline-flex; align-items:center; gap:5px; font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.08em; color:#444; margin-bottom:4pt; }
+.lee-label::before { content:'📖'; font-size:10pt; }
+.lectura { border:1px solid #111; border-left:4px solid #111; border-radius:0 4px 4px 0; padding:7pt 10pt; font-size:10pt; line-height:1.7; text-align:justify; }
+.lectura p { margin-bottom:5pt; }
+.lectura p:last-child { margin-bottom:0; }
+.dest { background:white; border:1px solid #111; border-left:3px solid #111; padding:4pt 8pt; margin:6pt 0; font-size:9.5pt; line-height:1.55; }
+.flecha-responde { text-align:center; font-size:9pt; color:#555; margin:4pt 0; }
+.resp-label { display:inline-flex; align-items:center; gap:5px; font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.08em; color:#444; margin-bottom:5pt; }
+.resp-label::before { content:'✏️'; font-size:10pt; }
+.ejercicio { border:1.5px solid #111; border-radius:4px; padding:7pt 10pt; font-size:10pt; line-height:1.6; }
+.ej-tit { font-size:9pt; font-weight:bold; margin-bottom:6pt; padding-bottom:4pt; border-bottom:1px solid #ccc; display:flex; justify-content:space-between; }
+.pts-badge { font-size:8pt; font-weight:normal; color:#444; border:1px solid #ccc; padding:1pt 5pt; border-radius:3px; }
+
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:7pt 0; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin:7pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 7pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:3.5px 7px; line-height:1.4; vertical-align:top; }
+table.datos th { background:white; color:#111; font-size:8.5pt; font-weight:bold; text-align:center; }
+table.datos td:first-child { text-align:left; }
+
+table.fill { width:100%; border-collapse:collapse; font-size:9.5pt; margin:5pt 0; }
+table.fill th,table.fill td { border:1px solid #111; padding:4pt 7pt; vertical-align:top; line-height:1.5; }
+table.fill th { background:white; font-size:8.5pt; font-weight:bold; text-align:center; }
+table.fill .fh { font-weight:bold; text-align:left; }
+table.fill .fill-cell { min-height:28pt; }
+
+.sm-p { margin-bottom:10px; }
+.sm-e { font-size:10.5pt; line-height:1.5; margin-bottom:5px; }
+.sm-opts { display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; padding-left:10px; }
+.sm-op { display:flex; align-items:flex-start; gap:5px; font-size:10pt; line-height:1.4; }
+.circulo { width:14pt; height:14pt; border:1.2px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+
+.vf-enc { display:flex; justify-content:flex-end; gap:3px; font-size:8pt; font-weight:bold; margin-bottom:3px; }
+.vf-enc span { width:16pt; text-align:center; }
+.vf-item { display:flex; align-items:flex-start; gap:6px; margin-bottom:6px; font-size:10pt; line-height:1.5; }
+.vf-n { font-weight:bold; min-width:14pt; flex-shrink:0; }
+.vf-txt { flex:1; }
+.vf-cas { display:flex; gap:3px; flex-shrink:0; margin-left:auto; padding-left:6px; }
+.casilla { width:16pt; height:16pt; border:1.2px solid #111; flex-shrink:0; }
+.corr-linea { display:block; border-bottom:.8px solid #aaa; height:15pt; width:100%; margin-top:2px; }
+
+.banco { font-size:8.5pt; font-weight:bold; color:#333; margin-bottom:5px; }
+.banco em { font-style:italic; font-weight:normal; }
+.completacion { font-size:10.5pt; line-height:2.2; text-align:justify; margin-bottom:5pt; }
+.bf { display:inline-block; border-bottom:1.2px solid #111; min-width:70pt; height:14pt; vertical-align:bottom; margin:0 2pt; }
+.bf-s { min-width:44pt; } .bf-m { min-width:82pt; } .bf-l { min-width:110pt; }
+
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:4px; }
+
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; min-height:unset; }
+  .btn-print { display:none; }
+  .bloque { margin-bottom:10pt; }
+  .lectura { padding:5pt 8pt; }
+  .ejercicio { padding:5pt 8pt; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .cols2,.cols3 { gap:5px; } .col-box { padding:3pt 6pt; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  table.datos th,table.datos td { padding:2px 5px; }
+  table.fill th,table.fill td { padding:3pt 6pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">🖨️ Imprimir guía</button>
+<div class="paper">
+
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 – Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Estructura y Organización Celular</h1>
+    <p class="subtitulo">(Biología Celular y Molecular · Guía N°2)</p>
+    <p class="profesor">Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">66</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenidos:</strong> Membranas biológicas: estructura y modelo mosaico fluido · Organelos celulares: núcleo, mitocondria, retículo endoplasmático, aparato de Golgi, lisosomas, ribosomas, cloroplastos · Relación estructura-función · Transporte celular: difusión, ósmosis, transporte activo y vesicular.</p>
+    <p><strong>Capacidades:</strong> Razonamiento lógico — Comprensión · Análisis — Pensamiento crítico · Expresión escrita.</p>
+    <p><strong>Destrezas:</strong> Identificar · Describir · Relacionar · Comparar · Clasificar · Interpretar · Analizar · Aplicar · Resolver · Explicar · Argumentar · Determinar.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Tema</th><th>Descripción</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Membrana plasmática y modelo mosaico fluido</td><td>16 pts</td><td></td></tr>
+      <tr><td>2</td><td>Organelos celulares y relación estructura-función</td><td>20 pts</td><td></td></tr>
+      <tr><td>3</td><td>Transporte celular</td><td>16 pts</td><td></td></tr>
+      <tr><td>4</td><td>Análisis integrado</td><td>14 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>66 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- TEMA 1 — MEMBRANA -->
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — La membrana plasmática: frontera inteligente</div>
+    <div class="lectura">
+      <p>Toda célula está delimitada por una <strong>membrana plasmática</strong>: una estructura dinámica que controla qué entra y qué sale, mantiene la identidad celular y permite la comunicación con el entorno.</p>
+      <p>El modelo aceptado hoy es el <strong>modelo mosaico fluido</strong> (Singer y Nicolson, 1972). Según este modelo, la membrana está formada por una <strong>bicapa de fosfolípidos</strong> en la que flotan proteínas, colesterol y glicoproteínas.</p>
+      <div class="cols2">
+        <div class="col-box">
+          <span class="col-tit">Bicapa de fosfolípidos</span>
+          Cada fosfolípido tiene una cabeza hidrofílica (afín al agua, hacia afuera) y una cola hidrofóbica (que evita el agua, hacia adentro). Esta propiedad genera espontáneamente la bicapa en un ambiente acuoso. El <strong>colesterol</strong> se intercala entre los fosfolípidos, dando estabilidad y regulando la fluidez.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Proteínas de membrana</span>
+          Las proteínas pueden ser <strong>integrales</strong> (atraviesan toda la bicapa, forman canales y transportadores) o <strong>periféricas</strong> (en la superficie, participan en reconocimiento celular y señalización). Las <strong>glicoproteínas</strong> tienen cadenas de azúcares y sirven para el reconocimiento entre células.
+        </div>
+      </div>
+      <div class="dest" style="margin-top:7pt">
+        <strong>¿Por qué "mosaico fluido"?</strong> Mosaico porque tiene diferentes tipos de moléculas (fosfolípidos, proteínas, colesterol, glicoproteínas). Fluido porque los fosfolípidos y las proteínas se mueven lateralmente: la membrana no es rígida sino dinámica.
+      </div>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 1 — Membrana plasmática <span class="pts-badge">16 pts</span></div>
+
+      <div class="banco">Banco — Completación: <em>fosfolípidos · hidrofílica · hidrofóbica · bicapa · mosaico fluido · proteínas · colesterol · glicoproteínas · fluidez · reconocimiento · canales · periféricas</em></div>
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:3pt">a) Completa el párrafo: <span style="font-weight:normal;font-size:8.5pt;color:#555">(6 pts)</span></p>
+      <p class="completacion">
+        La membrana plasmática está formada por una <span class="bf bf-s"></span> de <span class="bf bf-m"></span>. Cada fosfolípido tiene una cabeza <span class="bf bf-m"></span> y una cola <span class="bf bf-m"></span>. El modelo <span class="bf bf-m"></span> establece que en esta bicapa flotan <span class="bf bf-m"></span> y <span class="bf bf-m"></span>, entre otros componentes. El <span class="bf bf-m"></span> regula la <span class="bf bf-s"></span> de la membrana. Las proteínas integrales forman <span class="bf bf-s"></span> de transporte, mientras que las <span class="bf bf-m"></span> participan en el <span class="bf bf-m"></span> celular.
+      </p>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:7pt;margin-bottom:5pt">b) Verdadero y Falso: <span style="font-weight:normal;font-size:8.5pt;color:#555">(6 pts — 2 pts c/u)</span></p>
+      <div class="vf-enc"><span>V</span><span>F</span></div>
+      <div class="vf-item">
+        <span class="vf-n">1.</span>
+        <span class="vf-txt">Las colas hidrofóbicas de los fosfolípidos se orientan hacia el interior de la bicapa porque repelen el agua del entorno celular.</span>
+        <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+      </div>
+      <div class="vf-item" style="flex-wrap:wrap">
+        <span class="vf-n">2.</span>
+        <span class="vf-txt" style="width:calc(100% - 52px)">El modelo mosaico fluido implica que la membrana es una estructura rígida y estática, donde cada proteína ocupa siempre la misma posición.</span>
+        <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+        <div style="width:100%;padding-left:20px;margin-top:2px"><span style="font-size:8.5pt;color:#555">Corrección: </span><span class="corr-linea"></span></div>
+      </div>
+      <div class="vf-item">
+        <span class="vf-n">3.</span>
+        <span class="vf-txt">Las glicoproteínas de la membrana participan en el reconocimiento entre células, lo que es esencial para el sistema inmune y para que las células de un tejido se mantengan unidas.</span>
+        <div class="vf-cas"><div class="casilla"></div><div class="casilla"></div></div>
+      </div>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:7pt;margin-bottom:4pt">c) ¿Por qué la propiedad hidrofóbica de las colas de los fosfolípidos es fundamental para que exista una membrana estable? Explica en términos de la interacción con el agua: <span style="font-weight:normal;font-size:8.5pt;color:#555">(4 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: a) 0.5 pts por cada concepto correcto · b) 2 pts por afirmación correcta, 1 pt corrección si es falsa · c) 4 pts por explicar que las colas hidrofóbicas se agrupan espontáneamente para evitar el agua, formando una barrera estable.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- TEMA 2 — ORGANELOS -->
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Organelos celulares: división del trabajo</div>
+    <div class="lectura">
+      <p>Así como una ciudad tiene distintos edificios con funciones específicas, la célula eucariota tiene <strong>organelos</strong>: compartimentos membranosos con funciones especializadas. Esta compartimentación permite que reacciones incompatibles ocurran simultáneamente sin interferirse.</p>
+      <div class="cols3">
+        <div class="col-box">
+          <span class="col-tit">Núcleo</span>
+          Centro de control. Contiene el ADN (genoma). Rodeado por la <strong>envoltura nuclear</strong> con poros que regulan el paso de moléculas. Dentro está el <strong>nucléolo</strong>, donde se forman los ribosomas.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Mitocondria</span>
+          "Planta de energía". Produce ATP mediante la respiración celular aeróbica. Tiene dos membranas: la interna forma <strong>crestas</strong> que aumentan su superficie. Tiene su propio ADN.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Ribosoma</span>
+          Sintetiza proteínas. Puede estar libre en el citoplasma (proteínas para uso interno) o unido al retículo endoplasmático rugoso (proteínas para exportar). Presente en todos los tipos celulares.
+        </div>
+      </div>
+      <div class="cols3" style="margin-top:6pt">
+        <div class="col-box">
+          <span class="col-tit">Retículo endoplasmático</span>
+          <strong>Rugoso (RER):</strong> con ribosomas, sintetiza y procesa proteínas de exportación.<br>
+          <strong>Liso (REL):</strong> sin ribosomas, sintetiza lípidos y detoxifica sustancias (muy abundante en hepatocitos).
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Aparato de Golgi</span>
+          "Sistema postal". Recibe vesículas del RER, modifica, empaqueta y envía proteínas y lípidos a su destino final (membrana, exterior o lisosomas). Produce vesículas de secreción.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Lisosoma / Cloroplasto</span>
+          <strong>Lisosoma:</strong> contiene enzimas digestivas. Degrada materiales de desecho y organismos fagocitados (presente en células animales).<br>
+          <strong>Cloroplasto:</strong> realiza la fotosíntesis. Tiene tilacoides con clorofila y estroma (solo en células vegetales y algas).
+        </div>
+      </div>
+      <div class="dest" style="margin-top:7pt">
+        <strong>La ruta secretora:</strong> Núcleo (ADN) → Ribosoma (síntesis) → RER (procesamiento) → Golgi (modificación y empaque) → Vesícula de secreción → Membrana o exterior. Esta ruta conecta a varios organelos en una cadena de montaje molecular.
+      </div>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 2 — Organelos: estructura, función y relación <span class="pts-badge">20 pts</span></div>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:5pt">a) Relaciona cada característica estructural con el organelo correspondiente y explica por qué esa estructura le permite cumplir su función: <span style="font-weight:normal;font-size:8.5pt;color:#555">(10 pts)</span></p>
+      <table class="fill">
+        <thead>
+          <tr><th style="width:32%">Característica estructural</th><th style="width:24%">Organelo</th><th>¿Por qué esa estructura le permite cumplir su función?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="fh">Membrana interna con crestas muy plegadas</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Poros en la envoltura que regulan el paso de moléculas</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Enzimas digestivas en su interior a pH ácido</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Apilamiento de sacos membranosos (cisternas)</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Tilacoides con clorofila en su membrana</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:8pt;margin-bottom:5pt">b) Selección múltiple: <span style="font-weight:normal;font-size:8.5pt;color:#555">(6 pts — 3 pts c/u)</span></p>
+      <div class="sm-p">
+        <div class="sm-e"><strong>1.</strong> Una célula pancreática produce grandes cantidades de insulina (una proteína) para secretarla al torrente sanguíneo. ¿Qué ruta seguirá la insulina desde su síntesis hasta su secreción?</div>
+        <div class="sm-opts">
+          <div class="sm-op"><div class="circulo">A</div><span>Ribosoma libre → Lisosoma → Membrana plasmática.</span></div>
+          <div class="sm-op"><div class="circulo">B</div><span>Ribosoma en RER → RER → Golgi → Vesícula de secreción → Membrana plasmática.</span></div>
+          <div class="sm-op"><div class="circulo">C</div><span>Núcleo → Mitocondria → Golgi → Exterior.</span></div>
+          <div class="sm-op"><div class="circulo">D</div><span>Ribosoma libre → Retículo liso → Membrana plasmática.</span></div>
+        </div>
+      </div>
+      <div class="sm-p">
+        <div class="sm-e"><strong>2.</strong> ¿Por qué los hepatocitos (células del hígado) tienen mucho retículo endoplasmático liso (REL) en comparación con otras células?</div>
+        <div class="sm-opts">
+          <div class="sm-op"><div class="circulo">A</div><span>Porque el hígado produce muchas proteínas para exportar al torrente sanguíneo.</span></div>
+          <div class="sm-op"><div class="circulo">B</div><span>Porque el REL produce ATP mediante fotosíntesis en las células hepáticas.</span></div>
+          <div class="sm-op"><div class="circulo">C</div><span>Porque el hígado necesita sintetizar lípidos y detoxificar sustancias, funciones del REL.</span></div>
+          <div class="sm-op"><div class="circulo">D</div><span>Porque el REL contiene el ADN mitocondrial en los hepatocitos.</span></div>
+        </div>
+      </div>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:6pt;margin-bottom:4pt">c) Si una célula vegetal perdiera todos sus cloroplastos pero mantuviera sus mitocondrias, ¿qué consecuencias tendría para su metabolismo energético? ¿Y si una célula animal perdiera todas sus mitocondrias? <span style="font-weight:normal;font-size:8.5pt;color:#555">(4 pts — 2 pts c/u)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: a) 2 pts por fila con organelo correcto y justificación estructural · b) 3 pts por alternativa correcta · c) 2 pts por cada consecuencia correctamente fundamentada en la función del organelo.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- TEMA 3 — TRANSPORTE -->
+  <div class="bloque">
+    <div class="lee-label">Lee con atención — Transporte celular: cómo cruzan las sustancias la membrana</div>
+    <div class="lectura">
+      <p>La membrana plasmática es <strong>selectivamente permeable</strong>: deja pasar algunas sustancias y bloquea otras. El tipo de transporte depende del tamaño de la molécula, su carga eléctrica y la concentración a cada lado.</p>
+      <div class="cols2">
+        <div class="col-box">
+          <span class="col-tit">Transporte pasivo — sin gasto de energía</span>
+          Las moléculas se mueven <strong>a favor del gradiente de concentración</strong> (de mayor a menor concentración). No requiere ATP.<br><br>
+          • <strong>Difusión simple:</strong> moléculas pequeñas y no polares (O₂, CO₂) cruzan directamente la bicapa.<br>
+          • <strong>Difusión facilitada:</strong> moléculas polares o iones usan <strong>proteínas canales o transportadoras</strong>. Ejemplo: glucosa entra a la célula por proteínas GLUT.<br>
+          • <strong>Ósmosis:</strong> difusión del agua a través de <strong>acuaporinas</strong>, de menor a mayor concentración de soluto.
+        </div>
+        <div class="col-box">
+          <span class="col-tit">Transporte activo — con gasto de energía (ATP)</span>
+          Las moléculas se mueven <strong>en contra del gradiente de concentración</strong>. Requiere ATP y proteínas transportadoras específicas.<br><br>
+          • <strong>Bomba Na⁺/K⁺:</strong> expulsa 3 Na⁺ y entra 2 K⁺ contra gradiente. Mantiene el potencial de membrana (vital en neuronas).<br><br>
+          • <strong>Transporte vesicular:</strong><br>
+          — <em>Endocitosis:</em> la membrana rodea y engulle materiales del exterior.<br>
+          — <em>Exocitosis:</em> vesículas internas se fusionan con la membrana y liberan su contenido al exterior (ej: secreción de insulina).
+        </div>
+      </div>
+      <div class="dest" style="margin-top:7pt">
+        <strong>Regla del gradiente:</strong> Si el agua tiene baja concentración de solutos fuera de la célula (solución hipotónica), entra a la célula por ósmosis → la célula se hincha. Si la concentración de solutos es mayor afuera (solución hipertónica), el agua sale → la célula se encoge.
+      </div>
+    </div>
+
+    <div class="flecha-responde">▼ Ahora responde lo siguiente</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 3 — Transporte celular <span class="pts-badge">16 pts</span></div>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:5pt">a) Clasifica cada situación en el tipo de transporte correspondiente y justifica con una característica clave: <span style="font-weight:normal;font-size:8.5pt;color:#555">(8 pts)</span></p>
+      <table class="fill">
+        <thead>
+          <tr><th style="width:38%">Situación</th><th style="width:28%">Tipo de transporte</th><th>Característica clave que lo define</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="fh">El O₂ pasa de los alvéolos al interior de los glóbulos rojos.</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Una célula pancreática libera insulina al torrente sanguíneo mediante vesículas.</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">Una neurona mantiene alta concentración de K⁺ y baja de Na⁺ en su interior, contraria al gradiente.</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td class="fh">El agua entra a una célula vegetal colocada en agua pura.</td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-top:8pt;margin-bottom:4pt">b) Un glóbulo rojo se coloca en tres soluciones distintas. Predice qué ocurrirá en cada caso y explica el mecanismo de ósmosis que lo genera: <span style="font-weight:normal;font-size:8.5pt;color:#555">(6 pts — 2 pts c/u)</span></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;font-size:9.5pt;margin-bottom:6pt">
+        <div style="border:1px solid #111;border-radius:4px;padding:4pt 7pt"><strong>Solución isotónica</strong><br>(misma concentración de solutos que la célula)<br><br>¿Qué ocurre?<br><span class="linea-r" style="margin-top:4pt"></span><span class="linea-r"></span></div>
+        <div style="border:1px solid #111;border-radius:4px;padding:4pt 7pt"><strong>Solución hipotónica</strong><br>(menor concentración de solutos que la célula)<br><br>¿Qué ocurre?<br><span class="linea-r" style="margin-top:4pt"></span><span class="linea-r"></span></div>
+        <div style="border:1px solid #111;border-radius:4px;padding:4pt 7pt"><strong>Solución hipertónica</strong><br>(mayor concentración de solutos que la célula)<br><br>¿Qué ocurre?<br><span class="linea-r" style="margin-top:4pt"></span><span class="linea-r"></span></div>
+      </div>
+
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:4pt">c) ¿Por qué la bomba Na⁺/K⁺ es indispensable para el funcionamiento de las neuronas? ¿Qué pasaría si dejara de funcionar? <span style="font-weight:normal;font-size:8.5pt;color:#555">(2 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span>
+      <p class="rubrica">Rúbrica: a) 2 pts por fila completa · b) 2 pts por cada predicción con mecanismo de ósmosis explicado · c) 2 pts por relacionar la bomba con el potencial de membrana neuronal.</p>
+    </div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- TEMA 4 — ANÁLISIS INTEGRADO -->
+  <div class="item-header">
+    <span>Tema 4 · Análisis Integrado</span>
+    <span>14 puntos</span>
+  </div>
+  <p class="instruccion">Lee la situación y responde integrando membrana, organelos y transporte.</p>
+
+  <div style="border:1.5px dashed #111;border-radius:5px;padding:7pt 10pt;margin-bottom:8pt;font-size:10pt;line-height:1.65;">
+    <p style="font-size:7.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.07em;color:#555;margin-bottom:4pt">Situación</p>
+    <p>Valentina investiga una célula secretora de anticuerpos (célula B activada). Observa que esta célula tiene un retículo endoplasmático rugoso muy desarrollado, un aparato de Golgi prominente, muchas mitocondrias y una membrana plasmática con alta densidad de proteínas. Cada día secreta miles de moléculas de anticuerpos al exterior.</p>
+  </div>
+
+  <div style="margin-bottom:8pt">
+    <p style="font-size:10.5pt;font-weight:bold;margin-bottom:4pt">Pregunta 1 (6 pts):</p>
+    <p style="font-size:10pt;line-height:1.55;margin-bottom:5pt">Explica por qué esta célula tiene cada una de las tres estructuras muy desarrolladas (RER, Golgi y mitocondrias). Para cada una, relaciona su función con la actividad específica de esta célula secretora.</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts por cada organelo correctamente relacionado con la actividad secretora de anticuerpos.</p>
+  </div>
+
+  <div style="margin-bottom:8pt">
+    <p style="font-size:10.5pt;font-weight:bold;margin-bottom:4pt">Pregunta 2 (4 pts):</p>
+    <p style="font-size:10pt;line-height:1.55;margin-bottom:5pt">¿Por qué mecanismo de transporte salen los anticuerpos de la célula? Describe el proceso paso a paso desde que el anticuerpo es sintetizado hasta que llega al exterior.</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts por identificar la exocitosis correctamente · 2 pts por describir la secuencia RER → Golgi → vesícula → membrana.</p>
+  </div>
+
+  <div style="margin-bottom:8pt">
+    <p style="font-size:10.5pt;font-weight:bold;margin-bottom:4pt">Pregunta 3 — Argumentación (4 pts):</p>
+    <p style="font-size:10pt;line-height:1.55;margin-bottom:5pt">Valentina afirma: <em>"La alta densidad de proteínas en la membrana de esta célula no tiene nada que ver con su función secretora."</em> ¿Estás de acuerdo? Argumenta usando lo que sabes sobre las funciones de las proteínas de membrana.</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica">Rúbrica: 2 pts por refutar con argumento sobre el rol de proteínas en transporte y señalización · 2 pts por coherencia y uso de terminología precisa.</p>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Biología Celular y Molecular · Guía N°2</span>
+    <span>Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
