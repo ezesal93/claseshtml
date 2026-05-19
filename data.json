@@ -13,9 +13,9 @@
     {
       "categoria": "Biología Celular",
       "archivos": [
-        { "nombre": "Guía 1: Historia e introducción a la célula", "url": "Biologia-1M/guia_bio_celular_1_historia_intro.html" },
-        { "nombre": "Guía 2: Estructura y organización celular", "url": "Biologia-1M/guia_bio_celular_2_estructura.html" },
-        { "nombre": "Guía 3: Procesos y dinámica celular", "url": "Biologia-1M/guia_bio_celular_3_procesos.html" }
+        { "nombre": "Guía 1: Historia e introducción a la célula", "url": "Biologia-Celular/guia_bio_celular_1_historia_intro.html" },
+        { "nombre": "Guía 2: Estructura y organización celular", "url": "Biologia-Celular/guia_bio_celular_2_estructura.html" },
+        { "nombre": "Guía 3: Procesos y dinámica celular", "url": "Biologia-Celular/guia_bio_celular_3_procesos.html" }
       ]
     },
    
