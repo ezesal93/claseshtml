@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Aula 2026: ¡Misión Salvar el Clima!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            font-family: 'Fredoka', 'Nunito', sans-serif;
+            background-color: #e8f5e9;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .pulse-btn { animation: pulse-slow 2s infinite; }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+        }
+        .wheel-container {
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+        .confetti-particle {
+            position: fixed;
+            animation: fall linear forwards;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(720deg); }
+        }
+        /* Eco-Detective: tarjeta de escenario */
+        .detective-scene {
+            position: relative;
+            width: 100%;
+            background: linear-gradient(180deg, #87ceeb 0%, #87ceeb 45%, #a5d6a7 45%, #66bb6a 55%, #4caf50 100%);
+            border-radius: 1rem;
+            overflow: hidden;
+            min-height: 340px;
+        }
+        .detective-scene::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 45%;
+            background: #f5f5f5;
+            border-top: 6px solid #5d4037;
+            z-index: 0;
+        }
+        /* Casa dibujada con CSS */
+        .house-body {
+            position: absolute;
+            bottom: 44%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            z-index: 1;
+        }
+        .house-walls {
+            background: #fff8e1;
+            border: 4px solid #795548;
+            border-radius: 0 0 8px 8px;
+            width: 100%;
+            height: 120px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px;
+        }
+        .house-roof {
+            width: 0;
+            height: 0;
+            border-left: 120px solid transparent;
+            border-right: 120px solid transparent;
+            border-bottom: 70px solid #e53935;
+            margin-bottom: -2px;
+        }
+        .eco-item {
+            position: absolute;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+            transform-origin: bottom center;
+        }
+        .eco-item:hover:not(.solved) { transform: scale(1.1); }
+        .eco-item.solved { pointer-events: none; }
+        .eco-item .item-bubble {
+            background: #fff;
+            border-radius: 50%;
+            width: 52px; height: 52px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem;
+            border: 3px solid #ef5350;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            animation: wobble 2s ease-in-out infinite;
+        }
+        .eco-item:nth-child(2) .item-bubble { animation-delay: 0.4s; }
+        .eco-item:nth-child(3) .item-bubble { animation-delay: 0.8s; }
+        .eco-item:nth-child(4) .item-bubble { animation-delay: 1.2s; }
+        .eco-item:nth-child(5) .item-bubble { animation-delay: 1.6s; }
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        .eco-item.solved .item-bubble {
+            background: #c8e6c9;
+            border-color: #43a047;
+            animation: none;
+        }
+        .eco-item .item-label {
+            background: #ef5350;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        .eco-item.solved .item-label {
+            background: #43a047;
+        }
+        /* Tarjeta de quiz de detective */
+        .detective-quiz-card {
+            background: white;
+            border: 3px solid #66bb6a;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-top: 1rem;
+            display: none;
+            animation: slideUp 0.3s ease;
+        }
+        .detective-quiz-card.active { display: block; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .choice-btn {
+            width: 100%;
+            text-align: left;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 2px solid #a5d6a7;
+            background: #f1f8e9;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2e7d32;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .choice-btn:hover { background: #dcedc8; border-color: #66bb6a; transform: translateX(4px); }
+        .choice-btn.correct { background: #c8e6c9; border-color: #43a047; color: #1b5e20; }
+        .choice-btn.wrong { background: #ffcdd2; border-color: #ef9a9a; color: #b71c1c; }
+        /* Pantalla de carga nicely entre pantallas */
+        section { display: none; }
+        section.active { display: flex; }
+        /* Rueda SVG */
+        #wheel-graphic { transform-origin: center center; }
+        /* Modal fixes */
+        #eco-modal { display: none; }
+        #eco-modal.open { display: flex; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-slate-800">
+
+    <!-- CABECERA -->
+    <header class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-xl px-4 py-3 z-20 flex-shrink-0">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="bg-white text-emerald-600 p-2 rounded-full shadow animate-bounce">
+                    <i class="fa-solid fa-earth-americas text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black tracking-wide leading-none">ECO-AULA 2026</h1>
+                    <p class="text-[11px] md:text-xs text-emerald-100 font-semibold">Día Mundial del Medio Ambiente · Inspirados por la Naturaleza</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 bg-emerald-700/50 px-3 py-2 rounded-2xl border border-emerald-400/30">
+                <div>
+                    <label class="block text-[10px] text-emerald-200 font-bold uppercase tracking-wider">Clase:</label>
+                    <input type="text" id="class-name-input" value="1º Básico – Los Eco-Héroes"
+                        class="bg-transparent text-white font-bold text-sm focus:outline-none border-b border-transparent focus:border-white transition-all w-44">
+                </div>
+                <div class="bg-yellow-400 text-slate-900 font-black text-xl px-4 py-1 rounded-xl border-2 border-white flex items-center gap-1">
+                    <i class="fa-solid fa-star text-amber-600 text-base"></i>
+                    <span id="global-score">0</span>
+                    <span class="text-[10px] font-bold text-slate-700 leading-none">PTS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- GUÍA PROFESORA -->
+    <div class="bg-amber-50 border-b border-amber-200 py-2 px-4 flex-shrink-0 z-10">
+        <div class="max-w-6xl mx-auto flex items-start gap-2">
+            <div class="bg-amber-500 text-white p-1.5 rounded-lg mt-0.5 shrink-0">
+                <i class="fa-solid fa-chalkboard-user text-xs"></i>
+            </div>
+            <p id="teacher-instructions" class="text-xs md:text-sm text-amber-900 font-semibold leading-relaxed">
+                ¡Bienvenida! Escribe el nombre de tu clase arriba y selecciona una misión para empezar.
+            </p>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-3 md:p-5">
+
+        <!-- PANTALLA 1: MENÚ PRINCIPAL -->
+        <section id="screen-menu" class="active w-full flex-col items-center gap-5">
+            <div class="w-full bg-white/95 rounded-3xl shadow-xl border-4 border-emerald-200 p-5 md:p-8 flex flex-col items-center text-center">
+                <h2 class="text-3xl md:text-5xl font-black text-emerald-600 mb-2 leading-tight">¡Misión: Proteger el Clima!</h2>
+                <p class="text-sm md:text-base text-slate-600 max-w-2xl mb-6 leading-relaxed">
+                    Niños y niñas de <strong class="text-emerald-700">6 a 8 años</strong>, hoy nos convertiremos en Guardianes del Clima. ¡La naturaleza nos da la solución!
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mb-6">
+                    <button onclick="changeScreen('screen-wheel')"
+                        class="group p-5 bg-gradient-to-b from-sky-50 to-sky-100 hover:from-sky-100 hover:to-sky-200 border-4 border-sky-300 hover:border-sky-400 rounded-2xl shadow-lg transition-all hover:-translate-y-1 flex flex-col items-center">
+                        <div class="bg-sky-400 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-dharmachakra"></i>
+                        </div>
+                        <span class="font-bold text-sky-800 text-base">1. La Ruleta del Saber</span>
+                        <span class="text-xs text-sky-600 mt-1">Preguntas de la naturaleza.</span>
+                    </button>
+                    <button onclick="changeScreen('screen-sorter')"
+                        class="group p-5 bg-gradient-to-b from-amber-50 to-amber-100 hover:from-amber-100 hover:to-amber-200 border-4 border-amber-300 hover:border-amber-400 rounded-2xl shadow-lg transition-all hover:-translate-y-1 flex flex-col items-center">
+                        <div class="bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-recycle"></i>
+                        </div>
+                        <span class="font-bold text-amber-800 text-base">2. Clasificador Eco</span>
+                        <span class="text-xs text-amber-600 mt-1">¡Separa los residuos!</span>
+                    </button>
+                    <button onclick="changeScreen('screen-detectives')"
+                        class="group p-5 bg-gradient-to-b from-emerald-50 to-emerald-100 hover:from-emerald-100 hover:to-emerald-200 border-4 border-emerald-300 hover:border-emerald-400 rounded-2xl shadow-lg transition-all hover:-translate-y-1 flex flex-col items-center">
+                        <div class="bg-emerald-500 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl shadow mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-magnifying-glass-location"></i>
+                        </div>
+                        <span class="font-bold text-emerald-800 text-base">3. Eco-Detectives</span>
+                        <span class="text-xs text-emerald-600 mt-1">Encuentra y soluciona los descuidos.</span>
+                    </button>
+                </div>
+                <!-- Termómetro de progreso -->
+                <div class="w-full bg-slate-100 p-4 rounded-2xl border-2 border-dashed border-slate-300">
+                    <div class="flex justify-between items-center mb-1 text-xs md:text-sm font-bold text-slate-600">
+                        <span>🌡️ Termómetro del Clima Sano</span>
+                        <span id="classroom-progress-text">0 / 100 Puntos</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-5 overflow-hidden p-0.5 shadow-inner">
+                        <div id="classroom-progress-bar"
+                            class="bg-gradient-to-r from-emerald-400 to-yellow-400 h-full rounded-full transition-all duration-700"
+                            style="width:0%"></div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1.5">¡Lleguemos a 100 puntos para ganar el Diploma de la Clase!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 2: RULETA DEL SABER -->
+        <section id="screen-wheel" class="w-full flex-col items-center gap-4">
+            <div class="w-full bg-white/95 rounded-3xl shadow-xl border-4 border-sky-200 p-4 md:p-6">
+                <div class="flex justify-between items-center mb-4 border-b border-sky-100 pb-3">
+                    <div class="flex items-center gap-2 text-sky-700">
+                        <i class="fa-solid fa-dharmachakra text-xl"></i>
+                        <h3 class="text-lg md:text-xl font-black">La Ruleta de la Naturaleza</h3>
+                    </div>
+                    <button onclick="changeScreen('screen-menu')"
+                        class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition-all">
+                        <i class="fa-solid fa-arrow-left"></i> Menú
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                    <!-- Ruleta -->
+                    <div class="flex flex-col items-center">
+                        <div class="relative w-56 h-56 md:w-72 md:h-72 flex items-center justify-center">
+                            <div class="absolute -top-4 z-20 text-red-500 text-4xl" style="transform:rotate(180deg)">
+                                <i class="fa-solid fa-caret-up"></i>
+                            </div>
+                            <div id="wheel-graphic" class="w-full h-full rounded-full border-4 border-slate-700 shadow-2xl overflow-hidden wheel-container">
+                                <svg viewBox="0 0 100 100" class="w-full h-full" style="transform:rotate(0)">
+                                    <path d="M 50 50 L 50 0 A 50 50 0 0 1 93.3 25 Z" fill="#10b981"/>
+                                    <path d="M 50 50 L 93.3 25 A 50 50 0 0 1 93.3 75 Z" fill="#3b82f6"/>
+                                    <path d="M 50 50 L 93.3 75 A 50 50 0 0 1 50 100 Z" fill="#eab308"/>
+                                    <path d="M 50 50 L 50 100 A 50 50 0 0 1 6.7 75 Z" fill="#f97316"/>
+                                    <path d="M 50 50 L 6.7 75 A 50 50 0 0 1 6.7 25 Z" fill="#8b5cf6"/>
+                                    <path d="M 50 50 L 6.7 25 A 50 50 0 0 1 50 0 Z" fill="#06b6d4"/>
+                                    <text x="67" y="30" fill="white" font-size="7" text-anchor="middle" font-family="sans-serif">🌳</text>
+                                    <text x="82" y="57" fill="white" font-size="7" text-anchor="middle" font-family="sans-serif">💧</text>
+                                    <text x="68" y="80" fill="white" font-size="7" text-anchor="middle" font-family="sans-serif">⚡</text>
+                                    <text x="33" y="80" fill="white" font-size="7" text-anchor="middle" font-family="sans-serif">🐾</text>
+                                    <text x="18" y="57" fill="white" font-size="7" text-anchor="middle" font-family="sans-serif">♻️</text>
+                                    <text x="33" y="30" fill="white" font-size="7" text-anchor="middle" font-family="sans-serif">🌬️</text>
+                                    <circle cx="50" cy="50" r="8" fill="#fff" stroke="#334155" stroke-width="2"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <button id="spin-button" onclick="spinWheel()"
+                            class="mt-5 bg-rose-500 hover:bg-rose-600 active:scale-95 text-white font-black text-lg px-8 py-3 rounded-2xl shadow-lg transition-all pulse-btn border-b-4 border-rose-700">
+                            🎯 ¡GIRAR!
+                        </button>
+                    </div>
+                    <!-- Panel de pregunta -->
+                    <div class="bg-sky-50 border-2 border-sky-200 rounded-2xl p-5 flex flex-col min-h-[260px]">
+                        <div id="wheel-default-msg" class="flex flex-col items-center justify-center flex-grow text-center">
+                            <div class="text-sky-400 text-5xl mb-3"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <h4 class="text-base font-bold text-sky-800">¿Qué reto nos tocará?</h4>
+                            <p class="text-sm text-sky-600 mt-1">¡La profesora girará la ruleta y responderemos juntos!</p>
+                        </div>
+                        <div id="wheel-question-box" class="hidden flex-col flex-grow">
+                            <span id="question-category" class="bg-sky-200 text-sky-800 text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest self-start mb-3">CATEGORÍA</span>
+                            <h4 id="question-text" class="text-base md:text-lg font-bold text-slate-800 mb-4 leading-snug flex-grow">¿Pregunta?</h4>
+                            <div id="question-options" class="flex flex-col gap-2 w-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 3: CLASIFICADOR ECO -->
+        <section id="screen-sorter" class="w-full flex-col items-center gap-4">
+            <div class="w-full bg-white/95 rounded-3xl shadow-xl border-4 border-amber-200 p-4 md:p-6">
+                <div class="flex justify-between items-center mb-4 border-b border-amber-100 pb-3">
+                    <div class="flex items-center gap-2 text-amber-700">
+                        <i class="fa-solid fa-recycle text-xl"></i>
+                        <h3 class="text-lg md:text-xl font-black">El Gran Clasificador</h3>
+                    </div>
+                    <button onclick="changeScreen('screen-menu')"
+                        class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition-all">
+                        <i class="fa-solid fa-arrow-left"></i> Menú
+                    </button>
+                </div>
+                <p class="text-sm text-slate-600 text-center mb-5 font-medium">Observa el residuo. ¿En qué contenedor va para cuidar el planeta?</p>
+                <!-- Item activo -->
+                <div class="flex justify-center mb-6">
+                    <div class="bg-gradient-to-b from-yellow-50 to-amber-50 border-4 border-amber-300 rounded-2xl p-6 shadow-xl flex flex-col items-center justify-center w-56 h-48 transition-all">
+                        <div id="sorter-item-icon" class="text-6xl mb-3">🍎</div>
+                        <span id="sorter-item-name" class="font-extrabold text-lg text-slate-800 text-center">Manzana Mordida</span>
+                        <span id="sorter-item-hint" class="text-xs text-slate-500 mt-1 text-center">Orgánico / Comida</span>
+                    </div>
+                </div>
+                <!-- Contenedores -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 w-full">
+                    <button onclick="checkSorterAnswer('plastico')"
+                        class="bg-yellow-100 hover:bg-yellow-200 active:scale-95 border-4 border-yellow-400 p-3 rounded-2xl shadow flex flex-col items-center transition-all">
+                        <div class="text-yellow-500 text-3xl mb-1"><i class="fa-solid fa-bottle-water"></i></div>
+                        <span class="font-bold text-yellow-800">AMARILLO</span>
+                        <span class="text-xs font-semibold text-yellow-700">Plásticos</span>
+                    </button>
+                    <button onclick="checkSorterAnswer('papel')"
+                        class="bg-blue-100 hover:bg-blue-200 active:scale-95 border-4 border-blue-400 p-3 rounded-2xl shadow flex flex-col items-center transition-all">
+                        <div class="text-blue-500 text-3xl mb-1"><i class="fa-solid fa-box-open"></i></div>
+                        <span class="font-bold text-blue-800">AZUL</span>
+                        <span class="text-xs font-semibold text-blue-700">Papel y Cartón</span>
+                    </button>
+                    <button onclick="checkSorterAnswer('vidrio')"
+                        class="bg-emerald-100 hover:bg-emerald-200 active:scale-95 border-4 border-emerald-400 p-3 rounded-2xl shadow flex flex-col items-center transition-all">
+                        <div class="text-emerald-500 text-3xl mb-1"><i class="fa-solid fa-wine-glass-empty"></i></div>
+                        <span class="font-bold text-emerald-800">VERDE</span>
+                        <span class="text-xs font-semibold text-emerald-700">Vidrio</span>
+                    </button>
+                    <button onclick="checkSorterAnswer('organico')"
+                        class="bg-amber-100 hover:bg-amber-200 active:scale-95 border-4 border-amber-600 p-3 rounded-2xl shadow flex flex-col items-center transition-all">
+                        <div class="text-amber-700 text-3xl mb-1"><i class="fa-solid fa-seedling"></i></div>
+                        <span class="font-bold text-amber-800">MARRÓN</span>
+                        <span class="text-xs font-semibold text-amber-700">Orgánico</span>
+                    </button>
+                </div>
+                <p class="text-center text-xs text-slate-500 mt-3 font-medium">Clasificados: <span id="sorter-count" class="font-bold text-slate-700">1/6</span></p>
+            </div>
+        </section>
+
+        <!-- PANTALLA 4: ECO-DETECTIVES (REDISEÑADO) -->
+        <section id="screen-detectives" class="w-full flex-col items-center gap-4">
+            <div class="w-full bg-white/95 rounded-3xl shadow-xl border-4 border-emerald-200 p-4 md:p-6">
+                <!-- Cabecera -->
+                <div class="flex justify-between items-center mb-3 border-b border-emerald-100 pb-3">
+                    <div class="flex items-center gap-2 text-emerald-700">
+                        <i class="fa-solid fa-magnifying-glass-location text-xl"></i>
+                        <h3 class="text-lg md:text-xl font-black">Eco-Detectives: ¡Ayuda al planeta!</h3>
+                    </div>
+                    <button onclick="changeScreen('screen-menu')"
+                        class="bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold px-3 py-1.5 rounded-xl transition-all">
+                        <i class="fa-solid fa-arrow-left"></i> Menú
+                    </button>
+                </div>
+
+                <p class="text-center text-sm text-slate-600 font-medium mb-4">
+                    Hay <strong class="text-red-600">5 descuidos</strong> que dañan el clima. ¡Haz clic en cada uno para resolverlo y aprende cómo mejorar! 🔍
+                </p>
+
+                <!-- Grid principal: escena + quiz -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+
+                    <!-- ESCENA INTERACTIVA (izquierda/arriba) -->
+                    <div class="detective-scene" style="min-height:320px; border:4px solid #388e3c;">
+
+                        <!-- CIELO: sol y nube decorativos -->
+                        <div style="position:absolute;top:12px;right:20px;font-size:2rem;z-index:1;">☀️</div>
+                        <div style="position:absolute;top:18px;left:30px;font-size:1.6rem;z-index:1;">☁️</div>
+                        <!-- Árbol decorativo -->
+                        <div style="position:absolute;bottom:44%;left:6px;font-size:2.5rem;z-index:1;">🌳</div>
+                        <!-- Flores -->
+                        <div style="position:absolute;bottom:44%;right:8px;font-size:1.5rem;z-index:1;">🌻🌸</div>
+
+                        <!-- CASA (CSS pura) -->
+                        <div class="house-body">
+                            <div class="house-roof"></div>
+                            <div class="house-walls">
+                                <!-- Ventana izquierda con cortina -->
+                                <div style="width:44px;height:44px;border:3px solid #795548;background:#e3f2fd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🪟</div>
+                                <!-- Puerta -->
+                                <div style="width:44px;height:58px;border:3px solid #795548;background:#a1887f;border-radius:4px 4px 0 0;display:flex;align-items:center;justify-content:center;font-size:1rem;">🚪</div>
+                                <!-- Ventana derecha -->
+                                <div style="width:44px;height:44px;border:3px solid #795548;background:#e3f2fd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🪟</div>
+                            </div>
+                        </div>
+
+                        <!-- === 5 ITEMS DETECTABLES === -->
+
+                        <!-- 1. Grifo abierto (esquina inferior izquierda) -->
+                        <div id="di-faucet" class="eco-item" style="left:5%;bottom:8%;" onclick="activateDetective('faucet')">
+                            <div class="item-bubble">🚰</div>
+                            <span class="item-label">¡Grifo abierto!</span>
+                        </div>
+
+                        <!-- 2. Luz encendida de día (techo de la casa, centro) -->
+                        <div id="di-light" class="eco-item" style="left:42%;top:18%;" onclick="activateDetective('light')">
+                            <div class="item-bubble">💡</div>
+                            <span class="item-label">¡Luz de día!</span>
+                        </div>
+
+                        <!-- 3. Basura tirada (pasto, derecha) -->
+                        <div id="di-trash" class="eco-item" style="right:4%;bottom:46%;" onclick="activateDetective('trash')">
+                            <div class="item-bubble">🗑️</div>
+                            <span class="item-label">¡Basura tirada!</span>
+                        </div>
+
+                        <!-- 4. TV encendida sola (suelo, izquierda) -->
+                        <div id="di-tv" class="eco-item" style="left:8%;bottom:46%;" onclick="activateDetective('tv')">
+                            <div class="item-bubble">📺</div>
+                            <span class="item-label">¡Tele sola!</span>
+                        </div>
+
+                        <!-- 5. Tubo de humo / auto encendido (camino, abajo centro) -->
+                        <div id="di-smoke" class="eco-item" style="right:5%;bottom:8%;" onclick="activateDetective('smoke')">
+                            <div class="item-bubble">🚗</div>
+                            <span class="item-label">¡Motor encendido!</span>
+                        </div>
+                    </div>
+
+                    <!-- PANEL LATERAL: quiz + estado (derecha/abajo) -->
+                    <div class="flex flex-col gap-3">
+
+                        <!-- Progreso visual con badges -->
+                        <div class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-3">
+                            <p class="text-xs font-black text-emerald-800 uppercase tracking-wider mb-2">Descuidos resueltos: <span id="detective-count" class="text-emerald-600">0 / 5</span></p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span id="badge-faucet" class="bg-slate-200 text-slate-400 rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all" title="Grifo">🚰</span>
+                                <span id="badge-light" class="bg-slate-200 text-slate-400 rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all" title="Luz">💡</span>
+                                <span id="badge-trash" class="bg-slate-200 text-slate-400 rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all" title="Basura">🗑️</span>
+                                <span id="badge-tv" class="bg-slate-200 text-slate-400 rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all" title="TV">📺</span>
+                                <span id="badge-smoke" class="bg-slate-200 text-slate-400 rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all" title="Auto">🚗</span>
+                            </div>
+                        </div>
+
+                        <!-- Instrucción por defecto -->
+                        <div id="detective-default" class="bg-sky-50 border-2 border-sky-200 rounded-2xl p-5 text-center flex flex-col items-center gap-2">
+                            <span class="text-4xl">🔍</span>
+                            <p class="text-sm font-bold text-sky-700">Haz clic en un descuido de la imagen para iniciar el desafío.</p>
+                        </div>
+
+                        <!-- Quiz activo del detective (oculto hasta hacer clic) -->
+                        <div id="detective-quiz" class="detective-quiz-card">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span id="dq-icon" class="text-3xl">❓</span>
+                                <div>
+                                    <p id="dq-problem" class="text-xs text-red-600 font-bold uppercase tracking-wide">Descuido detectado</p>
+                                    <p id="dq-question" class="text-sm font-bold text-slate-800 leading-snug">¿Cómo podemos solucionarlo?</p>
+                                </div>
+                            </div>
+                            <div id="dq-options" class="flex flex-col gap-1"></div>
+                            <div id="dq-feedback" class="hidden mt-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
+                                <p id="dq-feedback-text" class="text-sm font-semibold text-emerald-800"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PANTALLA 5: VICTORIA -->
+        <section id="screen-victory" class="w-full flex-col items-center gap-5">
+            <div class="w-full bg-white rounded-3xl shadow-2xl border-8 border-yellow-400 p-6 md:p-10 flex flex-col items-center text-center relative overflow-hidden">
+                <div class="bg-yellow-400 text-slate-900 w-20 h-20 rounded-full flex items-center justify-center text-4xl shadow-lg border-4 border-white mb-4 animate-bounce">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-black text-amber-600 mb-1">¡MISIÓN CUMPLIDA!</h2>
+                <h3 class="text-lg md:text-2xl font-bold text-emerald-600 mb-5">¡La clase salvó al Medio Ambiente!</h3>
+
+                <div id="diploma-box" class="w-full max-w-xl bg-gradient-to-br from-emerald-50 to-teal-50 p-5 md:p-8 rounded-3xl border-4 border-double border-emerald-500 shadow-md mb-6">
+                    <h4 class="text-xs font-bold text-emerald-800 tracking-widest uppercase mb-1">Certificado de Honor Ambiental</h4>
+                    <p class="text-xs text-slate-500">Otorgado con orgullo al curso:</p>
+                    <h2 id="diploma-class-name" class="text-xl md:text-3xl font-extrabold text-teal-800 my-3 border-b-2 border-dashed border-teal-400 pb-2">Grupo Escolar</h2>
+                    <p class="text-sm text-slate-700 font-medium max-w-lg mx-auto">
+                        Por haber completado con éxito todos los desafíos ecológicos en el <strong class="text-emerald-700">Día Mundial del Medio Ambiente 2026</strong>, demostrando excelente trabajo en equipo, sabiduría y compromiso con la naturaleza.
+                    </p>
+                    <div class="flex justify-around items-center mt-6 pt-4 border-t border-emerald-100">
+                        <div class="text-center">
+                            <span class="font-bold text-emerald-800 text-sm block">🌻 Madre Tierra</span>
+                            <span class="text-xs text-slate-400">Naturaleza Feliz</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="font-bold text-teal-800 text-sm block">🎒 Profesora Guía</span>
+                            <span class="text-xs text-slate-400">Líder del Futuro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="resetGame()"
+                        class="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-black text-base px-6 py-3 rounded-2xl shadow transition-all">
+                        🔄 Jugar de nuevo
+                    </button>
+                    <button onclick="window.print()"
+                        class="bg-slate-700 hover:bg-slate-800 active:scale-95 text-white font-black text-base px-6 py-3 rounded-2xl shadow transition-all">
+                        🖨️ Imprimir Diploma
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL ECO -->
+    <div id="eco-modal" class="fixed inset-0 bg-slate-900/70 items-center justify-center p-4 z-50">
+        <div id="eco-modal-content" class="bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full border-8 text-center">
+            <div id="eco-modal-icon" class="text-6xl mb-3 text-center">🎉</div>
+            <h4 id="eco-modal-title" class="text-2xl font-black mb-2 text-slate-800">¡Excelente!</h4>
+            <p id="eco-modal-body" class="text-slate-600 font-medium mb-5 text-sm leading-relaxed">Mensaje ecológico.</p>
+            <button onclick="closeEcoModal()"
+                class="w-full bg-slate-800 hover:bg-slate-950 text-white font-black text-base py-3 rounded-2xl shadow transition-all">
+                ¡ENTENDIDO! 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-800 text-slate-400 text-center py-3 text-xs font-semibold flex-shrink-0 z-10 border-t border-slate-700">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-1">
+            <span>🌍 5 de Junio de 2026 – Día Mundial del Medio Ambiente</span>
+            <span>Inspirados por la Naturaleza · Para el Clima · Para nuestro Futuro</span>
+        </div>
+    </footer>
+
+<script>
+/*** AUDIO ***/
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(type) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    const now = audioCtx.currentTime;
+    if (type === 'click') {
+        osc.type = 'sine'; osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(80, now+0.1);
+        gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.1);
+        osc.start(now); osc.stop(now+0.1);
+    } else if (type === 'correct') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now); osc.frequency.setValueAtTime(659.25, now+0.08);
+        osc.frequency.setValueAtTime(783.99, now+0.16);
+        gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.35);
+        osc.start(now); osc.stop(now+0.35);
+    } else if (type === 'wrong') {
+        osc.type = 'triangle'; osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(110, now+0.25);
+        gain.gain.setValueAtTime(0.25, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.25);
+        osc.start(now); osc.stop(now+0.25);
+    } else if (type === 'spin') {
+        osc.type = 'sine'; osc.frequency.setValueAtTime(150, now);
+        osc.frequency.linearRampToValueAtTime(300, now+0.2);
+        gain.gain.setValueAtTime(0.15, now); gain.gain.exponentialRampToValueAtTime(0.01, now+0.2);
+        osc.start(now); osc.stop(now+0.2);
+    } else if (type === 'victory') {
+        [261.63,329.63,392,523.25,659.25,783.99,1046.5].forEach((freq,i) => {
+            const o2 = audioCtx.createOscillator(); const g2 = audioCtx.createGain();
+            o2.connect(g2); g2.connect(audioCtx.destination);
+            o2.type = 'sawtooth'; o2.frequency.setValueAtTime(freq, now+i*0.1);
+            g2.gain.setValueAtTime(0.1, now+i*0.1); g2.gain.exponentialRampToValueAtTime(0.01, now+i*0.1+0.4);
+            o2.start(now+i*0.1); o2.stop(now+i*0.1+0.4);
+        });
+    }
+}
+
+/*** ESTADO GLOBAL ***/
+let score = 0;
+let activeScreen = 'screen-menu';
+
+/*** PREGUNTAS RULETA ***/
+const ruletaQuestions = [
+    {
+        category: "🌳 Árboles y Clima",
+        text: "¿Por qué los árboles son tan importantes para combatir el cambio climático?",
+        options: [
+            { text: "🅰️ Limpian el aire y atrapan gases dañinos", correct: true },
+            { text: "🅱️ Tienen un color bonito para hacer fotos", correct: false },
+            { text: "🆃 Bloquean el sol para no jugar", correct: false }
+        ],
+        successMsg: "¡Súper! Los bosques actúan como pulmones de la Tierra, absorbiendo gases dañinos y enfriando nuestro clima."
+    },
+    {
+        category: "💧 Cuidado del Agua",
+        text: "¿Qué hacemos al cepillarnos los dientes para cuidar el agua?",
+        options: [
+            { text: "🅰️ Dejar el grifo abierto", correct: false },
+            { text: "🅱️ Cerrar el grifo y usar un vasito", correct: true },
+            { text: "🆃 Jugar a salpicar el espejo", correct: false }
+        ],
+        successMsg: "¡Exacto! Cerrar el grifo ahorra miles de litros de agua dulce. ¡La naturaleza nos lo agradece!"
+    },
+    {
+        category: "⚡ Ahorro de Energía",
+        text: "Si salimos de una habitación, ¿qué debemos hacer?",
+        options: [
+            { text: "🅰️ Dejar la luz encendida", correct: false },
+            { text: "🅱️ Apagar la luz y los aparatos", correct: true },
+            { text: "🆃 Prender más luces", correct: false }
+        ],
+        successMsg: "¡Bien hecho! Evitar el desperdicio de electricidad reduce la contaminación del aire."
+    },
+    {
+        category: "🐾 Amigos del Planeta",
+        text: "¿Cómo ayudamos a las abejas que cuidan nuestras flores?",
+        options: [
+            { text: "🅰️ No pisar flores y plantar plantas nativas", correct: true },
+            { text: "🅱️ Perseguirlas con una red", correct: false },
+            { text: "🆃 Quitar todas las plantas", correct: false }
+        ],
+        successMsg: "¡Excelente! Las abejas mantienen el ciclo de vida de los alimentos."
+    },
+    {
+        category: "♻️ Súper Recicladores",
+        text: "¿Qué significa 'Reducir' en las 3R de la ecología?",
+        options: [
+            { text: "🅰️ Comprar más juguetes de plástico", correct: false },
+            { text: "🅱️ Usar menos bolsas plásticas y preferir las de tela", correct: true },
+            { text: "🆃 Hacer las cosas más pequeñitas con tijeras", correct: false }
+        ],
+        successMsg: "¡Así es! Menos plástico significa océanos limpios y menos gases contaminantes."
+    },
+    {
+        category: "🌬️ Aire Puro",
+        text: "¿Cuál es la forma más ecológica de ir al colegio?",
+        options: [
+            { text: "🅰️ En camión de gasolina", correct: false },
+            { text: "🅱️ Caminando, en bicicleta o patines", correct: true },
+            { text: "🆃 En helicóptero", correct: false }
+        ],
+        successMsg: "¡Increíble! Caminar o andar en bicicleta nos mantiene sanos y evita el humo contaminante."
+    }
+];
+
+/*** CLASIFICADOR ***/
+const sorterItems = [
+    { icon: "🍌", name: "Cáscara de Plátano", type: "organico", hint: "Viene de la comida, es compostable" },
+    { icon: "🍼", name: "Botella de Plástico", type: "plastico", hint: "Envase ligero de refresco" },
+    { icon: "📦", name: "Caja de Cartón", type: "papel", hint: "Donde vienen los envíos" },
+    { icon: "🍾", name: "Frasco de Vidrio", type: "vidrio", hint: "Frasco transparente de mermelada" },
+    { icon: "📰", name: "Periódico Viejo", type: "papel", hint: "Hojas impresas para leer" },
+    { icon: "🥫", name: "Lata de Refresco", type: "plastico", hint: "Metal ligero (va con los envases)" }
+];
+let currentSorterIdx = 0;
+
+/*** ECO-DETECTIVES DATA (mejorado) ***/
+const detectiveData = {
+    faucet: {
+        icon: "🚰", label: "Grifo abierto",
+        problem: "El grifo está abierto sin que nadie lo use.",
+        question: "¿Qué debemos hacer para cuidar el agua en casa?",
+        options: [
+            { text: "Cerrar el grifo cuando no lo usamos", correct: true },
+            { text: "Dejar correr el agua para que no se oxide la cañería", correct: false },
+            { text: "Poner un balde para que se llene solo", correct: false }
+        ],
+        feedback: "💧 ¡Perfecto! Cerrar el grifo ahorra cientos de litros de agua dulce cada día. El agua es un tesoro precioso para la vida.",
+        solved: false
+    },
+    light: {
+        icon: "💡", label: "Luz encendida de día",
+        problem: "La luz está encendida aunque hay sol afuera.",
+        question: "¿Qué hacemos para no desperdiciar electricidad?",
+        options: [
+            { text: "Apagar la luz y aprovechar la luz del sol", correct: true },
+            { text: "Prender más luces para que haya más claridad", correct: false },
+            { text: "Cubrir la ventana para que no entre el sol", correct: false }
+        ],
+        feedback: "☀️ ¡Brillante! Usar la luz natural del sol en vez de electricidad reduce la contaminación y nos conecta con la naturaleza.",
+        solved: false
+    },
+    trash: {
+        icon: "🗑️", label: "Basura en el suelo",
+        problem: "Hay basura tirada en el jardín.",
+        question: "¿Qué debemos hacer con la basura?",
+        options: [
+            { text: "Recogerla y llevarla al contenedor correcto", correct: true },
+            { text: "Enterrarla en el jardín sin clasificar", correct: false },
+            { text: "Quemarla para que desaparezca", correct: false }
+        ],
+        feedback: "🌱 ¡Muy bien! Clasificar y disponer la basura correctamente protege el suelo, los ríos y los animales.",
+        solved: false
+    },
+    tv: {
+        icon: "📺", label: "TV encendida sola",
+        problem: "La televisión está encendida y no hay nadie mirándola.",
+        question: "¿Qué debemos hacer si no vemos la tele?",
+        options: [
+            { text: "Apagarla completamente para ahorrar energía", correct: true },
+            { text: "Bajar el volumen pero dejarla encendida", correct: false },
+            { text: "Poner otro canal más entretenido", correct: false }
+        ],
+        feedback: "📺 ¡Excelente! Apagar aparatos que no usamos puede reducir hasta un 10% el consumo eléctrico de una casa.",
+        solved: false
+    },
+    smoke: {
+        icon: "🚗", label: "Auto con motor encendido",
+        problem: "Un auto tiene el motor encendido aunque está parado.",
+        question: "¿Cómo podemos reducir la contaminación del aire?",
+        options: [
+            { text: "Apagar el motor si el auto está detenido más de 1 minuto", correct: true },
+            { text: "Abrir las ventanas del auto para que salga el humo", correct: false },
+            { text: "Poner música fuerte para no escuchar el motor", correct: false }
+        ],
+        feedback: "🌬️ ¡Genial! Los autos con el motor encendido innecesariamente emiten CO₂ que calienta el clima. ¡Piénsalo al bajar del auto!",
+        solved: false
+    }
+};
+
+let detectiveResolved = 0;
+let currentDetectiveKey = null;
+
+/*** CAMBIO DE PANTALLAS ***/
+function changeScreen(screenId) {
+    playSound('click');
+    document.querySelectorAll('main section').forEach(s => {
+        s.classList.remove('active');
+        s.style.display = 'none';
+    });
+    const target = document.getElementById(screenId);
+    target.style.display = 'flex';
+    target.classList.add('active');
+    activeScreen = screenId;
+    updateTeacherInstructions();
+}
+
+function updateTeacherInstructions() {
+    const el = document.getElementById('teacher-instructions');
+    const msgs = {
+        'screen-menu': '¡Menú principal! Escoge una misión con tu clase o deja que ellos voten cuál quieren.',
+        'screen-wheel': '💡 Haz que los niños griten "¡Gira, gira, gira!" y luego haz clic. Cuando salga la pregunta, pide que levanten la mano según su respuesta (A = mano izquierda, B = derecha).',
+        'screen-sorter': '💡 Muestra el residuo en pantalla. ¡Todos gritan el color del contenedor al mismo tiempo! Haz clic en el que ganó.',
+        'screen-detectives': '💡 Pide a los niños que busquen los descuidos en la imagen y los señalen. Haz clic en el que señalen para descubrir el reto y responderlo juntos.',
+        'screen-victory': '🎉 ¡Celebración total! Pide un gran aplauso grupal e imprime el diploma.'
+    };
+    el.textContent = msgs[activeScreen] || '';
+}
+
+/*** PUNTUACIÓN ***/
+function addPoints(pts) {
+    score = Math.min(100, score + pts);
+    document.getElementById('global-score').textContent = score;
+    document.getElementById('classroom-progress-text').textContent = `${score} / 100 Puntos`;
+    document.getElementById('classroom-progress-bar').style.width = `${score}%`;
+    if (score >= 100) setTimeout(triggerClassroomVictory, 1000);
+}
+
+/*** MODAL ***/
+function showEcoModal(title, text, icon, borderColor, isCorrect) {
+    playSound(isCorrect ? 'correct' : 'wrong');
+    document.getElementById('eco-modal-icon').textContent = icon;
+    document.getElementById('eco-modal-title').textContent = title;
+    document.getElementById('eco-modal-body').textContent = text;
+    const content = document.getElementById('eco-modal-content');
+    content.className = `bg-white rounded-3xl p-6 md:p-8 max-w-sm w-full border-8 ${borderColor} text-center`;
+    document.getElementById('eco-modal').classList.add('open');
+}
+function closeEcoModal() {
+    playSound('click');
+    document.getElementById('eco-modal').classList.remove('open');
+}
+
+/*** RULETA ***/
+let isSpinning = false;
+function spinWheel() {
+    if (isSpinning) return;
+    isSpinning = true;
+    playSound('click');
+    document.getElementById('spin-button').disabled = true;
+    document.getElementById('wheel-default-msg').classList.remove('hidden');
+    document.getElementById('wheel-question-box').classList.add('hidden');
+    document.getElementById('wheel-question-box').classList.remove('flex');
+
+    const intervalSound = setInterval(() => playSound('spin'), 200);
+    const degrees = 1800 + Math.floor(Math.random() * 360);
+    document.getElementById('wheel-graphic').style.transform = `rotate(${degrees}deg)`;
+
+    setTimeout(() => {
+        clearInterval(intervalSound);
+        isSpinning = false;
+        document.getElementById('spin-button').disabled = false;
+        const q = ruletaQuestions[Math.floor(Math.random() * ruletaQuestions.length)];
+        displayWheelQuestion(q);
+    }, 4000);
+}
+
+function displayWheelQuestion(q) {
+    document.getElementById('question-category').textContent = q.category;
+    document.getElementById('question-text').textContent = q.text;
+    const container = document.getElementById('question-options');
+    container.innerHTML = '';
+    q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = "w-full text-left p-3 rounded-xl border-2 border-sky-300 hover:bg-sky-100 font-semibold text-sm text-slate-700 transition-all active:scale-95";
+        btn.textContent = opt.text;
+        btn.onclick = () => checkWheelAnswer(opt.correct, q.successMsg);
+        container.appendChild(btn);
+    });
+    document.getElementById('wheel-default-msg').classList.add('hidden');
+    const qBox = document.getElementById('wheel-question-box');
+    qBox.classList.remove('hidden');
+    qBox.classList.add('flex');
+}
+
+function checkWheelAnswer(isCorrect, successMsg) {
+    if (isCorrect) {
+        addPoints(15);
+        showEcoModal("¡RESPUESTA CORRECTA! 🎉", successMsg, "🏆", "border-emerald-500", true);
+    } else {
+        showEcoModal("¡Casi, casi! 🌻", "Nuestra Tierra nos enseña que siempre podemos intentarlo de nuevo. ¡Escucha los consejos de tus compañeros!", "💡", "border-amber-400", false);
+    }
+    document.getElementById('wheel-default-msg').classList.remove('hidden');
+    const qBox = document.getElementById('wheel-question-box');
+    qBox.classList.add('hidden');
+    qBox.classList.remove('flex');
+}
+
+/*** CLASIFICADOR ***/
+function loadNextSorterItem() {
+    if (currentSorterIdx >= sorterItems.length) currentSorterIdx = 0;
+    const item = sorterItems[currentSorterIdx];
+    document.getElementById('sorter-item-icon').textContent = item.icon;
+    document.getElementById('sorter-item-name').textContent = item.name;
+    document.getElementById('sorter-item-hint').textContent = item.hint;
+    document.getElementById('sorter-count').textContent = `${currentSorterIdx + 1}/${sorterItems.length}`;
+}
+
+function checkSorterAnswer(binType) {
+    const item = sorterItems[currentSorterIdx];
+    if (item.type === binType) {
+        addPoints(10);
+        showEcoModal("¡Excelente Selección! ♻️", `"${item.name}" se procesará de forma segura gracias al reciclaje. ¡Gran trabajo!`, "🌱", "border-emerald-500", true);
+        currentSorterIdx++;
+        loadNextSorterItem();
+    } else {
+        showEcoModal("¡Atención Clase! 🧐", `¡Miremos mejor! "${item.name}" tiene características especiales. ¿De qué material está hecho? ¡Inténtalo de nuevo!`, "💭", "border-amber-400", false);
+    }
+}
+
+/*** ECO-DETECTIVES (nuevo sistema) ***/
+function activateDetective(key) {
+    if (detectiveData[key].solved) return;
+    playSound('click');
+    currentDetectiveKey = key;
+
+    const data = detectiveData[key];
+    document.getElementById('detective-default').style.display = 'none';
+
+    const quiz = document.getElementById('detective-quiz');
+    quiz.classList.add('active');
+    document.getElementById('dq-icon').textContent = data.icon;
+    document.getElementById('dq-problem').textContent = data.problem;
+    document.getElementById('dq-question').textContent = data.question;
+
+    const container = document.getElementById('dq-options');
+    container.innerHTML = '';
+    data.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => checkDetectiveAnswer(key, opt.correct, btn);
+        container.appendChild(btn);
+    });
+
+    document.getElementById('dq-feedback').classList.add('hidden');
+}
+
+function checkDetectiveAnswer(key, isCorrect, btn) {
+    const data = detectiveData[key];
+    const allBtns = document.querySelectorAll('#dq-options .choice-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    if (isCorrect) {
+        btn.classList.add('correct');
+        data.solved = true;
+        detectiveResolved++;
+
+        // Marcar ítem en la escena
+        const el = document.getElementById(`di-${key}`);
+        el.classList.add('solved');
+        el.querySelector('.item-bubble').style.background = '#c8e6c9';
+        el.querySelector('.item-bubble').style.borderColor = '#43a047';
+        el.querySelector('.item-label').style.background = '#43a047';
+        el.querySelector('.item-label').textContent = '✓ Resuelto';
+
+        // Actualizar badge
+        const badge = document.getElementById(`badge-${key}`);
+        badge.className = 'bg-emerald-400 text-white rounded-full w-9 h-9 flex items-center justify-center text-lg shadow transition-all scale-110';
+
+        // Actualizar contador
+        document.getElementById('detective-count').textContent = `${detectiveResolved} / 5`;
+
+        // Mostrar feedback
+        const feedback = document.getElementById('dq-feedback');
+        document.getElementById('dq-feedback-text').textContent = data.feedback;
+        feedback.classList.remove('hidden');
+
+        addPoints(15);
+
+        // Limpiar quiz después de un momento
+        setTimeout(() => {
+            document.getElementById('detective-quiz').classList.remove('active');
+            document.getElementById('detective-default').style.display = 'flex';
+            document.getElementById('detective-default').style.flexDirection = 'column';
+            if (detectiveResolved < 5) {
+                document.getElementById('detective-default').innerHTML = `<span class="text-4xl">🔍</span><p class="text-sm font-bold text-sky-700">¡Bien! Sigue buscando los descuidos. Quedan ${5 - detectiveResolved} por resolver.</p>`;
+            }
+        }, 2500);
+
+    } else {
+        btn.classList.add('wrong');
+        setTimeout(() => {
+            btn.classList.remove('wrong');
+            btn.disabled = false;
+            allBtns.forEach(b => b.disabled = false);
+        }, 1000);
+        playSound('wrong');
+    }
+}
+
+/*** VICTORIA ***/
+function triggerClassroomVictory() {
+    playSound('victory');
+    const className = document.getElementById('class-name-input').value || 'Eco-Héroes del Futuro';
+    document.getElementById('diploma-class-name').textContent = className;
+    changeScreen('screen-victory');
+    createConfettiEffect();
+}
+
+function createConfettiEffect() {
+    const colors = ['#10b981','#3b82f6','#f59e0b','#ef4444','#a855f7'];
+    for (let i = 0; i < 80; i++) {
+        const p = document.createElement('div');
+        p.className = 'confetti-particle';
+        p.style.cssText = `left:${Math.random()*100}vw;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};width:${Math.random()*12+6}px;height:${Math.random()*20+8}px;transform:rotate(${Math.random()*360}deg);animation-duration:${Math.random()*3+2}s;`;
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 5000);
+    }
+}
+
+/*** RESET ***/
+function resetGame() {
+    playSound('click');
+    score = 0;
+    detectiveResolved = 0;
+    currentSorterIdx = 0;
+    currentDetectiveKey = null;
+
+    document.getElementById('global-score').textContent = '0';
+    document.getElementById('classroom-progress-text').textContent = '0 / 100 Puntos';
+    document.getElementById('classroom-progress-bar').style.width = '0%';
+
+    Object.keys(detectiveData).forEach(key => {
+        detectiveData[key].solved = false;
+        const el = document.getElementById(`di-${key}`);
+        if (el) {
+            el.classList.remove('solved');
+            el.style.pointerEvents = '';
+            const bubble = el.querySelector('.item-bubble');
+            bubble.style.background = '#fff';
+            bubble.style.borderColor = '#ef5350';
+            const label = el.querySelector('.item-label');
+            label.style.background = '#ef5350';
+            label.textContent = detectiveData[key].label + '!';
+        }
+        const badge = document.getElementById(`badge-${key}`);
+        if (badge) badge.className = 'bg-slate-200 text-slate-400 rounded-full w-9 h-9 flex items-center justify-center text-lg transition-all';
+    });
+    document.getElementById('detective-count').textContent = '0 / 5';
+    document.getElementById('detective-quiz').classList.remove('active');
+    const def = document.getElementById('detective-default');
+    def.style.display = 'flex';
+    def.innerHTML = '<span class="text-4xl">🔍</span><p class="text-sm font-bold text-sky-700">Haz clic en un descuido de la imagen para iniciar el desafío.</p>';
+
+    loadNextSorterItem();
+    changeScreen('screen-menu');
+}
+
+/*** INIT ***/
+loadNextSorterItem();
+updateTeacherInstructions();
+// Asegurar que sólo screen-menu está visible al inicio
+document.querySelectorAll('main section').forEach(s => {
+    if (s.id !== 'screen-menu') s.style.display = 'none';
+});
+document.getElementById('screen-menu').style.display = 'flex';
+</script>
+</body>
+</html>
