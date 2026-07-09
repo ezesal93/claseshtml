@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía — Laboratorio Virtual PhET: Selección Natural — Biología 1° Medio</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; min-height: 297mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TÍTULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:18pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJA */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+/* ÍTEM HEADER */
+.item-header { background:white; color:#111; border:1.5px solid #111; padding:4px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase; }
+
+/* INSTRUCCIÓN */
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+/* PASO */
+.paso { display:flex; gap:10px; margin-bottom:8pt; align-items:flex-start; }
+.paso-num { min-width:22pt; height:22pt; border:1.5px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+.paso-body { flex:1; font-size:10pt; line-height:1.65; }
+
+/* COLS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:6pt 0; }
+.cols3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:7px; margin:6pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:3pt; }
+
+/* CONCEPTO */
+.concepto { background:white; border:1px solid #111; border-left:4px solid #111; padding:4pt 9pt; margin:6pt 0; font-size:9.5pt; line-height:1.55; }
+
+/* TABLA */
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:5pt 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:4pt 7pt; line-height:1.4; vertical-align:top; text-align:center; }
+table.datos th { background:white; color:#111; font-size:8.5pt; font-weight:bold; }
+table.datos td:first-child { text-align:left; }
+table.datos .fill-row { height:28pt; }
+
+/* IMAGEN BOX */
+.img-box { border:1.5px dashed #111; border-radius:6px; width:100%; padding:10pt; margin:6pt 0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:5pt; }
+.img-label { font-size:8.5pt; color:#555; text-align:center; line-height:1.5; }
+
+/* POSTULADOS */
+.postulado-item { display:flex; gap:10px; margin-bottom:7pt; align-items:flex-start; }
+.post-num { min-width:22pt; height:22pt; border:1.5px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9.5pt; font-weight:bold; flex-shrink:0; }
+.post-body { flex:1; font-size:10pt; line-height:1.6; }
+
+/* LÍNEAS */
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica-hint { font-size:7.5pt; color:#888; font-style:italic; margin-top:3px; }
+
+/* ALERTA */
+.alerta { border:1px solid #111; border-left:3px solid #111; padding:3pt 8pt; margin:5pt 0; font-size:8.5pt; color:#333; line-height:1.5; font-style:italic; border-radius:0 4px 4px 0; }
+
+/* RÚBRICA */
+.rubrica-tit { font-size:9pt; font-weight:bold; padding:4pt 9pt; border:1.5px solid #111; border-bottom:none; display:flex; justify-content:space-between; }
+table.rubrica { width:100%; border-collapse:collapse; font-size:8pt; margin-bottom:8pt; }
+table.rubrica th,table.rubrica td { border:1px solid #111; padding:4pt 6pt; vertical-align:top; line-height:1.45; font-size:8pt; }
+table.rubrica th { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.04em; text-align:center; background:white; }
+table.rubrica td:first-child { font-weight:bold; width:22%; font-size:8.5pt; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; min-height:unset; }
+  .btn-print { display:none; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  .paso { margin-bottom:6pt; }
+  .cols2,.cols3 { gap:5px; }
+  .col-box { padding:3pt 6pt; }
+  table.datos th,table.datos td { padding:2px 5px; }
+  .img-box { padding:6pt; }
+  table.rubrica th,table.rubrica td { padding:3pt 5pt; }
+  .postulado-item { margin-bottom:5pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">Imprimir guia</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henriquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 - Region De Los Rios</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Laboratorio Virtual PhET: Seleccion Natural</h1>
+    <p class="subtitulo">(Biologia — 1° Medio · Unidad 1: Evolucion y Biodiversidad)</p>
+    <p class="profesor">Prof. Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenidos:</strong> Postulados de la seleccion natural · Variacion heredable · Presion selectiva · Adaptacion · Cambio en la frecuencia de fenotipos a lo largo de generaciones.</p>
+    <p><strong>Capacidades:</strong> Analisis — Pensamiento critico · Razonamiento logico — Comprension · Expresion escrita.</p>
+    <p><strong>Destrezas:</strong> Observar · Registrar · Describir · Analizar · Relacionar · Interpretar · Argumentar · Concluir · Comparar · Formular · Sintetizar.</p>
+    <p><strong>Entrega del informe:</strong> Martes 16 · Escrito a mano en hoja de carta u oficio · Individual.</p>
+  </div>
+
+  <!-- ACCESO -->
+  <div class="item-header">
+    <span>Acceso a la Simulacion</span>
+    <span>Abrir antes de comenzar</span>
+  </div>
+
+  <div class="concepto">
+    <strong>Enlace de la simulacion:</strong> phet.colorado.edu/sims/html/natural-selection/latest/natural-selection_es.html<br>
+    Selecciona la pestana <strong>"Intro"</strong> para comenzar. Funciona en computador, tablet o celular.
+  </div>
+
+  <hr class="sep">
+
+  <!-- MARCO TEÓRICO -->
+  <div class="item-header">
+    <span>Marco Teorico — Los 4 Postulados de Darwin</span>
+  </div>
+  <p class="instruccion">Lee con atencion antes de comenzar la simulacion. Estos postulados guiaran todas tus observaciones.</p>
+
+  <div class="postulado-item">
+    <div class="post-num">1</div>
+    <div class="post-body"><strong>Variacion:</strong> Los individuos de una poblacion presentan diferencias en sus caracteristicas. Por ejemplo, en una poblacion de conejos puede haber individuos con pelaje blanco y otros con pelaje marron.</div>
+  </div>
+  <div class="postulado-item">
+    <div class="post-num">2</div>
+    <div class="post-body"><strong>Herencia:</strong> Las variaciones se transmiten de padres a hijos mediante genes. Algunos rasgos son dominantes (se expresan aunque solo haya una copia del gen) y otros son recesivos (solo se expresan si hay dos copias).</div>
+  </div>
+  <div class="postulado-item">
+    <div class="post-num">3</div>
+    <div class="post-body"><strong>Supervivencia diferencial:</strong> Algunos individuos sobreviven y se reproducen mas que otros segun sus caracteristicas y el ambiente en que viven. El ambiente "selecciona" que rasgos son ventajosos.</div>
+  </div>
+  <div class="postulado-item">
+    <div class="post-num">4</div>
+    <div class="post-body"><strong>Acumulacion en el tiempo:</strong> A lo largo de muchas generaciones, los rasgos favorables se vuelven mas frecuentes en la poblacion y los desfavorables disminuyen o desaparecen.</div>
+  </div>
+
+  <hr class="sep">
+
+  <!-- PARTE 1 -->
+  <div class="item-header">
+    <span>Parte 1 · Observacion Inicial — Sin presion selectiva</span>
+  </div>
+  <p class="instruccion">Sigue los pasos en orden. No actives ningun factor ambiental ni mutacion en esta parte.</p>
+
+  <div class="paso"><div class="paso-num">1</div><div class="paso-body">Abre la simulacion. Observa el conejo blanco en "Generacion 0". Haz clic en <strong>"Agregar un Compañero"</strong> para iniciar la poblacion.</div></div>
+  <div class="paso"><div class="paso-num">2</div><div class="paso-body">Presiona el boton de avance rapido (doble flecha) y deja correr <strong>3 a 4 generaciones</strong> sin activar ningun factor ni mutacion.</div></div>
+  <div class="paso"><div class="paso-num">3</div><div class="paso-body">Activa el <strong>"Lector de datos"</strong> en la leyenda inferior y anota la poblacion total en cada generacion en la tabla.</div></div>
+
+  <table class="datos" style="margin-top:5pt">
+    <thead>
+      <tr><th>Generacion</th><th>Poblacion total</th><th>¿Todos del mismo color?</th><th>Observacion</th></tr>
+    </thead>
+    <tbody>
+      <tr class="fill-row"><td>0</td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>1</td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>2</td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>3</td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>4</td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="sep">
+
+  <!-- PARTE 2 -->
+  <div class="item-header">
+    <span>Parte 2 · Introduccion de Variacion — Mutacion de Pelaje</span>
+  </div>
+  <p class="instruccion">Reinicia la simulacion antes de comenzar esta parte.</p>
+
+  <div class="paso"><div class="paso-num">1</div><div class="paso-body">Reinicia la simulacion (boton naranja de reinicio). Agrega un compañero nuevamente.</div></div>
+  <div class="paso"><div class="paso-num">2</div><div class="paso-body">En el panel derecho, bajo <strong>"Agregar Mutacion"</strong>, activa <strong>Pelaje Marron</strong> en la columna <strong>"Dominante"</strong>. Aparecera en la siguiente generacion.</div></div>
+  <div class="paso"><div class="paso-num">3</div><div class="paso-body">Corre <strong>5 generaciones</strong>. En la leyenda inferior, activa las casillas <strong>"Pelaje Blanco"</strong> y <strong>"Pelaje Marron"</strong> para ver ambas lineas en la grafica.</div></div>
+  <div class="paso"><div class="paso-num">4</div><div class="paso-body">Completa la tabla con los datos de cada color por generacion.</div></div>
+
+
+  <table class="datos" style="margin-top:5pt">
+    <thead>
+      <tr><th>Generacion</th><th>N° Pelaje Blanco</th><th>N° Pelaje Marron</th><th>Total</th><th>% Marron</th></tr>
+    </thead>
+    <tbody>
+      <tr class="fill-row"><td>1</td><td></td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>2</td><td></td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>3</td><td></td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>4</td><td></td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td>5</td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="sep">
+
+  <!-- PARTE 3 -->
+  <div class="item-header">
+    <span>Parte 3 · Presion Selectiva — Lobos y Ambiente</span>
+  </div>
+  <p class="instruccion">Realiza dos experimentos. En cada uno: reinicia, introduce la mutacion de pelaje marron (dominante) y luego activa el factor indicado. Corre maximo 6 generaciones o hasta que un fenotipo desaparezca.</p>
+
+  <div class="cols2">
+    <div class="col-box">
+      <span class="col-tit">Experimento A — Ambiente Ecuatorial + Lobos</span>
+      Asegurate de que el ambiente sea <strong>ecuatorial</strong> (pasto, boton de sol en la esquina superior derecha del escenario). Activa <strong>"Lobos"</strong> en Factores Ambientales. Observa cual pelaje desaparece primero.
+    </div>
+    <div class="col-box">
+      <span class="col-tit">Experimento B — Ambiente Artico + Lobos</span>
+      Cambia el ambiente a <strong>artico</strong> (boton de copo de nieve en la esquina superior derecha). Repite el mismo procedimiento del Experimento A. Compara el resultado.
+    </div>
+  </div>
+
+  <table class="datos" style="margin-top:6pt">
+    <thead>
+      <tr><th>Experimento</th><th>Ambiente</th><th>Fenotipo que sobrevive</th><th>Fenotipo que desaparece</th><th>Explicacion breve</th></tr>
+    </thead>
+    <tbody>
+      <tr class="fill-row"><td><strong>A</strong></td><td>Ecuatorial + Lobos</td><td></td><td></td><td></td></tr>
+      <tr class="fill-row"><td><strong>B</strong></td><td>Artico + Lobos</td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr class="sep">
+
+  <!-- PARTE 4 — ANÁLISIS DE DATOS -->
+  <div class="item-header">
+    <span>Parte 4 · Analisis de Datos — Preguntas</span>
+  </div>
+  <p class="instruccion">Responde cada pregunta en esta guia usando los datos de tus tablas. Estas preguntas son la base del analisis de resultados que escribiras en el informe.</p>
+
+  <div style="margin-bottom:9pt">
+    <p style="font-size:10pt;font-weight:bold;margin-bottom:3pt">1. (Postulado 1 — Variacion) Segun la Parte 2, ¿que diferencias de fenotipo observaste en la poblacion de conejos? ¿Que herramienta de la simulacion fue la fuente de esa variacion?</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div style="margin-bottom:9pt">
+    <p style="font-size:10pt;font-weight:bold;margin-bottom:3pt">2. (Postulado 2 — Herencia) Observa la opcion "Genealogia" en el panel derecho. ¿Como comprobaste que las variaciones se transmiten de padres a hijos? ¿Que diferencia notaste entre un rasgo dominante y uno recesivo en la grafica de proporciones?</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div style="margin-bottom:9pt">
+    <p style="font-size:10pt;font-weight:bold;margin-bottom:3pt">3. (Postulado 3 — Supervivencia diferencial) Compara los Experimentos A y B. ¿Por que el pelaje marron es una ventaja en el ambiente ecuatorial pero una desventaja en el artico? ¿Quien o que "decide" que fenotipo sobrevive?</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    <p class="rubrica-hint">Pista: relaciona con el concepto de camuflaje y presion selectiva.</p>
+  </div>
+
+  <div style="margin-bottom:9pt">
+    <p style="font-size:10pt;font-weight:bold;margin-bottom:3pt">4. (Postulado 4 — Acumulacion en el tiempo) Usando los datos de tu tabla de la Parte 2: ¿como cambio el porcentaje de pelaje marron entre la generacion 1 y la generacion 5? ¿Que le ocurrio al pelaje blanco? ¿Que tendencia muestra ese cambio?</p>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div style="margin-bottom:9pt">
+    <p style="font-size:10pt;font-weight:bold;margin-bottom:3pt">5. (Analisis critico — experimento propio) Activa <strong>al mismo tiempo</strong> "Lobos" y "Limitar comida". Antes de correrlo, escribe tu prediccion: ¿la poblacion crecera, se mantendra estable o colapsara? Luego correlo y describe el resultado real. ¿Coincidio con tu prediccion?</p>
+    <p style="font-size:9pt;color:#555;margin-bottom:3pt">Mi prediccion antes de correrlo:</p>
+    <span class="linea-r"></span>
+    <p style="font-size:9pt;color:#555;margin-top:4pt;margin-bottom:3pt">Resultado real observado:</p>
+    <span class="linea-r"></span><span class="linea-r"></span>
+    <p style="font-size:9pt;color:#555;margin-top:4pt;margin-bottom:3pt">¿Que postulado de Darwin se hace mas evidente en este resultado? Explica.</p>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- INSTRUCCIONES DEL INFORME -->
+  <div class="item-header">
+    <span>Instrucciones para el Informe Escrito</span>
+    <span>Entrega: martes 9</span>
+  </div>
+
+  <div class="box-cont" style="border-style:dashed">
+    <p><strong>Formato obligatorio:</strong> El informe se escribe completamente a mano, en hoja de carta u oficio, con lapiz pasta azul o negro. No se acepta impreso ni digitado. La presentacion, la letra y los margenes forman parte de la evaluacion.</p>
+    <p>El informe debe seguir exactamente la estructura que se describe a continuacion. Cada seccion debe comenzar con su titulo subrayado.</p>
+  </div>
+
+  <!-- Sección 1: Portada -->
+  <div class="paso" style="margin-top:8pt">
+    <div class="paso-num" style="border-radius:4px">1</div>
+    <div class="paso-body">
+      <strong>Portada</strong><br>
+      En la primera hoja escribe centrado y ordenado: nombre del laboratorio ("Laboratorio Virtual PhET: Seleccion Natural"), tu nombre completo, curso, nombre de la asignatura, nombre del docente y fecha de entrega. No es necesario que sea artisticamente elaborada, pero debe estar ordenada y ser legible.
+    </div>
+  </div>
+
+  <!-- Sección 2: Introducción -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">2</div>
+    <div class="paso-body">
+      <strong>Introduccion (minimo 8 oraciones)</strong><br>
+      Explica brevemente de que trata la actividad: que es la seleccion natural, por que es importante estudiarla y como una simulacion permite observarla. Menciona los cuatro postulados de Darwin en este parrafo. No copies el marco teorico de esta guia: redacta en tus propias palabras.<br>
+      <div class="alerta" style="margin-top:5pt">Una buena introduccion responde: ¿de que trata esta actividad?, ¿que es la seleccion natural?, ¿que esperamos observar en la simulacion?</div>
+    </div>
+  </div>
+
+  <!-- Sección 3: Pregunta de investigación -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">3</div>
+    <div class="paso-body">
+      <strong>Pregunta de investigacion</strong><br>
+      Copia la siguiente pregunta que guiara todo tu informe:<br>
+      <div class="concepto" style="margin-top:5pt;font-size:10.5pt;font-style:italic">
+        "¿Como influye el tipo de ambiente (ecuatorial vs. artico) y la presencia de depredadores en la seleccion del fenotipo de pelaje mas frecuente en una poblacion de conejos a lo largo de las generaciones?"
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección 4: Objetivos -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">4</div>
+    <div class="paso-body">
+      <strong>Objetivos</strong><br>
+      Copia el siguiente objetivo general y los especificos en tu informe:
+      <div class="concepto" style="margin-top:5pt">
+        <strong>Objetivo general:</strong> Analizar como el ambiente y la presion selectiva determinan el cambio en la frecuencia de fenotipos en una poblacion de conejos simulada a lo largo de multiples generaciones.<br><br>
+        <strong>Objetivos especificos:</strong><br>
+        1. Identificar la variacion de pelaje en la poblacion y describir como se transmite entre generaciones.<br>
+        2. Comparar la supervivencia de distintos fenotipos en ambientes con y sin depredadores.<br>
+        3. Registrar y analizar los cambios en la proporcion de fenotipos a lo largo de 5 generaciones.<br>
+        4. Relacionar los resultados observados con los cuatro postulados de la seleccion natural de Darwin.
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección 5: Hipótesis -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">5</div>
+    <div class="paso-body">
+      <strong>Hipotesis</strong><br>
+      A partir de la pregunta de investigacion, redacta tu propia hipotesis antes de realizar la simulacion. Usa la estructura <em>Si... entonces... porque...</em><br>
+      <div class="alerta" style="margin-top:5pt">Tu hipotesis debe predecir que fenotipo sobrevivira en cada ambiente y por que. Ejemplo de estructura (no copies este ejemplo, redacta el tuyo): "Si se introduce un depredador en un ambiente ecuatorial (pasto marron), entonces el fenotipo de pelaje blanco disminuira, porque sera mas visible para el depredador y sera cazado con mayor facilidad."</div>
+      <p style="font-size:9.5pt;margin-top:6pt;color:#555">En tu hoja escribe: "Mi hipotesis es: ____________"</p>
+    </div>
+  </div>
+
+  <!-- Sección 6: Materiales y Métodos -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">6</div>
+    <div class="paso-body">
+      <strong>Materiales y Metodos</strong><br>
+      Describe brevemente que usaste (computador o celular, la simulacion PhET) y el procedimiento que seguiste en cada parte (Partes 1, 2 y 3 de esta guia). Redacta en pasado y tercera persona. No copies las instrucciones de la guia: escribe lo que realmente hiciste, de forma resumida.
+    </div>
+  </div>
+
+  <!-- Sección 7: Resultados -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">7</div>
+    <div class="paso-body">
+      <strong>Resultados</strong><br>
+      Copia las tres tablas de datos de esta guia en tu informe (Partes 1, 2 y 3) con los valores que registraste. Bajo cada tabla escribe 2 a 3 oraciones describiendo lo que muestran los datos, sin interpretarlos todavia. Solo describe lo que observaste.<br>
+      <div class="alerta" style="margin-top:5pt">En esta seccion NO interpretas ni concluyes. Solo describes lo que ves en los datos: "En la generacion 5, el pelaje marron represento el 78% de la poblacion..."</div>
+    </div>
+  </div>
+
+  <!-- Sección 8: Análisis de resultados -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">8</div>
+    <div class="paso-body">
+      <strong>Analisis de Resultados</strong><br>
+      Esta es la seccion mas importante. Responde las preguntas de la Parte 4 de esta guia desarrolladas en parrafos continuos, no como lista. Conecta cada resultado con el postulado de Darwin correspondiente. Explica por que el ambiente determino el fenotipo que sobrevivio. Relaciona tus datos con la pregunta de investigacion.<br>
+      <div class="alerta" style="margin-top:5pt">Aqui SI interpretas: explicas el "por que" de lo que viste. Usa conceptos como variacion, herencia, presion selectiva, adaptacion, fenotipo, supervivencia diferencial.</div>
+    </div>
+  </div>
+
+  <!-- Sección 9: Conclusiones -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">9</div>
+    <div class="paso-body">
+      <strong>Conclusiones (minimo 6 oraciones)</strong><br>
+      Responde directamente la pregunta de investigacion. Indica si tu hipotesis se confirmo o se rechazo y por que. Sintetiza en orden los cuatro postulados usando los resultados de tu simulacion como evidencia. Menciona al menos una limitacion de la simulacion (algo que no puede representar de la naturaleza real).
+    </div>
+  </div>
+
+  <!-- Sección 10: Bibliografía -->
+  <div class="paso">
+    <div class="paso-num" style="border-radius:4px">10</div>
+    <div class="paso-body">
+      <strong>Bibliografia</strong><br>
+      Cita al menos la simulacion usada. Formato: PhET Interactive Simulations (2023). Seleccion Natural. Universidad de Colorado Boulder. phet.colorado.edu. Si consultaste el libro de texto u otra fuente, citala tambien.
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- RÚBRICA -->
+  <p style="font-size:9.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:7pt">Rubrica de Evaluacion del Informe</p>
+
+  <table class="rubrica">
+    <thead>
+      <tr>
+        <th style="text-align:left;width:22%">Criterio</th>
+        <th style="width:19%">4 — Logrado</th>
+        <th style="width:19%">3 — Med. Logrado</th>
+        <th style="width:19%">2 — Por Lograr</th>
+        <th style="width:14%">1 — No Logrado</th>
+        <th style="width:7%;text-align:center">Pts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tablas de datos completas<br><em style="font-weight:normal;font-size:7.5pt">(Partes 1, 2 y 3)</em></td>
+        <td>Las tres tablas estan completas con datos coherentes con la simulacion. La tabla de la Parte 2 incluye el calculo del porcentaje.</td>
+        <td>Las tablas estan mayormente completas pero falta algun dato o el calculo del porcentaje tiene errores.</td>
+        <td>Solo una o dos tablas completas o los datos son incoherentes.</td>
+        <td>Tablas ausentes o en blanco.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Introduccion, pregunta, hipotesis y objetivos<br><em style="font-weight:normal;font-size:7.5pt">(Secciones 2-5)</em></td>
+        <td>Introduccion fluida en palabras propias. Hipotesis con estructura Si/entonces/porque coherente con la pregunta. Objetivos copiados correctamente.</td>
+        <td>Introduccion aceptable pero con parrafos copiados. Hipotesis presente pero sin estructura completa.</td>
+        <td>Introduccion muy breve o copiada. Hipotesis vaga o sin relacion con la pregunta.</td>
+        <td>Secciones ausentes o reducidas a una oracion.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Resultados<br><em style="font-weight:normal;font-size:7.5pt">(Seccion 7)</em></td>
+        <td>Tablas transcritas correctamente. Descripcion de 2-3 oraciones por tabla sin mezclar interpretacion. Usa datos concretos ("en la generacion 5, el 78%...").</td>
+        <td>Tablas presentes pero la descripcion mezcla descripcion con interpretacion o no usa datos concretos.</td>
+        <td>Tablas presentes sin descripcion o descripcion muy superficial.</td>
+        <td>Seccion ausente o sin tablas.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Analisis de resultados<br><em style="font-weight:normal;font-size:7.5pt">(Seccion 8)</em></td>
+        <td>Responde las 5 preguntas de la Parte 4 en parrafos. Conecta cada resultado con el postulado correspondiente. Usa conceptos precisos (fenotipo, presion selectiva, adaptacion).</td>
+        <td>Responde la mayoria de las preguntas pero de forma superficial o sin conectar con los postulados.</td>
+        <td>Analisis muy breve. Responde solo algunas preguntas sin vinculo con la teoria.</td>
+        <td>Analisis ausente o es descripcion de los datos sin interpretacion.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Conclusiones<br><em style="font-weight:normal;font-size:7.5pt">(Seccion 9)</em></td>
+        <td>Responde la pregunta de investigacion. Verifica la hipotesis. Conecta los 4 postulados con los resultados. Menciona una limitacion de la simulacion.</td>
+        <td>Responde la pregunta pero no verifica la hipotesis o no menciona limitaciones.</td>
+        <td>Conclusion muy breve que no responde la pregunta ni conecta con los postulados.</td>
+        <td>Conclusion ausente o es repeticion de los resultados.</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Presentacion y redaccion<br><em style="font-weight:normal;font-size:7.5pt">(Todo el informe)</em></td>
+        <td>Escrito a mano, letra legible, margenes cuidados, secciones con titulo subrayado, sin uso de corrector liquido (tachado limpio). Redaccion en palabras propias.</td>
+        <td>Generalmente legible pero con algunos parrafos ilegibles o secciones sin titulo.</td>
+        <td>Letra dificil de leer o estructura desordenada.</td>
+        <td>No cumple el formato a mano o es impreso.</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Calificación -->
+  <div style="margin-top:8pt;border:1.5px solid #111;border-radius:6px;padding:7pt 12pt;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center;font-size:9.5pt">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Pje. maximo</div>
+      <div style="font-size:11pt;font-weight:bold">24 pts</div>
+      <div style="font-size:8pt;color:#888">(6 criterios × 4)</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Nivel exigencia</div>
+      <div style="font-size:11pt;font-weight:bold">60%</div>
+      <div style="font-size:8pt;color:#888">14 pts minimo</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Pje. obtenido</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt;display:block"></div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Nota final</div>
+      <div style="border-bottom:2px solid #111;height:20pt;display:block"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:8pt">
+    <div style="font-size:8.5pt;font-weight:bold;margin-bottom:4pt">Observaciones del docente:</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Biologia — 1° Medio · Laboratorio Virtual PhET</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>

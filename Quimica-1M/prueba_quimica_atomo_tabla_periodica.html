@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba Quimica 1 Medio</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TITULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:18pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJAS */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+/* ITEM HEADER */
+.item-header { background:white; color:#111; border:1.5px solid #111; padding:4px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase; }
+
+/* INSTRUCCION */
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+/* BLOQUE LEE+RESPONDE */
+.bloque { margin-bottom:14pt; }
+.lee-label { display:inline-flex; align-items:center; gap:5px; font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.08em; color:#444; margin-bottom:4pt; }
+.lectura { border:1px solid #111; border-left:4px solid #111; border-radius:0 4px 4px 0; padding:7pt 10pt; font-size:10pt; line-height:1.7; text-align:justify; margin-bottom:0; }
+.lectura p { margin-bottom:5pt; }
+.lectura p:last-child { margin-bottom:0; }
+.dest { background:white; border:1px solid #111; border-left:3px solid #111; padding:4pt 8pt; margin:6pt 0; font-size:9.5pt; line-height:1.55; }
+.flecha-responde { text-align:center; font-size:9pt; color:#555; margin:4pt 0; }
+.resp-label { display:inline-flex; align-items:center; gap:5px; font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.08em; color:#444; margin-bottom:5pt; }
+.ejercicio { border:1.5px solid #111; border-radius:4px; padding:7pt 10pt; font-size:10pt; line-height:1.6; }
+.ej-tit { font-size:9pt; font-weight:bold; margin-bottom:6pt; padding-bottom:4pt; border-bottom:1px solid #ccc; display:flex; justify-content:space-between; }
+.pts-badge { font-size:8pt; font-weight:normal; color:#444; border:1px solid #ccc; padding:1pt 5pt; border-radius:3px; }
+
+/* TABLAS */
+table.fill { width:100%; border-collapse:collapse; font-size:9.5pt; margin:5pt 0; }
+table.fill th,table.fill td { border:1px solid #111; padding:4pt 7pt; vertical-align:middle; line-height:1.4; text-align:center; }
+table.fill th { background:white; font-size:8.5pt; font-weight:bold; }
+table.fill td:first-child { text-align:left; font-weight:bold; }
+table.fill .fill-cell { min-height:26pt; }
+
+table.datos { width:100%; border-collapse:collapse; font-size:9pt; margin:6px 0; }
+table.datos th,table.datos td { border:1px solid #111; padding:4pt 7pt; text-align:center; line-height:1.4; vertical-align:middle; }
+table.datos th { background:white; font-size:8.5pt; font-weight:bold; }
+table.datos td:first-child { text-align:left; font-weight:bold; }
+
+/* COLS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:6pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:2pt; }
+
+/* SM */
+.sm-p { margin-bottom:9px; }
+.sm-e { font-size:10pt; line-height:1.55; margin-bottom:5px; }
+.sm-opts { display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; padding-left:10px; margin-bottom:4pt; }
+.sm-op { display:flex; align-items:flex-start; gap:5px; font-size:10pt; line-height:1.4; }
+.circulo { width:14pt; height:14pt; border:1.2px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+
+/* LINEAS */
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:4px; }
+
+/* TABLA PERIODICA MINI */
+table.tp { border-collapse:collapse; font-size:7.5pt; }
+table.tp td { border:1px solid #111; padding:1.5pt 2pt; text-align:center; vertical-align:middle; line-height:1.25; min-width:22pt; }
+table.tp td.vacio { border:none; background:white; min-width:8pt; }
+table.tp .z { font-size:6.5pt; color:#444; }
+table.tp .sim { font-size:9pt; font-weight:bold; }
+table.tp .ma { font-size:6.5pt; color:#444; }
+table.tp .trans { background:#f0f0f0; }
+
+/* AUFBAU ESPACIO */
+.aufbau-espacio { border:1.5px dashed #999; border-radius:6px; min-height:200pt; display:flex; align-items:center; justify-content:center; margin:6pt 0; }
+.aufbau-label { font-size:8.5pt; color:#888; text-align:center; line-height:1.6; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; }
+  .btn-print { display:none; }
+  .bloque { margin-bottom:10pt; }
+  .lectura { padding:5pt 8pt; }
+  .ejercicio { padding:5pt 8pt; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  table.fill th,table.fill td { padding:2pt 5pt; }
+  table.datos th,table.datos td { padding:2pt 5pt; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  .aufbau-espacio { min-height:185pt; }
+  .cols2 { gap:5px; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">Imprimir prueba</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henriquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 - Region De Los Rios</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Prueba: Átomo y Tabla Periodica</h1>
+    <p class="subtitulo">(Quimica - 1 Medio)</p>
+    <p class="profesor">Prof. Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+    <div style="display:flex;gap:22px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">70</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span> — nota 4,0 = 42 pts</span>
+      <span>Tiempo: <span class="val-bold">80 min</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenidos:</strong> Particulas subatomicas · Atomo neutro e iones · Configuracion electronica · Grupo y periodo · Radio atomico · Energia de ionizacion · Electronegatividad.</p>
+    <p><strong>Capacidades:</strong> Razonamiento logico — Comprension · Analisis — Pensamiento critico.</p>
+    <p><strong>Destrezas:</strong> Identificar · Calcular · Determinar · Aplicar · Comparar · Ordenar · Analizar · Argumentar · Justificar.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Item</th><th>Descripcion</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>I</td><td>Particulas subatomicas: atomos neutros e iones</td><td>24 pts</td><td></td></tr>
+      <tr><td>II</td><td>Configuracion electronica, grupo y periodo</td><td>24 pts</td><td></td></tr>
+      <tr><td>III</td><td>Propiedades de la tabla periodica</td><td>22 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>70 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <!-- MATERIAL DE REFERENCIA -->
+  <div style="font-size:8.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5pt">Material de referencia</div>
+
+  <div class="cols2" style="margin-bottom:8pt;align-items:start">
+    <!-- TABLA PERIODICA -->
+    <div>
+      <div style="font-size:8pt;font-weight:bold;margin-bottom:3pt">Tabla periodica resumida</div>
+      <table class="tp">
+        <tbody>
+          <tr>
+            <td><div class="z">1</div><div class="sim">H</div><div class="ma">1</div></td>
+            <td class="vacio" colspan="16"></td>
+            <td><div class="z">2</div><div class="sim">He</div><div class="ma">4</div></td>
+          </tr>
+          <tr>
+            <td><div class="z">3</div><div class="sim">Li</div><div class="ma">7</div></td>
+            <td><div class="z">4</div><div class="sim">Be</div><div class="ma">9</div></td>
+            <td class="vacio" colspan="10"></td>
+            <td><div class="z">5</div><div class="sim">B</div><div class="ma">11</div></td>
+            <td><div class="z">6</div><div class="sim">C</div><div class="ma">12</div></td>
+            <td><div class="z">7</div><div class="sim">N</div><div class="ma">14</div></td>
+            <td><div class="z">8</div><div class="sim">O</div><div class="ma">16</div></td>
+            <td><div class="z">9</div><div class="sim">F</div><div class="ma">19</div></td>
+            <td><div class="z">10</div><div class="sim">Ne</div><div class="ma">20</div></td>
+          </tr>
+          <tr>
+            <td><div class="z">11</div><div class="sim">Na</div><div class="ma">23</div></td>
+            <td><div class="z">12</div><div class="sim">Mg</div><div class="ma">24</div></td>
+            <td class="vacio" colspan="10"></td>
+            <td><div class="z">13</div><div class="sim">Al</div><div class="ma">27</div></td>
+            <td><div class="z">14</div><div class="sim">Si</div><div class="ma">28</div></td>
+            <td><div class="z">15</div><div class="sim">P</div><div class="ma">31</div></td>
+            <td><div class="z">16</div><div class="sim">S</div><div class="ma">32</div></td>
+            <td><div class="z">17</div><div class="sim">Cl</div><div class="ma">36</div></td>
+            <td><div class="z">18</div><div class="sim">Ar</div><div class="ma">40</div></td>
+          </tr>
+          <tr>
+            <td><div class="z">19</div><div class="sim">K</div><div class="ma">39</div></td>
+            <td><div class="z">20</div><div class="sim">Ca</div><div class="ma">40</div></td>
+            <td class="vacio" colspan="4"></td>
+            <td class="trans"><div class="z">26</div><div class="sim">Fe</div><div class="ma">56</div></td>
+            <td class="vacio"></td>
+            <td class="trans"><div class="z">28</div><div class="sim">Ni</div><div class="ma">59</div></td>
+            <td class="vacio" colspan="8"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:7pt;color:#555;margin-top:2pt">Numero atomico (arriba) · Simbolo · Masa atomica (abajo). Gris: metales de transicion.</div>
+
+      <!-- GRUPOS -->
+      <div style="font-size:8pt;font-weight:bold;margin-top:7pt;margin-bottom:3pt">Grupos numeros romanos</div>
+      <table style="width:100%;border-collapse:collapse;font-size:8pt">
+        <tr>
+          <td style="border:1px solid #111;padding:2pt 3pt;font-weight:bold;background:#f5f5f5;text-align:center;font-size:7.5pt">Número</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">1</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">2</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">3</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">4</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">5</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">6</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">7</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">8</td>
+        </tr>
+        <tr>
+          <td style="border:1px solid #111;padding:2pt 3pt;font-weight:bold;background:#f5f5f5;text-align:center;font-size:7.5pt">Grupo</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">I</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">II</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">III</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">IV</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">V</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">VI</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">VII</td>
+          <td style="border:1px solid #111;padding:2pt 3pt;text-align:center">VIII</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- AUFBAU ESPACIO -->
+<div>
+  <div style="font-size:8pt;font-weight:bold;margin-bottom:3pt">
+    Diagrama de Aufbau
+  </div>
+
+  <div class="aufbau-espacio">
+    <img
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjq-H4QeFnu3a1OxsPrpfjNjUqrvgpti0uRWDwmX-HhUI5y8gdvby51lrSJylgKvQ4QjAGlTy2lEzYjdwOr1T7-zmwXTGZ6EdMgDjHRufZww7zYrk25jrHxUA83dlCURSXT_TsVZPUO5-Y/s320/Esquema+de+Aufbau.jpg"
+      alt="Diagrama de Aufbau"
+      style="max-width:100%; max-height:100%; object-fit:contain;"
+    >
+  </div>
+</div>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ═══════════════════════
+       ITEM I
+  ═══════════════════════ -->
+
+  <!-- I.1 Atomos neutros -->
+  <div class="bloque">
+    <div class="lee-label">Item I · Particulas sub atómicas — 24 puntos</div>
+    <div class="instruccion">Completa la tabla de particulas sub atómicas usando la tabla periodica de referencia.</div>
+
+    <div class="flecha-responde">▼ Ejercicio 1</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 1 — Atomos neutros <span class="pts-badge">12 pts · 2 pt por fila completa y correcta</span></div>
+      <p style="font-size:9.5pt;margin-bottom:6pt">Completa la tabla para cada atomo neutro usando la tabla periodica de referencia.</p>
+      <table class="fill">
+        <thead>
+          <tr>
+            <th style="width:14%">Elemento</th>
+            <th style="width:10%">Simbolo</th>
+            <th style="width:12%">Z</th>
+            <th style="width:14%">Masa atomica (A)</th>
+            <th style="width:15%">Protones</th>
+            <th style="width:15%">Neutrones</th>
+            <th style="width:20%">Electrones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Hidrogeno</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td>Carbono</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td>Sodio</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td>Cloro</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td>Calcio</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td>Hierro</td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- I.2 Iones -->
+  <div class="bloque">
+    <div class="flecha-responde">▼ Ejercicio 2</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 2 — Iones (Átomos con carga) <span class="pts-badge">12 pts · 2 pts por fila completa y correcta</span></div>
+      <table class="fill">
+        <thead>
+          <tr>
+            <th style="width:12%">Ión</th>
+            <th style="width:16%">Elemento</th>
+            <th style="width:10%">Z</th>
+            <th style="width:14%">Protones</th>
+            <th style="width:14%">Neutrones</th>
+            <th style="width:14%">Electrones</th>
+            <th style="width:20%">Catión (+) o Anión (−)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Na⁺</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Cl⁻</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Mg²⁺</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>O²⁻</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Ca²⁺</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>S²⁻</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ═══════════════════════
+       ITEM II
+  ═══════════════════════ -->
+
+  <!-- II.1 Configuracion -->
+  <div class="bloque">
+    <div class="lee-label">Item II · Configuracion Electronica, Grupo y Periodo — 24 puntos</div>
+    <div class="instruccion">Completa la tabla usando el diagrama de Aufbau. El Z de cada elemento esta indicado en cada ejercicio.</div>
+
+    <div class="flecha-responde">▼ Ejercicio 1</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 1 — Configuracion electronica, grupo y periodo <span class="pts-badge">16 pts · 2 pts por fila</span></div>
+      <p style="font-size:9.5pt;margin-bottom:6pt">Completa la tabla para cada elemento usando el diagrama de Aufbau y la tabla de grupos de referencia.</p>
+      <table class="fill">
+        <thead>
+          <tr>
+            <th style="width:16%">Elemento (Z)</th>
+            <th style="width:36%">Configuración electrónica completa</th>
+            <th style="width:16%">e⁻ en ultimo nivel</th>
+            <th style="width:16%">Grupo</th>
+            <th style="width:16%">Periodo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Be (Z=4)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>N (Z=7)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Na (Z=11)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Al (Z=13)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Fe (Z=26)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>K (Z=19)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Ca (Z=20)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+          <tr><td><strong>Cl (Z=17)</strong></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td><td class="fill-cell"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- II.2 SM -->
+  <div class="bloque">
+    <div class="flecha-responde">▼ Ejercicio 2</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 2 — Seleccion multiple <span class="pts-badge">8 pts · 2 pts c/u</span></div>
+      <p style="font-size:9pt;color:#555;margin-bottom:6pt"> Marca con una X el circulo de la alternativa correcta.</p>
+
+      <div class="sm-p">
+        <div class="sm-e"><strong>1.</strong> Un elemento tiene la configuracion 1s² 2s² 2p⁶ 3s² 3p⁵¿a que grupo y periodo pertenece?</div>
+        <div class="sm-opts">
+          <div class="sm-op"><div class="circulo">A</div><span>Grupo VA, Periodo 3.</span></div>
+          <div class="sm-op"><div class="circulo">B</div><span>Grupo VIIA, Periodo 3.</span></div>
+          <div class="sm-op"><div class="circulo">C</div><span>Grupo VIIA, Periodo 2.</span></div>
+          <div class="sm-op"><div class="circulo">D</div><span>Grupo VIA, Periodo 3.</span></div>
+        </div>
+      </div>
+
+      <div class="sm-p">
+        <div class="sm-e"><strong>2.</strong> ¿ Por qué los átomos de Be (Z=4), Mg (Z=12) y Ca (Z=20) pertenecen al mismo grupo?:</div>
+        <div class="sm-opts">
+          <div class="sm-op"><div class="circulo">A</div><span>Tienen el mismo numero de neutrones.</span></div>
+          <div class="sm-op"><div class="circulo">B</div><span>Tienen el mismo numero de electrones en el ultimo nivel de energia.</span></div>
+          <div class="sm-op"><div class="circulo">C</div><span>Tienen el mismo numero atomico.</span></div>
+          <div class="sm-op"><div class="circulo">D</div><span>Estan en el mismo periodo de la tabla periodica.</span></div>
+        </div>
+      </div>
+
+      <div class="sm-p">
+        <div class="sm-e"><strong>3.</strong> ¿Cual de los siguientes elementos pertenece al Periodo 3 y Grupo IA ?</div>
+        <div class="sm-opts">
+          <div class="sm-op"><div class="circulo">A</div><span>Li (Z=3)</span></div>
+          <div class="sm-op"><div class="circulo">B</div><span>K (Z=19)</span></div>
+          <div class="sm-op"><div class="circulo">C</div><span>Na (Z=11)</span></div>
+          <div class="sm-op"><div class="circulo">D</div><span>H (Z=1)</span></div>
+        </div>
+      </div>
+
+      <div class="sm-p">
+        <div class="sm-e"><strong>4.</strong> El ion Na⁺ se forma cuando el Sodio (Z=11) pierde 1 electron. ¿Cual es su configuracion electronica?</div>
+        <div class="sm-opts">
+          <div class="sm-op"><div class="circulo">A</div><span>1s² 2s² 2p⁶ 3s¹</span></div>
+          <div class="sm-op"><div class="circulo">B</div><span>1s² 2s² 2p⁶ 3s²</span></div>
+          <div class="sm-op"><div class="circulo">C</div><span>1s² 2s² 2p⁶</span></div>
+          <div class="sm-op"><div class="circulo">D</div><span>1s² 2s² 2p⁵</span></div>
+        </div>
+      </div>
+      <p class="rubrica">Rubrica: 2 pts por alternativa correcta.</p>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ═══════════════════════
+       ITEM III
+  ═══════════════════════ -->
+
+  <div class="bloque">
+    <div class="lee-label">Item III · Propiedades de la Tabla Periodica — 22 puntos</div>
+    <div class="instruccion">Esta seccion evalua si entiendes por que varian las propiedades periodicas. Ordenar correctamente sin explicar solo da la un tercio del puntaje.</div>
+
+    <!-- III.1 Tabla de datos -->
+    <div class="flecha-responde">▼ Ejercicio 1</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 1 — Analisis de datos: radio atomico y energia de ionizacion <span class="pts-badge">10 pts</span></div>
+      <p style="font-size:9.5pt;margin-bottom:6pt">La siguiente tabla contiene datos reales. Usala para responder las preguntas.</p>
+
+      <table class="datos" style="font-size:8.5pt;margin-bottom:8pt">
+        <thead>
+          <tr>
+            <th>Elemento</th><th>Z</th><th>Grupo</th><th>Periodo</th>
+            <th>Radio atomico (pm)</th>
+            <th>Energia de ionizacion (kJ/mol)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Li</td><td>3</td><td>IA</td><td>2</td><td>152</td><td>520</td></tr>
+          <tr><td>Na</td><td>11</td><td>IA</td><td>3</td><td>186</td><td>496</td></tr>
+          <tr><td>K</td><td>19</td><td>IA</td><td>4</td><td>227</td><td>419</td></tr>
+          <tr><td>Be</td><td>4</td><td>IIA</td><td>2</td><td>112</td><td>900</td></tr>
+          <tr><td>Mg</td><td>12</td><td>IIA</td><td>3</td><td>160</td><td>738</td></tr>
+          <tr><td>N</td><td>7</td><td>VA</td><td>2</td><td>75</td><td>1402</td></tr>
+          <tr><td>F</td><td>9</td><td>VIIA</td><td>2</td><td>64</td><td>1681</td></tr>
+          <tr><td>Cl</td><td>17</td><td>VIIA</td><td>3</td><td>99</td><td>1251</td></tr>
+          <tr><td>Ne</td><td>10</td><td>VIIIA</td><td>2</td><td>38</td><td>2081</td></tr>
+        </tbody>
+      </table>
+
+      <p style="font-size:10pt;font-weight:bold;margin-bottom:3pt">a) Ordena Li, Na y K de mayor a menor radio atomico. Explica por que ocurre esa tendencia al bajar en el Grupo IA. <span style="font-weight:normal;font-size:8.5pt;color:#555">(4 pts)</span></p>
+      <p style="font-size:9.5pt;margin-bottom:4pt">Orden (mayor → menor): <span class="blank" style="min-width:160pt"></span></p>
+      <p style="font-size:9.5pt;margin-bottom:3pt">Explicacion:</p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+
+      <p style="font-size:10pt;font-weight:bold;margin-top:8pt;margin-bottom:3pt">b) Observa la energia de ionizacion de Li, Na y K. ¿Como cambia al bajar en el Grupo IA? ¿Por que cuesta menos energia arrancarle un electron al K que al Li? <span style="font-weight:normal;font-size:8.5pt;color:#555">(3 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+
+      <p style="font-size:10pt;font-weight:bold;margin-top:8pt;margin-bottom:3pt">c) Compara F (Periodo 2, VIIA) y Cl (Periodo 3, VIIA). ¿Cual tiene mayor radio atomico y cual tiene mayor energia de ionizacion? Explica usando los datos de la tabla. <span style="font-weight:normal;font-size:8.5pt;color:#555">(3 pts)</span></p>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+    </div>
+  </div>
+
+  <!-- III.2 Ordenar con explicacion -->
+  <div class="bloque">
+    <div class="flecha-responde">▼ Ejercicio 2</div>
+    <div class="resp-label">Responde</div>
+    <div class="ejercicio">
+      <div class="ej-tit">Ejercicio 2 — Ordenar propiedades y explicar tendencias <span class="pts-badge">12 pts · 4 pts c/u</span></div>
+      <p style="font-size:9.5pt;margin-bottom:6pt">Para cada propiedad, ordena los elementos de mayor a menor y explica la razon usando los conceptos de nivel de energia y carga nuclear efectiva.</p>
+
+      <div style="margin-bottom:10pt">
+        <p style="font-size:10pt;font-weight:bold;margin-bottom:4pt">a) Radio atomico — Ordena de mayor a menor: Na (Z=11), Mg (Z=12), Al (Z=13), Si (Z=14).</p>
+        <p style="font-size:9.5pt;margin-bottom:4pt">Estos cuatro elementos estan en el mismo periodo (Periodo 3). Todos tienen sus electrones de valencia en el nivel 3.</p>
+        <p style="font-size:9.5pt;margin-bottom:3pt">Orden (mayor → menor): <span class="blank" style="min-width:180pt"></span></p>
+        <p style="font-size:9.5pt;margin-top:5pt;margin-bottom:3pt">Explicacion:</p>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+      </div>
+
+      <div style="margin-bottom:10pt">
+        <p style="font-size:10pt;font-weight:bold;margin-bottom:4pt">b) Energia de ionizacion — Ordena de mayor a menor: Na (Z=11), Mg (Z=12), Al (Z=13), Si (Z=14).</p>
+        <p style="font-size:9.5pt;margin-bottom:3pt">Orden (mayor → menor): <span class="blank" style="min-width:180pt"></span></p>
+        <p style="font-size:9.5pt;margin-top:5pt;margin-bottom:3pt">Explicacion:</p>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+      </div>
+
+      <div style="margin-bottom:4pt">
+        <p style="font-size:10pt;font-weight:bold;margin-bottom:4pt">c) Electronegatividad — Ordena de mayor a menor: F (Z=9), Cl (Z=17), Na (Z=11), K (Z=19).</p>
+        <p style="font-size:9.5pt;margin-bottom:4pt">Estos cuatro elementos vienen de distintos grupos y periodos. Considera tanto el efecto del periodo como el del grupo.</p>
+        <p style="font-size:9.5pt;margin-bottom:3pt">Orden (mayor → menor): <span class="blank" style="min-width:180pt"></span></p>
+        <p style="font-size:9.5pt;margin-top:5pt;margin-bottom:3pt">Explicacion:</p>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Quimica - 1 Medio · Atomo y Tabla Periodica</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>

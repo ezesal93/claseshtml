@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba — Salud, Sociedad y Estilos de Vida</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+/* ENCABEZADO */
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+/* TITULO */
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:18pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+/* DATOS */
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+/* CAJAS */
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:2px; }
+
+/* SEP */
+.sep { border:none; border-top:0.5px dashed #bbb; margin:8px 0; }
+
+/* TABLA PUNTAJES */
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; color:#111; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+/* ITEM HEADER */
+.item-header { background:white; color:#111; border:1.5px solid #111; padding:4px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; letter-spacing:.04em; text-transform:uppercase; }
+
+/* INSTRUCCION */
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+/* CASO */
+.caso { border:1.5px solid #111; border-radius:5px; padding:7pt 10pt; margin:7pt 0; font-size:10pt; line-height:1.65; text-align:justify; }
+.caso-header { font-size:8.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.07em; color:#555; margin-bottom:5pt; padding-bottom:4pt; border-bottom:1px solid #ccc; display:block; }
+
+/* PREGUNTAS */
+.preg-bloque { margin-bottom:12pt; }
+.preg-num { font-size:10pt; font-weight:bold; margin-bottom:5pt; display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+.preg-pts { font-size:8pt; font-weight:normal; border:1px solid #aaa; padding:1pt 5pt; border-radius:3px; white-space:nowrap; flex-shrink:0; margin-top:2pt; }
+.preg-body { font-size:10pt; line-height:1.6; margin-bottom:5pt; text-align:justify; }
+
+/* LINEAS */
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica { font-size:7.5pt; color:#888; font-style:italic; margin-top:3px; }
+
+/* TABLA FILL */
+table.fill { width:100%; border-collapse:collapse; font-size:9.5pt; margin:6pt 0; }
+table.fill th,table.fill td { border:1px solid #111; padding:5pt 8pt; vertical-align:top; line-height:1.5; }
+table.fill th { background:white; font-weight:bold; font-size:8.5pt; text-align:center; }
+table.fill td.concepto { font-weight:bold; font-size:9.5pt; text-align:left; width:22%; }
+table.fill td.fill-cell { min-height:32pt; }
+
+/* SM */
+.sm-p { margin-bottom:9px; }
+.sm-e { font-size:10pt; line-height:1.55; margin-bottom:5px; }
+.sm-opts { display:grid; grid-template-columns:1fr 1fr; gap:3px 14px; padding-left:10px; margin-bottom:4pt; }
+.sm-op { display:flex; align-items:flex-start; gap:5px; font-size:10pt; line-height:1.4; }
+.circulo { width:14pt; height:14pt; border:1.2px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:7.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+
+/* COLS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:6pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:2pt; }
+
+/* CONCEPTO */
+.concepto-box { background:white; border:1px solid #111; border-left:4px solid #111; padding:4pt 9pt; margin:6pt 0; font-size:9.5pt; line-height:1.55; border-radius:0 4px 4px 0; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; }
+  .btn-print { display:none; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .item-header { padding:3px 8px; margin-bottom:5px; }
+  .preg-bloque { margin-bottom:9pt; }
+  .caso { padding:5pt 8pt; margin:5pt 0; }
+  table.fill th,table.fill td { padding:3pt 6pt; }
+  .cols2 { gap:5px; }
+  .col-box { padding:3pt 6pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">Imprimir prueba</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henriquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 - Region De Los Rios</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Prueba: Salud, Sociedad y Estilos de Vida</h1>
+    <p class="subtitulo">(Ciencias de la Salud — Unidad 1)</p>
+    <p class="profesor">Prof. Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:4pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:210pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+    <div style="display:flex;gap:22px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">70</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Nivel de exigencia: <span class="val-bold">60%</span> — nota 4,0 = 42 pts</span>
+      <span>Tiempo: <span class="val-bold">70 min</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:7pt">
+    <p><strong>Contenidos evaluados:</strong> Sueno y ciclo REM · Estres agudo y cronico · Cortisol e hipocampo · Drogas: tolerancia, abstinencia, sistema de recompensa · Macronutrientes · Metabolismo basal · Glucosa, insulina y prediabetes · Actividad fisica y metabolismo.</p>
+    <p><strong>Capacidades:</strong> Razonamiento logico — Comprension · Analisis — Pensamiento critico · Expresion escrita.</p>
+    <p><strong>Destrezas:</strong> Identificar · Describir · Analizar · Relacionar · Argumentar · Aplicar · Evaluar · Justificar · Sintetizar.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Item</th><th>Descripcion</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>I</td><td>Seleccion multiple: conceptos fundamentales</td><td>16 pts</td><td></td></tr>
+      <tr><td>II</td><td>Tabla de relaciones: mecanismos biologicos</td><td>16 pts</td><td></td></tr>
+      <tr><td>III</td><td>Analisis de casos</td><td>22 pts</td><td></td></tr>
+      <tr><td>IV</td><td>Argumentacion y postura fundamentada</td><td>16 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>70 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ══════════════════════════════
+       ITEM I — SELECCION MULTIPLE
+  ══════════════════════════════ -->
+  <div class="item-header">
+    <span>Item I · Seleccion Multiple</span>
+    <span>16 puntos — 2 pts por pregunta · Solo una alternativa correcta</span>
+  </div>
+  <p class="instruccion">Encierra en un circulo la letra de la alternativa correcta. No se descuenta puntaje por alternativas incorrectas.</p>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>1.</strong> ¿Por que la fase REM del sueno es fundamental para el aprendizaje y la memoria?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Porque durante el REM el cuerpo descansa y recupera energia para el dia siguiente.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Porque durante el REM el cerebro consolida la memoria declarativa, transfiriendo informacion del hipocampo a la corteza cerebral.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Porque el REM es la fase de sueno mas profundo donde la actividad cerebral es minima.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Porque en el REM el cuerpo produce cortisol para prepararse para el dia siguiente.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>2.</strong> La diferencia mas importante entre el estres agudo y el estres cronico es que:</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>El estres agudo siempre dania el hipocampo, mientras que el cronico no.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>El estres agudo es util porque activa al organismo frente a una amenaza real, mientras que el cronico dania el hipocampo, suprime el sistema inmune y deteriora el sueno.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>El estres agudo libera cortisol, pero el cronico no produce ninguna hormona.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>El estres cronico solo afecta la salud mental, no la fisica.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>3.</strong> Cuando una persona necesita consumir mas cantidad de una droga para obtener el mismo efecto que antes, este fenomeno se denomina:</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Abstinencia.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Dependencia psicologica.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Tolerancia.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Potenciacion.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>4.</strong> Las drogas depresoras del SNC actuan principalmente:</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Acelerando la actividad neuronal y aumentando la produccion de adrenalina.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Generando alucinaciones visuales sin afectar la velocidad del pensamiento.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Ralentizando la actividad del sistema nervioso central, reduciendo la frecuencia cardiaca, la respiracion y los reflejos.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Bloqueando exclusivamente el sistema de recompensa sin afectar otras funciones cerebrales.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>5.</strong> ¿Por que consumir principalmente carbohidratos simples (azucar, bebidas, pan blanco) a lo largo del dia puede llevar a prediabetes a largo plazo?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Porque los carbohidratos simples no se absorben en el intestino y se acumulan en la sangre.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Porque generan picos frecuentes de glucosa que obligan al pancreas a liberar mucha insulina repetidamente, lo que puede producir resistencia a la insulina con el tiempo.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Porque los carbohidratos simples bloquean directamente la produccion de insulina en el pancreas.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Porque se convierten directamente en grasa sin pasar por la glucosa.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>6.</strong> ¿Por que el ejercicio fisico regular aumenta el metabolismo basal a largo plazo?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Porque el cuerpo gasta mas calorias durante el ejercicio y eso se acumula con el tiempo.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Porque el ejercicio aumenta la masa muscular, y el tejido muscular consume mas energia en reposo que el tejido graso.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>Porque el ejercicio suprime el apetito y la persona come menos calorias.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Porque el corazon late mas rapido durante el ejercicio y eso acelera el metabolismo de forma permanente.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>7.</strong> Una persona que lleva meses con estres cronico y privacion de sueno tiene mayor riesgo de consumir drogas. ¿Cual es la explicacion biologica mas precisa?</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>El estres y la falta de sueno destruyen las neuronas, lo que hace que la persona busque estimulacion externa.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>El cortisol elevado y la fatiga reducen la capacidad de la corteza prefrontal para tomar decisiones racionales, y las drogas activan el sistema de recompensa ofreciendo alivio inmediato.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>El estres cronico produce adiccion automaticamente sin necesidad de consumir ninguna sustancia.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>La privacion de sueno aumenta la produccion de dopamina, lo que hace a las personas mas susceptibles.</span></div>
+    </div>
+  </div>
+
+  <div class="sm-p">
+    <div class="sm-e"><strong>8.</strong> Una persona con deficiencia cronica de proteinas en su dieta (como el caso de Paula en la Guia 2) puede presentar dificultades de concentracion en clases principalmente porque:</div>
+    <div class="sm-opts">
+      <div class="sm-op"><div class="circulo">A</div><span>Las proteinas son la principal fuente de energia para el cerebro y sin ellas no puede funcionar.</span></div>
+      <div class="sm-op"><div class="circulo">B</div><span>Las proteinas son necesarias para sintetizar neurotransmisores y para el desarrollo y mantenimiento de las neuronas, procesos que se ven comprometidos ante su deficiencia.</span></div>
+      <div class="sm-op"><div class="circulo">C</div><span>La deficiencia de proteinas eleva el cortisol, lo que bloquea directamente la funcion cognitiva.</span></div>
+      <div class="sm-op"><div class="circulo">D</div><span>Sin proteinas el cuerpo no puede producir glucosa, lo que deja al cerebro sin energia inmediata.</span></div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ══════════════════════════════
+       ITEM II — TABLA DE RELACIONES
+  ══════════════════════════════ -->
+  <div class="item-header">
+    <span>Item II · Tabla de Relaciones — Mecanismos Biologicos</span>
+    <span>16 puntos — 2 pts por fila</span>
+  </div>
+  <p class="instruccion">Explica con tus propias palabras como ocurre cada relacion. No basta con decir que "se relacionan": debes describir el mecanismo biologico.</p>
+
+  <table class="fill">
+    <thead>
+      <tr>
+        <th style="width:32%">Relacion</th>
+        <th>¿Por que y como ocurre? Describe el mecanismo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="concepto">El <strong>sueno insuficiente</strong> sube el <strong>cortisol</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+      <tr>
+        <td class="concepto">El <strong>cortisol cronico elevado</strong> daña el <strong>hipocampo</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+      <tr>
+        <td class="concepto">El <strong>estres cronico</strong> deteriora la <strong>calidad del sueno</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+      <tr>
+        <td class="concepto">Las <strong>drogas depresoras</strong> reducen el <strong>sueno REM</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+      <tr>
+        <td class="concepto">El <strong>ejercicio regular</strong> mejora la <strong>sensibilidad a la insulina</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+      <tr>
+        <td class="concepto">La <strong>restriccion calorica extrema</strong> baja el <strong>metabolismo basal</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+      <tr>
+        <td class="concepto">La <strong>deficiencia de proteinas</strong> afecta el <strong>sistema inmune</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+      <tr>
+        <td class="concepto">El <strong>estres cronico</strong> aumenta el <strong>riesgo de consumo de drogas</strong></td>
+        <td class="fill-cell"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ══════════════════════════════
+       ITEM III — ANALISIS DE CASOS
+  ══════════════════════════════ -->
+  <div class="item-header">
+    <span>Item III · Analisis de Casos</span>
+    <span>22 puntos</span>
+  </div>
+  <p class="instruccion">Lee cada caso con atencion. Las preguntas se responden integrando conceptos de ambas guias. Se evalua la calidad del analisis y el uso preciso de los conceptos biologicos.</p>
+
+  <!-- CASO 1 -->
+  <div class="caso">
+    <span class="caso-header">Caso 1 — "El semestre de Diego"</span>
+    <p>Diego, 17 anos, esta en un periodo de examenes muy exigente. Para mantenerse despierto estudia hasta las 3 a.m., duerme 4 horas y compensa con varias tazas de cafe y bebidas energeticas. Lleva tres semanas con este ritmo. Ademas, come principalmente lo que encuentra rapido: galletas, pan, bebidas y snacks. Ha subido 3 kilos. Esta irritable, le cuesta concentrarse, ha tenido dos resfrios seguidos y siente que "estudia mucho pero aprende poco".</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">1. <span class="preg-pts">6 pts</span></div>
+    <div class="preg-body">Diego siente que "estudia mucho pero aprende poco". Explica este fenomeno desde dos angulos distintos: <strong>a)</strong> ¿que ocurre con la consolidacion de memoria cuando no duerme suficiente? <strong>b)</strong> ¿como afecta el estres cronico con cortisol elevado a su capacidad de concentrarse y de retener informacion? Desarrolla cada punto con el mecanismo preciso.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">2. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Diego ha subido 3 kilos y ha tenido dos resfrios. Explica como sus habitos alimenticios y su nivel de cortisol pueden explicar <strong>ambos</strong> cambios fisicos. Conecta los dos fenomenos en tu respuesta (no los expliques por separado como si fueran independientes).</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <!-- CASO 2 -->
+  <div class="caso">
+    <span class="caso-header">Caso 2 — "El plan de Andrea"</span>
+    <p>Andrea, 16 anos, quiere bajar de peso para el verano. Su plan: comer solo 700 kcal al dia y no hacer ejercicio "para no gastar energia". Al cabo de dos meses ha bajado 4 kilos, pero se siente debil, tiene frio todo el tiempo y cuando vuelve a comer "normal" en vacaciones, recupera el peso perdido y sube 2 kilos adicionales. Su madre, que tiene diabetes tipo 2, le dice que tenga cuidado con el azucar porque "viene de familia".</p>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">3. <span class="preg-pts">6 pts</span></div>
+    <div class="preg-body">Explica por que la estrategia de Andrea no funciona a largo plazo. Tu respuesta debe incluir: <strong>a)</strong> que le ocurre al metabolismo basal con una restriccion calorica extrema y por que (menciona la masa muscular) · <strong>b)</strong> por que recupera mas peso del que bajo cuando vuelve a comer normal. Luego disenale <strong>una estrategia alternativa realista</strong> que si funcione metabolicamente, con justificacion biologica.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">4. <span class="preg-pts">6 pts</span></div>
+    <div class="preg-body">La madre de Andrea tiene diabetes tipo 2. Explica el mecanismo que lleva de una dieta rica en carbohidratos simples a la resistencia a la insulina y finalmente a la diabetes tipo 2, siguiendo este hilo: carbohidratos simples → picos de glucosa → respuesta del pancreas → uso cronico excesivo de insulina → resistencia → consecuencias. Luego indica dos habitos concretos que Andrea podria adoptar desde ahora para reducir su riesgo.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ══════════════════════════════
+       ITEM IV — ARGUMENTACION
+  ══════════════════════════════ -->
+  <div class="item-header">
+    <span>Item IV · Argumentacion y Postura Fundamentada</span>
+    <span>16 puntos</span>
+  </div>
+  <p class="instruccion">Estas preguntas no tienen una respuesta unica correcta. Se evalua que tu postura este fundamentada con conceptos biologicos precisos, que el argumento sea coherente y que integres contenidos de ambas guias de la unidad.</p>
+
+  <div class="preg-bloque">
+    <div class="preg-num">Pregunta 1 <span class="preg-pts">6 pts</span></div>
+    <div class="preg-body">
+      Lee la siguiente afirmacion y toma una postura argumentada:
+      <div class="concepto-box" style="margin:6pt 0;font-style:italic">"Dormir menos para estudiar mas es una buena estrategia: lo que pierdes en horas de descanso lo ganas en tiempo de repaso. Al final, quien mas horas estudia, mejor le va en las pruebas."</div>
+      ¿Estas de acuerdo, en desacuerdo o tienes una postura intermedia? Usa al menos <strong>tres conceptos biologicos</strong> vistos en clases (REM, cortisol, hipocampo, corteza prefrontal, consolidacion de memoria, estres, etc.) para fundamentar tu postura. Tu respuesta debe ser un parrafo continuo de al menos 6 oraciones.
+    </div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg-bloque">
+    <div class="preg-num">Pregunta 2 <span class="preg-pts">10 pts</span></div>
+    <div class="preg-body">
+      Esta es la pregunta integradora de la prueba. Conecta <strong>los tres grandes temas de la Guia 1</strong> (sueno, estres y drogas) con <strong>al menos un concepto de la Guia 2</strong> (metabolismo, alimentacion o actividad fisica) en la siguiente situacion:<br><br>
+      Construye tu propia historia de un adolescente cuya vida muestre como el mal sueno, el estres y el consumo de una sustancia se retroalimentan negativamente, y como eso afecta ademas su metabolismo o su alimentacion. Luego identifica el <strong>punto de intervencion mas efectivo</strong> — el momento o cambio que mas impacto tendria para romper ese ciclo — y justificalo biologicamente.<br><br>
+      Tu respuesta debe tener dos partes claramente separadas:<br>
+      <strong>a) La historia</strong> — debe mostrar la retroalimentacion entre los temas con precision biologica.<br>
+      <strong>b) El punto de intervencion</strong> — identifica cual es, por que ese y no otro, y como la biologia explica su efectividad.
+    </div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Ciencias de la Salud · Unidad 1: Salud, Sociedad y Estilos de Vida</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
