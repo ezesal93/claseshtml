@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Trabajo — Salud Pública Chile — Electivo Ciencias de la Salud 3M</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.score-box span { font-size:7pt; color:#555; }
+
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:17pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:3px; }
+
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; font-weight:bold; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+.etapa-header { background:white; border:1.5px solid #111; padding:5px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:7px; letter-spacing:.04em; text-transform:uppercase; }
+.etapa-num { display:inline-flex; align-items:center; justify-content:center; width:20pt; height:20pt; border:1.5px solid #111; border-radius:50%; font-size:9.5pt; font-weight:bold; flex-shrink:0; margin-right:6pt; }
+
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+/* NOTA PEDAGOGICA */
+.nota-ped { border:1px solid #111; border-left:4px solid #111; border-radius:0 5px 5px 0; padding:5pt 10pt; margin:5pt 0 8pt 0; font-size:9.5pt; line-height:1.65; background:#fafafa; }
+.nota-ped strong { display:block; margin-bottom:2pt; }
+
+/* ALERTA */
+.alerta { border:1px solid #111; border-left:3px solid #111; padding:4pt 9pt; margin:5pt 0 8pt 0; font-size:9pt; line-height:1.6; border-radius:0 4px 4px 0; }
+
+/* PREG */
+.preg { margin-bottom:9pt; }
+.preg-num { font-size:10pt; font-weight:bold; margin-bottom:3pt; display:flex; align-items:flex-start; gap:7px; }
+.preg-body { font-size:10pt; line-height:1.65; margin-bottom:4pt; text-align:justify; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+
+/* COLS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:6pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.6; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:2pt; }
+
+/* FICHA */
+.ficha { border:1.5px solid #111; border-radius:6px; padding:7pt 10pt; margin:5pt 0 9pt 0; font-size:9.5pt; line-height:1.8; }
+.ficha-tit { font-size:9pt; font-weight:bold; text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid #111; padding-bottom:3pt; margin-bottom:6pt; display:block; }
+
+/* CHECK */
+.check-item { display:flex; gap:8px; align-items:flex-start; margin-bottom:5pt; font-size:9.5pt; line-height:1.55; }
+.check-sq { width:13pt; height:13pt; border:1.2px solid #111; flex-shrink:0; margin-top:2pt; }
+
+/* RUBRICA */
+table.rubrica { width:100%; border-collapse:collapse; font-size:7.5pt; margin-bottom:8pt; }
+table.rubrica th,table.rubrica td { border:1px solid #111; padding:3pt 5pt; vertical-align:top; line-height:1.45; }
+table.rubrica th { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.04em; text-align:center; background:white; }
+table.rubrica td:first-child { font-weight:bold; width:19%; font-size:8pt; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; }
+  .btn-print { display:none; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .etapa-header { padding:3px 8px; margin-bottom:5px; }
+  .preg { margin-bottom:6pt; }
+  table.rubrica th,table.rubrica td { padding:2pt 4pt; }
+  .nota-ped { padding:3pt 8pt; margin:4pt 0 6pt 0; }
+  .ficha { padding:5pt 8pt; }
+  .cols2 { gap:5px; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">Imprimir guia</button>
+<div class="paper">
+
+ <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 - Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"><span>NOTA</span></div>
+  </div>
+ 
+  <div class="main-title">
+    <h1>Trabajo: Disertación sobre una Problemática de Salud Pública en Chile</h1>
+    <p class="subtitulo">Electivo Ciencias de la Salud · 3° Medio · Unidad 2: Salud Pública</p>
+    <p class="profesor">Prof. Ezequiel Saldivia</p>
+  </div>
+ 
+  <div style="margin-top:8pt;margin-bottom:5pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:190pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:45pt"></span></span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;">
+      <span>Fecha disertación: <span class="blank" style="min-width:80pt"></span></span>
+    </div>
+    <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;">
+      <span>Pje. ideal: <span class="val-bold">70</span></span>
+      <span>Pje. obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Exigencia: <span class="val-bold">60%</span> = 42 pts</span>
+      <span>Modalidad: <span class="val-bold">Individual</span></span>
+    </div>
+  </div>
+ 
+  <div class="box-cont" style="margin-top:6pt">
+    <p><strong>Objetivo:</strong> Investigar, analizar y comunicar de forma individual una problemática real de salud pública en Chile, desarrollando un pensamiento crítico fundamentado en datos oficiales y construyendo una postura propia argumentada.</p>
+    <p><strong>Contenidos:</strong> Determinantes sociales de la salud · Epidemiología · Políticas públicas de salud · Indicadores sanitarios · Prevención y promoción de la salud.</p>
+    <p><strong>Capacidades:</strong> Análisis · Pensamiento crítico · Comunicación oral y escrita · Uso de evidencia · Argumentación · Autonomía.</p>
+  </div>
+ 
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Etapa</th><th>Descripción</th><th>Entrega</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Ficha de investigación con fuentes primarias</td><td>Escrita, impresa</td><td>16 pts</td><td></td></tr>
+      <tr><td>2</td><td>Construcción del argumento propio</td><td>Escrita, impresa</td><td>14 pts</td><td></td></tr>
+      <tr><td>3</td><td>Diseño de la presentación</td><td>Digital (PPT/Canva)</td><td>16 pts</td><td></td></tr>
+      <tr><td>4</td><td>Presentación oral y preguntas</td><td>Oral en aula</td><td>24 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="3">TOTAL</td><td>70 pts</td><td></td></tr>
+    </tbody>
+  </table>
+ 
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+ 
+  <!-- ═══════════
+       ETAPA 1
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">1</span>Etapa 1 · Investigación con Fuentes Primarias</span>
+    <span>16 puntos · Entrega impresa</span>
+  </div>
+ 
+  <div class="nota-ped">
+    <strong>¿Por qué empezamos por los datos y no por lo que ya sabemos?</strong>
+    Ya eligieron su tema porque les parece relevante, y eso es un buen punto de partida. Ahora el desafío es ir más allá de lo que creen saber: partir de datos reales, leerlos directamente desde las fuentes, y dejar que la evidencia les diga si lo que pensaban sobre el problema era correcto, parcial o incompleto. Así trabajan los epidemiólogos y los equipos de salud pública.
+  </div>
+ 
+  <div style="border:1px solid #111;border-radius:6px;padding:6pt 10pt;margin-bottom:8pt;font-size:10pt">
+    <p style="font-weight:bold;margin-bottom:4pt">Tema elegido:</p>
+    <p style="margin-bottom:4pt">Problemática de salud pública: <span class="blank" style="min-width:230pt"></span></p>
+    <p>¿Por qué elegiste este tema? (una oración): <span class="blank" style="min-width:185pt"></span></p>
+  </div>
+ 
+  <p style="font-size:10pt;font-weight:bold;margin:7pt 0 5pt 0">Paso 1 — Lectura de datos oficiales</p>
+  <p class="instruccion">Busca datos de tu problemática en las siguientes fuentes oficiales del Estado chileno. No uses blogs, Wikipedia ni portales de noticias para esta etapa. Los datos deben ser estadísticas, tasas o cifras concretas, no opiniones.</p>
+ 
+  <div class="cols2" style="margin-bottom:8pt;font-size:9pt">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5pt 8pt;line-height:1.9">
+      <strong>Fuentes recomendadas:</strong><br>
+      · MINSAL — minsal.cl (Encuesta Nacional de Salud, informes de vigilancia)<br>
+      · DEIS — deis.minsal.cl (estadísticas de mortalidad, egresos hospitalarios)<br>
+      · INE — ine.gob.cl (datos demográficos y de condiciones de vida)<br>
+      · SENDA — senda.gob.cl (consumo de drogas y alcohol)
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:5pt 8pt;line-height:1.9">
+      <strong>También pueden consultar:</strong><br>
+      · OPS/OMS Chile — paho.org/chile<br>
+      · Superintendencia de Salud — supersalud.gob.cl<br>
+      · JUNAEB — junaeb.cl (salud escolar)<br>
+      · Estudios académicos con DOI en Google Scholar
+    </div>
+  </div>
+ 
+  <p style="font-size:10pt;font-weight:bold;margin-bottom:5pt">Paso 2 — Ficha de investigación</p>
+  <p class="instruccion">Completa la siguiente ficha con la información que encontraste. Cada respuesta debe estar basada en datos concretos de las fuentes consultadas, no en opiniones generales. Adjunta una copia o captura de al menos dos de las fuentes usadas.</p>
+ 
+  <div class="ficha">
+    <span class="ficha-tit">Ficha de Investigación — Etapa 1</span>
+ 
+    <div class="preg">
+      <div class="preg-num">1.</div>
+      <div class="preg-body">¿Cuál es la magnitud del problema? Incluye al menos dos cifras o estadísticas concretas con su fuente. ¿Cuántas personas afecta? ¿Ha aumentado o disminuido en los últimos años?</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      <p style="font-size:8.5pt;color:#555;margin-top:2pt">Fuente 1: <span class="blank" style="min-width:160pt"></span> &nbsp; Año del dato: <span class="blank" style="min-width:40pt"></span></p>
+      <p style="font-size:8.5pt;color:#555;margin-top:3pt">Fuente 2: <span class="blank" style="min-width:160pt"></span> &nbsp; Año del dato: <span class="blank" style="min-width:40pt"></span></p>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">2.</div>
+      <div class="preg-body">¿A qué grupos de la población afecta más esta problemática? (edad, sexo, región geográfica, nivel socioeconómico, u otro factor). Apóyate en datos.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">3.</div>
+      <div class="preg-body">¿Cuáles son las principales causas o determinantes de esta problemática según las fuentes consultadas? No confundan "causas" con "consecuencias".</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">4.</div>
+      <div class="preg-body">¿Qué políticas públicas o programas del Estado chileno existen actualmente para enfrentar esta problemática? Nombra al menos uno concreto y explica en qué consiste.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">5.</div>
+      <div class="preg-body">¿Esta problemática tiene algún impacto o expresión particular en la Región de Los Ríos o en comunidades como Paillaco? Si no encontraste datos regionales, explica por qué crees que podría o no podría afectar a tu comunidad de la misma manera que al promedio nacional.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+  </div>
+ 
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+ 
+  <!-- ═══════════
+       ETAPA 2
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">2</span>Etapa 2 · Construcción del Argumento Propio</span>
+    <span>14 puntos · Entrega impresa</span>
+  </div>
+ 
+  <div class="nota-ped">
+    <strong>¿Por qué escribir antes de hacer las diapositivas?</strong>
+    Hacer diapositivas sin haber pensado primero es la trampa más común. El resultado suele ser un copia-pega con imágenes decorativas. Esta etapa te obliga a pensar antes de diseñar: ¿qué quieres decir tú sobre este tema? ¿Qué postura tienes? ¿Cómo lo vas a argumentar? Solo cuando puedas responder eso en papel, estarás listo para construir la presentación.
+  </div>
+ 
+  <div class="ficha">
+    <span class="ficha-tit">Construcción del Argumento — Etapa 2</span>
+ 
+    <div class="preg">
+      <div class="preg-num">6.</div>
+      <div class="preg-body">En una sola oración, formula la postura central de tu presentación. No es un título: es una afirmación que puedes defender. Ejemplo: "La obesidad infantil en Chile es principalmente un problema de entorno y políticas públicas, no de decisión individual."</div>
+      <div style="border:1px solid #111;border-radius:4px;padding:6pt 8pt;min-height:36pt;margin:4pt 0;font-size:10pt"></div>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">7.</div>
+      <div class="preg-body">¿Con qué tres argumentos vas a sostener esa postura? Cada argumento debe apoyarse en al menos un dato de la Etapa 1. No vale decir "porque es importante": debes dar razones específicas respaldadas por evidencia.</div>
+      <div style="border:1px solid #ccc;border-radius:4px;padding:5pt 8pt;margin:4pt 0;font-size:9.5pt">
+        <p style="font-weight:bold;margin-bottom:3pt">Argumento 1:</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+        <p style="font-weight:bold;margin:5pt 0 3pt 0">Argumento 2:</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+        <p style="font-weight:bold;margin:5pt 0 3pt 0">Argumento 3:</p>
+        <span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">8.</div>
+      <div class="preg-body">¿Cuál es la propuesta o llamado a la acción que va a cerrar tu presentación? Debe ser concreta, dirigida a un destinatario específico (el Estado, el sistema educacional, las familias, los jóvenes, tu comunidad) y justificada por los datos que investigaste.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">9.</div>
+      <div class="preg-body">¿Qué aspecto de esta problemática te pareció más sorprendente o inesperado al investigar? ¿Cambió en algo lo que pensabas sobre el tema antes de comenzar? Explica con honestidad.</div>
+      <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+    </div>
+ 
+    <div class="preg" style="margin-top:7pt">
+      <div class="preg-num">10.</div>
+      <div class="preg-body">Esquema de la presentación: describe brevemente qué va a contener cada sección de tus diapositivas. No es el guión completo: es el mapa del recorrido que vas a proponer al curso.</div>
+      <div style="border:1px solid #ccc;border-radius:4px;padding:5pt 8pt;margin:4pt 0;font-size:9.5pt;line-height:2">
+        <p>Diapositiva 1 (Portada / título): <span class="blank" style="min-width:160pt"></span></p>
+        <p>Diapositivas 2-3 (El problema en datos): <span class="blank" style="min-width:130pt"></span></p>
+        <p>Diapositivas 4-5 (Causas y factores): <span class="blank" style="min-width:145pt"></span></p>
+        <p>Diapositivas 6-7 (Políticas públicas / qué se está haciendo): <span class="blank" style="min-width:80pt"></span></p>
+        <p>Diapositiva 8 (Propuesta / llamado a la acción): <span class="blank" style="min-width:130pt"></span></p>
+        <p>Diapositiva 9 (Fuentes): <span class="blank" style="min-width:175pt"></span></p>
+      </div>
+    </div>
+  </div>
+ 
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+ 
+  <!-- ═══════════
+       ETAPA 3
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">3</span>Etapa 3 · Diseño de la Presentación</span>
+    <span>16 puntos · Entrega digital</span>
+  </div>
+ 
+  <p class="instruccion">La presentación debe tener entre 8 y 12 diapositivas y seguir el esquema que definiste en la Etapa 2. Se evalúa el contenido y la claridad de los argumentos, no el diseño estético.</p>
+ 
+  <div class="cols2">
+    <div>
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:5pt">La presentación DEBE incluir:</p>
+      <div class="check-item"><div class="check-sq"></div><span>Portada con nombre del tema, integrantes, curso y fecha.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Al menos dos gráficos o tablas con datos reales citados.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>La postura central del grupo formulada en una diapositiva.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Descripción de al menos una política pública existente.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Una propuesta o llamado a la acción concreto y dirigido.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Diapositiva final de fuentes en formato APA.</span></div>
+    </div>
+    <div>
+      <p style="font-size:9.5pt;font-weight:bold;margin-bottom:5pt">La presentación NO debe incluir:</p>
+      <div class="check-item"><div class="check-sq"></div><span>Párrafos completos copiados de fuentes o de IA.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Más de 30 palabras por diapositiva (excepto gráficos y fuentes).</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Imágenes decorativas sin relación con el contenido.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Datos sin citar la fuente y el año.</span></div>
+      <div class="check-item"><div class="check-sq"></div><span>Animaciones o efectos que distraigan del contenido.</span></div>
+    </div>
+  </div>
+ 
+  <div class="alerta" style="margin-top:5pt">La presentación se envía al correo <strong>ezesaldivia.gyp@gmail.com</strong> con asunto <em>"Disertación Salud Pública — [Tema] — [Nombre]"</em> al menos 24 horas antes de la fecha de presentación.</div>
+ 
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+ 
+  <!-- ═══════════
+       ETAPA 4
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">4</span>Etapa 4 · Presentación Oral y Ronda de Preguntas</span>
+    <span>24 puntos · 10 a 12 minutos + 3 min de preguntas</span>
+  </div>
+ 
+  <div class="nota-ped">
+    <strong>¿Por qué hay preguntas al final?</strong>
+    Una presentación donde nadie pregunta nada es una presentación que no genera pensamiento. Las preguntas no son un castigo: son la prueba de que el tema es interesante y de que tú lo dominas. El docente y tus compañeros van a preguntar cosas que no están en las diapositivas, porque quieren saber si entiendes el tema o si solo leíste las láminas.
+  </div>
+ 
+  <p style="font-size:9.5pt;font-weight:bold;margin-bottom:5pt">Criterios para la presentación oral:</p>
+  <div class="cols2">
+    <div class="col-box">
+      <span class="col-tit">Distribución del tiempo (10-12 min)</span>
+      <span style="font-size:9pt;line-height:1.9;display:block">
+        · Introducción y contexto: 1-2 min<br>
+        · El problema en datos: 2-3 min<br>
+        · Causas y factores: 2-3 min<br>
+        · Políticas y propuesta: 2-3 min<br>
+        · Cierre y ronda de preguntas: 3 min
+      </span>
+    </div>
+    <div class="col-box">
+      <span class="col-tit">Presentación individual</span>
+      <span style="font-size:9pt;line-height:1.9;display:block">
+        Presentas tú solo frente al curso. Debes hablar con fluidez sin leer las diapositivas. La ronda de preguntas puede venir del docente o de cualquier compañero del curso.
+      </span>
+    </div>
+  </div>
+ 
+  <p style="font-size:9.5pt;font-weight:bold;margin:7pt 0 5pt 0">Ejemplos de preguntas que pueden surgir en la ronda:</p>
+  <div style="border:1px solid #ccc;border-radius:5px;padding:6pt 10pt;font-size:9.5pt;line-height:2">
+    · ¿De dónde obtuvieron ese dato? ¿Es reciente?<br>
+    · ¿Por qué eligieron ese tema y no otro?<br>
+    · ¿Qué pasaría si la política que mencionaron se eliminara?<br>
+    · ¿Cómo afecta esta problemática específicamente a jóvenes como ustedes?<br>
+    · ¿Hay algo que el sistema de salud esté haciendo bien en este tema?<br>
+    · Si tuvieran que convencer al alcalde de Paillaco de actuar en esto, ¿qué le dirían?
+  </div>
+ 
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+ 
+ 
+  <div style="margin-top:8pt;border:2px solid #111;border-radius:6px;padding:7pt 12pt;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;font-size:9.5pt">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Puntaje total</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt;"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">/ 70 pts</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Porcentaje de logro</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt;"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">pts / 70 × 100</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Nota final</div>
+      <div style="border-bottom:2px solid #111;height:20pt;"></div>
+    </div>
+  </div>
+ 
+  <div style="margin-top:7pt">
+    <div style="font-size:8.5pt;font-weight:bold;margin-bottom:3pt">Observaciones del docente:</div>
+    <div style="display:block;border-bottom:.8px solid #ccc;height:18pt;margin-bottom:3px"></div>
+    <div style="display:block;border-bottom:.8px solid #ccc;height:18pt;margin-bottom:3px"></div>
+  </div>
+ 
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Electivo Ciencias de la Salud · 3° Medio · Unidad 2: Salud Pública</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+ 
+</div>
+</body>
+</html>

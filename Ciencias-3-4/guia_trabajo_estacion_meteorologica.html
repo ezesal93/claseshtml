@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Trabajo — Estacion Meteorologica — Ciencias para la Ciudadania 3M</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; min-height: 297mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; }
+.score-box span { font-size:7pt; color:#555; }
+
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:17pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:3px; }
+
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; font-weight:bold; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+.etapa-header { background:white; border:1.5px solid #111; padding:5px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:7px; letter-spacing:.04em; text-transform:uppercase; }
+.etapa-num { display:inline-flex; align-items:center; justify-content:center; width:20pt; height:20pt; border:1.5px solid #111; border-radius:50%; font-size:9.5pt; font-weight:bold; flex-shrink:0; margin-right:6pt; }
+
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+/* PASO */
+.paso { display:flex; gap:10px; margin-bottom:8pt; align-items:flex-start; }
+.paso-num { min-width:22pt; height:22pt; border:1.5px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9.5pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+.paso-body { flex:1; font-size:10pt; line-height:1.7; }
+.paso-body strong { display:block; margin-bottom:1pt; }
+
+/* SECCION INFORME */
+.seccion-inf { border:1px solid #111; border-left:4px solid #111; border-radius:0 5px 5px 0; padding:5pt 10pt; margin:5pt 0; font-size:9.5pt; line-height:1.65; }
+.seccion-inf .tit { font-weight:bold; font-size:10pt; display:block; margin-bottom:3pt; }
+
+/* COLS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:6pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:2pt; }
+
+/* ALERTA */
+.alerta { border:1px solid #111; border-left:3px solid #111; padding:4pt 9pt; margin:5pt 0 8pt 0; font-size:9pt; line-height:1.55; border-radius:0 4px 4px 0; }
+
+/* PREGUNTAS ANALISIS */
+.preg { margin-bottom:8pt; }
+.preg-num { font-size:10pt; font-weight:bold; margin-bottom:3pt; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+
+/* RUBRICA */
+table.rubrica { width:100%; border-collapse:collapse; font-size:8pt; margin-bottom:8pt; }
+table.rubrica th,table.rubrica td { border:1px solid #111; padding:4pt 5pt; vertical-align:top; line-height:1.45; font-size:7.5pt; }
+table.rubrica th { font-size:7.5pt; font-weight:bold; text-transform:uppercase; letter-spacing:.04em; text-align:center; background:white; }
+table.rubrica td:first-child { font-weight:bold; width:20%; font-size:8pt; }
+table.rubrica .pts-col { width:6%; text-align:center; font-weight:bold; font-size:9pt; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; font-size:9.5pt; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; min-height:unset; }
+  .btn-print { display:none; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .etapa-header { padding:3px 8px; margin-bottom:5px; }
+  .paso { margin-bottom:6pt; }
+  .seccion-inf { padding:3pt 8pt; margin:4pt 0; }
+  table.rubrica th,table.rubrica td { padding:3pt 4pt; }
+  .cols2 { gap:5px; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">Imprimir guia</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henriquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 - Region De Los Rios</p>
+      </div>
+    </div>
+    <div class="score-box"><span>NOTA</span></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Trabajo: Construcción de una Estación Meteorológica Funcional</h1>
+    <p class="subtitulo">Ciencias para la Ciudadania · 3° Medio · Modulo Ambiente y Sostenibilidad · Unidad 2</p>
+    <p class="profesor">Prof. Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:5pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Integrantes: <span class="blank" style="min-width:180pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:45pt"></span></span>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span><span class="blank" style="min-width:290pt"></span></span>
+      <span>Fecha entrega: <span class="blank" style="min-width:68pt"></span></span>
+    </div>
+    <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;">
+      <span>Pje. ideal: <span class="val-bold">70</span></span>
+      <span>Pje. obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Exigencia: <span class="val-bold">60%</span> = 42 pts</span>
+      <span>Modalidad: <span class="val-bold">Grupos de 2 a 4 personas</span></span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:6pt">
+    <p><strong>Objetivo:</strong> Construir una estación meteorológica analogica funcional, registrar datos atmosféricos durante 5 dias consecutivos y elaborar un informe científico que analice el comportamiento del tiempo atmosférico local.</p>
+    <p><strong>Contenidos:</strong> Variables meteorológicas · Instrumentos de medición · Recolección y análisis de datos · Clima y tiempo atmosférico · Cambio climático local.</p>
+    <p><strong>Capacidades:</strong> Análisis · Pensamiento crítico · Razonamiento lógico · Expresión escrita · Trabajo colaborativo · Inserción social.</p>
+    <p><strong>Destrezas:</strong> Observar · Medir · Registrar · Analizar · Diseñar · Construir · Concluir · Comparar · Proponer · Sintetizar.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Etapa</th><th>Descripción</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Construccion de la estación meteorológica</td><td>16 pts</td><td></td></tr>
+      <tr><td>2</td><td>Registro de datos (5 días consecutivos)</td><td>10 pts</td><td></td></tr>
+      <tr><td>3</td><td>Informe escrito (estructura, contenido y análisis)</td><td>36 pts</td><td></td></tr>
+      <tr><td>4</td><td>Trabajo colaborativo y proceso</td><td>8 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>70 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ═══════════
+       ETAPA 1
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">1</span>Etapa 1 · Construcción de la Estación Meteorológica</span>
+    <span>16 puntos</span>
+  </div>
+  <p class="instruccion">La estación deben incluir los siguientes instrumentos, construidos con materiales de bajo costo o reciclados. Todos deben estar instalados sobre una base, etiquetados y operativos antes de comenzar el registro de datos.</p>
+
+  <div class="cols2">
+    <div>
+      <div class="seccion-inf" style="margin-bottom:6pt">
+        <span class="tit">Termómetro e Higrómetro</span>
+        Puede ser un termómetro comercial con higrómetro incorporado, o bien un higrómetro casero construido con pelo, botella u otro material. Debe estar protegido de la lluvia directa y del sol, con libre circulación de aire.
+      </div>
+      <div class="seccion-inf" style="margin-bottom:6pt">
+        <span class="tit">Pluviometro</span>
+        Recipiente de boca ancha con escala graduada en milimetros. Puede construirse con una botella plastica cortada e invertida.
+      </div>
+    </div>
+    <div>
+      <div class="seccion-inf" style="margin-bottom:6pt">
+        <span class="tit">Veleta</span>
+        Indica la dirección del viento. Puede construirse con carton (debe estar plastificado para portegerlo de la lluvia), palitos y una base giratoria. Debe estar orientada respecto a los puntos cardinales (N, S, E, O).
+      </div>
+      <div class="seccion-inf">
+        <span class="tit">Anemómetro</span>
+        Indica la intensidad o velocidad relativa del viento. Puede ser  hecho con vasos de plastico, palitos y un eje central. Aunque sea cualitativo (lento, moderado, rapido), debe ser consistente entre dias su medición.
+      </div>
+    </div>
+  </div>
+
+  <div class="alerta" style="margin-top:4pt">Todos los instrumentos deben estar instalados formando parte de su estación metereológica antes de la primera medicion. El grupo debe fotografiar la estación instalada y adjuntar la fotografía al informe.</div>
+
+  <p style="font-size:9.5pt;font-weight:bold;margin:7pt 0 4pt 0">Lista de verificacion — marcar cuando este listo:</p>
+  <div class="cols2">
+    <div style="font-size:9.5pt;line-height:2.2">
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>Termómetro instalado y funcionando.</span></div>
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>Higrómetro instalado (casero o comercial).</span></div>
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>Pluviómetro con escala graduada instalado.</span></div>
+    </div>
+    <div style="font-size:9.5pt;line-height:2.2">
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>Veleta orientada a los puntos cardinales.</span></div>
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>Anemómetro instalado y libre para moverse.</span></div>
+      <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>Foto de la estacion tomada y guardada.</span></div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ═══════════
+       ETAPA 2
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">2</span>Etapa 2 · Registro de Datos — 5 Días Consecutivos</span>
+    <span>10 puntos · 2 pts por día completado</span>
+  </div>
+  <p class="instruccion">Registren las mediciones de su estación durante 5 días seguidos, siempre a la misma hora.</p>
+
+  <div class="alerta">Los datos deben ser medidos directamente en la estación. No se permite completar esta tabla con datos de aplicaciones o sitios web.</div>
+
+  <table style="width:100%;border-collapse:collapse;font-size:8.5pt;margin:6pt 0">
+    <thead>
+      <tr>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Día / Fecha</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Hora</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Temperatura<br>(°C)</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Humedad<br>relativa (%)</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Precipitación<br>(mm)</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Dirección<br>del viento</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Intensidad<br>del viento</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Estado<br>del cielo</th>
+        <th style="border:1px solid #111;padding:3pt 5pt;background:white;font-weight:bold;text-align:center">Observaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="border:1px solid #111;padding:6pt 5pt;font-weight:bold">Dia 1 ___/___</td><td style="border:1px solid #111;padding:6pt 4pt;min-height:22pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td></tr>
+      <tr><td style="border:1px solid #111;padding:6pt 5pt;font-weight:bold">Dia 2 ___/___</td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td></tr>
+      <tr><td style="border:1px solid #111;padding:6pt 5pt;font-weight:bold">Dia 3 ___/___</td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td></tr>
+      <tr><td style="border:1px solid #111;padding:6pt 5pt;font-weight:bold">Dia 4 ___/___</td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td></tr>
+      <tr><td style="border:1px solid #111;padding:6pt 5pt;font-weight:bold">Dia 5 ___/___</td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td><td style="border:1px solid #111;padding:6pt 4pt"></td></tr>
+      <tr style="background:#f5f5f5"><td style="border:1px solid #111;padding:5pt;font-weight:bold;font-size:8pt">PROMEDIO</td><td style="border:1px solid #111;padding:5pt">—</td><td style="border:1px solid #111;padding:5pt"></td><td style="border:1px solid #111;padding:5pt"></td><td style="border:1px solid #111;padding:5pt"></td><td style="border:1px solid #111;padding:5pt">—</td><td style="border:1px solid #111;padding:5pt">—</td><td style="border:1px solid #111;padding:5pt">—</td><td style="border:1px solid #111;padding:5pt">—</td></tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ═══════════
+       ETAPA 3
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">3</span>Etapa 3 · Informe de Investigación</span>
+    <span>36 puntos</span>
+  </div>
+  <p class="instruccion">El informe se entrega en formato digital (Word o PDF) al correo <strong>ezesaldivia.gyp@gmail.com</strong> con asunto: <em>"Informe Estacin Meteorológica — [Nombres del grupo] — [Curso]"</em>. Debe incluir todas las secciones que se describen a continuación en el orden indicado.</p>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">1</div>
+    <div class="paso-body"><strong>Portada</strong>
+    Nombre del trabajo, nombres completos de todos los integrantes del grupo, curso, asignatura, nombre del docente y fecha de entrega. Debe incluir una foto de la estacion meteorológica construida e instalada.</div>
+  </div>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">2</div>
+    <div class="paso-body"><strong>Introducción (mínimo 150 palabras)</strong>
+    Presenta el contexto del trabajo: por que es relevante medir el tiempo atmosférico localmente en Paillaco y la Región de Los Ríos, que variables decidierón medir y por que, y cuál es el objetivo general del trabajo. Debe incluir la distinción entre tiempo atmosférico y clima.</div>
+  </div>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">3</div>
+    <div class="paso-body"><strong>Marco Teórico (mínimo 250 palabras)</strong>
+    Explica con sus palabras los conceptos fundamentales del trabajo. Debe incluir: definición de tiempo atmosférico y clima, descripción de cada instrumento de la estación (que mide, en que unidad y como funciona), y una breve referencia al clima característico de la Región de Los Ríos. Citen todas las fuentes consultadas en formato APA.</div>
+  </div>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">4</div>
+    <div class="paso-body"><strong>Materiales y Métodos</strong>
+    Describe detalladamente: (a) los materiales usados para construir cada instrumento y el proceso de construcción, (b) el lugar donde instalaron la estación y por que eligieron ese lugar, y (c) el protocolo de medicion: hora exacta, responsable de medir cada dia, y como registraron los datos. Incluye una segunda foto o dibujo de la estacion en su lugar de instalacion.</div>
+  </div>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">5</div>
+    <div class="paso-body"><strong>Resultados</strong>
+    Presenta la tabla de datos completa (copiada desde la Etapa 2 con los promedios calculados). Ademas, construye al menos <strong>dos gráficos</strong>: uno de lineas mostrando la evolución de la temperatura durante los 5 días, y uno adicional con otra variable a elección. Los gráficos deben tener título, etiquetas en los ejes y leyenda. Describe brevemente lo que muestran los datos sin interpretarlos todavía.</div>
+  </div>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">6</div>
+    <div class="paso-body"><strong>Análisis de Resultados (mínimo 200 palabras)</strong>
+    Interpreta los datos obtenidos respondiendo las siguientes preguntas guia. No basta con describir los datos: deben explicar el por que de lo que observaron.
+    <div style="margin-top:6pt">
+      <div class="preg"><div class="preg-num">P1. ¿Como fue la variación de temperatura durante los 5 dias? ¿Hubo algun día significativamente diferente? ¿A que podria deberse?</div></div>
+      <div class="preg"><div class="preg-num">P2. ¿Existe alguna relacion entre la humedad relativa y la precipitacion registrada? Fundamenta con tus datos.</div></div>
+      <div class="preg"><div class="preg-num">P3. ¿La direccion del viento fue constante o cambio durante los dias de medicion? ¿Que relacion tiene esto con el estado del cielo observado?</div></div>
+      <div class="preg"><div class="preg-num">P4. Compara tus datos con los promedios historicos de Paillaco para la epoca del año en que realizaste las mediciones. ¿Se parecen o difieren? ¿Por que crees que hay diferencias?</div></div>
+      <div class="preg"><div class="preg-num">P5. ¿Que limitaciones tuvo tu estacion analogica para medir con precision? ¿Que instrumento crees que fue el menos preciso y por que?</div></div>
+    </div>
+    </div>
+  </div>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">7</div>
+    <div class="paso-body"><strong>Conclusiones (minimo 120 palabras)</strong>
+    Sintetiza los hallazgos principales del trabajo respondiendo: ¿como fue el comportamiento del tiempo atmosferico en Paillaco durante el periodo medido?, ¿se cumplio el objetivo del trabajo?, y ¿que mejoras harian a la estacion si pudiesen construirla de nuevo? La conclusion debe estar redactada en parrafo continuo, sin usar viñetas.</div>
+  </div>
+
+  <div class="paso"><div class="paso-num" style="border-radius:4px">8</div>
+    <div class="paso-body"><strong>Bibliografia</strong>
+    Lista todas las fuentes consultadas en formato APA (autor, año, titulo, editorial o URL). Minimo 3 fuentes. No se acepta solo Wikipedia.</div>
+  </div>
+
+  <div class="alerta" style="margin-top:4pt">El uso de inteligencia artificial como herramienta de apoyo esta permitido, pero si la utilizaron deben adjuntar la captura de la conversacion al momento de la entrega. Copiar texto de internet sin citar la fuente se considera plagio y anula el trabajo.</div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ═══════════
+       ETAPA 4
+  ═══════════ -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">4</span>Etapa 4 · Trabajo Colaborativo y Proceso</span>
+    <span>8 puntos</span>
+  </div>
+  <p class="instruccion">Esta etapa es evaluada por el docente durante el proceso de construccion, medicion y entrega. No requiere una entrega especifica, pero el grupo debe demostrar division equitativa del trabajo y que todos los integrantes comprenden el proyecto.</p>
+
+  <div class="cols2">
+    <div class="col-box">
+      <span class="col-tit">Division de tareas del grupo</span>
+      <span style="font-size:9pt;color:#555">Indica quien fue responsable de cada instrumento y de cada seccion del informe:</span>
+      <div style="margin-top:4pt;font-size:9.5pt;line-height:2">
+        <span style="display:block;border-bottom:.8px solid #ccc">Termometro / Higrometro: <span style="min-width:80pt;display:inline-block"></span></span>
+        <span style="display:block;border-bottom:.8px solid #ccc">Pluviometro: <span style="min-width:80pt;display:inline-block"></span></span>
+        <span style="display:block;border-bottom:.8px solid #ccc">Veleta: <span style="min-width:80pt;display:inline-block"></span></span>
+        <span style="display:block;border-bottom:.8px solid #ccc">Anemometro: <span style="min-width:80pt;display:inline-block"></span></span>
+        <span style="display:block;border-bottom:.8px solid #ccc">Registro diario de datos: <span style="min-width:80pt;display:inline-block"></span></span>
+        <span style="display:block">Redaccion del informe: <span style="min-width:80pt;display:inline-block"></span></span>
+      </div>
+    </div>
+    <div class="col-box">
+      <span class="col-tit">Autoevaluacion del grupo</span>
+      <span style="font-size:9pt;color:#555">Marca con una X la opcion que mejor describe el trabajo de su grupo:</span>
+      <div style="margin-top:6pt;font-size:9.5pt;line-height:2.2">
+        <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>Todos participamos por igual en todo el proceso.</span></div>
+        <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>La mayoria participo; uno o dos integrantes aportaron menos.</span></div>
+        <div style="display:flex;gap:7px;align-items:center"><div style="width:13pt;height:13pt;border:1.2px solid #111;flex-shrink:0"></div><span>El trabajo lo realizo principalmente una persona.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- RUBRICA -->
+  <p style="font-size:9.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:7pt">Rubrica de Evaluacion</p>
+
+  <table class="rubrica">
+    <thead>
+      <tr>
+        <th style="text-align:left;width:20%">Criterio</th>
+        <th style="width:19%">4 — Logrado</th>
+        <th style="width:19%">3 — Med. Logrado</th>
+        <th style="width:19%">2 — Por Lograr</th>
+        <th style="width:16%">1 — No Logrado</th>
+        <th style="width:7%">Pts max.</th>
+        <th style="width:0%">Obtenido</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Construccion de instrumentos<br><em style="font-weight:normal;font-size:7pt">(Etapa 1)</em></td>
+        <td>Los 4 instrumentos construidos, instalados, funcionando y etiquetados. Foto incluida. Lugar de instalacion adecuado.</td>
+        <td>3 instrumentos funcionando correctamente. Foto incluida pero algun instrumento con problemas menores.</td>
+        <td>Solo 2 instrumentos funcionando o alguno instalado incorrectamente. Sin foto o lugar inadecuado.</td>
+        <td>Menos de 2 instrumentos o estacion no instalada.</td>
+        <td style="text-align:center">16</td>
+        <td style="text-align:center"></td>
+      </tr>
+      <tr>
+        <td>Registro de datos<br><em style="font-weight:normal;font-size:7pt">(Etapa 2)</em></td>
+        <td>5 dias completos con todas las variables registradas. Promedios calculados. Datos propios de la estacion.</td>
+        <td>5 dias registrados pero con algunas variables faltantes o promedios sin calcular.</td>
+        <td>Menos de 5 dias o tabla mayormente incompleta.</td>
+        <td>Sin registro de datos o datos tomados de aplicaciones.</td>
+        <td style="text-align:center">10</td>
+        <td style="text-align:center"></td>
+      </tr>
+      <tr>
+        <td>Estructura del informe<br><em style="font-weight:normal;font-size:7pt">(Etapa 3)</em></td>
+        <td>Las 8 secciones presentes, con la extension minima solicitada. Portada completa con foto. Bibliografia en APA con minimo 3 fuentes.</td>
+        <td>La mayoria de las secciones presentes pero algunas muy breves o sin extension minima. 1 o 2 secciones faltantes.</td>
+        <td>Informe incompleto con 3 o mas secciones faltantes o todas muy por debajo de la extension minima.</td>
+        <td>Sin informe o informe copiado sin elaboracion propia.</td>
+        <td style="text-align:center">8</td>
+        <td style="text-align:center"></td>
+      </tr>
+      <tr>
+        <td>Calidad del marco teorico<br><em style="font-weight:normal;font-size:7pt">(Etapa 3)</em></td>
+        <td>Explica con palabras propias todos los instrumentos, las variables que miden y sus unidades. Incluye referencia al clima de la region. Fuentes citadas correctamente.</td>
+        <td>Explica la mayoria de los instrumentos pero de forma superficial o copiada. Fuentes incompletas.</td>
+        <td>Marco teorico muy breve o con errores conceptuales importantes. Sin citas.</td>
+        <td>Sin marco teorico o completamente copiado.</td>
+        <td style="text-align:center">8</td>
+        <td style="text-align:center"></td>
+      </tr>
+      <tr>
+        <td>Resultados y graficos<br><em style="font-weight:normal;font-size:7pt">(Etapa 3)</em></td>
+        <td>Tabla de datos completa. Dos graficos con titulo, ejes etiquetados y leyenda. Descripcion clara de los resultados sin mezclarlos con el analisis.</td>
+        <td>Tabla completa. Al menos un grafico correcto. Descripcion presente pero mezcla datos con interpretacion.</td>
+        <td>Tabla incompleta o solo un grafico sin rotulos. Descripcion muy escasa.</td>
+        <td>Sin graficos o sin tabla de resultados.</td>
+        <td style="text-align:center">8</td>
+        <td style="text-align:center"></td>
+      </tr>
+      <tr>
+        <td>Analisis y conclusiones<br><em style="font-weight:normal;font-size:7pt">(Etapa 3)</em></td>
+        <td>Responde las 5 preguntas guia con argumentos basados en los datos. Compara con promedios historicos. Identifica limitaciones. Conclusion en parrafo continuo, sintetica y fundamentada.</td>
+        <td>Responde la mayoria de las preguntas pero con poca profundidad. Conclusion presente pero muy breve o sin fundamentacion.</td>
+        <td>Analisis muy superficial. Responde menos de 3 preguntas. Conclusion vaga o inexistente.</td>
+        <td>Sin analisis ni conclusion.</td>
+        <td style="text-align:center">12</td>
+        <td style="text-align:center"></td>
+      </tr>
+      <tr>
+        <td>Trabajo colaborativo<br><em style="font-weight:normal;font-size:7pt">(Etapa 4)</em></td>
+        <td>Division de tareas clara y equitativa. Todos los integrantes pueden explicar el proyecto completo. Autoevaluacion coherente con lo observado.</td>
+        <td>Division presente pero desigual. La mayoria de los integrantes comprende el proyecto.</td>
+        <td>Poca evidencia de trabajo en equipo. Algunos integrantes no conocen partes del proyecto.</td>
+        <td>Sin division de tareas o proyecto realizado por una sola persona.</td>
+        <td style="text-align:center">8</td>
+        <td style="text-align:center"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:8pt;border:2px solid #111;border-radius:6px;padding:7pt 12pt;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;font-size:9.5pt">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Puntaje total</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt;"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">/ 70 pts</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Porcentaje de logro</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt;"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">pts / 70 × 100</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;color:#555;margin-bottom:3pt">Nota final</div>
+      <div style="border-bottom:2px solid #111;height:20pt;"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:7pt">
+    <div style="font-size:8.5pt;font-weight:bold;margin-bottom:3pt">Observaciones del docente:</div>
+    <div style="display:block;border-bottom:.8px solid #ccc;height:18pt;width:100%;margin-bottom:2px"></div>
+    <div style="display:block;border-bottom:.8px solid #ccc;height:18pt;width:100%;margin-bottom:2px"></div>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Ciencias para la Ciudadania · 3° Medio · Modulo Ambiente y Sostenibilidad · Unidad 2</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
