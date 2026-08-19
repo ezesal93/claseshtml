@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Química - Modelos Atómicos y Estructura Atómica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            padding: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header p {
+            font-size: 13px;
+            margin: 3px 0;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #f5f5f5;
+            padding: 10px 12px;
+            border-left: 5px solid #000;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .subsection-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .content {
+            font-size: 13px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        
+        .content p {
+            margin-bottom: 10px;
+        }
+        
+        .highlight {
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-left: 3px solid #666;
+            margin: 12px 0;
+            font-weight: 500;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 12px;
+        }
+        
+        table th, table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        table th {
+            background-color: #e8e8e8;
+            font-weight: bold;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .ejercicios {
+            margin-top: 20px;
+        }
+        
+        .ejercicio {
+            margin-bottom: 18px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .ejercicio:last-child {
+            border-bottom: none;
+        }
+        
+        .ejercicio-numero {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .ejercicio-texto {
+            margin-bottom: 8px;
+            text-align: justify;
+            font-size: 13px;
+        }
+        
+        .opciones {
+            margin-left: 18px;
+            font-size: 12px;
+        }
+        
+        .opcion {
+            margin: 4px 0;
+            padding-left: 22px;
+            position: relative;
+        }
+        
+        .opcion:before {
+            content: attr(data-letra);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .respuesta {
+            margin-top: 8px;
+            padding: 8px;
+            background-color: #fff;
+            border-left: 3px solid #999;
+            font-size: 12px;
+            display: none;
+        }
+        
+        .respuesta.show {
+            display: block;
+        }
+        
+        .formula {
+            font-family: 'Courier New', monospace;
+            background-color: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+        
+        .formula-block {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-left: 3px solid #666;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .ejemplo {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid #999;
+            font-size: 12px;
+        }
+        
+        .modelo-atomico {
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fafafa;
+        }
+        
+        .modelo-titulo {
+            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        
+        .modelo-contenido {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .modelo-contenido li {
+            margin: 4px 0 4px 18px;
+        }
+        
+        .atom-table {
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        
+        .atom-table td {
+            padding: 6px;
+            border: 1px solid #999;
+        }
+        
+        .page-break {
+            page-break-after: always;
+            margin: 30px 0;
+        }
+        
+        .respuesta-key {
+            background-color: #f0f0f0;
+            padding: 12px;
+            margin-top: 30px;
+            border: 2px solid #000;
+        }
+        
+        .respuesta-key h3 {
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-size: 15px;
+        }
+        
+        .respuesta-key table {
+            font-size: 11px;
+        }
+        
+        /* OPTIMIZACIONES PARA IMPRESIÓN */
+        @media print {
+            body {
+                padding: 10mm;
+                line-height: 1.5;
+            }
+            
+            .header {
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+                margin-bottom: 5px;
+            }
+            
+            .section {
+                margin-bottom: 18px;
+                orphans: 3;
+                widows: 3;
+            }
+            
+            .section-title {
+                margin-bottom: 12px;
+                padding: 8px 10px;
+                font-size: 16px;
+            }
+            
+            .subsection-title {
+                margin-top: 12px;
+                margin-bottom: 8px;
+                font-size: 14px;
+            }
+            
+            .content {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+            
+            .content p {
+                margin-bottom: 8px;
+            }
+            
+            .highlight {
+                padding: 10px;
+                margin: 10px 0;
+                font-size: 12px;
+            }
+            
+            .modelo-atomico {
+                margin: 10px 0;
+                padding: 8px;
+                font-size: 12px;
+                page-break-inside: avoid;
+            }
+            
+            table {
+                margin: 10px 0;
+                font-size: 11px;
+                page-break-inside: avoid;
+            }
+            
+            table th, table td {
+                padding: 6px;
+            }
+            
+            .ejercicio {
+                margin-bottom: 15px;
+                padding-bottom: 12px;
+                font-size: 12px;
+            }
+            
+            .ejercicio-numero {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+            
+            .opciones {
+                margin-left: 16px;
+                font-size: 11px;
+            }
+            
+            .opcion {
+                margin: 3px 0;
+                padding-left: 20px;
+            }
+            
+            .ejercicio-texto {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+            
+            .page-break {
+                page-break-after: always;
+                margin: 20px 0;
+            }
+            
+            .respuesta-key {
+                page-break-before: always;
+                margin-top: 20px;
+                padding: 10px;
+                font-size: 11px;
+            }
+            
+            .respuesta-key h3 {
+                font-size: 14px;
+            }
+            
+            .respuesta-key table {
+                font-size: 10px;
+            }
+            
+            /* Evitar orfandades y viudas para mejor distribución */
+            .section, .modelo-atomico, table {
+                orphans: 2;
+                widows: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Química</h1>
+        <p><strong>PAES QUÍMICA</strong></p>
+        <p>Modelos Atómicos, Estructura Atómica y Tipos de Átomos</p>
+    </div>
+
+    <!-- SECCIÓN 1: TEORÍA ATÓMICA -->
+    <div class="section">
+        <div class="section-title">I. TEORÍA ATÓMICA</div>
+        
+        <div class="content">
+            <p>Toda la materia que nos rodea está formada por los <strong>átomos</strong>, los cuales se pueden unir mediante enlaces químicos, para formar <strong>moléculas</strong>, y así una diversidad de <strong>compuestos</strong> o sustancias.</p>
+            
+            <p>En la antigüedad (V a. C.), el filósofo griego <strong>Demócrito</strong> propuso que la materia estaba constituida por pequeñas partículas, invisibles e indivisibles a las que llamó <strong>átomos</strong> (del griego a=sin, tomo=división).</p>
+            
+            <p>Luego en el siglo XIX, el científico <strong>John Dalton</strong> retoma esta idea y al realizar experimentos, propone <strong>la primera teoría atómica</strong>, cuyos postulados fueron:</p>
+            
+            <div class="highlight">
+                <strong>Postulados de Dalton:</strong>
+                <ol style="margin-left: 20px; margin-top: 10px; font-size: 12px;">
+                    <li>Los elementos están formados por partículas muy pequeñas e indivisibles, llamadas átomos. De esta forma, a los átomos, se les consideraba como esferas sólidas, sin división.</li>
+                    <li>Todos los átomos de un elemento dado son idénticos; los átomos de elementos diferentes son diferentes y tienen propiedades distintas (incluida la masa).</li>
+                    <li>Los compuestos están formados por átomos de más de un elemento en relación de números enteros y sencillos.</li>
+                    <li>Una reacción química implica la separación, combinación o reordenamiento de los átomos; nunca supone la creación o destrucción de los mismos.</li>
+                </ol>
+            </div>
+            
+            <p><strong>Modificaciones posteriores:</strong> Estos postulados se han modificado en el tiempo, por evidencia experimental. Hoy se conoce que los <strong>átomos sí son divisibles</strong> y que los <strong>átomos de un mismo elemento presentan diferencias de masa (isótopos)</strong>.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2: MODELOS ATÓMICOS -->
+    <div class="section">
+        <div class="section-title">II. MODELOS ATÓMICOS</div>
+        
+        <div class="content">
+            <div class="modelo-atomico">
+                <div class="modelo-titulo">J.J Thomson (1897) - Descubre el electrón</div>
+                <div class="modelo-contenido">
+                    <ul>
+                        <li>Estudia la naturaleza eléctrica de los rayos catódicos.</li>
+                        <li>Deduce matemáticamente una relación entre la carga eléctrica y su masa.</li>
+                        <li>Los electrones son solo una pequeña fracción del átomo, y están incrustados en una esfera de carga positiva (budín de pasas).</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modelo-atomico">
+                <div class="modelo-titulo">E. Rutherford (1910) - Descubre el núcleo</div>
+                <div class="modelo-contenido">
+                    <ul>
+                        <li>La mayor parte de la masa del átomo y toda su carga positiva reside en el núcleo.</li>
+                        <li>La mayor parte del volumen total del átomo es espacio vacío.</li>
+                        <li>Los electrones se ubican en la corteza, girando alrededor del núcleo del átomo.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modelo-atomico">
+                <div class="modelo-titulo">N. Bohr (1913) - Órbitas cuantizadas</div>
+                <div class="modelo-contenido">
+                    <ul>
+                        <li>El electrón del átomo de hidrógeno gira alrededor del núcleo en órbitas circulares estacionarias, es decir, gira sin emitir energía.</li>
+                        <li>La atracción electrostática suministra la fuerza centrípeta que mantiene el electrón girando alrededor del núcleo.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="modelo-atomico">
+                <div class="modelo-titulo">Modelo mecánico cuántico (1926)</div>
+                <div class="modelo-contenido">
+                    <p style="font-size: 12px; margin-bottom: 6px;">Formada por los aportes de:</p>
+                    <ul>
+                        <li><strong>L. Broglie:</strong> los electrones son tratados como ondas y partículas.</li>
+                        <li><strong>W. Heisenberg:</strong> es imposible conocer simultáneamente y con exactitud la posición y la cantidad de movimiento de un electrón.</li>
+                        <li><strong>E. Schrödinger:</strong> describe a los electrones por medio de una función de onda, llamada orbital atómico.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 3: ESTRUCTURA ATÓMICA -->
+    <div class="section">
+        <div class="section-title">III. ESTRUCTURA ATÓMICA</div>
+        
+        <div class="content">
+            <p>El átomo está formado por un <strong>núcleo</strong> y una <strong>envoltura o corteza</strong>. En el núcleo se encuentran los <strong>protones</strong> y <strong>neutrones</strong>. En la envoltura se ubican los <strong>electrones</strong>. Las partículas subatómicas son: protones, neutrones y electrones.</p>
+            
+            <div class="subsection-title">Características de las Partículas Subatómicas</div>
+            
+            <table>
+                <tr>
+                    <th>Partícula</th>
+                    <th>Masa (uma)</th>
+                    <th>Carga (eV)</th>
+                    <th>Masa (relación)</th>
+                    <th>Símbolo</th>
+                </tr>
+                <tr>
+                    <td>Protón</td>
+                    <td>1,007276</td>
+                    <td>+1</td>
+                    <td>1</td>
+                    <td>p⁺</td>
+                </tr>
+                <tr>
+                    <td>Neutrón</td>
+                    <td>1,008665</td>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>n°</td>
+                </tr>
+                <tr>
+                    <td>Electrón</td>
+                    <td>0,0005485</td>
+                    <td>-1</td>
+                    <td>1/1840</td>
+                    <td>e⁻</td>
+                </tr>
+            </table>
+            
+            <p><strong>Nota:</strong> La masa de protones y neutrones es aproximadamente <strong>1840 veces</strong> la del electrón.</p>
+            
+            <div class="subsection-title">Número Atómico (Z)</div>
+            
+            <div class="highlight">
+                <p><strong>Número atómico (Z):</strong> Número de protones en el núcleo. Identifica al elemento.</p>
+                <ul style="margin-left: 20px; margin-top: 8px; font-size: 12px;">
+                    <li>En un átomo neutro: protones = electrones</li>
+                </ul>
+            </div>
+            
+            <div class="subsection-title">Número Másico (A)</div>
+            
+            <div class="highlight">
+                <p><strong>Número másico (A) = protones + neutrones</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN 4: TIPOS DE ÁTOMOS -->
+    <div class="section">
+        <div class="section-title">IV. TIPOS DE ÁTOMOS</div>
+        
+        <div class="content">
+            <p>Los átomos pueden clasificarse en <strong>neutros o iones</strong>, o en <strong>isótopos, isóbaros, isótonos e isoelectrónicos</strong>.</p>
+            
+            <div class="subsection-title">Átomos Neutros e Iones</div>
+            
+            <div class="highlight">
+                <p><strong>Átomo neutro:</strong> e⁻ = p⁺</p>
+                <p style="margin-top: 8px;"><strong>Anión (ion negativo):</strong> e⁻ > p⁺</p>
+                <p style="margin-top: 8px;"><strong>Catión (ion positivo):</strong> e⁻ < p⁺</p>
+            </div>
+            
+            <div class="subsection-title">Isótopos, Isóbaros, Isótonos e Isoelectrónicos</div>
+            
+            <div class="highlight">
+                <p><strong>Isótopos:</strong> Mismo número atómico, distinto número másico.</p>
+                <p style="margin-top: 8px;"><strong>Isóbaros:</strong> Distinto número atómico, mismo número másico.</p>
+                <p style="margin-top: 8px;"><strong>Isótonos:</strong> Igual número de neutrones, distinto Z y A.</p>
+                <p style="margin-top: 8px;"><strong>Isoelectrónicos:</strong> Igual número de electrones, distinto Z y A.</p>
+            </div>
+            
+            <div class="subsection-title">Resumen de Tipos de Átomos</div>
+            
+            <table>
+                <tr>
+                    <th>Especie</th>
+                    <th>Z</th>
+                    <th>A</th>
+                    <th>Neutrones</th>
+                    <th>Electrones</th>
+                </tr>
+                <tr>
+                    <td><strong>Isótopos</strong></td>
+                    <td>Igual</td>
+                    <td>Distinto</td>
+                    <td>Distinto</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td><strong>Isóbaros</strong></td>
+                    <td>Distinto</td>
+                    <td>Igual</td>
+                    <td>Distinto</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td><strong>Isótonos</strong></td>
+                    <td>Distinto</td>
+                    <td>Distinto</td>
+                    <td>Igual</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td><strong>Isoelectrónicos</strong></td>
+                    <td>Distinto</td>
+                    <td>Distinto</td>
+                    <td>Distinto</td>
+                    <td>Igual</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- SECCIÓN 5: EJERCICIOS (RESUMIDA) -->
+    <div class="section">
+        <div class="section-title">V. EJERCICIOS</div>
+        
+        <div class="ejercicios">
+            <div class="ejercicio">
+                <div class="ejercicio-numero">1. Si Z = 19 y A = 39, el número de neutrones es</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">19</div>
+                    <div class="opcion" data-letra="B)">20</div>
+                    <div class="opcion" data-letra="C)">30</div>
+                    <div class="opcion" data-letra="D)">39</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">2. ¿Cuál par corresponde a isóbaros?</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">₇N¹⁴, ₅B¹²</div>
+                    <div class="opcion" data-letra="B)">₁₃Al²⁸, ₁₂Mg²⁸</div>
+                    <div class="opcion" data-letra="C)">₆C¹², ₆C¹⁴</div>
+                    <div class="opcion" data-letra="D)">₈O¹⁵, ₈O¹⁶</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">3. Para ⁴⁰₂₀Ca, los valores de A, p⁺, n° y e⁻ son</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">40, 20, 20 y 18</div>
+                    <div class="opcion" data-letra="B)">20, 20, 20 y 20</div>
+                    <div class="opcion" data-letra="C)">40, 20, 20 y 20</div>
+                    <div class="opcion" data-letra="D)">20, 18, 20 y 18</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">4. El modelo que consideró al átomo como estructura eléctrica fue</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">Dalton</div>
+                    <div class="opcion" data-letra="B)">Rutherford</div>
+                    <div class="opcion" data-letra="C)">Bohr</div>
+                    <div class="opcion" data-letra="D)">Thomson</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">5. Un postulado de Bohr es que los electrones</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">orbitan sin irradiar energía</div>
+                    <div class="opcion" data-letra="B)">forman una nube electrónica</div>
+                    <div class="opcion" data-letra="C)">están incrustados en el núcleo</div>
+                    <div class="opcion" data-letra="D)">tienen masas iguales a protones</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">6. El número de electrones en X⁵⁺ con Z = 20 es</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">15</div>
+                    <div class="opcion" data-letra="B)">20</div>
+                    <div class="opcion" data-letra="C)">25</div>
+                    <div class="opcion" data-letra="D)">30</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">7. ₃₀Zn⁶⁵ y ₂₉Cu⁶⁴ tienen igual número de</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">protones</div>
+                    <div class="opcion" data-letra="B)">neutrones</div>
+                    <div class="opcion" data-letra="C)">electrones</div>
+                    <div class="opcion" data-letra="D)">nucleones</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">8. Todos los átomos de nitrógeno tienen igual</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">número másico</div>
+                    <div class="opcion" data-letra="B)">número de neutrones</div>
+                    <div class="opcion" data-letra="C)">número atómico</div>
+                    <div class="opcion" data-letra="D)">masa atómica</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">9. Rutherford comprobó</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">la existencia del electrón</div>
+                    <div class="opcion" data-letra="B)">la existencia del neutrón</div>
+                    <div class="opcion" data-letra="C)">la separación núcleo-electrones</div>
+                    <div class="opcion" data-letra="D)">la estructura cuántica</div>
+                </div>
+            </div>
+
+            <div class="ejercicio">
+                <div class="ejercicio-numero">10. Si un átomo neutro pierde un electrón</div>
+                <div class="opciones">
+                    <div class="opcion" data-letra="A)">su carga queda negativa</div>
+                    <div class="opcion" data-letra="B)">su carga queda positiva</div>
+                    <div class="opcion" data-letra="C)">su masa disminuye mucho</div>
+                    <div class="opcion" data-letra="D)">resulta un anión</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+</body>
+</html>

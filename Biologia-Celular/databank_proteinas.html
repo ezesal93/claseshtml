@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Laboratorio — Protein Data Bank — Biología Celular y Molecular 3M</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:'Times New Roman',Times,serif; font-size:17pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:3px; }
+
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; font-weight:bold; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+.etapa-header { background:white; border:1.5px solid #111; padding:5px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:7px; letter-spacing:.04em; text-transform:uppercase; }
+.etapa-num { display:inline-flex; align-items:center; justify-content:center; width:20pt; height:20pt; border:1.5px solid #111; border-radius:50%; font-size:9.5pt; font-weight:bold; flex-shrink:0; margin-right:6pt; }
+
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+.lectura { border:1.5px solid #111; border-radius:6px; padding:7pt 10pt; margin-bottom:9pt; background:white; font-size:10pt; line-height:1.7; text-align:justify; }
+.lectura-header { font-size:9pt; font-weight:bold; text-transform:uppercase; letter-spacing:.06em; margin-bottom:5pt; padding-bottom:4pt; border-bottom:1.5px solid #111; }
+.lectura p { margin-bottom:5pt; }
+.lectura p:last-child { margin-bottom:0; }
+
+.concepto { border:1px solid #111; border-left:4px solid #111; padding:4pt 9pt; margin:5pt 0 8pt 0; font-size:9.5pt; line-height:1.6; border-radius:0 4px 4px 0; }
+
+/* PROTEÍNA CARD */
+.prot-card { border:1.5px solid #111; border-radius:6px; margin:6pt 0 12pt 0; overflow:hidden; }
+.prot-header { background:#111; color:white; padding:5pt 10pt; display:flex; justify-content:space-between; align-items:center; }
+.prot-header .prot-nombre { font-size:11pt; font-weight:bold; }
+.prot-header .prot-pdb { font-size:9pt; font-family:'Courier New',monospace; background:rgba(255,255,255,0.15); padding:2pt 7pt; border-radius:3px; }
+.prot-body { padding:7pt 10pt; }
+.prot-url { font-size:8.5pt; font-family:'Courier New',monospace; background:#f0f0f0; padding:3pt 8pt; border-radius:4px; display:inline-block; margin:4pt 0 6pt 0; color:#111; }
+
+/* PASOS */
+.paso { display:flex; gap:10px; margin-bottom:7pt; align-items:flex-start; }
+.paso-num { min-width:20pt; height:20pt; border:1.5px solid #111; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:9pt; font-weight:bold; flex-shrink:0; margin-top:1pt; }
+.paso-body { flex:1; font-size:10pt; line-height:1.65; }
+
+/* COLS */
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:5pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:2pt; }
+
+/* ESPACIO DIBUJO */
+.dibujo-box { border:1.5px dashed #111; border-radius:6px; min-height:80pt; margin:5pt 0; display:flex; align-items:center; justify-content:center; }
+.dibujo-label { font-size:9pt; color:#aaa; text-align:center; }
+
+/* PREGUNTAS */
+.preg { margin-bottom:9pt; }
+.preg-num { font-size:10pt; font-weight:bold; margin-bottom:3pt; display:flex; align-items:flex-start; gap:7px; line-height:1.5; }
+.preg-pts { font-size:8pt; font-weight:normal; border:1px solid #aaa; padding:1pt 5pt; border-radius:3px; white-space:nowrap; flex-shrink:0; }
+.preg-body { font-size:10pt; line-height:1.65; margin-bottom:4pt; text-align:justify; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica-h { font-size:7.5pt; color:#888; font-style:italic; margin-top:2px; }
+
+/* TABLA COMPARATIVA */
+table.comp { width:100%; border-collapse:collapse; font-size:9.5pt; margin:5pt 0 8pt 0; }
+table.comp th, table.comp td { border:1px solid #111; padding:5pt 7pt; vertical-align:top; line-height:1.5; }
+table.comp th { background:white; font-size:8.5pt; font-weight:bold; text-align:center; }
+table.comp td:first-child { font-weight:bold; text-align:left; width:22%; }
+table.comp .fill { min-height:30pt; }
+
+/* RUBRICA */
+table.rubrica { width:100%; border-collapse:collapse; font-size:7.5pt; margin:6pt 0; }
+table.rubrica th, table.rubrica td { border:1px solid #111; padding:3pt 5pt; vertical-align:top; line-height:1.45; }
+table.rubrica th { font-size:7.5pt; font-weight:bold; text-transform:uppercase; text-align:center; background:white; }
+table.rubrica td:first-child { font-weight:bold; width:20%; font-size:8pt; }
+
+/* PIE */
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; }
+  .btn-print { display:none; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .etapa-header { padding:3px 8px; margin-bottom:5px; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .prot-card { margin:4pt 0 9pt 0; }
+  .prot-body { padding:5pt 8pt; }
+  .paso { margin-bottom:5pt; }
+  .preg { margin-bottom:6pt; }
+  .dibujo-box { min-height:65pt; }
+  table.comp th, table.comp td { padding:3pt 5pt; }
+  table.rubrica th, table.rubrica td { padding:2pt 4pt; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo Escuela Alemana">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 - Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Laboratorio: Explorando Proteínas en el Protein Data Bank</h1>
+    <p class="subtitulo">Biología Celular y Molecular · 3° Medio · Estructura de Proteínas</p>
+    <p class="profesor">Prof. Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:5pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:220pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+      <span>Fecha: <span class="blank" style="min-width:60pt"></span></span>
+    </div>
+    <div style="display:flex;gap:22px;align-items:center;">
+      <span>Pje. ideal: <span class="val-bold">70</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Exigencia: <span class="val-bold">60%</span> = 42 pts</span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:6pt">
+    <p><strong>Contenidos:</strong> Proteínas · Estructura primaria, secundaria, terciaria y cuaternaria · Relación estructura-función · Bioinformática básica.</p>
+    <p><strong>Capacidades:</strong> Análisis · Pensamiento científico · Observación · Descripción · Comparación · Síntesis.</p>
+    <p><strong>Destrezas:</strong> Navegar en bases de datos científicas · Observar modelos moleculares · Identificar estructuras · Relacionar forma y función · Registrar y comunicar hallazgos.</p>
+    <p><strong>Materiales:</strong> Computador o tablet con acceso a internet · Esta guía.</p>
+  </div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Etapa</th><th>Descripción</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Introducción al Protein Data Bank y navegación básica</td><td>6 pts</td><td></td></tr>
+      <tr><td>2</td><td>Insulina — Estructura primaria</td><td>14 pts</td><td></td></tr>
+      <tr><td>3</td><td>Mioglobina — Estructura secundaria y terciaria</td><td>16 pts</td><td></td></tr>
+      <tr><td>4</td><td>Hemoglobina — Estructura cuaternaria</td><td>14 pts</td><td></td></tr>
+      <tr><td>5</td><td>Tabla comparativa y síntesis final</td><td>20 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="2">TOTAL</td><td>70 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- LECTURA INTRODUCTORIA -->
+  <div class="lectura">
+    <div class="lectura-header">¿Qué es el Protein Data Bank (PDB)?</div>
+    <p>El <strong>Protein Data Bank</strong> (PDB) es una base de datos mundial y gratuita que contiene las estructuras tridimensionales de más de 200.000 proteínas, ácidos nucleicos y otras biomoléculas. Fue creada en 1971 y hoy es la principal herramienta de bioinformática estructural usada por científicos de todo el mundo. Cada proteína tiene un código único de cuatro caracteres (por ejemplo, <strong>1HHO</strong>) que permite acceder directamente a su estructura.</p>
+    <p>En este laboratorio explorarás cuatro proteínas reales cuyos datos están disponibles públicamente. Para cada una, observarás su estructura tridimensional en el visor interactivo del PDB y responderás preguntas que te permitirán identificar los cuatro niveles de organización estructural de las proteínas: primario, secundario, terciario y cuaternario.</p>
+    <div class="concepto">
+      <strong>URL de acceso:</strong> &nbsp; <span style="font-family:'Courier New',monospace;font-size:10pt">https://www.rcsb.org</span> &nbsp; · &nbsp; Escribe el código PDB en el buscador de la página principal para acceder a cada proteína directamente.
+    </div>
+  </div>
+
+  <!-- COMO NAVEGAR -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">1</span>Etapa 1 · Introducción al PDB y Navegación Básica</span>
+    <span>6 puntos</span>
+  </div>
+  <p class="instruccion">Antes de comenzar con las proteínas, familiarízate con el sitio. Sigue los pasos y responde.</p>
+
+  <div class="paso"><div class="paso-num">1</div><div class="paso-body">Ingresa a <strong>rcsb.org</strong> desde tu navegador. Observa la página de inicio.</div></div>
+  <div class="paso"><div class="paso-num">2</div><div class="paso-body">En el buscador escribe el código <strong>1HHO</strong> y presiona Enter. Se abrirá la página de la hemoglobina.</div></div>
+  <div class="paso"><div class="paso-num">3</div><div class="paso-body">Haz clic en la pestaña <strong>"3D View"</strong> o en el visor 3D que aparece en la parte superior derecha. Aparecerá el modelo tridimensional de la proteína. Puedes rotarlo con el mouse.</div></div>
+  <div class="paso"><div class="paso-num">4</div><div class="paso-body">Explora la barra lateral del visor: prueba cambiar la representación entre <strong>"Cartoon"</strong> (cintas) y <strong>"Surface"</strong> (superficie). Observa cómo cambia lo que ves.</div></div>
+
+  <div class="preg" style="margin-top:6pt">
+    <div class="preg-num">1. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Qué información aparece en la página del PDB además de la estructura 3D? Menciona al menos tres tipos de información que puedas encontrar en la página de una proteína.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">2. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Qué diferencia observas al ver la proteína en representación "Cartoon" versus "Surface"? ¿Cuál de las dos representaciones te parece más útil para identificar la forma general de la proteína y cuál para ver su estructura interna? Explica.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ETAPA 2 — INSULINA -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">2</span>Etapa 2 · Insulina — Estructura Primaria</span>
+    <span>14 puntos</span>
+  </div>
+
+  <div class="prot-card">
+    <div class="prot-header">
+      <span class="prot-nombre">Insulina humana</span>
+      <span class="prot-pdb">Código PDB: 4INS</span>
+    </div>
+    <div class="prot-body">
+      <span class="prot-url">https://www.rcsb.org/structure/4INS</span>
+      <p style="font-size:9.5pt;line-height:1.65;margin-top:4pt">La insulina es la hormona encargada de regular el ingreso de glucosa a las células. Es una proteína pequeña formada por <strong>dos cadenas polipeptídicas</strong>: la cadena A (21 aminoácidos) y la cadena B (30 aminoácidos), unidas por puentes disulfuro. Su estructura fue la primera proteína en ser secuenciada completamente (Frederick Sanger, 1955) y la primera sintetizada artificialmente para uso médico.</p>
+    </div>
+  </div>
+
+  <p class="instruccion">Ingresa al código 4INS en el PDB. En la página de la insulina, busca la sección <strong>"Sequence"</strong> o <strong>"Primary Structure"</strong> que muestra la secuencia de aminoácidos. Observa el modelo 3D en representación "Cartoon".</p>
+
+  <div class="preg">
+    <div class="preg-num">3. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Qué es la estructura primaria de una proteína? ¿Qué tipo de enlace une a los aminoácidos entre sí en la cadena? Explica con tus palabras.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">4. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">La insulina tiene una cadena A y una cadena B. ¿Cómo se llaman las unidades que forman esas cadenas? ¿Cuántas unidades tiene en total la insulina (suma ambas cadenas)?</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">5. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Observa el modelo 3D de la insulina y dibuja un esquema simplificado de su forma general en el espacio de abajo. Indica con flechas dónde están la cadena A y la cadena B.</div>
+    <div class="dibujo-box"><div class="dibujo-label">Espacio para el dibujo de la insulina (4INS)</div></div>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">6. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">¿Por qué la estructura primaria es tan importante? Si cambia un solo aminoácido en la secuencia de la insulina, ¿qué podría ocurrir con su función? Relaciona tu respuesta con el concepto de estructura-función.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ETAPA 3 — MIOGLOBINA -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">3</span>Etapa 3 · Mioglobina — Estructura Secundaria y Terciaria</span>
+    <span>16 puntos</span>
+  </div>
+
+  <div class="prot-card">
+    <div class="prot-header">
+      <span class="prot-nombre">Mioglobina de ballena</span>
+      <span class="prot-pdb">Código PDB: 1MBO</span>
+    </div>
+    <div class="prot-body">
+      <span class="prot-url">https://www.rcsb.org/structure/1MBO</span>
+      <p style="font-size:9.5pt;line-height:1.65;margin-top:4pt">La mioglobina es una proteína muscular que almacena oxígeno en los músculos. Es la responsable del color rojo de la carne. Está formada por <strong>una sola cadena polipeptídica</strong> de 153 aminoácidos, plegada en ocho segmentos de α-hélice. Fue la primera proteína en tener su estructura tridimensional resuelta por cristalografía de rayos X (John Kendrew, Premio Nobel 1962). Su estructura es el ejemplo clásico para estudiar los niveles secundario y terciario.</p>
+    </div>
+  </div>
+
+  <p class="instruccion">Ingresa al código 1MBO. Observa el modelo en representación "Cartoon". Las cintas enrolladas en espiral son α-hélices (estructura secundaria). El plegamiento general de toda la cadena corresponde a la estructura terciaria.</p>
+
+  <div class="preg">
+    <div class="preg-num">7. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Qué es la estructura secundaria? Nombra los dos tipos principales de estructura secundaria y describe brevemente cómo se ve cada uno en el visor 3D del PDB.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">8. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">Observa la mioglobina en el visor. ¿Cuál tipo de estructura secundaria predomina en esta proteína: α-hélices u hojas β-plegadas? ¿Cómo lo puedes identificar visualmente?</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">9. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Dibuja un esquema simplificado de la mioglobina tal como la ves en el visor en representación "Cartoon". Indica con una flecha una zona de α-hélice y el grupo hemo (el punto rojo o naranja en el centro, que es donde se une el oxígeno).</div>
+    <div class="dibujo-box"><div class="dibujo-label">Espacio para el dibujo de la mioglobina (1MBO)</div></div>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">10. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Qué es la estructura terciaria? ¿En qué se diferencia de la estructura secundaria? Usa la mioglobina como ejemplo para explicar la diferencia.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">11. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">La mioglobina almacena oxígeno en los músculos. ¿Cómo crees que su forma tridimensional (estructura terciaria) se relaciona con esa función? ¿Qué parte de la proteína crees que interactúa directamente con el oxígeno?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ETAPA 4 — HEMOGLOBINA -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">4</span>Etapa 4 · Hemoglobina — Estructura Cuaternaria</span>
+    <span>14 puntos</span>
+  </div>
+
+  <div class="prot-card">
+    <div class="prot-header">
+      <span class="prot-nombre">Hemoglobina humana</span>
+      <span class="prot-pdb">Código PDB: 1HHO</span>
+    </div>
+    <div class="prot-body">
+      <span class="prot-url">https://www.rcsb.org/structure/1HHO</span>
+      <p style="font-size:9.5pt;line-height:1.65;margin-top:4pt">La hemoglobina es la proteína de los glóbulos rojos encargada de transportar oxígeno desde los pulmones hasta los tejidos. A diferencia de la mioglobina, está formada por <strong>cuatro subunidades</strong>: dos cadenas α y dos cadenas β, cada una con su propio grupo hemo. Esta unión de múltiples cadenas polipeptídicas es lo que define la estructura cuaternaria. Gracias a su estructura cuaternaria, la hemoglobina puede transportar cuatro veces más oxígeno que una sola mioglobina.</p>
+    </div>
+  </div>
+
+  <p class="instruccion">Ingresa al código 1HHO. Observa el modelo en representación "Cartoon" y cambia los colores por cadena si el visor lo permite (opción "Chain" en el menú de colores). Verás cuatro subunidades con colores distintos.</p>
+
+  <div class="preg">
+    <div class="preg-num">12. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Qué es la estructura cuaternaria? ¿Qué condición debe cumplir una proteína para tener estructura cuaternaria?</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">13. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Dibuja un esquema simplificado de la hemoglobina. Usa colores o etiquetas distintas para indicar las cuatro subunidades (dos cadenas α y dos cadenas β). Señala con puntos dónde están los cuatro grupos hemo.</div>
+    <div class="dibujo-box"><div class="dibujo-label">Espacio para el dibujo de la hemoglobina (1HHO)</div></div>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">14. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Compara la hemoglobina con la mioglobina observando ambas en el PDB. Nombra <strong>dos semejanzas</strong> y <strong>dos diferencias</strong> visibles en su estructura tridimensional.</div>
+    <div class="cols2" style="margin-top:4pt">
+      <div class="col-box">
+        <span class="col-tit">Semejanzas</span>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+      <div class="col-box">
+        <span class="col-tit">Diferencias</span>
+        <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">15. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">La hemoglobina puede transportar cuatro moléculas de O₂ y la mioglobina solo una. ¿Qué nivel de estructura explica esta diferencia? ¿Por qué tener cuatro subunidades es una ventaja para una proteína que transporta oxígeno por la sangre?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ETAPA 5 — COMPARATIVA Y SÍNTESIS -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">5</span>Etapa 5 · Tabla Comparativa y Síntesis Final</span>
+    <span>20 puntos</span>
+  </div>
+  <p class="instruccion">Completa la tabla usando lo que observaste y aprendiste en las etapas anteriores. Luego responde las preguntas de síntesis.</p>
+
+  <table class="comp">
+    <thead>
+      <tr>
+        <th style="width:22%">Característica</th>
+        <th>Insulina (4INS)</th>
+        <th>Mioglobina (1MBO)</th>
+        <th>Hemoglobina (1HHO)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Número de cadenas polipeptídicas</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>Nivel(es) estructural(es) que presenta</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>Tipo de estructura secundaria predominante</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>¿Tiene estructura cuaternaria? ¿Por qué?</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>Función biológica principal</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>Característica visual más notable en el PDB</td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="preg" style="margin-top:8pt">
+    <div class="preg-num">16. <span class="preg-pts">6 pts</span></div>
+    <div class="preg-body">¿Qué relación existe entre el nivel de organización estructural de una proteína y su función? Explica usando como ejemplos dos de las proteínas que observaste hoy. ¿Por qué una proteína con estructura cuaternaria puede realizar funciones que una proteína con solo estructura terciaria no podría?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">17. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Si una proteína se desnaturaliza (pierde su forma tridimensional), ¿qué niveles estructurales se ven afectados y cuáles no? ¿Por qué la desnaturalización hace que la proteína pierda su función?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <!-- RUBRICA -->
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+  <p style="font-size:9.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:7pt">Rúbrica de Evaluación</p>
+
+  <table class="rubrica">
+    <thead>
+      <tr>
+        <th style="text-align:left;width:20%">Criterio</th>
+        <th style="width:20%">4 — Logrado</th>
+        <th style="width:20%">3 — Med. Logrado</th>
+        <th style="width:20%">2 — Por Lograr</th>
+        <th style="width:13%">1 — No Logrado</th>
+        <th style="width:7%">Pts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Navegación y observación del PDB<br><em style="font-weight:normal;font-size:7pt">(Etapas 1 y dibujos)</em></td>
+        <td>Describe con precisión lo observado. Los tres dibujos muestran las estructuras reconocibles con etiquetas correctas.</td>
+        <td>Observaciones correctas pero superficiales. Dibujos presentes pero sin etiquetas o poco reconocibles.</td>
+        <td>Observaciones muy vagas o incorrectas. Dibujos ausentes o sin relación con la estructura real.</td>
+        <td>No accedió al PDB o no realizó las observaciones.</td>
+        <td style="text-align:center">14</td>
+      </tr>
+      <tr>
+        <td>Identificación de niveles estructurales<br><em style="font-weight:normal;font-size:7pt">(Preguntas 3, 7, 10, 12)</em></td>
+        <td>Define correctamente los cuatro niveles con sus características. Identifica en qué proteína se observa cada uno.</td>
+        <td>Define correctamente 3 niveles. Identifica la mayoría en las proteínas pero con alguna imprecisión.</td>
+        <td>Define 1 o 2 niveles correctamente. Confunde estructuras secundaria y terciaria o terciaria y cuaternaria.</td>
+        <td>No identifica ni define los niveles estructurales.</td>
+        <td style="text-align:center">20</td>
+      </tr>
+      <tr>
+        <td>Relación estructura-función<br><em style="font-weight:normal;font-size:7pt">(Preguntas 6, 11, 15, 16, 17)</em></td>
+        <td>Relaciona el nivel estructural con la función biológica usando ejemplos concretos de las proteínas observadas. Explica la desnaturalización correctamente.</td>
+        <td>Establece relación estructura-función pero de forma general, sin ejemplos específicos o con imprecisiones.</td>
+        <td>Menciona la relación sin explicarla o usa ejemplos incorrectos.</td>
+        <td>No establece relación entre estructura y función.</td>
+        <td style="text-align:center">24</td>
+      </tr>
+      <tr>
+        <td>Tabla comparativa y síntesis<br><em style="font-weight:normal;font-size:7pt">(Etapa 5)</em></td>
+        <td>Tabla completa con información correcta en todas las celdas. Síntesis coherente que integra las tres proteínas.</td>
+        <td>Tabla mayormente completa con 1 o 2 errores menores. Síntesis presente pero incompleta.</td>
+        <td>Tabla con más de 3 errores o varias celdas vacías. Síntesis muy escasa.</td>
+        <td>Tabla no completada.</td>
+        <td style="text-align:center">12</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:8pt;border:2px solid #111;border-radius:6px;padding:7pt 12pt;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;font-size:9.5pt">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;color:#555;margin-bottom:3pt">Puntaje total</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">/ 70 pts</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;color:#555;margin-bottom:3pt">Porcentaje de logro</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">pts / 70 × 100</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;color:#555;margin-bottom:3pt">Nota final</div>
+      <div style="border-bottom:2px solid #111;height:20pt"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:7pt">
+    <div style="font-size:8.5pt;font-weight:bold;margin-bottom:3pt">Observaciones del docente:</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Biología Celular y Molecular · 3° Medio · Estructura de Proteínas</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
