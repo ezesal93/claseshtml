@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Laboratorio — Óptica Geométrica — PhET</title>
+<link href="https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; font-size: 11pt; background: #ccc; color: #111; }
+.paper { width: 210mm; background: white; margin: 20px auto; padding: 14mm 16mm 16mm 16mm; box-shadow: 0 4px 28px rgba(0,0,0,0.22); }
+
+.enc-wrap { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8pt; }
+.enc-left { display:flex; align-items:center; gap:10px; }
+.enc-left img { width:68px; height:auto; }
+.enc-text { font-size:9pt; line-height:1.6; }
+.enc-text p:first-child { font-weight:bold; }
+.score-box { width:68px; height:68px; border:2px solid #5a9a3a; border-radius:8px; flex-shrink:0; }
+
+.main-title { text-align:center; margin-bottom:5pt; }
+.main-title h1 { font-family:"Times New Roman",Times,serif; font-size:16pt; font-weight:normal; margin-bottom:1pt; }
+.main-title .subtitulo { font-size:10pt; }
+.main-title .profesor { font-size:10pt; font-weight:bold; text-decoration:underline; font-style:italic; color:#1a3faa; }
+
+.blank { display:inline-block; border-bottom:1px solid #111; height:14px; vertical-align:bottom; }
+.val-bold { font-weight:bold; text-decoration:underline; min-width:28px; display:inline-block; text-align:center; }
+
+.box-cont { border:1.2px solid #111; border-radius:8px; padding:5pt 10pt; font-size:9.5pt; margin-bottom:8pt; line-height:1.55; }
+.box-cont p+p { margin-top:3px; }
+
+.tbl-pts { width:100%; border-collapse:collapse; font-size:8.5pt; margin-bottom:8px; }
+.tbl-pts th,.tbl-pts td { border:1px solid #111; padding:3px 6px; text-align:center; }
+.tbl-pts th { background:white; font-size:8pt; text-transform:uppercase; letter-spacing:.05em; font-weight:bold; }
+.tbl-pts td:first-child,.tbl-pts td:nth-child(2) { text-align:left; }
+.tbl-pts .tot td { font-weight:bold; }
+
+.clase-banner { background:#111; color:white; padding:6pt 12pt; font-size:10pt; font-weight:bold; letter-spacing:.06em; text-transform:uppercase; margin:12pt 0 8pt 0; border-radius:4px; display:flex; justify-content:space-between; align-items:center; }
+
+.etapa-header { border:1.5px solid #111; padding:4px 10px; font-size:9pt; font-weight:bold; display:flex; justify-content:space-between; align-items:center; margin-bottom:7px; letter-spacing:.04em; text-transform:uppercase; }
+.etapa-num { display:inline-flex; align-items:center; justify-content:center; width:20pt; height:20pt; border:1.5px solid #111; border-radius:50%; font-size:9.5pt; font-weight:bold; flex-shrink:0; margin-right:6pt; }
+
+.instruccion { font-size:9.5pt; font-style:italic; margin-bottom:7px; color:#333; line-height:1.55; }
+
+.sim-url { border:1px solid #ccc; border-radius:5px; padding:5pt 10pt; font-size:8.5pt; background:#f5f5f5; margin-bottom:8pt; line-height:1.65; }
+.sim-url strong { display:block; margin-bottom:2pt; }
+
+/* ESPACIO IMAGEN */
+.img-espacio { border:1.5px dashed #bbb; border-radius:5px; min-height:110pt; margin:6pt 0 4pt 0; display:flex; align-items:center; justify-content:center; background:#fafafa; }
+.img-espacio span { font-size:9pt; color:#aaa; text-align:center; line-height:1.7; }
+.img-caption { font-size:8pt; color:#555; text-align:center; margin-top:2pt; font-style:italic; margin-bottom:6pt; }
+
+.concepto { border:1px solid #111; border-left:4px solid #111; padding:4pt 9pt; margin:5pt 0 7pt 0; font-size:9.5pt; line-height:1.6; border-radius:0 4px 4px 0; }
+
+table.reg { width:100%; border-collapse:collapse; font-size:9.5pt; margin:5pt 0 8pt 0; }
+table.reg th, table.reg td { border:1px solid #111; padding:5pt 7pt; text-align:center; vertical-align:middle; }
+table.reg th { background:white; font-size:8.5pt; font-weight:bold; }
+table.reg td:first-child { text-align:left; font-weight:bold; width:28%; }
+table.reg .fill { min-height:26pt; }
+
+.preg { margin-bottom:9pt; }
+.preg-num { font-size:10pt; font-weight:bold; margin-bottom:3pt; display:flex; align-items:flex-start; gap:7px; line-height:1.5; }
+.preg-pts { font-size:8pt; font-weight:normal; border:1px solid #aaa; padding:1pt 5pt; border-radius:3px; white-space:nowrap; flex-shrink:0; }
+.preg-body { font-size:10pt; line-height:1.65; margin-bottom:4pt; text-align:justify; }
+.linea-r { display:block; border-bottom:.8px solid #ccc; height:18pt; width:100%; margin-bottom:2px; }
+.rubrica-h { font-size:7.5pt; color:#888; font-style:italic; margin-top:2px; }
+
+.dibujo-box { border:1.5px dashed #111; border-radius:6px; min-height:240pt; margin:5pt 0; display:flex; align-items:center; justify-content:center; }
+.dibujo-label { font-size:9pt; color:#aaa; text-align:center; line-height:1.6; }
+
+.cols2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:5pt 0; }
+.col-box { border:1px solid #111; border-radius:4px; padding:5pt 8pt; font-size:9.5pt; line-height:1.55; }
+.col-box .col-tit { font-weight:bold; font-size:9pt; margin-bottom:3pt; display:block; border-bottom:1px solid #ccc; padding-bottom:2pt; }
+
+table.comp { width:100%; border-collapse:collapse; font-size:8.5pt; margin:5pt 0; }
+table.comp th, table.comp td { border:1px solid #111; padding:4pt 5pt; vertical-align:middle; text-align:center; line-height:1.5; }
+table.comp th { background:white; font-size:8pt; font-weight:bold; }
+table.comp td:first-child { text-align:left; font-weight:bold; width:26%; }
+table.comp .fill { min-height:24pt; }
+
+table.rubrica { width:100%; border-collapse:collapse; font-size:7.5pt; margin:6pt 0 8pt 0; }
+table.rubrica th, table.rubrica td { border:1px solid #111; padding:3pt 5pt; vertical-align:top; line-height:1.4; }
+table.rubrica th { font-size:7.5pt; font-weight:bold; text-transform:uppercase; text-align:center; background:white; }
+table.rubrica td:first-child { font-weight:bold; width:20%; font-size:8pt; }
+
+.pie { border-top:.5px solid #ccc; margin-top:10px; padding-top:5px; display:flex; justify-content:space-between; font-size:7.5pt; color:#888; }
+.btn-print { position:fixed; bottom:22px; right:22px; background:#333; color:white; border:none; padding:11px 20px; border-radius:8px; font-size:13px; font-weight:bold; cursor:pointer; z-index:999; }
+.btn-print:hover { background:#111; }
+
+@page { size: letter; margin: 12mm 14mm 14mm 14mm; }
+@media print {
+  body { background:white; }
+  .paper { margin:0; box-shadow:none; width:100%; padding:0; }
+  .btn-print { display:none; }
+  .linea-r { height:16pt; }
+  .tbl-pts th,.tbl-pts td { padding:2px 5px; }
+  .etapa-header { padding:3px 8px; margin-bottom:5px; }
+  .box-cont { padding:3pt 8pt; margin-bottom:5pt; }
+  .img-espacio { min-height:100pt; }
+  .dibujo-box { min-height:60pt; }
+  .preg { margin-bottom:6pt; }
+  table.reg th, table.reg td { padding:3pt 5pt; }
+  table.comp th, table.comp td { padding:3pt 4pt; }
+  table.rubrica th, table.rubrica td { padding:2pt 4pt; }
+  .clase-banner { padding:4pt 10pt; margin:8pt 0 6pt 0; }
+  .cols2 { gap:5px; }
+}
+</style>
+</head>
+<body>
+<button class="btn-print" onclick="window.print()">Imprimir guía</button>
+<div class="paper">
+
+  <!-- ENCABEZADO -->
+  <div class="enc-wrap">
+    <div class="enc-left">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTZgaxlPZAljAl4uajFI4nJWg47tyWdxAbdMPq8AymeUa0fAncAB1tlAyNakG4xkDRYa2kdgT3cJ4QKamrFUNXrqLKec22&s&ec=121585077" alt="Escudo">
+      <div class="enc-text">
+        <p>Escuela Particular 95 Alemana</p>
+        <p>Camilo Henríquez 125 - Paillaco</p>
+        <p>Fono: 63-421765 - Región De Los Ríos</p>
+      </div>
+    </div>
+    <div class="score-box"></div>
+  </div>
+
+  <div class="main-title">
+    <h1>Laboratorio Virtual: Óptica Geométrica</h1>
+    <p class="subtitulo">Física · Simulador PhET — Espejos y Lentes · 2 clases</p>
+    <p class="profesor">Prof. Ezequiel Saldivia</p>
+  </div>
+
+  <div style="margin-top:8pt;margin-bottom:5pt;font-size:10pt;">
+    <div style="display:flex;justify-content:space-between;margin-bottom:4pt;gap:10px;">
+      <span>Nombre: <span class="blank" style="min-width:220pt"></span></span>
+      <span>Curso: <span class="blank" style="min-width:50pt"></span></span>
+    </div>
+    <div style="display:flex;gap:22px;align-items:center;">
+      <span>Fecha: <span class="blank" style="min-width:80pt"></span></span>
+      <span>Pje. ideal: <span class="val-bold">70</span></span>
+      <span>Pje. Obtenido: <span class="blank" style="min-width:38pt"></span></span>
+      <span>Exigencia: <span class="val-bold">60%</span> = 42 pts</span>
+    </div>
+  </div>
+
+  <div class="box-cont" style="margin-top:6pt">
+    <p><strong>Contenidos:</strong> Reflexión y refracción de la luz · Espejos planos, cóncavos y convexos · Lentes convergentes y divergentes · Formación de imágenes reales y virtuales · Aplicaciones en la vida cotidiana.</p>
+    <p><strong>Capacidades:</strong> Análisis · Observación · Razonamiento lógico · Pensamiento científico · Expresión escrita.</p>
+    <p><strong>Destrezas:</strong> Manipular variables en un simulador · Observar · Registrar · Comparar · Predecir · Argumentar · Concluir.</p>
+  </div>
+
+<div class="sim-url">
+  <strong>Simulador PhET:</strong> &nbsp;
+  https://phet.colorado.edu/es/simulations/geometric-optics/activities?locale=es &nbsp;·&nbsp;
+  <a href="https://phet.colorado.edu/es/simulations/geometric-optics/activities?locale=es" target="_blank" style="color:#1a3faa;font-weight:bold;">Haz clic aquí</a> &nbsp;·&nbsp;
+  Clase 1 selecciona la pestaña "Espejos", Clase 2 la pestaña "Lentes". Activa "Etiquetas" y "Puntos Focales" antes de comenzar.
+</div>
+
+  <table class="tbl-pts">
+    <thead>
+      <tr><th>Act.</th><th>Descripción</th><th>Clase</th><th>Pts</th><th>Obtenido</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Espejo cóncavo — imagen real</td><td>1</td><td>12 pts</td><td></td></tr>
+      <tr><td>2</td><td>Espejo cóncavo — imagen virtual</td><td>1</td><td>10 pts</td><td></td></tr>
+      <tr><td>3</td><td>Espejo convexo</td><td>1</td><td>10 pts</td><td></td></tr>
+      <tr><td>4</td><td>Espejo plano</td><td>1</td><td>8 pts</td><td></td></tr>
+      <tr><td>5</td><td>Lente convexa — imagen real</td><td>2</td><td>10 pts</td><td></td></tr>
+      <tr><td>6</td><td>Lente cóncava — imagen virtual</td><td>2</td><td>10 pts</td><td></td></tr>
+      <tr><td>7</td><td>Tabla comparativa y síntesis</td><td>2</td><td>10 pts</td><td></td></tr>
+      <tr class="tot"><td colspan="3">TOTAL</td><td>70 pts</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ════════════════════
+       CLASE 1
+  ════════════════════ -->
+  <div class="clase-banner">
+    <span>Clase 1 · Espejos: Cóncavo, Convexo y Plano</span>
+    <span style="font-size:9pt;font-weight:normal">Pestaña "Espejos" del simulador</span>
+  </div>
+
+  <div class="concepto">
+    <strong>Antes de comenzar:</strong> En el simulador, la <strong>flecha azul</strong> es el objeto. Las <strong>líneas continuas</strong> son rayos de luz reales. Las <strong>líneas punteadas</strong> son prolongaciones de los rayos: cuando convergen detrás del espejo indican una <strong>imagen virtual</strong>. El punto amarillo (●) es el foco. Activa "Imagen Virtual" y "Puntos Focales" en el panel derecho antes de comenzar.
+  </div>
+
+  <!-- ACTIVIDAD 1 -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">1</span>Actividad 1 · Espejo Cóncavo — Imagen Real</span>
+    <span>12 puntos</span>
+  </div>
+  <p class="instruccion">Selecciona el espejo cóncavo (primer ícono de la barra). Configura Radio de Curvatura: 180 cm · Diámetro: 80 cm. Coloca el objeto <strong>más allá del foco</strong>. La imagen de referencia muestra cómo debe verse:</p>
+
+  <div class="img-espacio"><span>
+    <img src="img/espejo-concavo.png" style="width:100%;border-radius:4px;">
+  </span></span></div>
+  <div class="img-caption">Figura 1 — Espejo cóncavo · imagen real invertida · objeto más allá del foco · Radio: 180 cm · Diámetro: 80 cm</div>
+
+  <div class="preg">
+    <div class="preg-num">1. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Observa la Figura 1. ¿Dónde se forma la imagen? ¿Está del mismo lado que el objeto o del lado contrario al espejo? ¿La imagen es derecha o invertida? ¿Cómo sabes que es una imagen real y no virtual?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">2. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">En el simulador, arrastra el objeto <strong>acercándolo al espejo</strong> lentamente (el objeto no debe pasar el foco, punto amarillo). ¿Qué le ocurre a la imagen a medida que el objeto se acerca? ¿La imagen crece o se achica? ¿Se aleja o se acerca al espejo?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">3. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Dibuja un esquema simplificado del espejo cóncavo con imagen real: el espejo, el eje óptico, el objeto (flecha hacia arriba), el foco (F) y la imagen (flecha hacia abajo, invertida). Indica con flechas la dirección de los rayos de luz.</div>
+    <div class="dibujo-box"><div class="dibujo-label"></div></div>
+  </div>
+
+  <!-- ACTIVIDAD 2 -->
+  <div class="etapa-header" style="margin-top:10pt">
+    <span><span class="etapa-num">2</span>Actividad 2 · Espejo Cóncavo — Imagen Virtual</span>
+    <span>10 puntos</span>
+  </div>
+  <p class="instruccion">Mantén la misma configuración. Ahora arrastra el objeto hasta colocarlo <strong>entre el foco y el espejo</strong>. Observa cómo la imagen cambia a virtual (líneas punteadas detrás del espejo).</p>
+
+  <div class="img-espacio"><span>
+    <img src="img/espejo-concavo-2.png" style="width:100%;border-radius:4px;">
+  </span></span></div>
+  <div class="img-caption">Figura 2 — Espejo cóncavo · imagen virtual derecha · objeto entre el foco y el espejo · líneas punteadas detrás del espejo</div>
+
+  <div class="preg">
+    <div class="preg-num">4. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Compara la Figura 1 (imagen real) con la Figura 2 (imagen virtual). Señala tres diferencias entre ambas: posición de la imagen, orientación y tipo de rayos que la forman.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">5. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Por qué la imagen que se forma detrás del espejo cóncavo no se puede proyectar en una pantalla? Fíjate en los rayos de luz del simulador y explica qué pasa con ellos</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">6. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">El espejo cóncavo forma imágenes virtuales ampliadas cuando el objeto está cerca. ¿Qué ejemplo cotidiano usa esta propiedad? ¿Y qué ejemplo usa la imagen real del espejo cóncavo? Menciona uno para cada caso.</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <!-- ACTIVIDAD 3 — ESPEJO CONVEXO -->
+  <div class="etapa-header" style="margin-top:10pt">
+    <span><span class="etapa-num">3</span>Actividad 3 · Espejo Convexo</span>
+    <span>10 puntos</span>
+  </div>
+  <p class="instruccion">Selecciona el espejo convexo (segundo ícono de la barra, curva hacia afuera). Configura Radio de Curvatura: 180 cm · Diámetro: 80 cm. Coloca el objeto en distintas posiciones frente al espejo y observa la imagen que se forma.</p>
+
+  <div class="img-espacio"><span>
+    <img src="img/espejo-convexo.png" style="width:100%;border-radius:4px;">
+  </span></span></div>
+  <div class="img-caption">Figura 3 — Espejo convexo · imagen virtual derecha y reducida · el foco está detrás del espejo</div>
+
+  <div class="preg">
+    <div class="preg-num">7. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">Observa la Figura 3. ¿La imagen que forma el espejo convexo es real o virtual? ¿Es derecha o invertida? ¿Es más grande, igual o más pequeña que el objeto? ¿Dónde está el foco respecto al espejo?</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">8. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">Arrastra el objeto acercándolo y alejándolo del espejo convexo. ¿La imagen siempre es virtual y derecha sin importar dónde pongas el objeto? ¿Cambia de tamaño? ¿En qué se diferencia este comportamiento del espejo cóncavo?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">9. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">El espejo convexo forma imágenes más pequeñas pero abarca un campo visual mucho más amplio que un espejo plano. ¿Dónde se usan los espejos convexos aprovechando esta propiedad? Menciona dos ejemplos concretos y explica por qué ese uso requiere ver un campo amplio.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <!-- ACTIVIDAD 4 — ESPEJO PLANO -->
+  <div class="etapa-header" style="margin-top:10pt">
+    <span><span class="etapa-num">4</span>Actividad 4 · Espejo Plano</span>
+    <span>8 puntos</span>
+  </div>
+  <p class="instruccion">Selecciona el espejo plano (tercer ícono). Configura Diámetro: 80 cm. Coloca el objeto frente al espejo y observa la imagen.</p>
+
+  <div class="img-espacio"><span>    
+    <img src="img/espejo-plano.png" style="width:100%;border-radius:4px;">
+  </span></span></div>
+  <div class="img-caption">Figura 4 — Espejo plano · imagen virtual derecha y del mismo tamaño · a la misma distancia detrás del espejo</div>
+
+  <div class="preg">
+    <div class="preg-num">10. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Observa la imagen en el espejo plano. ¿Es real o virtual? ¿Derecha o invertida? ¿Del mismo tamaño que el objeto? Luego arrastra el objeto acercándolo y alejándolo. ¿Qué relación hay entre la distancia del objeto al espejo y la distancia de la imagen al espejo?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">11. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">¿Por qué el espejo del baño muestra tu imagen derecha y del mismo tamaño, pero si miras en la parte cóncava de una cuchara (parte hundida) ves tu imagen invertida, y en la parte convexa (parte abultada) la ves derecha pero más pequeña? Usa lo aprendido en las actividades 1 a 4 para responder.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ════════════════════
+       CLASE 2
+  ════════════════════ -->
+  <div class="clase-banner">
+    <span>Clase 2 · Lentes: Convexa y Cóncava</span>
+    <span style="font-size:9pt;font-weight:normal">Pestaña "Lentes" del simulador</span>
+  </div>
+
+  <div class="concepto">
+    <strong>Antes de comenzar:</strong> En la pestaña "Lentes" aparecen dos focos (F) simétricos a ambos lados. La <strong>lente convexa</strong> (más gruesa en el centro) hace que los rayos <strong>converjan</strong>. La <strong>lente cóncava</strong> (más delgada en el centro) hace que los rayos <strong>diverjan</strong>. Activa "Etiquetas" para ver: Eje Óptico, Objeto 1, F, Imagen Real 1 o Imagen Virtual 1.
+  </div>
+
+  <!-- ACTIVIDAD 5 -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">5</span>Actividad 5 · Lente Convexa — Imagen Real</span>
+    <span>10 puntos</span>
+  </div>
+  <p class="instruccion">Selecciona la lente convexa. Configura Radio de Curvatura: 80 cm · Índice de Refracción: 1,50 · Diámetro: 80 cm. Coloca el objeto <strong>más allá del foco izquierdo</strong>. Activa "Etiquetas".</p>
+
+  <div class="img-espacio"><span>
+    <img src="img/lente-convexa.png" style="width:100%;border-radius:4px;">
+  </span></span></div>
+  <div class="img-caption">Figura 5 — Lente convexa · imagen real invertida · objeto más allá del foco · etiquetas: Eje Óptico, Objeto 1, F, Lente Convexa, Imagen Real 1</div>
+
+  <div class="preg">
+    <div class="preg-num">12. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Observa la Figura 5. ¿Del qué lado de la lente se forma la imagen? ¿Es real o virtual? ¿Derecha o invertida?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">13. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">Arrastra el objeto acercándolo al foco desde el lado izquierdo. ¿Qué le ocurre a la imagen al acercar el objeto al foco? ¿Qué pasa cuando el objeto cruza el foco hacia adentro?</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">14. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">¿Qué instrumento óptico usa la lente convexa para proyectar una imagen real en una pantalla? ¿Y qué instrumento la usa para ver objetos lejanos? Da un ejemplo concreto para cada caso.</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <!-- ACTIVIDAD 6 -->
+  <div class="etapa-header" style="margin-top:10pt">
+    <span><span class="etapa-num">6</span>Actividad 6 · Lente Cóncava — Imagen Virtual</span>
+    <span>10 puntos</span>
+  </div>
+  <p class="instruccion">Selecciona la lente cóncava (ícono con forma de reloj de arena). Misma configuración: Radio 80 cm · Índice 1,50 · Diámetro 80 cm. Coloca el objeto de cualquier lado y activa "Etiquetas".</p>
+
+  <div class="img-espacio"><span>
+    <img src="img/lente-concava.png" style="width:100%;border-radius:4px;">
+  </span></span></div>
+  <div class="img-caption">Figura 6 — Lente cóncava · imagen virtual derecha y reducida · imagen entre el objeto y la lente · etiquetas: Objeto 1, F, Imagen Virtual 1, Lente Cóncava</div>
+
+  <div class="preg">
+    <div class="preg-num">15. <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">Observa la Figura 6. ¿Dónde se forma la imagen respecto a la lente y al objeto? ¿Es real o virtual? ¿Derecha o invertida? ¿Es más grande o más pequeña que el objeto?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">16. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">Arrastra el objeto a distintas posiciones. ¿La imagen siempre es virtual y derecha sin importar dónde pongas el objeto? ¿En qué se diferencia la lente cóncava de la lente convexa en su comportamiento?</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="preg">
+    <div class="preg-num">17. <span class="preg-pts">3 pts</span></div>
+    <div class="preg-body">Las lentes cóncavas se usan en anteojos para personas con miopía. ¿Qué problema de la visión corrige? ¿Por qué una lente que forma imágenes más pequeñas y virtuales ayuda a ver mejor a quien tiene miopía?</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+
+  <!-- ACTIVIDAD 7 — TABLA COMPARATIVA -->
+  <div class="etapa-header">
+    <span><span class="etapa-num">7</span>Actividad 7 · Tabla Comparativa y Síntesis</span>
+    <span>10 puntos</span>
+  </div>
+  <p class="instruccion">Completa la tabla con lo que observaste en el simulador durante las dos clases. Luego responde la pregunta de síntesis.</p>
+
+  <table class="comp">
+    <thead>
+      <tr>
+        <th style="text-align:left">Característica</th>
+        <th>Espejo<br>cóncavo<br>(obj. lejos F)</th>
+        <th>Espejo<br>cóncavo<br>(obj. cerca F)</th>
+        <th>Espejo<br>convexo</th>
+        <th>Espejo<br>plano</th>
+        <th>Lente<br>convexa</th>
+        <th>Lente<br>cóncava</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>¿Real o virtual?</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>¿Derecha o invertida?</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>Tamaño vs objeto</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>¿Se proyecta en pantalla?</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+      <tr><td>Uso cotidiano</td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td><td class="fill"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="preg" style="margin-top:8pt">
+    <div class="preg-num">18. Síntesis <span class="preg-pts">4 pts</span></div>
+    <div class="preg-body">¿Cuál es la diferencia fundamental entre una imagen real y una imagen virtual? ¿Qué elementos ópticos de los que trabajaste hoy pueden formar imágenes reales y cuáles solo forman imágenes virtuales? Explica en no más de cinco oraciones.</div>
+    <span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <!-- RÚBRICA -->
+  <hr style="border:none;border-top:1.5px solid #111;margin:10px 0">
+  <p style="font-size:9.5pt;font-weight:bold;text-transform:uppercase;letter-spacing:.04em;margin-bottom:7pt">Rúbrica de Evaluación</p>
+
+  <table class="rubrica">
+    <thead>
+      <tr>
+        <th style="text-align:left">Criterio</th>
+        <th>4 — Logrado</th>
+        <th>3 — Med. Logrado</th>
+        <th>2 — Por Lograr</th>
+        <th style="width:13%">1 — No Logrado</th>
+        <th style="width:6%">Pts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Observación y descripción<br><em style="font-weight:normal;font-size:7pt">(Pregs. 1, 4, 7, 10, 12, 15)</em></td>
+        <td>Describe con precisión posición, orientación y tipo de imagen en todos los casos. Dibujos correctamente etiquetados.</td>
+        <td>Descripción correcta en la mayoría. Dibujos presentes con algún error o sin etiquetas.</td>
+        <td>Descripciones parciales o incorrectas. Dibujos ausentes o sin relación con lo observado.</td>
+        <td>No describe ni dibuja lo observado.</td>
+        <td style="text-align:center">20</td>
+      </tr>
+      <tr>
+        <td>Manipulación y análisis<br><em style="font-weight:normal;font-size:7pt">(Pregs. 2, 5, 8, 11, 13, 16)</em></td>
+        <td>Manipuló el simulador, describe correctamente los cambios al variar la posición del objeto y los relaciona con el tipo de imagen.</td>
+        <td>Manipuló el simulador pero la descripción de cambios es superficial o incompleta.</td>
+        <td>No manipuló el simulador o no registró los cambios observados.</td>
+        <td>Sin evidencia de uso del simulador.</td>
+        <td style="text-align:center">20</td>
+      </tr>
+      <tr>
+        <td>Aplicaciones cotidianas<br><em style="font-weight:normal;font-size:7pt">(Pregs. 3, 6, 9, 11, 14, 17)</em></td>
+        <td>Identifica aplicaciones correctas para cada elemento óptico y justifica la propiedad que las fundamenta.</td>
+        <td>Identifica la mayoría de las aplicaciones sin explicar la propiedad que las fundamenta.</td>
+        <td>Menciona aplicaciones genéricas sin relacionarlas con las propiedades estudiadas.</td>
+        <td>No relaciona los contenidos con aplicaciones reales.</td>
+        <td style="text-align:center">18</td>
+      </tr>
+      <tr>
+        <td>Tabla y síntesis<br><em style="font-weight:normal;font-size:7pt">(Actividad 7)</em></td>
+        <td>Tabla completa y correcta con los seis elementos. Síntesis que distingue imagen real de virtual con ejemplos de todos los elementos.</td>
+        <td>Tabla con 2-3 errores. Síntesis presente pero parcial.</td>
+        <td>Tabla incompleta con más de 4 errores. Síntesis muy escasa.</td>
+        <td>Sin tabla ni síntesis.</td>
+        <td style="text-align:center">12</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:8pt;border:2px solid #111;border-radius:6px;padding:7pt 12pt;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;font-size:9.5pt">
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;color:#555;margin-bottom:3pt">Puntaje total</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">/ 70 pts</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;color:#555;margin-bottom:3pt">Porcentaje de logro</div>
+      <div style="border-bottom:1.5px solid #111;height:20pt"></div>
+      <div style="font-size:8pt;color:#888;margin-top:2pt">pts / 70 × 100</div>
+    </div>
+    <div style="border:1px solid #ccc;border-radius:4px;padding:4pt">
+      <div style="font-size:8pt;font-weight:bold;text-transform:uppercase;color:#555;margin-bottom:3pt">Nota final</div>
+      <div style="border-bottom:2px solid #111;height:20pt"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:7pt">
+    <div style="font-size:8.5pt;font-weight:bold;margin-bottom:3pt">Observaciones del docente:</div>
+    <span class="linea-r"></span><span class="linea-r"></span>
+  </div>
+
+  <div class="pie">
+    <span>Escuela Particular 95 Alemana · Paillaco</span>
+    <span>Física · Óptica Geométrica · Simulador PhET · 2 clases</span>
+    <span>Prof. Ezequiel Saldivia</span>
+  </div>
+
+</div>
+</body>
+</html>
