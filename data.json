@@ -54,6 +54,7 @@
       "archivos": [
         { "nombre": "Laboratorio: Introducción al Átomo", "url": "Quimica-1M/laboratorio-introduccion-atomo.html" },
         { "nombre": "Guía Estructura Átomica", "url": "Quimica-1M/guia-quimica-estructura-atomica.html" },
+        { "nombre": "Laboratorio: Descubriendo el Balance de Ecuaciones", "url": "Quimica-1M/guia_balance_molecular_1m.html" },
         { "nombre": "Guía Propiedades de la Tabla Periódica", "url": "Quimica-1M/guia-quimica-propiedades-tabla-periodica.html" }       
       ]
     },
