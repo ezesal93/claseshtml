@@ -46,7 +46,7 @@
         { "nombre": "Laboratorio: Ondas Variables", "url": "Fisica-1M/laboratorio-ondas-variables.html" },
         { "nombre": "Simulador de Ondas", "url": "Fisica-1M/simulador-onda.html" },
         { "nombre": "Guía 2 : Ondas", "url": "Fisica-1M/guia-2-ondas.html" },
-        { "nombre": "Guía 2 : Laboratorio Virtual: Óptica Geométrica", "url": "Fguia_optica_geometrica_phet.html" },
+        { "nombre": "Guía 2 : Laboratorio Virtual: Óptica Geométrica", "url": "guia_optica_geometrica_phet.html" },
         { "nombre": "Guía 3 : Ondas", "url": "Fisica-1M/guia-3-ondas.html" }
       ]
     },
