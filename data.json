@@ -83,6 +83,12 @@
         { "nombre": "Clase: Vapers", "url": "Orientacion/clase-vapers.html" }
       ]
     },
+        {
+      "categoria": "PAES-Quimica",
+      "archivos": [
+        { "nombre": "Juego Grupos Funcionales", "url": "PAES-Quimica/juego_grupos_funcionales/juego_grupos_funcionales.html" }
+      ]
+    },
     {
       "categoria": "Química Marcos",
       "archivos": [

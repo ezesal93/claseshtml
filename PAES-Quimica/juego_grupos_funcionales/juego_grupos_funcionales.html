@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuimLab: Desafío de Grupos Funcionales</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        chem: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            dark: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.35);
+        }
+        .glow-correct {
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.5);
+        }
+        .glow-wrong {
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.5);
+        }
+        .chem-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f766e 100%);
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mol-img-container {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-teal-500 selection:text-white">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-teal-500/30">
+                    <i class="fa-solid font-bold fa-flask"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-teal-400 to-emerald-300 bg-clip-text text-transparent">QuimLab</h1>
+                    <p class="text-xs text-slate-400 -mt-1 hidden sm:block">Grupos Funcionales Orgánicos</p>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center space-x-1 sm:space-x-2">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-medium transition text-teal-400 bg-slate-800">
+                    <i class="fa-solid fa-house sm:mr-1"></i> <span class="hidden sm:inline">Inicio</span>
+                </button>
+                <button onclick="switchTab('game')" id="nav-game" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-medium transition text-slate-300 hover:text-teal-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-gamepad sm:mr-1"></i> <span class="hidden sm:inline">Desafío</span>
+                </button>
+                <button onclick="switchTab('flashcards')" id="nav-flashcards" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-medium transition text-slate-300 hover:text-teal-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-layer-group sm:mr-1"></i> <span class="hidden sm:inline">Tarjetas (40)</span>
+                </button>
+                <button onclick="switchTab('cheatsheet')" id="nav-cheatsheet" class="nav-btn px-3 py-1.5 rounded-lg text-sm font-medium transition text-slate-300 hover:text-teal-300 hover:bg-slate-800">
+                    <i class="fa-solid fa-book-bookmark sm:mr-1"></i> <span class="hidden sm:inline">Guía</span>
+                </button>
+                <button id="sound-btn" onclick="toggleSound()" class="p-2 rounded-lg text-slate-400 hover:text-teal-300 hover:bg-slate-800 transition ml-1" title="Alternar Sonido">
+                    <i class="fa-solid fa-volume-high text-lg" id="sound-icon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ================= HOME / DASHBOARD TAB ================= -->
+        <section id="tab-home" class="tab-content transition-all duration-300">
+            <div class="relative overflow-hidden rounded-3xl p-8 sm:p-12 chem-gradient border border-teal-500/20 mb-8 glow-effect">
+                <div class="relative z-10 max-w-2xl">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/30 mb-4">
+                        <i class="fa-solid fa-atom animate-spin"></i> Química Orgánica con Imágenes de MolView
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4">
+                        Masteriza los 8 Grupos Funcionales
+                    </h2>
+                    <p class="text-slate-300 text-base sm:text-lg mb-6 leading-relaxed">
+                        Aprende a reconocer las <strong>40 moléculas</strong> clave (Alcoholes, Cetonas, Aldehídos, Ácidos Carboxílicos, Amidas, Aminas, Ésteres y Éteres) con imágenes estructurales 2D descargables desde MolView.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="startGame('standard')" class="px-6 py-3.5 rounded-xl font-bold bg-gradient-to-r from-teal-500 to-emerald-500 text-slate-950 hover:from-teal-400 hover:to-emerald-400 shadow-lg shadow-teal-500/30 transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <i class="fa-solid fa-play"></i> Comenzar Desafío Express
+                        </button>
+                        <button onclick="switchTab('flashcards')" class="px-6 py-3.5 rounded-xl font-semibold bg-slate-800 text-slate-200 hover:bg-slate-700 border border-slate-700 transition flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group"></i> Ver 40 Tarjetas de Moléculas
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute -right-10 -bottom-10 opacity-15 sm:opacity-25 pointer-events-none text-teal-300 text-9xl font-black">
+                    <i class="fa-solid fa-vial-circle-check"></i>
+                </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-200 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-cubes text-teal-400"></i> Los 8 Grupos Funcionales del Juego
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="home-group-grid">
+                <!-- Dynamically injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- ================= GAME TAB ================= -->
+        <section id="tab-game" class="tab-content hidden transition-all duration-300">
+            <!-- Game HUD / Stats Header -->
+            <div class="glass-panel rounded-2xl p-4 sm:p-6 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-6">
+                    <div>
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Puntaje</span>
+                        <span id="game-score" class="text-2xl sm:text-3xl font-black text-teal-400">0</span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Racha</span>
+                        <span id="game-streak" class="text-2xl sm:text-3xl font-black text-amber-400 flex items-center gap-1">
+                            0 <i class="fa-solid fa-fire text-lg"></i>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-xs text-slate-400 font-semibold uppercase tracking-wider block">Pregunta</span>
+                        <span id="game-progress" class="text-2xl sm:text-3xl font-black text-slate-200">1 / 10</span>
+                    </div>
+                </div>
+
+                <!-- Timer Bar -->
+                <div class="w-full sm:w-48 bg-slate-800 h-3 rounded-full overflow-hidden p-0.5 border border-slate-700">
+                    <div id="timer-bar" class="bg-gradient-to-r from-teal-400 to-emerald-400 h-full rounded-full w-full transition-all duration-100"></div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button onclick="startGame('standard')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Reiniciar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-700/80 shadow-2xl relative overflow-hidden" id="question-card">
+                
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-teal-400 bg-teal-500/10 px-3 py-1 rounded-full border border-teal-500/20" id="q-hint-category">
+                        Identificación Molecular
+                    </span>
+                    <span class="text-xs text-slate-400" id="q-difficulty">
+                        Imágenes MolView 2D
+                    </span>
+                </div>
+
+                <h3 class="text-xl sm:text-2xl font-bold text-center text-white mb-6" id="q-title">
+                    ¿A qué grupo funcional pertenece esta molécula?
+                </h3>
+
+                <!-- Molecule Image Display Container -->
+                <div class="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 mb-6 flex flex-col items-center justify-center mol-img-container relative" id="molecule-display-container">
+                    <div id="image-molecule-wrapper" class="w-full flex justify-center items-center py-2 min-h-[180px]">
+                        <!-- Image tag inserted dynamically -->
+                    </div>
+                    <div id="formula-text-display" class="mt-3 text-slate-300 font-mono text-lg font-bold bg-slate-950/80 px-4 py-1.5 rounded-lg border border-slate-800">
+                        --
+                    </div>
+                </div>
+
+                <!-- Answer Options Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6" id="answers-grid">
+                    <!-- Option buttons dynamically generated -->
+                </div>
+
+                <!-- Feedback Banner -->
+                <div id="feedback-banner" class="hidden rounded-2xl p-4 sm:p-5 border transition-all duration-300">
+                    <div class="flex items-start gap-3">
+                        <div id="feedback-icon" class="text-2xl mt-0.5"></div>
+                        <div>
+                            <h4 id="feedback-title" class="font-bold text-lg mb-1"></h4>
+                            <p id="feedback-body" class="text-sm text-slate-300 leading-relaxed"></p>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl font-bold bg-teal-500 hover:bg-teal-400 text-slate-950 transition flex items-center gap-2 shadow-lg shadow-teal-500/20">
+                            Siguiente Pregunta <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= FLASHCARDS TAB ================= -->
+        <section id="tab-flashcards" class="tab-content hidden transition-all duration-300">
+            <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Tarjetas Individuales de Moléculas (40)</h2>
+                    <p class="text-slate-400 text-sm">Cada molécula incluye su imagen de MolView, fórmula semidesarrollada y explicación.</p>
+                </div>
+                
+                <!-- Group Filters -->
+                <div class="flex flex-wrap gap-1.5" id="flashcard-filter-container">
+                    <!-- Dynamic filter buttons -->
+                </div>
+            </div>
+
+            <!-- Flashcards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="flashcards-container">
+                <!-- Flashcard items generated dynamically -->
+            </div>
+        </section>
+
+        <!-- ================= CHEATSHEET TAB ================= -->
+        <section id="tab-cheatsheet" class="tab-content hidden transition-all duration-300">
+            <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-700/80">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-table-list text-teal-400"></i> Tabla Resumen de Grupos Funcionales
+                    </h2>
+                    <p class="text-slate-400 text-sm">Guía de referencia rápida para identificar los 8 grupos oxigenados y nitrogenados.</p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-slate-900/90 text-teal-300 uppercase text-xs tracking-wider border-b border-slate-800">
+                            <tr>
+                                <th class="p-3.5 rounded-tl-xl">Grupo Funcional</th>
+                                <th class="p-3.5">Fórmula Estructural</th>
+                                <th class="p-3.5">Característica Clave</th>
+                                <th class="p-3.5">Sufijo IUPAC</th>
+                                <th class="p-3.5 rounded-tr-xl">Ejemplo de Molécula</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60" id="cheatsheet-table-body">
+                            <!-- Table rows injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>© 2026 QuimLab - Juego y Colección de 40 Moléculas en MolView.</p>
+            <p class="flex items-center gap-1">
+                Aprende identificando: <span class="text-teal-400 font-semibold">Alcohol, Cetona, Aldehído, Ácido, Amida, Amina, Éster, Éter</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        /* ===================================================================
+           DATABASE: 8 Functional Groups & 40 Molecule Cards with MolView Paths
+           =================================================================== */
+        const GROUPS = {
+            alcohol: {
+                id: 'alcohol',
+                name: 'Alcohol',
+                pluralName: 'Alcoholes',
+                formula: 'R-OH',
+                suffix: '-ol',
+                badgeBg: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
+                color: '#f59e0b',
+                description: 'Contiene un grupo hidroxilo (-OH) unido a un carbono saturado.',
+                keyFeature: 'Grupo -OH (Hidroxilo)',
+                example: 'Etanol'
+            },
+            cetona: {
+                id: 'cetona',
+                name: 'Cetona',
+                pluralName: 'Cetonas',
+                formula: 'R-CO-R\'',
+                suffix: '-ona',
+                badgeBg: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+                color: '#f43f5e',
+                description: 'Tiene un grupo carbonilo (C=O) en posición no terminal unido a dos carbonos.',
+                keyFeature: 'Carbonilo intermedio (C=O)',
+                example: 'Propanona (Acetona)'
+            },
+            aldehido: {
+                id: 'aldehido',
+                name: 'Aldehído',
+                pluralName: 'Aldehídos',
+                formula: 'R-CHO',
+                suffix: '-al',
+                badgeBg: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+                color: '#a855f7',
+                description: 'Grupo formilo (-CHO) ubicado siempre en el extremo de la cadena.',
+                keyFeature: 'Grupo terminal -CHO',
+                example: 'Etanal (Acetaldehído)'
+            },
+            acido: {
+                id: 'acido',
+                name: 'Ácido Carboxílico',
+                pluralName: 'Ácidos Carboxílicos',
+                formula: 'R-COOH',
+                suffix: 'Ácido ...-oico',
+                badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+                color: '#10b981',
+                description: 'Grupo carboxilo (-COOH) integrando un carbonilo y un hidroxilo en el mismo carbono.',
+                keyFeature: 'Grupo -COOH (Carboxilo)',
+                example: 'Ácido etanoico (Acético)'
+            },
+            amida: {
+                id: 'amida',
+                name: 'Amida',
+                pluralName: 'Amidas',
+                formula: 'R-CONH₂',
+                suffix: '-amida',
+                badgeBg: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+                color: '#3b82f6',
+                description: 'Carbonilo unido directamente a un nitrógeno (C=O-N).',
+                keyFeature: 'Enlace C=O-N',
+                example: 'Etanamida (Acetamida)'
+            },
+            amina: {
+                id: 'amina',
+                name: 'Amina',
+                pluralName: 'Aminas',
+                formula: 'R-NH₂',
+                suffix: '-amina',
+                badgeBg: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
+                color: '#6366f1',
+                description: 'Nitrógeno derivado del amoníaco unido a radicales de carbono sin C=O adyacente.',
+                keyFeature: 'Nitrógeno amino (-NH₂, -NHR, -NR₂)',
+                example: 'Metilamina'
+            },
+            ester: {
+                id: 'ester',
+                name: 'Éster',
+                pluralName: 'Ésteres',
+                formula: 'R-COO-R\'',
+                suffix: '-oato de ...ilo',
+                badgeBg: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
+                color: '#06b6d4',
+                description: 'Enlace central carboxílico con oxígeno puente (-COO-).',
+                keyFeature: 'Puente éster (-COO-)',
+                example: 'Etanoato de metilo'
+            },
+            eter: {
+                id: 'eter',
+                name: 'Éter',
+                pluralName: 'Éteres',
+                formula: 'R-O-R\'',
+                suffix: '-oxi- / éter',
+                badgeBg: 'bg-teal-500/20 text-teal-300 border-teal-500/30',
+                color: '#14b8a6',
+                description: 'Átomo de oxígeno puente (-O-) intermedio unido directamente a dos radicales.',
+                keyFeature: 'Puente de oxígeno (-O-)',
+                example: 'Etoxietano (Dietiléter)'
+            }
+        };
+
+        const MOLECULES = [
+            // 1. ALCOHOLES
+            {
+                id: "metanol",
+                name: "Metanol",
+                iupac: "Metanol",
+                group: "alcohol",
+                smiles: "CO",
+                formula: "CH₃OH",
+                image: "img/metanol.png",
+                description: "El alcohol más sencillo, formado por un grupo metilo unido al hidroxilo.",
+                explanation: "Posee el grupo característico -OH (hidroxilo) unido a un carbono sp³."
+            },
+            {
+                id: "etanol",
+                name: "Etanol",
+                iupac: "Etanol",
+                group: "alcohol",
+                smiles: "CCO",
+                formula: "CH₃-CH₂-OH",
+                image: "img/etanol.png",
+                description: "Alcohol presente en bebidas fermentadas y antisépticos.",
+                explanation: "Cadena lineal de 2 carbonos con el grupo terminal -OH."
+            },
+            {
+                id: "isopropanol",
+                name: "Isopropanol",
+                iupac: "Propan-2-ol",
+                group: "alcohol",
+                smiles: "CC(O)C",
+                formula: "(CH₃)₂CH-OH",
+                image: "img/isopropanol.png",
+                description: "Alcohol secundario ampliamente utilizado como desinfectante.",
+                explanation: "El grupo -OH está enlazado al carbono secundario central."
+            },
+            {
+                id: "butan-1-ol",
+                name: "Butan-1-ol",
+                iupac: "Butan-1-ol",
+                group: "alcohol",
+                smiles: "CCCCO",
+                formula: "CH₃-CH₂-CH₂-CH₂-OH",
+                image: "img/1-butanol.png",
+                description: "Alcohol primario lineal de 4 átomos de carbono.",
+                explanation: "Cadena saturada de cuatro carbonos con -OH terminal."
+            },
+            {
+                id: "ciclohexanol",
+                name: "Ciclohexanol",
+                iupac: "Ciclohexanol",
+                group: "alcohol",
+                smiles: "C1CCC(CC1)O",
+                formula: "C₆H₁₁OH",
+                image: "img/ciclohexanol.png",
+                description: "Alcohol alicíclico derivado del anillo del ciclohexano.",
+                explanation: "Anillo de 6 carbonos sustituido con un grupo hidroxilo -OH."
+            },
+
+            // 2. CETONAS
+            {
+                id: "propanona",
+                name: "Acetona",
+                iupac: "Propanona",
+                group: "cetona",
+                formula: "CH₃-CO-CH₃",
+                image: "img/propanona.png",
+                description: "La cetona más simple y disolvente orgánico muy común.",
+                explanation: "Grupo carbonilo (C=O) secundario flanqueado por dos grupos metilo."
+            },
+            {
+                id: "butan-2-ona",
+                name: "Metiletilcetona",
+                iupac: "Butan-2-ona",
+                group: "cetona",
+                formula: "CH₃-CO-CH₂-CH₃",
+                image: "img/butan-2-ona.png",
+                description: "Cetona asimétrica con 4 carbonos.",
+                explanation: "El grupo carbonilo (C=O) está en posición no terminal (carbono 2)."
+            },
+            {
+                id: "pentan-3-ona",
+                name: "Dietilcetona",
+                iupac: "Pentan-3-ona",
+                group: "cetona",
+                formula: "CH₃-CH₂-CO-CH₂-CH₃",
+                image: "img/pentan-3-ona.png",
+                description: "Cetona simétrica de 5 carbonos.",
+                explanation: "El grupo carbonilo se ubica en el centro exacto de la cadena."
+            },
+            {
+                id: "ciclohexanona",
+                name: "Ciclohexanona",
+                iupac: "Ciclohexanona",
+                group: "cetona",
+                formula: "C₆H₁₀O",
+                image: "img/ciclohexanona.png",
+                description: "Cetona cíclica, materia prima en la síntesis del nylon.",
+                explanation: "Átomo de oxígeno unido mediante doble enlace a un carbono del anillo."
+            },
+            {
+                id: "acetofenona",
+                name: "Acetofenona",
+                iupac: "1-Feniletan-1-ona",
+                group: "cetona",
+                formula: "C₆H₅-CO-CH₃",
+                image: "img/1-feniletan-1-ona.png",
+                description: "La cetona aromática más sencilla.",
+                explanation: "Grupo carbonilo C=O que conecta un anillo bencénico y un grupo metilo."
+            },
+
+            // 3. ALDEHÍDOS
+            {
+                id: "metanal",
+                name: "Formaldehído",
+                iupac: "Metanal",
+                group: "aldehido",
+                formula: "HCHO",
+                image: "img/metanal.png",
+                description: "El aldehído más pequeño y gas altamente reactivo.",
+                explanation: "Grupo formilo (-CHO) unido únicamente a un átomo de hidrógeno."
+            },
+            {
+                id: "etanal",
+                name: "Acetaldehído",
+                iupac: "Etanal",
+                group: "aldehido",
+                formula: "CH₃-CHO",
+                image: "img/etanal.png",
+                description: "Aldehído de 2 carbonos, metabolito del etanol.",
+                explanation: "Grupo característico -CHO en la posición terminal de la cadena."
+            },
+            {
+                id: "propanal",
+                name: "Propionaldehído",
+                iupac: "Propanal",
+                group: "aldehido",
+                formula: "CH₃-CH₂-CHO",
+                image: "img/propanal.png",
+                description: "Aldehído de 3 carbonos de olor afrutado.",
+                explanation: "Cadena de 3 carbonos terminada en un grupo formilo -CHO."
+            },
+            {
+                id: "butanal",
+                name: "Butiraldehído",
+                iupac: "Butanal",
+                group: "aldehido",
+                formula: "CH₃-CH₂-CH₂-CHO",
+                image: "img/butanal.png",
+                description: "Aldehído lineal de 4 carbonos.",
+                explanation: "Grupo C=O terminal acoplado directamente a un hidrógeno."
+            },
+            {
+                id: "benzaldehido",
+                name: "Benzaldehído",
+                iupac: "Benzaldehído",
+                group: "aldehido",
+                formula: "C₆H₅-CHO",
+                image: "img/benzaldehido.png",
+                description: "Aldehído aromático responsable del aroma a almendras amargas.",
+                explanation: "Anillo bencénico enlazado directamente al grupo formilo -CHO."
+            },
+
+            // 4. ÁCIDOS CARBOXÍLICOS
+            {
+                id: "acido_metanoico",
+                name: "Ácido Fórmico",
+                iupac: "Ácido metanoico",
+                group: "acido",
+                formula: "HCOOH",
+                image: "img/acido_metanoico.png",
+                description: "Ácido carboxílico presente en las venenosas picaduras de hormiga.",
+                explanation: "Contiene el grupo -COOH unido directamente a un hidrógeno."
+            },
+            {
+                id: "acido_etanoico",
+                name: "Ácido Acético",
+                iupac: "Ácido etanoico",
+                group: "acido",
+                formula: "CH₃-COOH",
+                image: "img/acido_etanoico.png",
+                description: "Componente principal del vinagre responsable de su acidez y olor.",
+                explanation: "Combina un carbonilo (C=O) e hidroxilo (-OH) en el mismo carbono terminal."
+            },
+            {
+                id: "acido_propanoico",
+                name: "Ácido Propiónico",
+                iupac: "Ácido propanoico",
+                group: "acido",
+                formula: "CH₃-CH₂-COOH",
+                image: "img/acido_propanoico.png",
+                description: "Ácido carboxílico de 3 carbonos usado como conservante alimentario.",
+                explanation: "Cadena etilo unida al grupo carboxilo (-COOH)."
+            },
+            {
+                id: "acido_butanoico",
+                name: "Ácido Butírico",
+                iupac: "Ácido butanoico",
+                group: "acido",
+                formula: "CH₃-CH₂-CH₂-COOH",
+                image: "img/acido_butanoico.png",
+                description: "Ácido graso de cadena corta característico de la mantequilla rancia.",
+                explanation: "Presencia del grupo acídico carboxilo -COOH al final de 4 carbonos."
+            },
+            {
+                id: "acido_benzoico",
+                name: "Ácido Benzoico",
+                iupac: "Ácido benzoico",
+                group: "acido",
+                formula: "C₆H₅-COOH",
+                image: "img/acido_benzoico.png",
+                description: "Ácido carboxílico aromático básico.",
+                explanation: "Grupo carboxilo -COOH enlazado a un anillo aromático de benceno."
+            },
+
+            // 5. AMIDAS
+            {
+                id: "metanamida",
+                name: "Formamida",
+                iupac: "Metanamida",
+                group: "amida",
+                formula: "HCONH₂",
+                image: "img/metanamida.png",
+                description: "La amida primaria más simple derivada del ácido fórmico.",
+                explanation: "Estructura directa H-C(=O)-NH₂."
+            },
+            {
+                id: "etanamida",
+                name: "Acetamida",
+                iupac: "Etanamida",
+                group: "amida",
+                formula: "CH₃-CONH₂",
+                image: "img/etanamida.png",
+                description: "Amida derivada del ácido acético.",
+                explanation: "Grupo carbonilo C=O unido en el mismo carbono a un grupo amino -NH₂."
+            },
+            {
+                id: "n_metilacetamida",
+                name: "N-Metilacetamida",
+                iupac: "N-Metilacetamida",
+                group: "amida",
+                formula: "CH₃-CONH-CH₃",
+                image: "img/n_metilacetamida.png",
+                description: "Amida secundaria con sustitución metilo en el nitrógeno.",
+                explanation: "Muestra la unión carbonilo-nitrógeno con un radical en el átomo de N."
+            },
+            {
+                id: "propanamida",
+                name: "Propionamida",
+                iupac: "Propanamida",
+                group: "amida",
+                formula: "CH₃-CH₂-CONH₂",
+                image: "img/propanamida.png",
+                description: "Amida primaria de 3 carbonos.",
+                explanation: "Grupo funcional terminal -CONH₂ acoplado a la cadena etílica."
+            },
+            {
+                id: "benzamida",
+                name: "Benzamida",
+                iupac: "Benzamida",
+                group: "amida",
+                formula: "C₆H₅-CONH₂",
+                image: "img/benzamida.png",
+                description: "Amida aromática sólida derivada del ácido benzoico.",
+                explanation: "Anillo fenílico unido directamente al grupo amida -CONH₂."
+            },
+
+            // 6. AMINAS
+            {
+                id: "metilamina",
+                name: "Metilamina",
+                iupac: "Metanamina",
+                group: "amina",
+                formula: "CH₃-NH₂",
+                image: "img/metilamina.png",
+                description: "Amina primaria muy volátil y de olor amoniacal.",
+                explanation: "Nitrógeno con un par libre de electrones unido a un metilo sin C=O adyacente."
+            },
+            {
+                id: "etilamina",
+                name: "Etilamina",
+                iupac: "Etanamina",
+                group: "amina",
+                formula: "CH₃-CH₂-NH₂",
+                image: "img/etilamina.png",
+                description: "Amina primaria alifática de 2 carbonos.",
+                explanation: "Sustituyente amino -NH₂ básico ligado a la cadena etilo."
+            },
+            {
+                id: "dimetilamina",
+                name: "Dimetilamina",
+                iupac: "N-Metilmetanamina",
+                group: "amina",
+                formula: "(CH₃)₂NH",
+                image: "img/dimetilamina.png",
+                description: "Amina secundaria con dos radicales metilo unidos al nitrógeno.",
+                explanation: "El átomo de nitrógeno actúa como puente secundario -NH-."
+            },
+            {
+                id: "trimetilamina",
+                name: "Trimetilamina",
+                iupac: "N,N-Dimetilmetanamina",
+                group: "amina",
+                formula: "(CH₃)₃N",
+                image: "img/trimetilamina.png",
+                description: "Amina terciaria responsable del olor característico al pescado.",
+                explanation: "Nitrógeno sustituido con tres grupos metilo sin hidrógenos unidos."
+            },
+            {
+                id: "aniline",
+                name: "Anilina",
+                iupac: "Aminobenceno",
+                group: "amina",
+                formula: "C₆H₅-NH₂",
+                image: "img/anilina.png",
+                description: "La amina aromática fundamental, precursora de tintes sintéticos.",
+                explanation: "Grupo amino -NH₂ unido directamente a un anillo de benceno."
+            },
+
+            // 7. ÉSTERES
+            {
+                id: "metanoato_de_metilo",
+                name: "Formiato de Metilo",
+                iupac: "Metanoato de metilo",
+                group: "ester",
+                formula: "HCOOCH₃",
+                image: "img/metanoato_de_metilo.png",
+                description: "El éster más simple con agradable olor etéreo.",
+                explanation: "Estructura central con oxígeno puente acoplada a un carbonilo (-COO-)."
+            },
+            {
+                id: "etanoato_de_metilo",
+                name: "Acetato de Metilo",
+                iupac: "Etanoato de metilo",
+                group: "ester",
+                formula: "CH₃-COO-CH₃",
+                image: "img/etanoato_de_metilo.png",
+                description: "Éster utilizado habitualmente en disolventes y pegamentos.",
+                explanation: "Grupo carboxilo C=O enlazado a un oxígeno puente (-COO-)."
+            },
+            {
+                id: "etanoato_de_etilo",
+                name: "Acetato de Etilo",
+                iupac: "Etanoato de etilo",
+                group: "ester",
+                formula: "CH₃-COO-CH₂-CH₃",
+                image: "img/etanoato_de_etilo.png",
+                description: "Éster característico con fragancia afrutada utilizado en quitaesmaltes.",
+                explanation: "Derivado de la condensación de ácido acético y etanol."
+            },
+            {
+                id: "propanoato_de_metilo",
+                name: "Propionato de Metilo",
+                iupac: "Propanoato de metilo",
+                group: "ester",
+                formula: "CH₃-CH₂-COO-CH₃",
+                image: "img/propanoato_de_metilo.png",
+                description: "Éster de 4 carbonos de aroma dulce y frutal.",
+                explanation: "Cadena propanoato unida al radical metilo mediante el enlace -COO-."
+            },
+            {
+                id: "benzoato_de_metilo",
+                name: "Benzoato de Metilo",
+                iupac: "Benzoato de metilo",
+                group: "ester",
+                formula: "C₆H₅-COO-CH₃",
+                image: "img/benzoato_de_metilo.png",
+                description: "Éster aromático suave derivado del ácido benzoico.",
+                explanation: "Unión de un anillo aromático con el grupo éster central -COO-."
+            },
+
+            // 8. ÉTERES
+            {
+                id: "metoximetano",
+                name: "Dimetiléter",
+                iupac: "Metoximetano",
+                group: "eter",
+                formula: "CH₃-O-CH₃",
+                image: "img/metoximetano.png",
+                description: "El éter más sencillo, usado como propelente.",
+                explanation: "Un átomo de oxígeno uniendo dos radicales metilo (-O-)."
+            },
+            {
+                id: "etoxietano",
+                name: "Dietiléter",
+                iupac: "Etoxietano",
+                group: "eter",
+                formula: "CH₃-CH₂-O-CH₂-CH₃",
+                image: "img/etoxietano.png",
+                description: "Histórico anestésico general y potente disolvente orgánico.",
+                explanation: "Átomo de oxígeno puente interpuesto entre dos grupos etilo."
+            },
+            {
+                id: "metoxietano",
+                name: "Metiletiléter",
+                iupac: "Metoxietano",
+                group: "eter",
+                formula: "CH₃-O-CH₂-CH₃",
+                image: "img/metoxietano.png",
+                description: "Éter asimétrico gaseoso.",
+                explanation: "El oxígeno actúa de nexo entre un radical metilo y uno etilo."
+            },
+            {
+                id: "anisol",
+                name: "Anisol",
+                iupac: "Metoxibenceno",
+                group: "eter",
+                formula: "C₆H₅-O-CH₃",
+                image: "img/anisol.png",
+                description: "Éter aromático con agradable fragancia semejante al anís.",
+                explanation: "Átomo de oxígeno intermedio enlazando un anillo bencénico y un metilo."
+            },
+            {
+                id: "tetrahidrofurano",
+                name: "Tetrahidrofurano (THF)",
+                iupac: "Oxolano",
+                group: "eter",
+                formula: "C₄H₈O",
+                image: "img/tetrahidrofurano.png",
+                description: "Éter cíclico de cinco miembros de amplio uso en laboratorios.",
+                explanation: "Un átomo de oxígeno integrado dentro de un anillo saturado de 5 miembros."
+            }
+        ];
+
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+
+                if (type === 'correct') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1);
+                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, now);
+                    osc.frequency.exponentialRampToValueAtTime(140, now + 0.2);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                } else if (type === 'click') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(400, now);
+                    gain.gain.setValueAtTime(0.05, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                }
+            } catch (e) {
+                console.log("Audio not active or restricted");
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            if (soundEnabled) {
+                icon.className = "fa-solid fa-volume-high text-lg";
+            } else {
+                icon.className = "fa-solid fa-volume-xmark text-lg text-slate-600";
+            }
+        }
+
+        let gameState = {
+            score: 0,
+            streak: 0,
+            currentQuestionIdx: 0,
+            totalQuestions: 10,
+            questions: [],
+            timer: null,
+            timeLeft: 15,
+            maxTime: 15,
+            isAnswered: false
+        };
+
+        let activeFilter = 'all';
+
+        function switchTab(tabId) {
+            playSound('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-teal-400', 'bg-slate-800');
+                btn.classList.add('text-slate-300');
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('text-teal-400', 'bg-slate-800');
+                activeNav.classList.remove('text-slate-300');
+            }
+
+            if (tabId === 'game' && gameState.questions.length === 0) {
+                startGame('standard');
+            }
+        }
+
+        /* Helper to build robust HTML Image tag with elegant fallback card if PNG not found yet */
+        function getMoleculeImageHTML(molecule, customClass = "max-h-44 max-w-full object-contain rounded-xl") {
+            const grp = GROUPS[molecule.group];
+            const fallbackHTML = `
+                <div class="p-4 bg-slate-950/90 border border-teal-500/30 rounded-2xl flex flex-col items-center justify-center text-center shadow-inner min-w-[220px]">
+                    <span class="text-xs font-bold text-teal-400 uppercase tracking-widest mb-1">${molecule.name}</span>
+                    <span class="text-xl sm:text-2xl font-mono font-extrabold text-amber-300 my-2">${molecule.formula}</span>
+                    <span class="text-xs text-slate-400">${molecule.iupac}</span>
+                    <span class="mt-2 text-[10px] bg-teal-500/10 text-teal-300 border border-teal-500/20 px-2 py-0.5 rounded-full font-mono">${grp.formula}</span>
+                </div>
+            `;
+
+            return `
+                <img src="${molecule.image}" 
+                     alt="${molecule.name} - ${molecule.iupac}" 
+                     class="${customClass} transition-all duration-300 filter drop-shadow-lg"
+                     onerror="this.onerror=null; this.parentNode.innerHTML=\`${fallbackHTML.replace(/"/g, '&quot;')}\`;" />
+            `;
+        }
+
+        function startGame(mode = 'standard') {
+            const shuffled = [...MOLECULES].sort(() => Math.random() - 0.5);
+            gameState.questions = shuffled.slice(0, 10);
+            gameState.score = 0;
+            gameState.streak = 0;
+            gameState.currentQuestionIdx = 0;
+            gameState.isAnswered = false;
+
+            updateHUD();
+            showQuestion();
+            switchTab('game');
+        }
+
+        function updateHUD() {
+            document.getElementById('game-score').innerText = gameState.score;
+            document.getElementById('game-streak').innerHTML = `${gameState.streak} <i class="fa-solid fa-fire text-lg"></i>`;
+            document.getElementById('game-progress').innerText = `${gameState.currentQuestionIdx + 1} / ${gameState.questions.length}`;
+        }
+
+        function startTimer() {
+            clearInterval(gameState.timer);
+            gameState.timeLeft = gameState.maxTime;
+            const timerBar = document.getElementById('timer-bar');
+            timerBar.style.width = '100%';
+
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft -= 0.1;
+                const percent = (gameState.timeLeft / gameState.maxTime) * 100;
+                timerBar.style.width = `${Math.max(0, percent)}%`;
+
+                if (gameState.timeLeft <= 0) {
+                    clearInterval(gameState.timer);
+                    handleTimeOut();
+                }
+            }, 100);
+        }
+
+        function showQuestion() {
+            gameState.isAnswered = false;
+            const currentQ = gameState.questions[gameState.currentQuestionIdx];
+
+            document.getElementById('feedback-banner').classList.add('hidden');
+
+            const imgWrapper = document.getElementById('image-molecule-wrapper');
+            imgWrapper.innerHTML = getMoleculeImageHTML(currentQ, "max-h-48 max-w-full object-contain rounded-xl p-2 bg-white/5 border border-slate-700/50");
+
+            document.getElementById('formula-text-display').innerText = `${currentQ.name} (${currentQ.iupac})`;
+
+            const correctGroupId = currentQ.group;
+            const allGroupIds = Object.keys(GROUPS);
+            const distractors = allGroupIds.filter(id => id !== correctGroupId).sort(() => Math.random() - 0.5).slice(0, 3);
+            const options = [correctGroupId, ...distractors].sort(() => Math.random() - 0.5);
+
+            const grid = document.getElementById('answers-grid');
+            grid.innerHTML = '';
+
+            options.forEach(groupId => {
+                const grp = GROUPS[groupId];
+                const btn = document.createElement('button');
+                btn.className = `option-btn w-full p-4 rounded-xl font-bold border border-slate-700 bg-slate-800/90 hover:bg-slate-700 hover:border-teal-500 text-slate-200 transition flex items-center justify-between text-left group`;
+                btn.onclick = () => checkAnswer(groupId, currentQ);
+                btn.innerHTML = `
+                    <span class="flex items-center gap-3">
+                        <span class="w-3 h-3 rounded-full" style="background-color: ${grp.color}"></span>
+                        <span>${grp.name}</span>
+                    </span>
+                    <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-teal-400 group-hover:translate-x-1 transition-all"></i>
+                `;
+                grid.appendChild(btn);
+            });
+
+            startTimer();
+        }
+
+        function checkAnswer(selectedGroupId, molecule) {
+            if (gameState.isAnswered) return;
+            gameState.isAnswered = true;
+            clearInterval(gameState.timer);
+
+            const isCorrect = selectedGroupId === molecule.group;
+            const grpInfo = GROUPS[molecule.group];
+
+            if (isCorrect) {
+                playSound('correct');
+                gameState.streak++;
+                const timeBonus = Math.round(gameState.timeLeft * 10);
+                const streakBonus = gameState.streak * 50;
+                gameState.score += 100 + timeBonus + streakBonus;
+            } else {
+                playSound('wrong');
+                gameState.streak = 0;
+            }
+
+            updateHUD();
+
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                const grpName = btn.innerText.trim();
+                if (grpName === grpInfo.name) {
+                    btn.className = "w-full p-4 rounded-xl font-bold border-2 border-emerald-500 bg-emerald-500/20 text-emerald-300 flex items-center justify-between text-left glow-correct";
+                } else if (grpName === GROUPS[selectedGroupId]?.name && !isCorrect) {
+                    btn.className = "w-full p-4 rounded-xl font-bold border-2 border-rose-500 bg-rose-500/20 text-rose-300 flex items-center justify-between text-left glow-wrong";
+                } else {
+                    btn.className = "w-full p-4 rounded-xl font-bold border border-slate-800 bg-slate-900/50 text-slate-600 opacity-50 flex items-center justify-between text-left";
+                }
+            });
+
+            const banner = document.getElementById('feedback-banner');
+            const icon = document.getElementById('feedback-icon');
+            const title = document.getElementById('feedback-title');
+            const body = document.getElementById('feedback-body');
+
+            banner.classList.remove('hidden', 'bg-emerald-950/60', 'border-emerald-500/50', 'bg-rose-950/60', 'border-rose-500/50');
+
+            if (isCorrect) {
+                banner.classList.add('bg-emerald-950/60', 'border-emerald-500/50');
+                icon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i>`;
+                title.innerText = "¡Correcto!";
+                title.className = "font-bold text-lg mb-1 text-emerald-300";
+            } else {
+                banner.classList.add('bg-rose-950/60', 'border-rose-500/50');
+                icon.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400"></i>`;
+                title.innerText = `Incorrecto - Pertenece a: ${grpInfo.name}`;
+                title.className = "font-bold text-lg mb-1 text-rose-300";
+            }
+
+            body.innerHTML = `${molecule.explanation} <br><span class="text-xs font-semibold text-teal-400 mt-1 inline-block">Fórmula clave: ${grpInfo.formula} | Sufijo IUPAC: ${grpInfo.suffix}</span>`;
+        }
+
+        function handleTimeOut() {
+            if (gameState.isAnswered) return;
+            const currentQ = gameState.questions[gameState.currentQuestionIdx];
+            checkAnswer('TIMEOUT', currentQ);
+        }
+
+        function nextQuestion() {
+            playSound('click');
+            gameState.currentQuestionIdx++;
+            if (gameState.currentQuestionIdx < gameState.questions.length) {
+                updateHUD();
+                showQuestion();
+            } else {
+                showEndGameModal();
+            }
+        }
+
+        function showEndGameModal() {
+            const card = document.getElementById('question-card');
+            card.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-teal-500 to-emerald-400 text-slate-950 flex items-center justify-center text-4xl font-black mx-auto mb-4 shadow-xl shadow-teal-500/30">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-3xl font-black text-white mb-2">¡Desafío Completado!</h3>
+                    <p class="text-slate-300 text-sm mb-6">Has demostrado tus habilidades reconociendo estructuras moleculares 2D.</p>
+                    
+                    <div class="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 max-w-sm mx-auto mb-6 flex justify-around">
+                        <div>
+                            <span class="text-xs text-slate-400 uppercase font-bold block">Puntaje Final</span>
+                            <span class="text-3xl font-black text-teal-400">${gameState.score}</span>
+                        </div>
+                        <div class="border-r border-slate-800"></div>
+                        <div>
+                            <span class="text-xs text-slate-400 uppercase font-bold block">Racha Máxima</span>
+                            <span class="text-3xl font-black text-amber-400">${gameState.streak}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center gap-4">
+                        <button onclick="startGame('standard')" class="px-6 py-3 rounded-xl font-bold bg-teal-500 hover:bg-teal-400 text-slate-950 transition flex items-center gap-2">
+                            <i class="fa-solid fa-rotate-right"></i> Jugar de Nuevo
+                        </button>
+                        <button onclick="switchTab('flashcards')" class="px-6 py-3 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group"></i> Ver las 40 Tarjetas
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFlashcards() {
+            const container = document.getElementById('flashcards-container');
+            container.innerHTML = '';
+
+            const filteredMolecules = activeFilter === 'all' 
+                ? MOLECULES 
+                : MOLECULES.filter(m => m.group === activeFilter);
+
+            filteredMolecules.forEach(mol => {
+                const grp = GROUPS[mol.group];
+                const card = document.createElement('div');
+                card.className = "glass-panel rounded-2xl p-5 border border-slate-800 flex flex-col justify-between hover:border-teal-500/40 transition";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg ${grp.badgeBg}">${grp.name}</span>
+                            <span class="text-xs font-mono text-slate-400">${mol.formula}</span>
+                        </div>
+
+                        <div class="bg-slate-950/80 rounded-xl p-3 border border-slate-800/80 mb-4 flex flex-col items-center justify-center min-h-[160px] relative">
+                            ${getMoleculeImageHTML(mol, "max-h-36 max-w-full object-contain rounded-lg")}
+                            <span class="text-xs font-bold text-slate-200 mt-2">${mol.name}</span>
+                            <span class="text-[11px] text-slate-400 italic">${mol.iupac}</span>
+                            ${mol.smiles ? `<span class="mt-1 text-[10px] font-mono text-teal-400/80 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">SMILES: ${mol.smiles}</span>` : ''}
+                        </div>
+
+                        <p class="text-xs text-slate-300 mb-4 leading-relaxed">${mol.description}</p>
+                    </div>
+
+                    <div class="border-t border-slate-800/80 pt-3 text-[11px] space-y-1">
+                        <div class="flex justify-between text-slate-400">
+                            <span>Sufijo IUPAC:</span>
+                            <span class="font-mono text-teal-300 font-bold">${grp.suffix}</span>
+                        </div>
+                        <p class="text-slate-400 leading-tight mt-1">
+                            <span class="text-teal-400 font-semibold">Explicación:</span> ${mol.explanation}
+                        </p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function setFlashcardFilter(filterGroup) {
+            playSound('click');
+            activeFilter = filterGroup;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = "filter-btn px-3 py-1 rounded-lg text-xs font-medium transition border border-slate-800 bg-slate-900 text-slate-400 hover:text-slate-200";
+            });
+
+            const activeBtn = document.getElementById(`filter-btn-${filterGroup}`);
+            if (activeBtn) {
+                activeBtn.className = "filter-btn px-3 py-1 rounded-lg text-xs font-bold transition border border-teal-500/50 bg-teal-500/20 text-teal-300";
+            }
+
+            renderFlashcards();
+        }
+
+        function initApp() {
+            // Render Home Grid
+            const homeGrid = document.getElementById('home-group-grid');
+            homeGrid.innerHTML = '';
+
+            Object.values(GROUPS).forEach(grp => {
+                const count = MOLECULES.filter(m => m.group === grp.id).length;
+                const card = document.createElement('div');
+                card.className = "glass-panel p-5 rounded-2xl border border-slate-800 hover:border-teal-500/50 transition cursor-pointer group";
+                card.onclick = () => {
+                    setFlashcardFilter(grp.id);
+                    switchTab('flashcards');
+                };
+                card.innerHTML = `
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-1 rounded-lg text-xs font-bold ${grp.badgeBg}">${grp.formula}</span>
+                        <span class="text-xs text-slate-400 font-semibold">${count} moléculas</span>
+                    </div>
+                    <h4 class="font-bold text-slate-100 group-hover:text-teal-300 transition">${grp.name}</h4>
+                    <p class="text-xs text-slate-400 mt-1 line-clamp-2">${grp.keyFeature}</p>
+                `;
+                homeGrid.appendChild(card);
+            });
+
+            // Filter buttons for flashcards
+            const filterContainer = document.getElementById('flashcard-filter-container');
+            filterContainer.innerHTML = `
+                <button id="filter-btn-all" onclick="setFlashcardFilter('all')" class="filter-btn px-3 py-1 rounded-lg text-xs font-bold transition border border-teal-500/50 bg-teal-500/20 text-teal-300">
+                    Todas (40)
+                </button>
+            `;
+
+            Object.values(GROUPS).forEach(grp => {
+                const btn = document.createElement('button');
+                btn.id = `filter-btn-${grp.id}`;
+                btn.onclick = () => setFlashcardFilter(grp.id);
+                btn.className = "filter-btn px-3 py-1 rounded-lg text-xs font-medium transition border border-slate-800 bg-slate-900 text-slate-400 hover:text-slate-200";
+                btn.innerText = grp.name;
+                filterContainer.appendChild(btn);
+            });
+
+            renderFlashcards();
+
+            // Cheatsheet Table
+            const tableBody = document.getElementById('cheatsheet-table-body');
+            tableBody.innerHTML = '';
+
+            Object.values(GROUPS).forEach(grp => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-900/50 transition";
+                tr.innerHTML = `
+                    <td class="p-3.5 font-bold text-white flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${grp.color}"></span>
+                        ${grp.name}
+                    </td>
+                    <td class="p-3.5 font-mono text-teal-300 font-bold">${grp.formula}</td>
+                    <td class="p-3.5 text-slate-300">${grp.keyFeature}</td>
+                    <td class="p-3.5 font-mono text-amber-300">${grp.suffix}</td>
+                    <td class="p-3.5 text-slate-400">${grp.example}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Initialize App on DOM Load
+        window.onload = function() {
+            initApp();
+        };
+    </script>
+</body>
+</html>
